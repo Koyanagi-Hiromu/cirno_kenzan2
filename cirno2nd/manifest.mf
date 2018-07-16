@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: . lib/tritonus_share.jar lib/jinput.jar lib/jogg-0.0.7.jar  lib/jl1.0.jar lib/basicplayer3.0.jar lib/commons-logging-api.jar lib/mp3spi1.9.4.jar
+

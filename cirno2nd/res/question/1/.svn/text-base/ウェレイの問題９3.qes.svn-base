@@ -1,0 +1,67 @@
+壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　壁壁壁
+壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁壁
+[Entrance x,y]	[Exit x,y]
+5,4	33,25
+[Enemy x,y,lv,sleep,angry]
+パルスィ,25,3,1,false,false
+パルスィ,10,4,1,false,false
+パルスィ,20,7,1,false,false
+パルスィ,32,7,1,false,false
+パルスィ,5,10,2,false,false
+パルスィ,23,10,1,false,false
+パルスィ,10,11,3,false,false
+パルスィ,16,11,1,false,false
+パルスィ,19,12,1,false,false
+パルスィ,11,13,1,false,false
+パルスィ,32,14,1,false,false
+パルスィ,24,16,1,false,false
+パルスィ,5,17,1,false,false
+パルスィ,28,18,1,false,false
+パルスィ,11,19,1,false,false
+パルスィ,33,19,1,false,false
+パルスィ,6,20,1,false,false
+パルスィ,15,20,1,false,false
+パルスィ,28,20,1,false,false
+パルスィ,23,22,1,false,false
+パルスィ,34,22,1,false,false
+パルスィ,20,23,1,false,false
+パルスィ,10,24,1,false,false
+パルスィ,15,24,1,false,false
+パルスィ,5,25,1,false,false
+パルスィ,30,25,1,false,false
+パルスィ,12,27,1,false,false
+パルスィ,25,27,1,false,false
+[Item x,y,curse,forge,staff,arrow]
+grass.毒草,3,3,false,0,0,0
+staff.イカリの杖,6,4,false,0,0,0
+spellcard.パルスィのカード,5,5,false,0,0,0
+scrool.自爆の巻物,6,5,false,0,0,0
+[Trap x,y]

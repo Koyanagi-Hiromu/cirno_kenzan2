@@ -1,0 +1,7 @@
+package main.util;
+
+import java.io.Serializable;
+
+public enum EX_DIRECTION implements Serializable {
+	NEUTRAL, UP, DOWN, LEFT, RIGHT, UP_DOWN, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT, LEFT_RIGHT, UP_DOWN_LEFT, DOWN_LEFT_RIGHT, UP_DOWN_RIGHT, UP_LEFT_RIGHT, UP_DOWN_RIGHT_LEFT, ELSE,
+}

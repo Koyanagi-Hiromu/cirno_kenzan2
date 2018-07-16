@@ -1,0 +1,173 @@
+package dangeon.latest.scene.action.menu.first.item.list;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+import main.res.Image_Window_Frame;
+import main.util.BeautifulView;
+import dangeon.latest.scene.Base_View;
+import dangeon.latest.scene.action.menu.first.Scene_Menu_First_View;
+import dangeon.latest.util.view_window.ItemExplainWindow;
+import dangeon.latest.util.view_window.ItemSelectMenuWindow;
+import dangeon.latest.util.view_window.MenuWindow;
+import dangeon.latest.util.view_window.StringOnlyWindow;
+import dangeon.latest.util.view_window.StringOnlyWindow_CuttingOff;
+import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.creature.player.Belongings;
+import dangeon.view.constant.NormalFont;
+
+public class CopyOfScene_Menu_First_Item_List_View extends
+		Scene_Menu_First_View {
+
+	private StringOnlyWindow TOP_WINDOW;
+	private ItemExplainWindow BOTTOM_WINDOW;
+	private StringOnlyWindow SIDE_WINDOW1, SIDE_WINDOW2;
+	public static final int MINI_W = 31, MAIN_W = 270, MARGINE = 19, Y = 40,
+			X = 6 + MINI_W + MARGINE;
+
+	public CopyOfScene_Menu_First_Item_List_View(Base_View bv) {
+		super(X, Y, Image_Window_Frame.LINE, bv);
+	}
+
+	@Override
+	public void draw(Graphics2D g, boolean current) {
+		drawIMLC(g);
+		drawBlack(g);
+		super_draw(g, current);
+		if (current) {
+			BeautifulView.setAlphaOnImg(g, 0.6f);
+		} else {
+			BeautifulView.setAlphaOnImg(g, 0.3f);
+		}
+		if (SIDE_WINDOW1 != null)
+			SIDE_WINDOW1.drawWindow(g);
+		BeautifulView.setAlphaOnImg(g, 0.6f);
+		if (SIDE_WINDOW2 != null)
+			SIDE_WINDOW2.drawWindow(g);
+		BeautifulView.setAlphaOnImg(g, 1f);
+		BOTTOM_WINDOW.drawWindow(g);
+		TOP_WINDOW.drawWindow(g);
+	}
+
+	private StringOnlyWindow createTop() {
+		return new StringOnlyWindow(X, 2,
+				NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE),
+				getTop());
+	}
+
+	public String getTop() {
+		Scene_Menu_First_Item_List smfil = (Scene_Menu_First_Item_List) PARENT_SCENE;
+		StringBuilder sb = new StringBuilder();
+		sb.append("持ち物　　(");
+		sb.append(smfil.page + 1);
+		sb.append(Color.WHITE);
+		sb.append("/");
+		sb.append(smfil.getMaxPage());
+		sb.append(Color.WHITE);
+		sb.append(")");
+		return sb.toString();
+	}
+
+	public void setTopWindow() {
+		if (TOP_WINDOW != null)
+			TOP_WINDOW.setString(getTop());
+
+	}
+
+	// int page = smfil.page;
+	// int w = 31;
+	// super.X = X + (w + BOTTOM_WINDOW.INSETS.left * 2 + MARGINE) * page;
+	// int main_w = 270;
+	// if (smfil.getMaxPage() > 1) {
+	// page = smfil.page == 0 ? 1 : 0;
+	// int x = X;
+	// if (page == 1) {
+	// x += main_w + BOTTOM_WINDOW.INSETS.left * 2 + MARGINE;
+	// }
+	// SIDE_WINDOW1 = new StringOnlyWindow_CuttingOff(x, Y, w,
+	// NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE),
+	// getItems(page));
+	// }
+	// if (smfil.getMaxPage() > 2) {
+	// page = smfil.page == 2 ? 1 : 2;
+	// int x = X + w + BOTTOM_WINDOW.INSETS.left * 2 + MARGINE;
+	// if (page == 2) {
+	// x += main_w + BOTTOM_WINDOW.INSETS.left * 2 + MARGINE;
+	// }
+	// SIDE_WINDOW2 = new StringOnlyWindow_CuttingOff(x, Y, w,
+	// NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE),
+	// getItems(page));
+	// }
+	// return new MenuWindow(this, main_w,
+	// NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE));
+	@Override
+	protected MenuWindow createMenuWindow() {
+		Scene_Menu_First_Item_List smfil = (Scene_Menu_First_Item_List) PARENT_SCENE;
+		// BOTTOM_WINDOW = new ItemExplainWindow(smfil);
+		TOP_WINDOW = createTop();
+		int page = smfil.page;
+
+		float size = 10;
+		int x;
+		int x1 = X - MINI_W - MARGINE;
+		int x2 = X + MAIN_W + MARGINE;
+		int y;
+		int y1 = Y;
+		int y2 = Y + 120;
+		if (smfil.getMaxPage() > 1) {
+			x = x2;
+			y = y1;
+			if (smfil.page == 0) {
+				page = 1;
+			} else if (smfil.page == 1) {
+				page = 2;
+			} else {
+				page = 0;
+			}
+			if (page == 2 && smfil.getMaxPage() < 3) {
+				SIDE_WINDOW1 = null;
+			} else {
+				SIDE_WINDOW1 = new StringOnlyWindow_CuttingOff(x, y, MINI_W,
+						NormalFont.NORMALFONT.deriveFont(size), getItems(page));
+			}
+		} else {
+			SIDE_WINDOW1 = null;
+		}
+		if (smfil.getMaxPage() > 1) {
+			x = x1;
+			y = y1;
+			if (smfil.page == 0) {
+				page = 2;
+			} else if (smfil.page == 1) {
+				page = 0;
+			} else {
+				page = 1;
+			}
+			if (page == 2 && smfil.getMaxPage() < 3) {
+				SIDE_WINDOW2 = null;
+			} else {
+				SIDE_WINDOW2 = new StringOnlyWindow_CuttingOff(x, y, MINI_W,
+						NormalFont.NORMALFONT.deriveFont(size), getItems(page));
+			}
+		} else {
+			SIDE_WINDOW2 = null;
+		}
+		return new ItemSelectMenuWindow(this, MAIN_W,
+				NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE));
+	}
+
+	private String[] getItems(int page) {
+		Scene_Menu_First_Item_List smfil = (Scene_Menu_First_Item_List) PARENT_SCENE;
+		String[] arr = new String[smfil.COL];
+		for (int j = 0; j < arr.length; j++) {
+			int index = page * arr.length + j;
+			if (index < Belongings.getSize()) {
+				Base_Artifact a = Belongings.get(index);
+				arr[j] = a.getColoredName();
+			} else {
+				arr[j] = "";
+			}
+		}
+		return arr;
+	}
+}

@@ -1,0 +1,6 @@
+【Sat Sep 17 15:50:08 JST 2011】	res/map/65.txt
+【Sun Sep 18 05:33:44 JST 2011】	res\map\27.txt
+【Sun Sep 18 17:04:18 JST 2011】	res\map\62.txt
+【Mon Sep 19 19:53:46 JST 2011】	res/map/30.txt
+【Mon Sep 19 20:00:35 JST 2011】	res/map/60.txt
+【Sat Sep 24 17:28:39 JST 2011】	res\map\95.txt

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: . lib/cirno.jar
+Main-Class: cirno_question.QuestionExpStarter
+

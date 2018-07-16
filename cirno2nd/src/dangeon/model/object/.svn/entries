@@ -1,0 +1,71 @@
+10
+
+dir
+208
+file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/src/dangeon/model/object
+file://c:/Users/weray/Dropbox/java/svn/cirno2nd
+
+
+
+2016-09-10T01:21:38.417000Z
+208
+weray
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f88bf4f4-31b0-724e-9a5b-aef1273bafaf
+
+Base_MapObject.java
+file
+206
+
+
+
+2014-08-30T10:51:08.014000Z
+7c84e160e6610b83c0d2239d623859d2
+2016-09-09T15:57:11.888000Z
+206
+weray
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9696
+
+artifact
+dir
+
+creature
+dir
+
+reader
+dir
+
