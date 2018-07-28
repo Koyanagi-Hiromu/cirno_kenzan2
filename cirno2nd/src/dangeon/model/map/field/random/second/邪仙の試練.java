@@ -22,7 +22,7 @@ public class 邪仙の試練 extends Base_Map_Random {
 				BGM.kanpyo_ch2_fairy, Image_MapTip.命蓮寺, "懐かしき水曜日"), ネクストヒストリー(
 				44, BGM.kanpyo_ch2_hexa, Image_MapTip.草原_秋, "来世の木曜日"), レジスタンスベース(
 				60, BGM.to_kou_chiruno, Image_MapTip.スキマ, "氾濫の金曜日"), 星に願いを(74,
-				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "祈りの土曜日"), 誰もいなくなるのか？(
+				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "祈りの土曜日"), 誰もいなくなるのか(
 				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水, "賢者の冥日"),
 
 		;
@@ -152,7 +152,7 @@ public class 邪仙の試練 extends Base_Map_Random {
 		if (MapList.getFloor() <= FloorConducter.ネクストヒストリー.floor) {
 			return 16;
 		} else {
-			if (MapList.getFloor() <= FloorConducter.誰もいなくなるのか？.floor) {
+			if (MapList.getFloor() <= FloorConducter.誰もいなくなるのか.floor) {
 				return SMH_NORMAL;
 			} else {
 				return 0;

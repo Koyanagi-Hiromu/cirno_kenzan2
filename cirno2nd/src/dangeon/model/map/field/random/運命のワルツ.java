@@ -49,7 +49,7 @@ public class 運命のワルツ extends Base_Map_Random {
 				Image_MapTip.命蓮寺), ネクストヒストリー(44, BGM.kanpyo_ch2_hexa,
 				Image_MapTip.草原_秋, "思い出になる秋"), レジスタンスベース(60,
 				BGM.to_kou_chiruno, Image_MapTip.スキマ, "妖精大革命"), 星に願いを(74,
-				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "奇跡にお祈り"), 誰もいなくなるのか？(
+				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "奇跡にお祈り"), 誰もいなくなるのか(
 				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水), 運命のラプソディ(100,
 				BGM.kanpyo_ch2_bbcc, Image_MapTip.地霊殿)
 
@@ -382,7 +382,7 @@ public class 運命のワルツ extends Base_Map_Random {
 		if (MapList.getFloor() <= FloorConducter.ネクストヒストリー.floor) {
 			return 16;
 		} else {
-			if (MapList.getFloor() <= FloorConducter.誰もいなくなるのか？.floor) {
+			if (MapList.getFloor() <= FloorConducter.誰もいなくなるのか.floor) {
 				return SMH_NORMAL;
 			} else {
 				return 0;
