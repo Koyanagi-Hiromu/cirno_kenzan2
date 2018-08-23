@@ -1,3 +1,6 @@
+/.svn/
+/cirno_question/
+/connection/
 /dangeon/
 /debugMode/
 /dungeon_creater/
@@ -11,5 +14,3 @@
 /title/
 /敵キャラ案
 /Formatter.class
-/cirno_question/
-/connection/
