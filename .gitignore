@@ -1,5 +1,8 @@
 .DS_Store
 
+# Build
+Build
+
 # Steamworks SDK
 SteamworksSDK/*
 !SteamworksSDK/tools
