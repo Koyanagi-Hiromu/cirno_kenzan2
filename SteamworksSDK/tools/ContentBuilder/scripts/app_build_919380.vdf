@@ -1,6 +1,6 @@
 "appbuild"
 {
-	"appid"	"1000"
+	"appid"	"919380"
 	"desc" "Your build description here" // description for this build
 	"buildoutput" "..\output\" // build output folder for .log, .csm & .csd files, relative to location of this file
 	"contentroot" "..\content\" // root content folder, relative to location of this file
@@ -10,6 +10,6 @@
 	
 	"depots"
 	{
-		"1001" "depot_build_1001.vdf"
+		"919381" "depot_build_919381.vdf"
 	}
 }
