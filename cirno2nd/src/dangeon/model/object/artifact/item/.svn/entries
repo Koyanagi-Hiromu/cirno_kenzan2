@@ -1,132 +1,0 @@
-10
-
-dir
-208
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/src/dangeon/model/object/artifact/item
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd
-
-
-
-2016-09-10T01:21:38.417000Z
-208
-weray
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f88bf4f4-31b0-724e-9a5b-aef1273bafaf
-
-Base_Item.java
-file
-
-
-
-
-2016-09-09T16:10:18.226000Z
-55358bead27ddc82c7ec692341eb48cb
-2016-09-10T01:21:38.417000Z
-208
-weray
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-10778
-
-SelectItem.java
-file
-204
-
-
-
-2013-06-07T06:55:35.866000Z
-b968a0b6b22d0fc585923e68fc1c8262
-2013-06-07T16:04:47.294000Z
-160
-weray
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-323
-
-arrow
-dir
-
-bullet
-dir
-
-check
-dir
-
-disc
-dir
-
-enchantSpecial
-dir
-
-food
-dir
-
-grass
-dir
-
-pot
-dir
-
-ring
-dir
-
-scrool
-dir
-
-spellcard
-dir
-
-staff
-dir
-

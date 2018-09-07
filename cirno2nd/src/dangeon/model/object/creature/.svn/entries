@@ -1,80 +1,0 @@
-10
-
-dir
-208
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/src/dangeon/model/object/creature
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd
-
-
-
-2016-09-10T01:21:38.417000Z
-208
-weray
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f88bf4f4-31b0-724e-9a5b-aef1273bafaf
-
-Base_Creature.java
-file
-
-
-
-
-2016-09-09T16:10:19.499000Z
-455d10603df673a2727bd61c704fc8cf
-2016-09-10T01:21:38.417000Z
-208
-weray
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-41530
-
-action
-dir
-
-enemy
-dir
-
-npc
-dir
-
-player
-dir
-
-resistant
-dir
-
-specialAction
-dir
-

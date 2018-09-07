@@ -1,61 +1,0 @@
-10
-
-dir
-185
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/res/image
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd
-
-
-
-2013-09-26T01:33:46.666000Z
-183
-weray
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f88bf4f4-31b0-724e-9a5b-aef1273bafaf
-
-LargeCharacter
-dir
-
-anime
-dir
-
-artifact
-dir
-
-bg
-dir
-
-character_dot
-dir
-
-effect
-dir
-
-frame
-dir
-
-icon
-dir
-
-maptip
-dir
-
-object
-dir
-
-title
-dir
-

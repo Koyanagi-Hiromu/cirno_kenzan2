@@ -1,49 +1,0 @@
-10
-
-dir
-208
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/src/dangeon/model
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd
-
-
-
-2016-09-10T01:21:38.417000Z
-208
-weray
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f88bf4f4-31b0-724e-9a5b-aef1273bafaf
-
-condition
-dir
-
-config
-dir
-
-map
-dir
-
-message
-dir
-
-object
-dir
-
-result
-dir
-
-select
-dir
-

@@ -1,83 +1,0 @@
-10
-
-dir
-208
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd/cirno2/src/dangeon/model/map/field
-file://c:/Users/weray/Dropbox/java/svn/cirno2nd
-
-
-
-2016-09-10T01:21:38.417000Z
-208
-weray
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f88bf4f4-31b0-724e-9a5b-aef1273bafaf
-
-Base_Map.java
-file
-
-
-
-
-2016-09-09T16:10:17.886000Z
-8b06db381082a4c842e95d0253827a38
-2016-09-10T01:21:38.417000Z
-208
-weray
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7035
-
-base
-dir
-
-firstfield
-dir
-
-keine
-dir
-
-random
-dir
-
-school
-dir
-
-special
-dir
-
-town
-dir
-
