@@ -293,7 +293,7 @@ public class ThrowingItem {
 		ArrayList<Point> old = new ArrayList<Point>();
 		ArrayList<Point> now = new ArrayList<Point>();
 		now.add(p.getLocation());
-		int length = 5;
+		int length = 4;
 		for (int i = 0; i < length; i++) {
 			Point _p = getBouncePoint(now, old);
 			if (_p != null)

@@ -595,6 +595,10 @@ public class Damage {
 		if (HoldEnemy.ME.get() != null) {
 			str = HoldEnemy.ME.get().getSTR() / 2 + str;
 		}
+		if (BonusConductor.ナイフマスター_射撃威力増加()) {
+			str += Enchant.getSumSTR() * 2;
+		}
+			
 		double damage = str + (arrow_str / 1.5);
 		double damage_value = damage * damage_random / 1000 - target.getDEF();
 		if (damage_value <= 1) {
@@ -632,6 +636,7 @@ public class Damage {
 		CONDITION.conditionEffectCase(target, CONDITION.安心);
 		CONDITION.conditionEffectCase(target, CONDITION.やりすごし);
 		damage = 印ダメージUP.fixDamage(damage);
+		damage *= BonusConductor.ナイフマスター_デメリット()? (100 - MapList.getFloor()) * 0.01f : 1;
 		damage = EnchantSpecial.enchantSimbolAllCheck(CASE.ATK,
 				ENCHANT_SIMBOL.連) ? SetEnchantCard.isSetCard(魂魄妖夢のカード.class) ? damage
 				: damage * 40 / 100

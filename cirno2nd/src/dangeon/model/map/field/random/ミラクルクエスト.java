@@ -39,6 +39,7 @@ import dangeon.model.object.creature.player.class_job.BaseClassJob;
 import dangeon.model.object.creature.player.class_job.ClassDefault;
 import dangeon.model.object.creature.player.class_job.Classひねくれ者;
 import dangeon.model.object.creature.player.class_job.Classゆっくり;
+import dangeon.model.object.creature.player.class_job.Classナイフマスター;
 import dangeon.model.object.creature.player.class_job.Classフラワーマスター;
 import dangeon.model.object.creature.player.class_job.Class人工太陽;
 import dangeon.model.object.creature.player.class_job.Class人形使い;
@@ -531,6 +532,8 @@ public class ミラクルクエスト extends Base_Map_Random {
 		}
 		if (Config.getKsg1Score() > 50)
 			add(new ClassJobNpc(new Class半人半霊(), 16, 15, DIRECTION.RIGHT));
+		if (Medal.ナイフをまとめて投げて敵を倒した.hasFinished())
+			add(new ClassJobNpc(new Classナイフマスター(), 19, 17, DIRECTION.UP));
 		flag_to_1f = true;
 		return super.getObjectList();
 	}

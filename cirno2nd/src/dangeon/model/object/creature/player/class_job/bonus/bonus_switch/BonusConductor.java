@@ -4,6 +4,7 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.class_job.BaseClassJob;
 import dangeon.model.object.creature.player.class_job.Classひねくれ者;
 import dangeon.model.object.creature.player.class_job.Classゆっくり;
+import dangeon.model.object.creature.player.class_job.Classナイフマスター;
 import dangeon.model.object.creature.player.class_job.Classフラワーマスター;
 import dangeon.model.object.creature.player.class_job.Class人工太陽;
 import dangeon.model.object.creature.player.class_job.Class人形使い;
@@ -32,6 +33,18 @@ public class BonusConductor {
 		return check(Class賢将.class, 0);
 	}
 
+	public static boolean ナイフマスター_通常攻撃() {
+		return check(Classナイフマスター.class, 0);
+	}
+	
+	public static boolean ナイフマスター_デメリット() {
+		return check(Classナイフマスター.class, 1);
+	}
+
+	public static boolean ナイフマスター_射撃威力増加() {
+		return check(Classナイフマスター.class, 2);
+	}
+	
 	public static boolean ひねくれ者_攻撃受け() {
 		return check(Classひねくれ者.class, 3);
 	}

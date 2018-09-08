@@ -45,6 +45,8 @@ import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.map.field.random.救出大作戦;
 import dangeon.model.map.field.random.逆ヶ島;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.item.arrow.大砲の弾;
+import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.bullet.御柱;
 import dangeon.model.object.artifact.item.bullet.目からビーム;
 import dangeon.model.object.artifact.item.check.Checker;
@@ -615,7 +617,15 @@ public class Player extends Base_Creature {
 					return true;
 				}
 			}
-			if (BonusConductor.ひねくれ者_攻撃受け() && reverseAttack(p, x, y)) {
+			if (BonusConductor.ナイフマスター_通常攻撃()) {
+
+				if (checkTrap(p.x + x, p.y + y)) {
+					return true;
+				} else { 
+					return ナイフマスター_通常攻撃();
+				}
+			}
+			else if (BonusConductor.ひねくれ者_攻撃受け() && reverseAttack(p, x, y)) {
 				return true;
 			} else if (EnchantSpecial.enchantSimbolAllCheck(CASE.ATK,
 					ENCHANT_SIMBOL.式)) {
@@ -645,6 +655,10 @@ public class Player extends Base_Creature {
 			if (checkTrap(p.x + x, p.y + y))
 				return true;
 		}
+
+		if (BonusConductor.ナイフマスター_通常攻撃()) {
+			return ナイフマスター_通常攻撃();
+		}
 		if (BonusConductor.ひねくれ者_攻撃受け()) {
 			return reverseAttack(p, x, y);
 		}
@@ -654,6 +668,15 @@ public class Player extends Base_Creature {
 		}
 		startAttack(null, flag);
 		EnchantSpecial.attackPhaseStart();
+		return true;
+	}
+
+	private boolean ナイフマスター_通常攻撃() {
+		attacking_direction = direction;
+		normal_attack_phase = AttackPhase.GO;
+		SE.THROW.play();
+		new 鉄の矢(getMassPoint(), false).itemThrow(this, HowToThrow.BREAK, 10);
+//		direction = direction.getDeNeiboringDirection();
 		return true;
 	}
 
