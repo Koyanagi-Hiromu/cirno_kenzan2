@@ -30,6 +30,14 @@ public class 氷の杖 extends Staff {
 	public 氷の杖(Point p) {
 		super(p, item_name, 1);
 	}
+	
+	public 氷の杖(Point p, boolean frozen) {
+		this(p);
+		if (frozen)
+		{
+			setFreezeCount(9999);
+		}
+	}
 
 	@Override
 	protected void effect(final Base_Creature c) {

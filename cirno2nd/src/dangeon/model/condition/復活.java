@@ -67,7 +67,7 @@ public class 復活 {
 			return true;
 		} else if (BonusConductor.蓬莱人形_自動復活()) {
 			if (Player.me.getMAX_HP() > MapList.getFloor()) {
-				Player.me.setMAX_HP(Player.me.getMAX_HP() - MapList.getFloor());
+				Player.me.setMAX_HP(Player.me.getOriginMAX_HP() - MapList.getFloor());
 				return recoveryMessage(Player.me.getColoredName(),
 						"は不死鳥のごとく蘇った");
 			} else {

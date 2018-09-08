@@ -9,13 +9,19 @@ import main.res.SE;
 import main.util.DIRECTION;
 import main.util.EX_DIRECTION;
 import main.util.Show;
+import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
+import dangeon.model.condition.CONDITION;
 import dangeon.model.map.InitialPlacement.Room;
 import dangeon.model.object.Base_MapObject;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
+import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
+import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印罠師;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.npc.守矢賽銭箱;
+import dangeon.model.object.creature.player.Player;
 import dangeon.util.R;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
@@ -353,6 +359,12 @@ public class Mass implements Serializable {
 			setWater(!b);
 			WATER_FROZEN = b;
 			WATER_LEEF = false;
+			
+			if (WATER_FROZEN && EnchantSpecial.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.冴)) {
+				SE.LIGHT_ON.play();
+				Scene_Action.getMe().tellRestStop();
+				Player.me.setCondition(CONDITION.目薬, 0);
+			}
 		}
 	}
 

@@ -166,7 +166,7 @@ public class Scene_Menu_First_Item_List_Command extends Base_Scene_Menu {
 	private void contentsBreak() {
 		if (!SELECTED_ARTIFACT.isMobile())
 			setDeprecatedContents("破棄", getExp_Breaking(), new MsgBook(
-					SELECTED_ARTIFACT.getColoredName() + "は固定されていて破棄できいない"));
+					SELECTED_ARTIFACT.getColoredName() + "は固定されていて破棄できない"));
 		else
 			setContents("破棄", getExp_Breaking(), new MyBook(false) {
 				@Override

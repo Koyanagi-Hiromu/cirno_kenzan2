@@ -200,11 +200,8 @@ public class パチュリー extends Base_Enemy {
 	@Override
 	protected void init4() {
 		STAFF = new パチュリーの杖(getMassPoint());
-		S = new Staff[] { new いかづちの杖(getMassPoint()), new 氷の杖(mass_point),
+		S = new Staff[] { new いかづちの杖(getMassPoint()), new 氷の杖(mass_point, true),
 				new 炎の杖(mass_point) };
-		S[1].freezeCountReset();
-		S[1].setFlagNoFrozen(false);
-		S[1].freezeCountPlus(1000);
 	}
 
 	private boolean railgun() {

@@ -397,7 +397,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 					.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.冴)) {
 				SE.LIGHT_ON.play();
 				Scene_Action.getMe().tellRestStop();
-				Player.me.setCondition(CONDITION.透視, 40);
+				Player.me.setCondition(CONDITION.目薬, 0);
 			}
 		}
 	}

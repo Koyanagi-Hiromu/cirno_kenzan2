@@ -863,6 +863,13 @@ public class Player extends Base_Creature {
 		return max;
 	}
 
+	public int getOriginMAX_HP() {
+		int max = super.getMAX_HP();
+		if (max > 999)
+			max = 999;
+		return max;
+	}
+	
 	public int getMAX_SATIETY() {
 		return MAX_SATIETY;
 	}

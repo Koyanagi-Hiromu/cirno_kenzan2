@@ -123,7 +123,7 @@ public class MassCreater implements Serializable {
 						ENCHANT_SIMBOL.冴)) {
 			SE.LIGHT_ON.play();
 			Scene_Action.getMe().tellRestStop();
-			Player.me.setCondition(CONDITION.透視, 40);
+			Player.me.setCondition(CONDITION.目薬, 0);
 		}
 	}
 
@@ -139,14 +139,6 @@ public class MassCreater implements Serializable {
 			}
 		}
 		MassCreater.retakeMassSet();
-
-		if (iced
-				&& EnchantSpecial.enchantSimbolAllCheck(CASE.ALL,
-						ENCHANT_SIMBOL.冴)) {
-			SE.LIGHT_ON.play();
-			Scene_Action.getMe().tellRestStop();
-			Player.me.setCondition(CONDITION.透視, 40);
-		}
 	}
 
 	public static String getHackName() {
