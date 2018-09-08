@@ -12,7 +12,7 @@ public class Switch {
 	public static boolean test;
 	static {
 		// 必ずfalseにすること
-		test = true;
+		test = false;
 		if (test) {
 			test = new PropertySupporter(4).isGotPropertyTrue("eclipse_test");
 		}
