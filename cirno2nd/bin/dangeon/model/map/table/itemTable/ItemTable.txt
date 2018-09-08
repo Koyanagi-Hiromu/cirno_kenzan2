@@ -1,7 +1,0 @@
-category.spellcard
-パチュリーのカード,A
-チルノのカード,A
-レミリアのカード,C
-category.grass
-薬草,B
-妹切草,A
