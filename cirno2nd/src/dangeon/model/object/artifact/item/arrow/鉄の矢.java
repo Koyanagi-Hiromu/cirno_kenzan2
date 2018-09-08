@@ -16,6 +16,8 @@ import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印時;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.十六夜咲夜;
 import dangeon.model.object.creature.player.Player;
+import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
+import dangeon.util.Damage;
 import dangeon.util.ThunderDamage;
 
 /**
@@ -82,6 +84,10 @@ public class 鉄の矢 extends Arrow {
 			if (EnchantSpecial
 					.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.鼓)) {
 				ThunderDamage.thunderDamage(this, Player.me, deffece, 15);
+				return;
+			}
+			else if (attack == deffece && BonusConductor.ナイフマスター_通常攻撃()) {
+				Damage.PtoE_ArrowAttack(this, attack, deffece, -9999);
 				return;
 			}
 		} else if (attack instanceof 十六夜咲夜 && attack.getLV() == 4) {

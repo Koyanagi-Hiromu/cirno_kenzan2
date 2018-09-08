@@ -23,7 +23,7 @@ public class Classナイフマスター extends BaseClassJob {
 
 	@Override
 	protected void bonusLv1(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusSwitch(this, 2, "射撃威力に攻撃カードの攻撃力の2倍を追加"));
+		list.add(new BonusSwitch(this, 2, "射撃威力に攻撃カードの攻撃力を追加"));
 	}
 
 	@Override
@@ -44,6 +44,7 @@ public class Classナイフマスター extends BaseClassJob {
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
 		list.add(new BonusSwitch(this, 0, "敵が目の前にいないならナイフを投げる"));
+		list.add(new BonusSwitch(this, 3, "咲夜のナイフの反射ダメージを軽減"));
 	}
 
 	@Override

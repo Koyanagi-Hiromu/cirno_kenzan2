@@ -25,7 +25,7 @@ public class リリーホワイトのカード extends SpellCard {
 
 	private static final String[] EXPLAN = new String[] { "部屋内のキャラクターの状態を回復する程度の能力" };
 
-	final int heal = 50;
+	final int heal = 100;
 
 	public リリーホワイトのカード(Point p) {
 		super(p, item_name, 1, composition);

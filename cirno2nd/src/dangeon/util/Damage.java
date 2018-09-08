@@ -596,7 +596,7 @@ public class Damage {
 			str = HoldEnemy.ME.get().getSTR() / 2 + str;
 		}
 		if (BonusConductor.ナイフマスター_射撃威力増加()) {
-			str += Enchant.getSumSTR() * 2;
+			str += Enchant.getSumSTR();
 		}
 			
 		double damage = str + (arrow_str / 1.5);
