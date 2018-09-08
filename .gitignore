@@ -11,5 +11,3 @@ SteamworksSDK/tools/*
 SteamworksSDK/tools/ContentBuilder/*
 !SteamworksSDK/tools/ContentBuilder/scripts
 
-
-**/save/**/*
