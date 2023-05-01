@@ -3,7 +3,7 @@ package dangeon.model.object.creature.player.class_job.bonus.spec;
 import java.awt.Point;
 import java.util.Random;
 
-import javax.xml.ws.ResponseWrapper;
+//import javax.xml.ws.ResponseWrapper;
 
 import main.res.SE;
 import dangeon.controller.TurnSystemController;
