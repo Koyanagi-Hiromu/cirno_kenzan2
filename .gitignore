@@ -1,4 +1,7 @@
 .DS_Store
+.metadata
+cirno2nd/error.txt
+cirno2nd/bin
 
 # Build
 Build
