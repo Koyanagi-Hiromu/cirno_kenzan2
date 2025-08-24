@@ -4,12 +4,6 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.AbstractList;
 
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.Image_MapTip;
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.latest.scene.action.message.Message;
@@ -27,6 +21,12 @@ import dangeon.model.object.creature.npc.second.NPCレミリア;
 import dangeon.model.object.creature.npc.second.NPC十六夜咲夜;
 import dangeon.model.object.creature.npc.second.NPC小悪魔;
 import dangeon.model.object.creature.player.Player;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class KoumaKan extends Base_TownMap {
 	public class Dark extends HiddenDevice {
@@ -128,7 +128,8 @@ public class KoumaKan extends Base_TownMap {
 			add(new Dark(new Point(31, 7)));
 		}
 		add(new NPC小悪魔(new Point(18, 9)));
-		if (StoryManager.七曜の魔導ok.hasFinished()) {
+		if (StoryManager.七曜クエストok.hasFinished()) {
+			
 		} else {
 			add(new Heikan(new Point(17, 8)));
 			add(new Heikan(new Point(17, 7)));

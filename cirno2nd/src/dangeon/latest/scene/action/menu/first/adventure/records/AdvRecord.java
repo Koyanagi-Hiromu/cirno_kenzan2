@@ -3,8 +3,6 @@ package dangeon.latest.scene.action.menu.first.adventure.records;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import main.constant.PropertySupporter;
-import main.res.SE;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.Base_View;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
@@ -19,10 +17,13 @@ import dangeon.model.map.field.random.緋想の地下;
 import dangeon.model.map.field.random.逆ヶ島;
 import dangeon.model.map.field.random.運命のワルツ;
 import dangeon.model.map.field.random.風穴旅行;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.map.field.random.second.五色の神霊廟;
 import dangeon.model.map.field.random.second.賢将裏の洞窟;
 import dangeon.model.map.field.random.second.魔理沙のトラップタワー;
 import dangeon.model.object.creature.player.save.ResultSaveLoad;
+import main.constant.PropertySupporter;
+import main.res.SE;
 
 public class AdvRecord extends Base_Scene_Menu {
 	public final Base_View BACK;
@@ -30,8 +31,8 @@ public class AdvRecord extends Base_Scene_Menu {
 	public final int difficulty, INDEX, X, Y;
 	public final Base_Map_Random[] ARR = { new 救出大作戦(), new 逆ヶ島(), new 緋想の地下(),
 			new 二撃必殺(), new 五色の神霊廟(), new ミラクルクエスト(), new 風穴旅行(), new 賢将裏の洞窟(),
-			new 魔理沙のトラップタワー(), new 運命のワルツ()
-	// ,new 七曜の魔導()
+			new 魔理沙のトラップタワー(), new 運命のワルツ(), new 七曜クエスト()
+	// ,new 七曜クエスト()
 	};
 
 	public boolean flag_selected;
@@ -47,7 +48,7 @@ public class AdvRecord extends Base_Scene_Menu {
 		INDEX = i;
 		X = x;
 		Y = y;
-		difficulty = ARR[i].getDIFFICULTY(fate).index;
+		difficulty = ARR[i].getDIFFICULTY(fate, true).index;
 		PREVIOUS_SCENE = prev;
 	}
 

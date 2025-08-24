@@ -14,7 +14,7 @@ public enum StoryManager {
 	//
 	おりん車, 日記帳,
 	// 2.10
-	運命のワルツok, 運命のワルツclear, あとがき, シェアok, 運命のワルツEvent_1, 七曜の魔導ok, 七曜の魔導clear, 賢将裏の洞窟ok, 賢将裏の洞窟clear, トラップタワーok, トラップタワーclear
+	運命のワルツok, 運命のワルツclear, あとがき, シェアok, 運命のワルツEvent_1, 七曜クエストok, 七曜クエストclear, 賢将裏の洞窟ok, 賢将裏の洞窟clear, トラップタワーok, トラップタワーclear
 
 	;
 	public static PropertySupporter property = new PropertySupporter(

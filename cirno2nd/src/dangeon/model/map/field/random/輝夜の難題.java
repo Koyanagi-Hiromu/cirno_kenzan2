@@ -1,17 +1,17 @@
-package dangeon.model.map.field.random.second;
+package dangeon.model.map.field.random;
 
 import java.util.ArrayList;
 
-import main.res.BGM;
-import main.res.Image_MapTip;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.MapList;
 import dangeon.model.map.PresentField;
-import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.map.field.town.map.KoumaKan;
 import dangeon.util.R;
+import main.res.BGM;
+import main.res.Image_MapTip;
 
-public class 邪仙の試練 extends Base_Map_Random {
+
+public class 輝夜の難題 extends Base_Map_Random {
 	private enum FloorConducter {
 		// vs ヒソウテンソク hisoutensoku
 		// vs 朱鷺子　izanagi
@@ -69,7 +69,7 @@ public class 邪仙の試練 extends Base_Map_Random {
 
 	private static final long serialVersionUID = 1L;
 
-	public 邪仙の試練() {
+	public 輝夜の難題() {
 		super(Difficulty.Hard, 0, 10);
 	}
 

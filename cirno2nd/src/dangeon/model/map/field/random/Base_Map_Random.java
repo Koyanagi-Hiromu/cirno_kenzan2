@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import main.res.BGM;
-import main.util.BlackOut;
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -36,6 +32,10 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.util.R;
 import dangeon.view.util.StringFilter;
+import main.res.BGM;
+import main.util.BlackOut;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public abstract class Base_Map_Random extends Base_Map {
 	public enum Difficulty {
@@ -59,9 +59,9 @@ public abstract class Base_Map_Random extends Base_Map {
 			this.index = index;
 		}
 
-		public Difficulty get(int delt) {
+		public Difficulty get(int delt, boolean phantomOK) {
 			int i = index + delt;
-			int max = StoryManager.あとがき.hasFinished() ? Phantasm.index
+			int max = phantomOK || StoryManager.あとがき.hasFinished() ? Phantasm.index
 					: Lunatic.index;
 			if (i < 0)
 				i = 0;
@@ -249,8 +249,9 @@ public abstract class Base_Map_Random extends Base_Map {
 		return getDIFFICULTY(Config.getFate());
 	}
 
-	public Difficulty getDIFFICULTY(int fate) {
-		return DIFFICULTY.get(fate);
+	public Difficulty getDIFFICULTY(int fate) { return getDIFFICULTY(fate, false); }
+	public Difficulty getDIFFICULTY(int fate, boolean phantomOK) {
+		return DIFFICULTY.get(fate, phantomOK);
 	}
 
 	@Override

@@ -4,13 +4,6 @@ import java.awt.Point;
 import java.util.AbstractList;
 import java.util.List;
 
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.Image_MapTip;
-import main.res.SE;
-import main.util.BlackOut;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.Book;
@@ -50,6 +43,13 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.util.R;
 import dangeon.util.Switch;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.BlackOut;
+import main.util.DIRECTION;
 
 public class FairyPlace extends Base_TownMap {
 
@@ -67,7 +67,7 @@ public class FairyPlace extends Base_TownMap {
 	private void add_紫(int x, int y) {
 		final Abstract_NPC c = new Abstract_NPC(CHARA_IMAGE.八雲紫, "八雲紫", x, y,
 				false, false, "あらあら@", "よく私に話しかけられたわね@",
-				"それなら特殊合成のヒントを教えてあげるわ@", "「ひよこになるには変化する赤と橙色の印がそれぞれ１つ必要」よ@");
+				"それなら特殊合成のヒントを教えてあげるわ@", "「ひよこになるには変化する赤い謎と橙色の狸が１つずつ必要」よ@");
 		add(c);
 		add(new HiddenDevice(new Point(x, y + 1)) {
 			private static final long serialVersionUID = 1L;
@@ -150,7 +150,7 @@ public class FairyPlace extends Base_TownMap {
 		kanako(new Point(20, 7));
 		if (Switch.test) {
 			add(new NPC二撃(new Point(20, 6)));
-			add(new NPCパチェ(new Point(20, 7)));
+			add(new NPCパチェ(new Point(19, 7)));
 			add(new チルノの旅NPC(new Point(21, 6)));
 			add(new NPC逆ヶ島(new Point(22, 6)));
 			// add(new 熱解凍NPC(new Point(17, 9)));
@@ -250,7 +250,7 @@ public class FairyPlace extends Base_TownMap {
 				};
 			} else if (StoryManager.ミラクルクエスト挑戦ok.hasFinished()) {
 				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4,
-						false, "もしエクストラなカードが手に入ったら見せてくれないかー？@", "⑨おー？");
+						false, "もしエクストラなカードが手に入ったら見せてくれないかー？@", "⑨おー？@", "⑨エネミー図鑑にヒントが書いてあるらしいぞー");
 			} else {
 				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4,
 						false, "おーチルノかー？@", "封印状態になるとどんな状態異常も解除されるって知ってたかー？@",

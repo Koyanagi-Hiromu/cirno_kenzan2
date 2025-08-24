@@ -2,20 +2,22 @@ package dangeon.model.map.field.random.second;
 
 import java.util.ArrayList;
 
-import main.res.BGM;
-import main.res.Image_MapTip;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.MapList;
 import dangeon.model.map.PresentField;
-import dangeon.model.map.field.random.Base_Map_Random;
+import dangeon.model.map.field.random.ミラクルクエスト;
 import dangeon.model.map.field.town.map.KoumaKan;
+import dangeon.model.object.creature.player.Player;
+import dangeon.model.object.creature.player.class_job.ClassDefault;
 import dangeon.util.R;
+import main.res.BGM;
+import main.res.Image_MapTip;
 
-public class 七曜の魔導 extends Base_Map_Random {
+public class 七曜クエスト extends ミラクルクエスト {
 	private enum FloorConducter {
 		// vs ヒソウテンソク hisoutensoku
 		// vs 朱鷺子　izanagi
-		ERROR(0, null, Image_MapTip.紅魔館, "七曜の魔導"), 運命のワルツ(7, BGM.frozen_night,
+		ERROR(0, null, Image_MapTip.紅魔館, "七曜クエスト"), 運命のワルツ(7, BGM.frozen_night,
 				Image_MapTip.紅魔館, "始まりの日曜日"), ゴーストナイトムーン(14, BGM.hyougenyakou,
 				Image_MapTip.stars, "夜道の月曜日"), オールドヒストリー(24,
 				BGM.kanpyo_ch_sprite, Image_MapTip.草原, "挑戦の火曜日"), 一条戻り橋(29,
@@ -69,25 +71,10 @@ public class 七曜の魔導 extends Base_Map_Random {
 
 	private static final long serialVersionUID = 1L;
 
-	public 七曜の魔導() {
-		super(Difficulty.Hard, 0, 10);
+	public 七曜クエスト() {
+		super(Difficulty.Hard, 2, 0);
 	}
 
-	@Override
-	public int defaultItemNumber() {
-		return new R().nextInt(3) + 2;
-	}
-
-	@Override
-	public int expRate_From1To100() {
-		int rate = 100 - MapList.getFloor() + 1;
-		return Math.max(rate, 25);
-	}
-
-	@Override
-	public int getBelongingsMax() {
-		return 20;
-	}
 
 	@Override
 	public BGM getBGM() {
@@ -96,20 +83,20 @@ public class 七曜の魔導 extends Base_Map_Random {
 
 	@Override
 	public String getClassName() {
-		return "七曜の魔導";
+		return "七曜クエスト";
 	}
 
 	@Override
 	protected void getExn_Warning(ArrayList<String> list) {
-		list.add("アイテムが２０コまでしか持てませんが");
-		list.add("持っているアイテムの印が全て適用されます");
-		list.add("チルノのレベルが上がりにくいです");
-	}
-
-	@Override
-	public int[] getGouseiFloor() {
-		return new int[] {};
-		// return new int[] { 14, 44, 74 };
+		if (Player.me.getClassJob().getClass().equals(ClassDefault.class)) {
+			list.add("クラスを選んで進むダンジョンよ");
+			list.add("運命のワルツを利用して作ったわ");
+			list.add("覚悟して挑むことね");
+		} else {
+			for (String string : Player.me.getClassJob().getSelectingExn()) {
+				list.add(string);
+			}
+		}
 	}
 
 	@Override
@@ -124,7 +111,13 @@ public class 七曜の魔導 extends Base_Map_Random {
 
 	@Override
 	public int getSaisenParcent() {
-		return 4;
+		if (MapList.getFloor() <= FloorConducter.運命のワルツ.floor) {
+			return 6;
+		} else if (MapList.getFloor() > FloorConducter.星に願いを.floor) {
+			return 2;
+		} else {
+			return 8;
+		}
 	}
 
 	@Override
@@ -162,12 +155,12 @@ public class 七曜の魔導 extends Base_Map_Random {
 
 	@Override
 	public StoryManager getStoryManager_ClearFlag() {
-		return StoryManager.七曜の魔導ok;
+		return StoryManager.七曜クエストclear;
 	}
 
 	@Override
 	public StoryManager getStoryManager_FirstFlag() {
-		return StoryManager.七曜の魔導clear;
+		return StoryManager.七曜クエストok;
 	}
 
 	@Override
@@ -178,11 +171,6 @@ public class 七曜の魔導 extends Base_Map_Random {
 	@Override
 	public int getTrapDefaultValue() {
 		return super.getTrapDefaultValue();
-	}
-
-	@Override
-	public boolean isAllEnchantDungeon() {
-		return true;
 	}
 
 	@Override

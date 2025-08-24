@@ -8,13 +8,6 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import main.res.BGM;
-import main.res.Image_LargeCharacter;
-import main.res.Image_MapTip;
-import main.res.SE;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.action.itemlist.Book_Item;
 import dangeon.latest.scene.action.itemlist.Item_List;
 import dangeon.latest.scene.action.menu.Book;
@@ -55,6 +48,13 @@ import dangeon.util.R;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.View_Sider;
+import main.res.BGM;
+import main.res.Image_LargeCharacter;
+import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class ミラクルクエスト extends Base_Map_Random {
 	public class ClassJobLvUpNpc extends Abstract_NPC {
@@ -311,7 +311,12 @@ public class ミラクルクエスト extends Base_Map_Random {
 	private boolean flag_to_1f;
 
 	public ミラクルクエスト() {
-		super(Difficulty.Easy, 2, 0);
+		this(Difficulty.Easy, 2, 0);
+	}
+	
+	public ミラクルクエスト(Difficulty difficulty, int un_checked_level,
+			Integer item_max) {
+		super(difficulty, un_checked_level, item_max);
 	}
 
 	@Override

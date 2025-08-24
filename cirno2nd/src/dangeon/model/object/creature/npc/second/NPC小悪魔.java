@@ -2,18 +2,17 @@ package dangeon.model.object.creature.npc.second;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
-import main.res.SE;
-import patch.PatchChecker;
 import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
-import dangeon.model.map.field.random.second.七曜の魔導;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.object.creature.npc.dungeonNpc.Base_DungeonNPC;
 import dangeon.util.Switch;
+import main.res.CHARA_IMAGE;
+import main.res.SE;
 
 public class NPC小悪魔 extends Base_DungeonNPC {
 
@@ -24,7 +23,7 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 
 	public NPC小悪魔(Point p) {
 		super(p, "小悪魔", CHARA_IMAGE.小悪魔, "危険な場所だと伺っていますが、それでも向かうのですね？",
-				new 七曜の魔導());
+				new 七曜クエスト());
 	}
 
 	private void dataMove() {
@@ -83,40 +82,40 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 	public void message() {
 		String msg = "パチュリー様はご不在ですよ$私に何かお手伝いできることはありませんか？";
 		ConvEvent CnE = new ConvEvent() {
-			@Override
-			protected Book getContent1() {
-				return new Book("最新パッチのチェック") {
-					@Override
-					protected void work() {
-						new ConvEvent("インターネットに接続しますがよろしいですか？") {
-							@Override
-							protected Book getYes() {
-								return new Book() {
-									@Override
-									protected void work() {
-										try {
-											String[] arr = new PatchChecker()
-													.get();
-											patchSay(arr);
-										} catch (Exception e) {
-											e.printStackTrace();
-											say("なにかしらのエラーが起きてしまいました");
-											say("ネット環境をお確かめ下さい");
-										}
-									}
-								};
-							}
-						};
-					}
-				};
-			}
+//			@Override
+//			protected Book getContent1() {
+//				return new Book("最新パッチのチェック") {
+//					@Override
+//					protected void work() {
+//						new ConvEvent("インターネットに接続しますがよろしいですか？") {
+//							@Override
+//							protected Book getYes() {
+//								return new Book() {
+//									@Override
+//									protected void work() {
+//										try {
+//											String[] arr = new PatchChecker()
+//													.get();
+//											patchSay(arr);
+//										} catch (Exception e) {
+//											e.printStackTrace();
+//											say("なにかしらのエラーが起きてしまいました");
+//											say("ネット環境をお確かめ下さい");
+//										}
+//									}
+//								};
+//							}
+//						};
+//					}
+//				};
+//			}
 
 			@Override
 			protected Book getContent2() {
 				return new Book("図書館への入室") {
 					@Override
 					protected void work() {
-						if (StoryManager.七曜の魔導ok.hasFinished()) {
+						if (StoryManager.七曜クエストok.hasFinished()) {
 							ask();
 						} else {
 							say("ごめんなさい、パチュリー様が戻ってくるまでお待ちください");
@@ -199,13 +198,15 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 
 	@Override
 	protected void sayBrief() {
-		// TODO 自動生成されたメソッド・スタブ
+		talks("最難関未識別９９Ｆダンジョンだ");
+		talks("時々レベルが１つ高い敵が出現するよ");
+		talks("しかもボスも特定階層にいるから気をつけてね");
+		talks(true, "まずは倉庫にカードを置きに戻ろう");
 
 	}
 
 	@Override
 	protected void sayFirst() {
 		// TODO 自動生成されたメソッド・スタブ
-
 	}
 }

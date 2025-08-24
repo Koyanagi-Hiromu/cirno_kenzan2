@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.SE;
-import main.util.BlackOut;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.Scene_Action;
@@ -20,12 +15,19 @@ import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.model.config.StoryManager;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
+import dangeon.util.Switch;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.SE;
+import main.util.BlackOut;
+import main.util.半角全角コンバーター;
 
 public class NPCパチェ extends Base_NPC {
 
@@ -114,35 +116,39 @@ public class NPCパチェ extends Base_NPC {
 										Player.flag_clear = true;
 										SE.FANFARE2.play();
 										setTalks(Image_LargeCharacter.ANY);
-										talks("図書館に入れるようになった！");
-										talks(true, "さっそく紅魔館に向かおう！");
+										talks("七曜クエストが開放された！");
+										talks("ミラクルクエストをもっと難しくしたダンジョンだ！");
+										talks("好きなクラスが運命のワルツでも通用するか試そう！");
+										talks(true, "紅魔館の小悪魔が案内してくれるぞ");
 									}
 								}, new Task() {
 									private static final long serialVersionUID = 1L;
 
 									@Override
 									public void work() {
-										StoryManager.七曜の魔導ok.saveThisFinished();
+										new 七曜クエスト().getStoryManager_FirstFlag().saveThisFinished();
+										StoryManager.七曜クエストok.saveThisFinished();
 										TaskOnMapObject.reCreateNewMap();
 									}
 								});
 							}
 						};
-						new Conversation(IMLC, cne, "（今あそこは魔窟になっているけどね）");
+						new Conversation(IMLC, cne, "運命のワルツとミラクルクエストをつないだのだけど、気にいるかしら");
 					}
 
 					@Override
 					protected void work() {
-						if (StoryManager.七曜の魔導ok.hasFinished()) {
-							say("もうあげたでしょ・・・");
-							rep("そうだった！");
-						} else if (StoryManager.運命のワルツok.hasFinished()) {
-							say("もうあげたでしょ・・・");
-							rep("そうだった！");
-							// please2();
+						if (StoryManager.七曜クエストok.hasFinished()) {
+							say("もうあげられるものはないわ");
+							rep("ちぇー！");
+						} else if (StoryManager.運命のワルツok.hasFinished() || Switch.test) {
+							 please2();
 						} else if (StoryManager.日記帳.hasFinished()) {
 							say("もうあげたでしょ・・・");
 							rep("そうだった！");
+							say("そういえば、八雲紫にあなたから話しかけたことあるかしら");
+							say("あいつ壁の中にいるから、一方的に話しかけてくるわよね");
+							rep("そうかも！");
 						} else {
 							please();
 						}
