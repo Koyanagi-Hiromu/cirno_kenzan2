@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import main.res.CHARA_IMAGE;
-import main.res.Image_Artifact;
-import main.res.SE;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.ThrowingItem;
 import dangeon.controller.TurnSystemController;
@@ -67,6 +62,11 @@ import dangeon.view.constant.MAP;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.SecondAnime;
 import dangeon.view.detail.View_Sider;
+import main.res.CHARA_IMAGE;
+import main.res.Image_Artifact;
+import main.res.SE;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
 
 public abstract class Base_Creature extends Base_MapObject {
 
@@ -172,6 +172,22 @@ public abstract class Base_Creature extends Base_MapObject {
 
 	public void addAttackTask(Task t) {
 		attack_task.add(t);
+	}
+	
+	public void setLv4() {
+		if (this instanceof Base_NPC) {
+			return;
+		}
+		if (getConvertedLV() == 4) {
+			Message.set("ANOTHERのレベルは変化しなかった");
+			return;
+		}
+
+		SE.LEVEL_UP.play();
+		Message.set(getColoredName(), "はレベルが上がって");
+		LV = 4;
+		setNameAndStatus();
+		Message.set(getColoredName(), "になった");
 	}
 
 	public void addLV(int delt) {

@@ -103,6 +103,7 @@ import dangeon.model.object.artifact.item.scrool.混乱の書;
 import dangeon.model.object.artifact.item.scrool.破裂の書;
 import dangeon.model.object.artifact.item.scrool.罠師の書;
 import dangeon.model.object.artifact.item.scrool.自爆の書;
+import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
 import dangeon.model.object.artifact.item.scrool.解凍の書;
 import dangeon.model.object.artifact.item.scrool.識別の書;
 import dangeon.model.object.artifact.item.scrool.電光石火の書;
@@ -423,6 +424,7 @@ public class ItemNpc extends Base_NPC {
 		items.add(new 人を殺せる書(p));
 		items.add(new 幻想郷縁起(p));
 		items.add(new 切れ端(p));
+		items.add(new 自由人の狂想曲(p));
 
 	}
 

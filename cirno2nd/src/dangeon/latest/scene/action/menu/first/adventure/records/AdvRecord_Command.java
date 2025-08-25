@@ -3,6 +3,7 @@ package dangeon.latest.scene.action.menu.first.adventure.records;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import main.util.DIRECTION;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
 import dangeon.latest.scene.action.menu.Book;
@@ -10,7 +11,6 @@ import dangeon.latest.util.view_window.UnderMenuWindow;
 import dangeon.model.config.Config;
 import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.map.field.random.Base_Map_Random.Difficulty;
-import main.util.DIRECTION;
 
 public class AdvRecord_Command extends Base_Scene_Menu {
 	private final Base_Map_Random[] ARR;

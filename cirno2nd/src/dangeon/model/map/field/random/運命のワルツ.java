@@ -32,7 +32,7 @@ import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.device.Stairs;
 import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.check.Checker;
-import dangeon.model.object.artifact.item.scrool.あとがき;
+import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
 import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
 import dangeon.model.object.artifact.item.scrool.慧音の歴史書;
 import dangeon.model.object.creature.npc.second.Takarabako;
@@ -285,7 +285,7 @@ public class 運命のワルツ extends Base_Map_Random {
 
 				@Override
 				public void appearStair() {
-					あとがき a = new あとがき(boss.getMassPoint());
+					自由人の狂想曲 a = new 自由人の狂想曲(boss.getMassPoint());
 					Checker.checkStatic(a);
 					ItemFall.itemFall(a);
 					super.appearStair();
