@@ -2,13 +2,13 @@ package dangeon.model.object.artifact.item.enchantSpecial;
 
 import java.awt.Color;
 
-import main.res.BGM;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.Base_Item;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.staff.Staff;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Enchant;
+import main.res.BGM;
 
 public class Composition {
 	private static boolean checkComposition(Base_Artifact a, Base_Artifact a2) {
@@ -189,6 +189,11 @@ public class Composition {
 		}
 		// 色を付ける
 		((Base_Item) a).flag_gousei = true;
+		
+		if (a.isCurse() && EnchantSpecial.simbolCheckOne(a, ENCHANT_SIMBOL.金))
+		{
+			a.setCurse(false);
+		}
 
 		return true;
 	}

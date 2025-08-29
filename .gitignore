@@ -3,6 +3,7 @@
 cirno2nd/error.txt
 cirno2nd/bin
 cirno2nd/save
+cirno2nd/**/*.properties
 
 # Build
 Build
@@ -14,4 +15,3 @@ SteamworksSDK/tools/*
 !SteamworksSDK/tools/ContentBuilder
 SteamworksSDK/tools/ContentBuilder/*
 !SteamworksSDK/tools/ContentBuilder/scripts
-
