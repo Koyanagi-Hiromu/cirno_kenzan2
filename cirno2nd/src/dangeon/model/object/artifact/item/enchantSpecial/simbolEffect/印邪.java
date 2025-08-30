@@ -160,6 +160,7 @@ public class 印邪 extends EnchantSpecial {
 			map.put(4, "・大ダメージ発生率５０％");
 			map.put(6, "・会心の一撃発生の可能性");
 			map.put(9, "・壁中攻撃");
+			map.put(10, "・呪いを犠牲にして死んでも復活");
 			map.put(13, "・大ダメージ発生率上昇");
 			map.put(15, "・空気を少し食べられる");
 			map.put(16, "・半死人化");

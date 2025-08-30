@@ -3,11 +3,6 @@ package dangeon.controller;
 import java.awt.Color;
 import java.awt.Image;
 
-import main.res.Image_Icon;
-import main.res.SE;
-import main.thread.MainThread;
-import main.util.FrameShaker;
-import main.util.半角全角コンバーター;
 import connection.sv_cl.SocketHolder;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.Scene_Action;
@@ -40,6 +35,11 @@ import dangeon.util.MapInSelect;
 import dangeon.view.anime.CirnoIceEffect;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.View_Sider;
+import main.res.Image_Icon;
+import main.res.SE;
+import main.thread.MainThread;
+import main.util.FrameShaker;
+import main.util.半角全角コンバーター;
 
 public class TurnSystemController {
 	private enum EnemyTurnStep {
@@ -201,7 +201,11 @@ public class TurnSystemController {
 	}
 
 	public static int getRestTurn() {
-		return flag_turn_count_second ? getMaxTurn() - turn_count : -1;
+		return getMaxTurn() - turn_count;
+	}
+
+	public static int getRestTurnForHeader() {
+		return flag_turn_count_second ? getRestTurn()  : -1;
 	}
 
 	public static boolean getSlowSwitch() {

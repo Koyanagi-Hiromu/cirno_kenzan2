@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import main.Listener;
-import main.Listener.ACTION;
-import main.constant.PropertySupporter;
-import main.pad.ListenerAdapter;
-import main.res.Image_Dungeon_Name;
-import main.util.DIRECTION;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.map.MapList;
 import dangeon.model.map.PresentField;
@@ -29,6 +23,12 @@ import dangeon.model.object.creature.enemy.人形;
 import dangeon.model.object.creature.enemy.博麗霊夢;
 import dangeon.util.Switch;
 import dangeon.view.constant.NormalFont;
+import main.Listener;
+import main.Listener.ACTION;
+import main.constant.PropertySupporter;
+import main.pad.ListenerAdapter;
+import main.res.Image_Dungeon_Name;
+import main.util.DIRECTION;
 
 public class Config {
 	public static final PropertySupporter PR = new PropertySupporter(-1);
@@ -654,6 +654,11 @@ public class Config {
 	public static void saveRetrySeed(long seed) {
 		PropertySupporter ps = PR_INDIV_PRE[save_index - 1];
 		ps.saveProperty("random_seed_for_retry", seed);
+		ps.saveProperty("numbers_for_retry", 3);
+	}
+	
+	public static void resetRetry() {
+		PropertySupporter ps = PR_INDIV_PRE[save_index - 1];
 		ps.saveProperty("numbers_for_retry", 3);
 	}
 

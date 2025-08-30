@@ -2,8 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TurnSystemController;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -11,6 +9,8 @@ import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.蓬莱山輝夜;
 import dangeon.model.object.creature.player.Player;
+import main.res.SE;
+import main.util.半角全角コンバーター;
 
 public class 蓬莱山輝夜のカード extends SpellCard {
 
@@ -103,7 +103,7 @@ public class 蓬莱山輝夜のカード extends SpellCard {
 		Player.me.setCondition(CONDITION.反射, 0);
 		TurnSystemController.turnSkip();
 		Message.set("夜明けまであと",
-				半角全角コンバーター.半角To全角数字(TurnSystemController.getRestTurn() / 10),
+				半角全角コンバーター.半角To全角数字(1+(TurnSystemController.getRestTurn() / 10)),
 				"行動");
 		return true;
 	}

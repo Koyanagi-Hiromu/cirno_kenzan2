@@ -6,12 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import main.Listener.ACTION;
-import main.Second_Firster;
-import main.res.SE;
-import main.util.BlackOut;
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.controller.DangeonScene;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
@@ -42,6 +36,12 @@ import dangeon.model.object.creature.player.class_job.ClassDefault;
 import dangeon.model.object.creature.player.save.ResultSaveLoad;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.view.util.StringFilter;
+import main.Listener.ACTION;
+import main.Second_Firster;
+import main.res.SE;
+import main.util.BlackOut;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class Scene_Result_Info extends Plain {
 	private boolean flag_item_conservation;
@@ -205,12 +205,13 @@ public class Scene_Result_Info extends Plain {
 				|| Config.isCoinOnly1()) {
 			initializePlayer_Task(false);
 		} else {
-			final int numbers = Config.decRetryNumbers();
-			if (numbers == 0) {
-				confirm_2_0(numbers);
-			} else {
-				confirm_2_1(numbers);
-			}
+			confirm_3();
+//			final int numbers = Config.decRetryNumbers();
+//			if (numbers == 0) {
+//				confirm_2_0(numbers);
+//			} else {
+//				confirm_2_1(numbers);
+//			}
 		}
 	}
 
@@ -251,6 +252,35 @@ public class Scene_Result_Info extends Plain {
 					@Override
 					protected void work() {
 						initializePlayer_Task(false);
+					}
+				};
+			}
+
+			@Override
+			protected int pushCancelAction() {
+				return -1;
+			}
+		};
+	}
+
+	private void confirm_3() {
+		new ConvEvent("アイテムと敵の配置を再現しますか？$") {
+			@Override
+			protected Book getContent1() {
+				return new Book("いいえ（初期配置変更）") {
+					@Override
+					protected void work() {
+						initializePlayer_Task(false);
+					}
+				};
+			}
+
+			@Override
+			protected Book getContent2() {
+				return new Book("はい（完全再現）") {
+					@Override
+					protected void work() {
+						initializePlayer_Task(true);
 					}
 				};
 			}
@@ -499,7 +529,7 @@ public class Scene_Result_Info extends Plain {
 		}
 	}
 
-	private String getZanki(int numbers) {
+	public static String getZanki(int numbers) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(Color.CYAN.toString());
 		sb.append("残機：");

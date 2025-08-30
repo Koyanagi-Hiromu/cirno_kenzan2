@@ -10,17 +10,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-import main.constant.FR;
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_Artifact;
-import main.res.Image_Player;
-import main.res.SE;
-import main.thread.MainThread;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
-import main.util.Show;
-import main.util.半角全角コンバーター;
 import connection.sv_cl.SocketHolder;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.ThrowingItem;
@@ -28,11 +17,14 @@ import dangeon.controller.ThrowingItem.HowToThrow;
 import dangeon.controller.TurnSystemController;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.Scene_Action;
+import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.menu.view.result.Scene_Result_Info;
+import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.latest.scene.action.message.MessageLock;
 import dangeon.model.condition.CONDITION;
+import dangeon.model.condition.復活;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.EnemyTable;
 import dangeon.model.map.ItemFall;
@@ -45,7 +37,6 @@ import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.map.field.random.救出大作戦;
 import dangeon.model.map.field.random.逆ヶ島;
 import dangeon.model.object.artifact.Base_Artifact;
-import dangeon.model.object.artifact.item.arrow.大砲の弾;
 import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.bullet.御柱;
 import dangeon.model.object.artifact.item.bullet.目からビーム;
@@ -100,6 +91,17 @@ import dangeon.view.detail.MainMap;
 import dangeon.view.detail.MiniMap;
 import dangeon.view.detail.View_Sider;
 import dangeon.view.util.StringFilter;
+import main.constant.FR;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_Artifact;
+import main.res.Image_Player;
+import main.res.SE;
+import main.thread.MainThread;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
+import main.util.Show;
+import main.util.半角全角コンバーター;
 
 public class Player extends Base_Creature {
 	protected enum STATUS {
@@ -465,6 +467,59 @@ public class Player extends Base_Creature {
 			}
 		}
 	}
+	
+	private void recover(BGM 復活時のBGM, boolean flanCoin)
+	{
+		dying_frame = 0;
+		復活時のBGM.play();
+		Player.me.chengeHP_NoEffect(Player.me.getMAX_HP());
+		if (flanCoin)
+		{
+			Config.decRetryNumbers();
+			Player.me.setCondition(CONDITION.炎上, 0);
+			MapInSelect.explosion(Player.me.getMassPoint());
+		}
+		else
+		{
+			Medal.復活回数.addCount();
+			if (BonusConductor.蓬莱人形_復活時炎上()) {
+				Player.me.setCondition(CONDITION.炎上, 0);
+			}
+			if (BonusConductor.蓬莱人形_復活時自爆()) {
+				MapInSelect.explosion(Player.me.getMassPoint());
+			}
+		}
+	}
+	
+	private void confirmFlanCoin(int zanki)
+	{
+		new ConvEvent("残機を使って復活しますか？(爆発して復活します)$", Scene_Result_Info.getZanki(zanki)) {
+			@Override
+			protected Book getContent1() {
+				return new Book("はい") {
+					@Override
+					protected void work() {
+						recover(PresentField.get().getBGM(), true);
+					}
+				};
+			}
+
+			@Override
+			protected Book getContent2() {
+				return new Book("いいえ") {
+					@Override
+					protected void work() {
+						new Scene_Result_Info();
+					}
+				};
+			}
+
+			@Override
+			protected int pushCancelAction() {
+				return -1;
+			}
+		};
+	}
 
 	private void death_at_dying_finished() {
 		Message.setConcatFlag(false);
@@ -473,8 +528,31 @@ public class Player extends Base_Creature {
 
 			@Override
 			public void second() {
-				flag_game_over_TurnOver = false;
-				new Scene_Result_Info();
+				if (flag_game_over_TurnOver) {
+					flag_game_over_TurnOver = false;
+					new Scene_Result_Info();
+				}
+				else if (cause_of_death == "冒険をあきらめた") {
+					new Scene_Result_Info();
+				}
+				else {
+					BGM 復活時のBGM = 復活.tryRecovery(); 
+					if (復活時のBGM != null) {
+						recover(復活時のBGM, false);
+						return;
+					}
+
+					if (!Config.isCoinOnly1()) {
+						int zanki = Config.getRetryNumber() - 1;
+						if (zanki > 0)
+						{
+							confirmFlanCoin(zanki);
+							return;
+						}
+					}
+					
+					new Scene_Result_Info();
+				}
 			}
 		};
 	}
@@ -1457,6 +1535,7 @@ public class Player extends Base_Creature {
 		Enchant.allRemove();
 		endDamaging();
 		TurnSystemController.setTurnFinish();
+		Config.resetRetry();
 	}
 
 	public void resetExpCashNoMessage() {

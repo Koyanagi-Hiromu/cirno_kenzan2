@@ -8,15 +8,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import main.Second_Firster;
-import main.constant.FR;
-import main.res.Image_Artifact;
-import main.res.Image_Icon;
-import main.res.Image_LargeCharacter;
-import main.res.Image_Object;
-import main.res.Image_Window_Frame;
-import main.util.BeautifulView;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TurnSystemController;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
@@ -32,6 +23,15 @@ import dangeon.util.R;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.util.RotateDraw;
 import dangeon.view.util.StringFilter;
+import main.Second_Firster;
+import main.constant.FR;
+import main.res.Image_Artifact;
+import main.res.Image_Icon;
+import main.res.Image_LargeCharacter;
+import main.res.Image_Object;
+import main.res.Image_Window_Frame;
+import main.util.BeautifulView;
+import main.util.半角全角コンバーター;
 
 public class Header {
 	private static final int y = NormalFont.HEIGHT + NormalFont.LEADING;
@@ -357,7 +357,7 @@ public class Header {
 		int floor_lv_x = 3;
 		int y = 62;
 		int dy = 15;
-		int att = TurnSystemController.getRestTurn();
+		int att = TurnSystemController.getRestTurnForHeader();
 		StringFilter.drawEdgedString_plain(g, sb.toString(), floor_lv_x, y);
 		if (diff != null)
 			StringFilter.drawEdgedString(g, diff, floor_lv_x, y + dy);

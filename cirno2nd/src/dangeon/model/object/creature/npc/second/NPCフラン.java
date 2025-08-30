@@ -3,12 +3,12 @@ package dangeon.model.object.creature.npc.second;
 import java.awt.Color;
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
 import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.model.config.Config;
 import dangeon.model.object.creature.npc.Base_NPC;
+import main.res.CHARA_IMAGE;
 
 public class NPCフラン extends Base_NPC {
 
@@ -28,7 +28,7 @@ public class NPCフラン extends Base_NPC {
 
 			@Override
 			protected Book getContent1() {
-				return new Book("３コ（ON）") {
+				return new Book("３コ（残機２）") {
 					@Override
 					protected void work() {
 						setContinueSwith(true);
@@ -38,7 +38,7 @@ public class NPCフラン extends Base_NPC {
 
 			@Override
 			protected Book getContent2() {
-				return new Book("１コ（OFF）") {
+				return new Book("１コ（残機０）") {
 					@Override
 					protected void work() {
 						setContinueSwith(false);
@@ -52,16 +52,15 @@ public class NPCフラン extends Base_NPC {
 				String s;
 				s = getON_OFF(Config.isCoinOnly1());
 				return new String[] {
-						Color.LIGHT_GRAY + "コンティニューシステムの",
-						Color.LIGHT_GRAY + "ON・OFFを切り替えます",
+						Color.LIGHT_GRAY + "コンティニュー回数",
+						Color.LIGHT_GRAY + "を切り替えます",
 						Color.LIGHT_GRAY + "現在は " + s + Color.LIGHT_GRAY
-								+ " です", Color.LIGHT_GRAY + "ＯＦＦにすると倒れても",
-						Color.LIGHT_GRAY + "尋ねられなくなります" };
+								+ " です" };
 			}
 
 			private String getON_OFF(boolean flag) {
-				return (flag ? Color.ORANGE.toString() + "ＯＦＦ" : Color.GREEN
-						.toString() + " ＯＮ ")
+				return (flag ? Color.ORANGE.toString() + "残機０" : Color.GREEN
+						.toString() + " 残機２")
 						+ Color.WHITE.toString();
 			}
 
@@ -69,10 +68,9 @@ public class NPCフラン extends Base_NPC {
 				Config.setCoinOnly1(!on);
 				if (Config.isCoinOnly1()) {
 					say("それじゃあコンティニュー出来ないね！");
-					say("倒れた後「やり直す」を選択すると、初期配置を変更して１Ｆからやり直すよ");
+					say("残機は０だよ");
 				} else {
 					say("それじゃあコンティニューは２回までね！");
-					say("倒れた後「やり直す」を選択すると完全再現するかしないか選べるよ");
 				}
 			}
 		};

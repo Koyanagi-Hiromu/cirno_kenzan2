@@ -15,7 +15,6 @@ import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
-import dangeon.model.condition.復活;
 import dangeon.model.config.table.ItemTable;
 import dangeon.model.map.EnemyFall;
 import dangeon.model.map.ItemFall;
@@ -1294,10 +1293,6 @@ public abstract class Base_Creature extends Base_MapObject {
 
 	public boolean playerLifeCheck(Object obj) {
 		if (Player.me.getHP() <= 0) {
-			if (復活.recovery()) {
-				Medal.復活回数.addCount();
-				return false;
-			}
 			// EnchantSpecial.sendStrage();
 			if (Switch.test && Switch.switch_player_no_death) {
 				return false;
@@ -1356,6 +1351,7 @@ public abstract class Base_Creature extends Base_MapObject {
 			chengeHP(null, null, this.getGhost() == 0 ? 1 : getMAX_HP() / 2);
 			return true;
 		}
+		
 		return false;
 	}
 

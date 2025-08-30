@@ -61,7 +61,7 @@ public abstract class Base_Map_Random extends Base_Map {
 
 		public Difficulty get(int delt, boolean phantomOK) {
 			int i = index + delt;
-			int max = phantomOK || StoryManager.あとがき.hasFinished() ? Phantasm.index
+			int max = phantomOK || StoryManager.運命のワルツclear.hasFinished() ? Phantasm.index
 					: Lunatic.index;
 			if (i < 0)
 				i = 0;
