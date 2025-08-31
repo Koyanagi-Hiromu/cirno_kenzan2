@@ -3,7 +3,6 @@ package dangeon.model.object.creature.npc.second;
 import java.awt.Image;
 import java.awt.Point;
 
-import main.res.Image_Object;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.condition.CONDITION;
@@ -16,6 +15,7 @@ import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
+import main.res.Image_Object;
 
 public class Takarabako extends Base_NPC {
 
@@ -70,6 +70,11 @@ public class Takarabako extends Base_NPC {
 	@Override
 	public void message() {
 		Player.me.startAttackWithHand(getAttackTask(Player.me, this));
+	}
+	
+	@Override
+	public boolean isSkillActive() {
+		return true;
 	}
 
 	@Override

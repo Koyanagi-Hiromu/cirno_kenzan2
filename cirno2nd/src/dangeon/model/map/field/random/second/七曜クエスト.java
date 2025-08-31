@@ -1,17 +1,45 @@
 package dangeon.model.map.field.random.second;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
+import dangeon.controller.TaskOnMapObject;
+import dangeon.latest.scene.action.menu.Book;
+import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.model.config.StoryManager;
+import dangeon.model.config.table.ItemTable;
+import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
+import dangeon.model.map.MassCreater;
+import dangeon.model.map.NextFloor;
 import dangeon.model.map.PresentField;
+import dangeon.model.map.field.Base_Map;
 import dangeon.model.map.field.random.ミラクルクエスト;
+import dangeon.model.map.field.random.bossmap.BossMap_Daisakusen;
+import dangeon.model.map.field.random.bossmap.BossMap_Hisoutensoku;
+import dangeon.model.map.field.random.bossmap.BossMap_Sakasa;
+import dangeon.model.map.field.random.bossmap.BossMap_Tokiko;
+import dangeon.model.map.field.special.map.BossMap;
+import dangeon.model.map.field.special.map.EndingMap;
 import dangeon.model.map.field.town.map.KoumaKan;
+import dangeon.model.object.Base_MapObject;
+import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.device.Stairs;
+import dangeon.model.object.artifact.item.arrow.鉄の矢;
+import dangeon.model.object.artifact.item.check.Checker;
+import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
+import dangeon.model.object.artifact.item.scrool.慧音の歴史書;
+import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
+import dangeon.model.object.creature.npc.second.Takarabako;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.class_job.ClassDefault;
 import dangeon.util.R;
 import main.res.BGM;
 import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 七曜クエスト extends ミラクルクエスト {
 	private enum FloorConducter {
@@ -75,10 +103,228 @@ public class 七曜クエスト extends ミラクルクエスト {
 		super(Difficulty.Hard, 2, 0);
 	}
 
+	private class MiddMap extends EndingMap {
+		private static final long serialVersionUID = 1L;
+		private int count;
+
+		public MiddMap(int count) {
+			super(七曜クエスト.this);
+			this.count = count - 1;
+		}
+
+		@Override
+		public String getMapName() {
+			return "境界の踊り場";
+		}
+
+		@Override
+		protected Base_MapObject getStair(boolean flag_no_item) {
+			Point center = new Point(19, 12);
+			int i = 0;
+			for (DIRECTION d : DIRECTION.values_exceptNeatral()) {
+				if (i++ == count)
+					break;
+				if (i == 1) {
+					add(new 鉄の矢(center.getLocation(), false).setArrowRest(15));
+				} else {
+					add(ItemTable.itemReturn(
+							d.getFrontPoint(center.getLocation()), null));
+				}
+			}
+			add(new Takarabako(center));
+			return new Stairs(getExitPoint(), 七曜クエスト.this) {
+				private static final long serialVersionUID = 1L;
+
+				private void boss() {
+					new ConvEvent("ただならぬ気配がする…") {
+						@Override
+						protected Book getContent1() {
+							return new Book("BOSS戦へ進む") {
+
+								@Override
+								protected void work() {
+									move();
+								}
+							};
+						}
+
+						@Override
+						protected Book getContent2() {
+							return new Book("まだ") {
+								@Override
+								protected void work() {
+								}
+							};
+						}
+					};
+				}
+
+				protected void getNextStairFromMidMap() {
+					if (isBoss(MapList.getFloor())) {
+						boss();
+					} else {
+						TaskOnMapObject.setTaskStairs(this);
+					}
+				}
+
+				@Override
+				public String[] getSlection() {
+					if (isBoss(MapList.getFloor())) {
+						return new String[] { "BOSS戦へ進む", "まだ" };
+					} else {
+						return super.getSlection();
+					}
+				}
+
+				@Override
+				public void move() {
+					if (isBoss(MapList.getFloor())) {
+						SE.SYSTEM_STAIR_STEP.play();
+						BMR.goToBossMap();
+					} else {
+						super.move();
+					}
+				}
+
+				@Override
+				public boolean walkOnAction() {
+					getNextStairFromMidMap();
+					return false;
+				}
+			};
+		}
+	}
+
+	@Override
+	protected void addSpecialFloor(HashMap<Integer, Base_Map> hash) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (FloorConducter fc : FloorConducter.values()) {
+			list.add(fc.floor);
+		}
+		for (int i = 0; i < getBossLength(); i++) {
+			list.add(getXndBossFloor(i + 1));
+		}
+		Collections.sort(list);
+		int count = 0;
+		for (Integer integer : list) {
+			hash.put(integer, new MiddMap(++count));
+		}
+		// hash.put(13,
+		// });
+		// hash.put(59, );
+	}
+
+	@Override
+	public int defaultItemNumber() {
+		int f = MapList.getFloor();
+		if (f < FloorConducter.ゴーストナイトムーン.floor) {
+			return new R().nextInt(3) + 2;
+		} else if (f < FloorConducter.一条戻り橋.floor) {
+			return new R().nextInt(3) + new R().nextInt(2) + 2;
+		} else {
+			return new R().nextInt(4) + 2;
+		}
+	}
 
 	@Override
 	public BGM getBGM() {
 		return FloorConducter.get().bgm;
+	}
+
+	private int getBossLength() {
+		return 4;
+	}
+
+	@Override
+	public BossMap getBossMap() {
+		int floor = MapList.getFloor();
+		if (floor <= getXndBossFloor(1)) {
+			return new BossMap_Daisakusen(this) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				protected Base_Artifact getStair() {
+					return getNextStair();
+				}
+			};
+		} else if (floor <= getXndBossFloor(2)) {
+			return new BossMap_Sakasa(this) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void appearStair() {
+					慧音の歴史書 a = new 慧音の歴史書(boss.getMassPoint());
+					Checker.checkStatic(a);
+					ItemFall.itemFall(a);
+					super.appearStair();
+				}
+
+				@Override
+				protected Base_Artifact getStair() {
+					return getNextStair();
+				}
+			};
+		} else if (floor <= getXndBossFloor(3)) {
+			return new BossMap_Hisoutensoku(this) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void appearStair() {
+					幻想郷縁起 a = new 幻想郷縁起(boss.getMassPoint());
+					Checker.checkStatic(a);
+					ItemFall.itemFall(a);
+					super.appearStair();
+				}
+
+				@Override
+				protected Base_Artifact getStair() {
+					return getNextStair();
+				}
+			};
+		} else if (floor <= getXndBossFloor(4)) {
+			return new BossMap_Tokiko(this) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void appearStair() {
+					自由人の狂想曲 a = new 自由人の狂想曲(boss.getMassPoint());
+					Checker.checkStatic(a);
+					ItemFall.itemFall(a);
+					super.appearStair();
+				}
+
+			};
+		}
+		return super.getBossMap();
+	}
+	
+	private Stairs getNextStair() {
+		return getNextStair(MassCreater.getStairsIP());
+	}
+
+	private Stairs getNextStair(Point p) {
+		return new Stairs(p, 七曜クエスト.this) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void move() {
+				PresentField.setPresentField(bm);
+				NextFloor.next(bm);
+			}
+		};
+	}
+
+	private int getXndBossFloor(int index) {
+		if (index == 1)
+			return 13;
+		else if (index == 2)
+			return 59;
+		else if (index == 3)
+			return 73;
+		else if (index == 4)
+			return 98;
+		else
+			return -1;
 	}
 
 	@Override
@@ -182,6 +428,14 @@ public class 七曜クエスト extends ミラクルクエスト {
 				return true;
 		}
 		return super.isBGMDemandedToPlay();
+	}
+
+	private boolean isBoss(int floor) {
+		for (int i = 0; i < getBossLength(); i++) {
+			if (getXndBossFloor(i + 1) == floor)
+				return true;
+		}
+		return false;
 	}
 
 	@Override

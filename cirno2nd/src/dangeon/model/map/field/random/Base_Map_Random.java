@@ -9,7 +9,6 @@ import java.util.List;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
-import dangeon.latest.util.view_window.WindowFrame;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.MapList;
@@ -288,8 +287,8 @@ public abstract class Base_Map_Random extends Base_Map {
 		String d = w + "持ち込み：" + s;
 		s = isBossMap() ? "いる" : "いない";
 		String e = w + "BOSS：" + g + s;
-		list.add(a + WindowFrame.CENTERIZE + e);
-		list.add(b + WindowFrame.CENTERIZE + d);
+		list.add(a + "　" + e);
+		list.add(b + "　" + d);
 		list.add(c);
 		list.add(Message.HORIZON);
 		getExn_Warning(list);

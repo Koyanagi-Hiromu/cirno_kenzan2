@@ -2,7 +2,6 @@ package dangeon.model.map.field.random;
 
 import java.util.ArrayList;
 
-import main.res.Image_MapTip;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.event.story.Event_Scene2;
 import dangeon.latest.scene.event.story.Event_Scene3;
@@ -18,6 +17,7 @@ import dangeon.model.object.artifact.device.階段戻り;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.R;
 import dangeon.util.Switch;
+import main.res.Image_MapTip;
 
 public class 救出大作戦 extends Base_Map_Random {
 
@@ -95,8 +95,7 @@ public class 救出大作戦 extends Base_Map_Random {
 	@Override
 	protected void getExn_Warning(ArrayList<String> list) {
 		list.add("はじめてのダンジョンです");
-		list.add("倒れてもマップや敵、アイテムの配置を変えずに");
-		list.add("１Ｆからやり直せます");
+		list.add("カードをたくさん使用して慣れておこう");
 		if (StoryManager.大妖精救出へ.hasFinished()) {
 			list.add("大妖精を助けました");
 		} else {

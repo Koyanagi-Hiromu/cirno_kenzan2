@@ -25,6 +25,11 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 		super(p, "小悪魔", CHARA_IMAGE.小悪魔, "危険な場所だと伺っていますが、それでも向かうのですね？",
 				new 七曜クエスト());
 	}
+	
+	@Override
+	protected String[] getMsg_overItems() {
+		return new String[] { "アイテムは持っていけませんよ" };
+	}
 
 	private void dataMove() {
 		String msg = "どの処理をお望みですか？";
@@ -80,6 +85,10 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 
 	@Override
 	public void message() {
+		if (StoryManager.七曜クエストok.hasFinished()) {
+			ask();
+			return;
+		}
 		String msg = "パチュリー様はご不在ですよ$私に何かお手伝いできることはありませんか？";
 		ConvEvent CnE = new ConvEvent() {
 //			@Override

@@ -1581,8 +1581,8 @@ public class Player extends Base_Creature {
 			target.translate(-x, -y);
 			c = MapList.getCreature(target);
 		} while (c == null);
-		boolean flag_self_attack = false;
-		if (c.equals(this)) {
+		boolean flag_frienlyfire = false;
+		if (c.equals(this) || (c instanceof Base_Enemy && ((Base_Enemy)c).hasMessage())) {
 			// ワナちぇ
 			int i = p.x + x;
 			int j = p.y + y;
@@ -1596,7 +1596,7 @@ public class Player extends Base_Creature {
 						true);
 				return true;
 			}
-			flag_self_attack = true;
+			flag_frienlyfire = true;
 		} else {
 			if (EnchantSpecial
 					.enchantSimbolAllCheck(CASE.ATK, ENCHANT_SIMBOL.間)) {
@@ -1621,7 +1621,7 @@ public class Player extends Base_Creature {
 
 		flag_stand_attacking = true;
 		// 自分から自分への攻撃無効
-		super.startAttack(flag_self_attack ? null : getAttackTask(this, c));
+		super.startAttack(flag_frienlyfire ? null : getAttackTask(this, c));
 		return true;
 	}
 
