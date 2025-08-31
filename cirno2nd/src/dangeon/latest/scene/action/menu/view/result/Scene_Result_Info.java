@@ -169,24 +169,25 @@ public class Scene_Result_Info extends Plain {
 	}
 
 	private void confirm() {
-		new ConvEvent("このダンジョンをやり直しますか？") {
+		new ConvEvent("アイテムを持ったまま帰還しますか？") {
 			@Override
 			protected Book getContent1() {
-				return new Book("はい") {
+				return new Book("すぐに再挑戦") {
 
 					@Override
 					protected void work() {
-						initializePlayer_Task(false);
+						confirm_2();
 					}
 				};
 			}
 			
 			@Override
 			protected Book getContent2() {
-				return new Book("いいえ") {
+				return new Book("いったん帰る") {
 
 					@Override
 					protected void work() {
+						flag_item_conservation = true;
 						blackout();
 					}
 				};
@@ -213,8 +214,42 @@ public class Scene_Result_Info extends Plain {
 
 		};
 	}
-
+	
 	private void confirm_2() {
+
+		new ConvEvent("アイテムが１つも残らないけど大丈夫？") {
+			@Override
+			protected Book getContent1() {
+				return new Book("問題ない！（すぐに再挑戦）") {
+
+					@Override
+					protected void work() {
+						flag_item_conservation = false;
+						initializePlayer_Task(false);
+					}
+				};
+			}
+			
+			@Override
+			protected Book getContent2() {
+				return new Book("やっぱり帰る") {
+
+					@Override
+					protected void work() {
+						flag_item_conservation = true;
+						blackout();
+					}
+				};
+			}
+			
+			@Override
+			protected int pushCancelAction() {
+				return -1;
+			}
+		};
+	}
+
+	private void confirm_2_old() {
 		if (!PresentField.get().getRandomMap().isFixedRandom()) {
 			initializePlayer_Task(false);
 		} else {
@@ -370,7 +405,7 @@ public class Scene_Result_Info extends Plain {
 		sb.append(Color.WHITE);
 		sb.append("Lv");
 		sb.append(convert(result.PLAYER.getLV()));
-		sb.append("　残機");
+//		sb.append("　残機");
 		sb.append(StringFilter.NUMBERS);
 		for (int i = 0; i < result.LEFT_LIFE; i++) {
 			sb.append("★");
