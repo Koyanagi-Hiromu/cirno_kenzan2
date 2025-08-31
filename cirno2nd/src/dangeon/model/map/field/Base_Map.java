@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ListIterator;
 
-import main.res.BGM;
-import main.res.Image_Dungeon_Name;
-import main.res.Image_MapTip;
-import main.util.Show;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.Base_View;
 import dangeon.latest.system.KeyHolder;
@@ -28,6 +24,10 @@ import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印邪;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.R;
+import main.res.BGM;
+import main.res.Image_Dungeon_Name;
+import main.res.Image_MapTip;
+import main.util.Show;
 
 public abstract class Base_Map implements Serializable {
 	/**
@@ -252,6 +252,7 @@ public abstract class Base_Map implements Serializable {
 	}
 
 	public abstract boolean isHaraheru();
+	public boolean isHaraheranai() { return false; }
 
 	public boolean isInsane() {
 		return false;

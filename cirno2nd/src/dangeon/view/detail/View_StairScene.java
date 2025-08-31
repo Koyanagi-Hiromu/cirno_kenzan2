@@ -3,17 +3,18 @@ package dangeon.view.detail;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.constant.FR;
-import main.util.BeautifulView;
 import dangeon.controller.DangeonScene;
 import dangeon.model.config.Config;
 import dangeon.model.map.MapList;
 import dangeon.model.map.PresentField;
 import dangeon.model.map.StairScene;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.object.creature.player.Player;
 import dangeon.view.constant.BGMFONT;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.util.StringFilter;
+import main.constant.FR;
+import main.util.BeautifulView;
 
 public class View_StairScene {
 	public static void draw(Graphics2D g) {
@@ -38,10 +39,17 @@ public class View_StairScene {
 		// g.drawString(s, FR.SCREEN_WIDTH / 2
 		// - g.getFontMetrics().stringWidth(s) / 2,
 		// FR.SCREEN_HEIGHT / 2 - 50);
-		g.setFont(BGMFONT.FONT);
+		boolean isQuest = PresentField.get() instanceof 七曜クエスト; 
+		if (isQuest)
+			g.setFont(NormalFont.NORMALFONT);
+		else
+			g.setFont(BGMFONT.FONT);
 		StringBuilder s = new StringBuilder();
 		s.append(PresentField.get().getMapName());
 		drawMap(g, s.toString());
+		if (isQuest)
+			g.setFont(BGMFONT.FONT);
+
 		s = new StringBuilder();
 		s.append(" -");
 		s.append(PresentField.get().getRandomMap().getDIFFICULTY().name());

@@ -647,5 +647,10 @@ public class ミラクルクエスト extends Base_Map_Random {
 			}
 		};
 	}
-
+	
+	@Override
+	public boolean isHaraheranai()
+	{
+		return MapList.getFloor() == 1;
+	}
 }

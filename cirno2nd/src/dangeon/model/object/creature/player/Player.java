@@ -1950,6 +1950,9 @@ public class Player extends Base_Creature {
 		if (!PresentField.get().isHaraheru()) {
 			return;
 		}
+		if (PresentField.get().isHaraheranai()) {
+			return;
+		}
 		if (印空腹.notHungry()) {
 			return;
 		}

@@ -7,10 +7,6 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.util.Show;
 import dangeon.controller.task.Task;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.Base_Artifact;
@@ -22,6 +18,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSpecialAction;
 import dangeon.view.detail.View_Sider;
 import dangeon.view.util.StringFilter;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.util.Show;
 
 public abstract class BaseClassJob implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -146,7 +146,7 @@ public class NPCパチェ extends Base_NPC {
 						} else if (StoryManager.日記帳.hasFinished()) {
 							say("もうあげたでしょ・・・");
 							rep("そうだった！");
-							say("そういえば、八雲紫にあなたから話しかけたことあるかしら");
+							say("そういえば、妖精の踊り場で八雲紫にあなたから話しかけたことある？");
 							say("あいつ壁の中にいるから、一方的に話しかけてくるわよね");
 							rep("そうかも！");
 						} else {

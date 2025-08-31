@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
-import dangeon.model.object.artifact.item.spellcard.チルノのカード;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 
 public class ClassDefault extends BaseClassJob {
@@ -33,7 +32,7 @@ public class ClassDefault extends BaseClassJob {
 
 	@Override
 	public SpellCard getRep() {
-		return new チルノのカード(new Point());
+		return null;
 	}
 
 	@Override
