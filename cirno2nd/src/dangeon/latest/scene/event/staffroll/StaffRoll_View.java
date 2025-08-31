@@ -11,13 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import main.constant.FR;
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.util.CSVLoadSupporter;
-import main.util.DIRECTION;
-import main.util.FileReadSupporter;
 import dangeon.latest.scene.Base_View;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.チルノのカード;
@@ -31,6 +24,13 @@ import dangeon.model.object.creature.enemy.チルノ;
 import dangeon.model.object.creature.enemy.魅魔;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.util.StringFilter;
+import main.constant.FR;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.util.CSVLoadSupporter;
+import main.util.DIRECTION;
+import main.util.FileReadSupporter;
 
 public class StaffRoll_View extends Base_View {
 	private class DAI_CHIRU {
@@ -336,7 +336,7 @@ public class StaffRoll_View extends Base_View {
 		case 24:
 			return new Staff("ニギラソ", "ござる", "渡辺", "ゆずぽんず");
 		case 25:
-			return new Staff("ずんだ", "", "大会に参加くださった方々", "ご意見くださった方々");
+			return new Staff("ずんだ", "にるく", "大会に参加くださった方々", "ご意見くださった方々");
 		case 26:
 			return new Staff("", "", "", "そしてエンディングを見ているあなた");
 		case 27:
