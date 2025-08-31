@@ -57,15 +57,7 @@ public class 姉切草 extends Base_Grass {
 	@Override
 	public boolean grassUse() {
 		MainMap.addEffect(new GoodBadEffect(true));
-		if (Player.me.isBadCondition()) {
-			for (CONDITION condition : Player.me.getBadConditionList()) {
-				CONDITION.conditionRecovery(Player.me, condition);
-			}
-			for (CONDITION con : Player.me.getConditionRemoveTask()) {
-				Player.me.getConditionList().remove(con);
-			}
-			Player.me.getConditionRemoveTask().clear();
-		}
+		CONDITION.conditionAllClear(Player.me, true);
 		int heal = item_use_power1;
 		int max_heal = 2;
 		if (EnchantSpecial.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.医)) {

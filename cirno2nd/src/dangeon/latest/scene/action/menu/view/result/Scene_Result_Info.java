@@ -171,8 +171,19 @@ public class Scene_Result_Info extends Plain {
 	private void confirm() {
 		new ConvEvent("このダンジョンをやり直しますか？") {
 			@Override
-			protected Book getNo() {
-				return new Book() {
+			protected Book getContent1() {
+				return new Book("はい") {
+
+					@Override
+					protected void work() {
+						initializePlayer_Task(false);
+					}
+				};
+			}
+			
+			@Override
+			protected Book getContent2() {
+				return new Book("いいえ") {
 
 					@Override
 					protected void work() {
@@ -180,17 +191,20 @@ public class Scene_Result_Info extends Plain {
 					}
 				};
 			}
-
-			@Override
-			protected Book getYes() {
-				return new Book() {
-					@Override
-					protected void work() {
-						confirm_2();
-					}
-
-				};
-			}
+			
+//			@Override
+//			protected Book getContent3() {
+//				if (!PresentField.get().getRandomMap().isFixedRandom())
+//					return null;
+//				else
+//					return new Book("同じシード値でやりなおす") {
+//
+//						@Override
+//						protected void work() {
+//							initializePlayer_Task(true);
+//						}
+//					};
+//			}
 
 			@Override
 			protected int pushCancelAction() {
@@ -201,11 +215,37 @@ public class Scene_Result_Info extends Plain {
 	}
 
 	private void confirm_2() {
-		if (!PresentField.get().getRandomMap().isFixedRandom()
-				|| Config.isCoinOnly1()) {
+		if (!PresentField.get().getRandomMap().isFixedRandom()) {
 			initializePlayer_Task(false);
 		} else {
-			confirm_3();
+			
+			new ConvEvent("アイテムと敵の配置を再現しますか？$") {
+				@Override
+				protected Book getContent1() {
+					return new Book("いいえ（初期配置変更）") {
+						@Override
+						protected void work() {
+							initializePlayer_Task(false);
+						}
+					};
+				}
+
+				@Override
+				protected Book getContent2() {
+					return new Book("はい（完全再現）") {
+						@Override
+						protected void work() {
+							initializePlayer_Task(true);
+						}
+					};
+				}
+
+				@Override
+				protected int pushCancelAction() {
+					return -1;
+				}
+			};
+			
 //			final int numbers = Config.decRetryNumbers();
 //			if (numbers == 0) {
 //				confirm_2_0(numbers);
@@ -252,35 +292,6 @@ public class Scene_Result_Info extends Plain {
 					@Override
 					protected void work() {
 						initializePlayer_Task(false);
-					}
-				};
-			}
-
-			@Override
-			protected int pushCancelAction() {
-				return -1;
-			}
-		};
-	}
-
-	private void confirm_3() {
-		new ConvEvent("アイテムと敵の配置を再現しますか？$") {
-			@Override
-			protected Book getContent1() {
-				return new Book("いいえ（初期配置変更）") {
-					@Override
-					protected void work() {
-						initializePlayer_Task(false);
-					}
-				};
-			}
-
-			@Override
-			protected Book getContent2() {
-				return new Book("はい（完全再現）") {
-					@Override
-					protected void work() {
-						initializePlayer_Task(true);
 					}
 				};
 			}

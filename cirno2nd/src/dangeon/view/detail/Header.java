@@ -349,7 +349,7 @@ public class Header {
 		} else {
 			sb.append("??");
 			if (Config.getFate() != 0)
-				diff = "Fate+".concat(String.valueOf(Config.getFate()));
+				diff = "Fate +".concat(String.valueOf(Config.getFate()));
 		}
 		sb.append(" F");
 		sb.append(" LV ");
@@ -392,7 +392,17 @@ public class Header {
 		StringFilter.drawEdgedString_plain(g, "/", x + 19, y);
 		StringFilter.drawEdgedString_plain(g,
 				String.valueOf(Player.me.getMAX_HP()), x + 27, y);
-
+		if (!Config.isCoinOnly1())
+		{
+			int retry = Config.getRetryNumber();
+		
+			if (retry == 3)
+				StringFilter.drawEdgedString(g, StringFilter.NUMBERS + "★★", x + 30, y + dy);
+			else if (retry == 2)
+				StringFilter.drawEdgedString(g, StringFilter.NUMBERS + "★" + Color.gray + "☆", x + 30, y + dy);
+			else
+				StringFilter.drawEdgedString(g, Color.gray + "☆☆", x + 30, y + dy);
+		}
 	}
 
 	private static void drawOldIdea(Graphics2D g) {

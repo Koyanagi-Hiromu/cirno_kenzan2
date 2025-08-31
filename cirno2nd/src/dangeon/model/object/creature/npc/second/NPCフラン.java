@@ -68,7 +68,6 @@ public class NPCフラン extends Base_NPC {
 				Config.setCoinOnly1(!on);
 				if (Config.isCoinOnly1()) {
 					say("それじゃあコンティニュー出来ないね！");
-					say("残機は０だよ");
 				} else {
 					say("それじゃあコンティニューは２回までね！");
 				}

@@ -472,12 +472,17 @@ public class Player extends Base_Creature {
 	{
 		dying_frame = 0;
 		復活時のBGM.play();
-		Player.me.chengeHP_NoEffect(Player.me.getMAX_HP());
+		chengeHP_NoEffect(getMAX_HP());
+		chengeSatiety(getMAX_SATIETY());
+		CONDITION.conditionAllClear(Player.me, true);
+		
 		if (flanCoin)
 		{
+			setTelepoteAnimation(true, null);
 			Config.decRetryNumbers();
-			Player.me.setCondition(CONDITION.炎上, 0);
-			MapInSelect.explosion(Player.me.getMassPoint());
+			setCondition(CONDITION.炎上, 0);
+			setCondition(CONDITION.反射, 0);
+			MapInSelect.explosion(getMassPoint());
 		}
 		else
 		{
@@ -493,23 +498,13 @@ public class Player extends Base_Creature {
 	
 	private void confirmFlanCoin(int zanki)
 	{
-		new ConvEvent("残機を使って復活しますか？(爆発して復活します)$", Scene_Result_Info.getZanki(zanki)) {
+		new ConvEvent("残機を使って復活しますか？$(爆発して復活します)$", Scene_Result_Info.getZanki(zanki)) {
 			@Override
 			protected Book getContent1() {
-				return new Book("はい") {
+				return new Book("再挑戦") {
 					@Override
 					protected void work() {
 						recover(PresentField.get().getBGM(), true);
-					}
-				};
-			}
-
-			@Override
-			protected Book getContent2() {
-				return new Book("いいえ") {
-					@Override
-					protected void work() {
-						new Scene_Result_Info();
 					}
 				};
 			}

@@ -34,7 +34,7 @@ public class かき氷器 extends Base_Pot_Selective {
 			LIST.remove(A);
 			Message.set("かき氷を食べた");
 			Header.setEatIce();
-			CONDITION.conditionAllClear(Player.me);
+			CONDITION.conditionAllClear(Player.me, true);
 			Player.me.chengeHP(this, null, 999);
 			MAX--;
 		}

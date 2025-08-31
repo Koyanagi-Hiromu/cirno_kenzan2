@@ -3,8 +3,6 @@ package dangeon.model.condition;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.res.Image_Condition;
-import main.util.CSVLoadSupporter;
 import dangeon.controller.TurnSystemController;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.MapList;
@@ -15,6 +13,8 @@ import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.R;
+import main.res.Image_Condition;
+import main.util.CSVLoadSupporter;
 
 /**
  * 浮遊状態は消えました<br />
@@ -94,6 +94,28 @@ public enum CONDITION {
 	public static void conditionAllClear(Base_Creature creature) {
 		creature.getConditionList().clear();
 		creature.condition_map.clear();
+	}
+
+	/**
+	 * 状態異常全て回復
+	 * 
+	 * @param creature
+	 * @param isBadOnly
+	 */
+	public static void conditionAllClear(Base_Creature creature, boolean isBadOnly) {
+		if (isBadOnly) {
+			for (CONDITION condition : creature.getBadConditionList()) {
+				CONDITION.conditionRecovery(creature, condition);
+			}
+			for (CONDITION con : creature.getConditionRemoveTask()) {
+				creature.getConditionList().remove(con);
+			}
+			creature.getConditionRemoveTask().clear();
+		}
+		else 
+		{
+			conditionAllClear(creature);
+		}
 	}
 
 	/**
