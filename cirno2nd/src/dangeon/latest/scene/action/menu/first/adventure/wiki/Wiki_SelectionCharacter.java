@@ -3,7 +3,6 @@ package dangeon.latest.scene.action.menu.first.adventure.wiki;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.res.SE;
 import dangeon.latest.scene.Base_View;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
 import dangeon.latest.scene.action.menu.Book;
@@ -20,6 +19,7 @@ import dangeon.model.object.creature.enemy.チルノ;
 import dangeon.model.object.creature.enemy.ナズーリン;
 import dangeon.model.object.creature.enemy.パチュリー;
 import dangeon.model.object.creature.enemy.パルスィ;
+import dangeon.model.object.creature.enemy.ヒソウテンソク;
 import dangeon.model.object.creature.enemy.フランドール;
 import dangeon.model.object.creature.enemy.ミスティア;
 import dangeon.model.object.creature.enemy.メディスン;
@@ -89,6 +89,7 @@ import dangeon.model.object.creature.enemy.魅魔;
 import dangeon.model.object.creature.enemy.黄金ゆっくり;
 import dangeon.model.object.creature.enemy.黒谷ヤマメ;
 import dangeon.util.STAGE;
+import main.res.SE;
 
 public class Wiki_SelectionCharacter extends Base_Scene_Menu {
 	public final int INDEX;
@@ -255,6 +256,7 @@ public class Wiki_SelectionCharacter extends Base_Scene_Menu {
 		add(new ゆっくり霊夢(p, 1));
 		add(new 黄金ゆっくり(p, 1));
 		add(new 人形(p, 1));
+		add(new ヒソウテンソク(p, 1));
 	}
 
 	private void setContents(String header, final int i, final int max,

@@ -1,18 +1,19 @@
 package dangeon.view.util;
 
+import java.awt.Image;
 import java.awt.Point;
 
-import main.constant.FR;
 import dangeon.model.object.Base_MapObject;
 import dangeon.util.ObjectPoint;
 import dangeon.view.constant.MAP;
+import main.constant.FR;
 
 public class WithinOutofScreen {
 	public static boolean isOutside(Base_MapObject o) {
 		Point p = ObjectPoint.getScreenPointRelPlayer(o);
 		try {
-			return isOutside(p.x, p.y, o.getImage().getWidth(null), o
-					.getImage().getHeight(null));
+			Image image = o.getImage();
+			return isOutside(p.x, p.y, image.getWidth(null), image.getHeight(null));
 		} catch (Exception e) {
 			System.out.println(o);
 			e.printStackTrace();

@@ -1570,9 +1570,9 @@ public class Player extends Base_Creature {
 
 	private boolean reverseAttack(Point p, int x, int y) {
 		Point wall = p.getLocation();
-		while (MassCreater.getMass(wall.x, wall.y).WALKABLE) {
+		do {
 			wall.translate(x, y);
-		}
+		} while (MassCreater.getMass(wall.x, wall.y).WALKABLE);
 		Point target = wall.getLocation();
 		int count = 0;
 		Base_Creature c;
@@ -1580,7 +1580,7 @@ public class Player extends Base_Creature {
 			count++;
 			target.translate(-x, -y);
 			c = MapList.getCreature(target);
-		} while (c == null);
+		} while (c == null || count > 255);
 		boolean flag_frienlyfire = false;
 		if (c.equals(this) || (c instanceof Base_Enemy && ((Base_Enemy)c).hasMessage())) {
 			// ワナちぇ

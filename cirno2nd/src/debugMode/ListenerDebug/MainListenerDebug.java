@@ -7,9 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
-import dangeon.model.object.artifact.device.Stairs;
-import dangeon.model.object.creature.player.Belongings;
-import dangeon.model.object.creature.player.Player;
+import dangeon.model.map.NextFloor;
 import dangeon.util.Switch;
 import debugMode.WindowDebug;
 
@@ -18,17 +16,23 @@ public class MainListenerDebug implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Action");
-		if (e.getActionCommand().matches("デス")) {
+		if (e.getActionCommand().matches("死なない")) {
 			Switch.switch_player_no_death = !Switch.switch_player_no_death;
-			setLabel(WindowDebug.death_l, Switch.switch_player_no_death);
-		} else if (e.getActionCommand().matches("予備")) {
-			Belongings.setItems(new Stairs(Player.me.getMassPoint()
-					.getLocation()));
-			// R.next();
+			RefreshText();
+		} else if (e.getActionCommand().matches("壁抜け")) {
+			Switch.switch_wall_walk= !Switch.switch_wall_walk;
+			RefreshText();
+		} else if (e.getActionCommand().matches("次のフロアへ")) {
+			NextFloor.next(null);
 		}
 	}
-
+	
+	public void RefreshText()
+	{
+		setLabel(WindowDebug.death_l, Switch.switch_player_no_death);
+		setLabel(WindowDebug.walk_l, Switch.switch_wall_walk);		
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == 1) {

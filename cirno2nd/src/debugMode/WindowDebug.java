@@ -28,6 +28,7 @@ public class WindowDebug extends JFrame {
 	private final int first_height = 10;
 	private final int one_height = 40;
 	public static JLabel death_l = new JLabel("ON");
+	public static JLabel walk_l = new JLabel("ON");
 
 	public static JPopupMenu items = new JPopupMenu();
 
@@ -45,28 +46,43 @@ public class WindowDebug extends JFrame {
 
 	private void addButton() {
 		int current_y = 0;
-		// HPが0にならないフラグ。
 		current_y += first_height;
-		death_l.setBounds(first_height, current_y, 50, 30);
-		JButton death = new JButton("デス");
-		death.addActionListener(MainListenerDebug.ME);
-		death.setBounds(second_width, current_y, 100, 30);
-		// 余り1
+		{
+			// HPが0にならないフラグ。
+			death_l.setBounds(first_height, current_y, 50, 30);
+			add(death_l);
+			JButton death = new JButton("死なない");
+			death.addActionListener(MainListenerDebug.ME);
+			death.setBounds(second_width, current_y, 150, 30);
+			add(death);
+		}
 		current_y += one_height;
-		JButton set = new JButton("予備");
-		set.setBounds(second_width, current_y, 100, 30);
-		set.addActionListener(MainListenerDebug.ME);
-		add(set);
-		// アイテムを追加する
+		{
+			walk_l.setBounds(first_height, current_y, 50, 30);
+			add(walk_l);
+			JButton walk = new JButton("壁抜け");
+			walk.addActionListener(MainListenerDebug.ME);
+			walk.setBounds(second_width, current_y, 150, 30);
+			add(walk);
+		}
 		current_y += one_height;
-		addPopupItem();
-		JButton popup = new JButton("アイテムを追加");
-		popup.setBounds(second_width, current_y, 150, 30);
-		popup.addMouseListener(MainListenerDebug.ME);
-		// ウィンドウに追加する
-		add(popup);
-		add(death_l);
-		add(death);
+		{
+			JButton set = new JButton("次のフロアへ");
+			set.setBounds(second_width, current_y, 150, 30);
+			set.addActionListener(MainListenerDebug.ME);
+			add(set);
+		}
+		current_y += one_height;
+		{
+			// アイテムを追加する
+			addPopupItem();
+			JButton popup = new JButton("アイテムを追加");
+			popup.setBounds(second_width, current_y, 150, 30);
+			popup.addMouseListener(MainListenerDebug.ME);
+			add(popup);
+		}
+		
+		MainListenerDebug.ME.RefreshText();
 	}
 
 	private void addPopupItem() {

@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import dangeon.latest.scene.action.itemlist.Book_Item;
@@ -18,13 +19,18 @@ import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
+import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
 import dangeon.model.map.field.Base_Map;
+import dangeon.model.map.field.random.bossmap.BossMap_Hisoutensoku;
+import dangeon.model.map.field.special.map.BossMap;
+import dangeon.model.map.field.special.map.EndingMap;
 import dangeon.model.map.field.special.map.GouseiMap;
 import dangeon.model.object.Base_MapObject;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.device.Stairs;
 import dangeon.model.object.artifact.item.check.Checker;
+import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
 import dangeon.model.object.creature.npc.Abstract_NPC;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
@@ -621,4 +627,25 @@ public class ミラクルクエスト extends Base_Map_Random {
 			Medal.気分屋OK.save_the_more(1);
 		}
 	}
+	
+	@Override
+	protected void addSpecialFloor(HashMap<Integer, Base_Map> hash) {
+		hash.put(98, new EndingMap(this));
+	}
+
+	@Override
+	public BossMap getBossMap() {
+		return new BossMap_Hisoutensoku(this) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void appearStair() {
+				幻想郷縁起 a = new 幻想郷縁起(boss.getMassPoint());
+				Checker.checkStatic(a);
+				ItemFall.itemFall(a);
+				super.appearStair();
+			}
+		};
+	}
+
 }

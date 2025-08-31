@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import main.res.SE;
-import main.util.Show;
 import dangeon.controller.listener.menu.Base_MenuItem;
 import dangeon.controller.task.Task.TaskHasAppo;
 import dangeon.latest.scene.action.Scene_Action;
@@ -29,6 +27,8 @@ import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.model.select.SelectBox_Stair;
+import main.res.SE;
+import main.util.Show;
 
 public class TaskOnMapObject {
 	private static ArrayList<Base_Artifact> artifact_set_task = new ArrayList<Base_Artifact>();

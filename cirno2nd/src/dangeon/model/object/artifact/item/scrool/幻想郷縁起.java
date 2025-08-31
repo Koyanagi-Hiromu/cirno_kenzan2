@@ -3,9 +3,6 @@ package dangeon.model.object.artifact.item.scrool;
 import java.awt.Color;
 import java.awt.Point;
 
-import main.res.Image_Artifact;
-import main.res.SE;
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.Base_Creature;
@@ -14,6 +11,9 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.view.anime.HitEffect;
 import dangeon.view.detail.MainMap;
+import main.res.Image_Artifact;
+import main.res.SE;
+import main.util.半角全角コンバーター;
 
 public class 幻想郷縁起 extends Scrool {
 	/**
@@ -129,8 +129,8 @@ public class 幻想郷縁起 extends Scrool {
 		if (pages == 0) {
 			Message.set("特に効果はなかった");
 		} else {
-			int delt = (int) (pages * 0.50f);
-			Message.set("ポケットが膨らんだ");
+			int delt = (int) (pages * 0.99f);
+			Message.set(delt + "枚のページになってポケットに入った");
 			Player.me.addBooks(delt);
 		}
 	}

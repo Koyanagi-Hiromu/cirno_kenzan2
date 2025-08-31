@@ -8,8 +8,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import main.Second_Firster;
 import dangeon.model.config.Config;
+import main.Second_Firster;
 
 public class Show {
 	private static void set(boolean b) {
@@ -75,7 +75,7 @@ public class Show {
 	public static void showErrorMessageDialog(Exception e) {
 		writeErrorText(e);
 		// エラーダイアログの表示
-		if (showConfirmDialog(e.toString().concat("\n\n了解 => 続行")) != 0) {
+		if (showConfirmDialog(e.toString().concat("\n\n大変申し訳ございません。エラーが発生しました。\n内容をerror.txtに出力しました\n左側のボタンを押すと続行できる可能性があります")) != 0) {
 			System.exit(0);
 		}
 	}
@@ -89,7 +89,7 @@ public class Show {
 	public static void showErrorMessageDialog(String message) {
 		writeErrorText(new Exception(message));
 		// エラーダイアログの表示
-		if (showConfirmDialog(message.concat("\n\n了解 => 続行")) != 0) {
+		if (showConfirmDialog(message.concat("\n\n大変申し訳ございません。エラーが発生しました。\n内容をerror.txtに出力しました\n左側のボタンを押すと続行できる可能性があります")) != 0) {
 			System.exit(0);
 		}
 	}

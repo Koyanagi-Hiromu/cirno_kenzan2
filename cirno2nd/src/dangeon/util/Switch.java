@@ -17,6 +17,7 @@ public class Switch {
 			test = new PropertySupporter(4).isGotPropertyTrue("eclipse_test");
 		}
 	}
+	public static boolean force_hasFinished_true = true;
 
 	public static boolean huyukomi = false;
 	public static boolean reitaisai = false;
@@ -31,6 +32,7 @@ public class Switch {
 	private static final String sub_string = "";
 
 	public static boolean switch_player_no_death = true;
+	public static boolean switch_wall_walk = false;
 
 	public static String getMainTitle() {
 		return main_name.concat(" ver" + Switch.big_ver + "."

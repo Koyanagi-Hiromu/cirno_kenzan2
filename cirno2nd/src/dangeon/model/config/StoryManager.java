@@ -1,7 +1,8 @@
 package dangeon.model.config;
 
-import main.constant.PropertySupporter;
 import dangeon.model.map.field.random.Base_Map_Random;
+import dangeon.util.Switch;
+import main.constant.PropertySupporter;
 
 public enum StoryManager {
 	大妖精救出へ, 救出大作戦挑戦ok, 大妖精救出clear, 逆ヶ島挑戦ok, 逆ヶ島clear,
@@ -34,6 +35,7 @@ public enum StoryManager {
 	}
 
 	public boolean hasFinished() {
+		if (Switch.test && Switch.force_hasFinished_true) return true;
 		Object obj = property.getProperty_Nature(this.toString());
 		return obj != null && obj.equals(getKeyFinished());
 	}

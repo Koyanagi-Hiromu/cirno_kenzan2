@@ -5,16 +5,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import main.constant.FR;
-import main.res.BulletImage;
-import main.res.CHARA_IMAGE;
-import main.res.SE;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
-import main.util.FileReadSupporter;
-import main.util.FrameShaker;
-import main.util.半角全角コンバーター;
-import dangeon.controller.ThrowingItem.HowToThrow;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -26,18 +16,26 @@ import dangeon.model.object.artifact.device.HiddenDevice;
 import dangeon.model.object.artifact.item.arrow.大砲の弾;
 import dangeon.model.object.artifact.item.bullet.ドラゴンブレス;
 import dangeon.model.object.artifact.item.bullet.目からビーム;
+import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印招;
 import dangeon.model.object.artifact.item.staff.MagicBullet;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.util.MapInSelect;
-import dangeon.util.ObjectPoint;
 import dangeon.util.R;
 import dangeon.util.ThunderDamage;
 import dangeon.view.anime.Special_Wait;
 import dangeon.view.anime.ThunderEffect;
 import dangeon.view.detail.MainMap;
-import dangeon.view.util.WithinOutofScreen;
+import main.constant.FR;
+import main.res.BulletImage;
+import main.res.CHARA_IMAGE;
+import main.res.SE;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
+import main.util.FileReadSupporter;
+import main.util.FrameShaker;
+import main.util.半角全角コンバーター;
 
 /**
  * マムルの位置づけ
@@ -58,7 +56,8 @@ public class ヒソウテンソク extends Base_Enemy {
 	private boolean flag_arm;
 	private int frame_count = -1;
 
-	private int count = 0;
+	private int count;
+	private boolean resistItemOnPrevTurn;
 
 	public ヒソウテンソク(Point p, int Lv) {
 		super(p, Lv);
@@ -168,6 +167,19 @@ public class ヒソウテンソク extends Base_Enemy {
 	}
 
 	@Override
+	public int getDeConvertedLV(int lv) {
+		if (lv == 1) {
+			return 1;
+		} else if (lv == 2) {
+			return 3;
+		} else if (lv == 3) {
+			return 5;
+		} else {
+			return 10;
+		}
+	}
+
+	@Override
 	protected int getFootDeltY() {
 		return -5;
 	}
@@ -201,7 +213,7 @@ public class ヒソウテンソク extends Base_Enemy {
 
 	@Override
 	public String getOriginalName() {
-		return name;
+		return "ヒソウテンソク";
 	}
 
 	@Override
@@ -238,6 +250,7 @@ public class ヒソウテンソク extends Base_Enemy {
 		} else
 			s = "アイテム";
 		resist(getColoredName(), "はフルメタルコーティングだから", s, "を受け付けない！");
+		resistItemOnPrevTurn = true;
 		return false;
 	}
 
@@ -310,21 +323,14 @@ public class ヒソウテンソク extends Base_Enemy {
 		int MAX_DEF = this.MAX_DEF;
 		int ENEMY_EXP = this.ENEMY_EXP;
 		LV = lv;
-		setFirstStatus(MAX_HP + LV * 2, MAX_STR + LV, MAX_DEF + LV);
+		setFirstStatus(MAX_HP + (LV-1) * 2, MAX_STR + LV, MAX_DEF + LV);
 		this.ENEMY_EXP = ENEMY_EXP + lv * 100;
+		count = 14;
 
 		if (LV > 1) {
-			this.name = "ヒソウテンソク".concat("ver").concat(String.valueOf(LV));
-			new Task() {
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				public void work() {
-					tellHp();
-				}
-			}.work_appointment();
+			this.name = "ヒソウテンソク".concat("ver").concat(半角全角コンバーター.半角To全角数字(LV));
+			count = 100;
 		}
-
 	}
 
 	private void setSuperBeatedAway() {
@@ -333,44 +339,76 @@ public class ヒソウテンソク extends Base_Enemy {
 
 	@Override
 	protected boolean specialAttack() {
-		if (!player_is_in_sight)
+		if (resistItemOnPrevTurn)
+		{
+			resistItemOnPrevTurn = false;
+			tellWeakPoint();
 			return true;
+		}
 		if (++count > 50) {
 			count = 0;
 			tellHp();
 			return true;
-		} else if (count == 20) {
-			String at = "";
-			if (!WithinOutofScreen.isOutside(this)) {
+		}
+		
+		if (count == 15) {
+			if (isInside()) {
 				setAnimation(new Special_Wait(this, 9, 4));
-			} else {
-				at = "@";
 			}
-			Message.set("「放電準備開始」", at);
+			Message.set("「放電 準備開始」@");
 			return true;
-		} else if (count > 20 && count < 25) {
-			String at = "";
-			if (!WithinOutofScreen.isOutside(this)) {
+		} else if (count > 15 && count < 20) {
+			if (isInside()) {
 				setAnimation(new Special_Wait(this, 3, 4));
-			} else {
-				at = "@";
 			}
-			Message.set("「", 半角全角コンバーター.半角To全角数字(25 - count), "」", at);
+			Message.set("「", 半角全角コンバーター.半角To全角数字(20 - count), "」");
 			return true;
-		} else if (count == 25) {
+		} else if (count == 20) {
 			setAnimation(new Special_Wait(this, 9, 4));
-			Message.set(getColoredName(), "の体から雷がほとばしる！");
-			Message.set("部屋全体に雷ダメージ！");
+			Message.set("どこからでもチルノに雷ダメージ！");
 			SE.LIGHTNING.play();
-			MainMap.addEffect(new ThunderEffect(true, ObjectPoint
-					.getDifferenceBetweenPlayer(screen_point.x, screen_point.y)));
+			MainMap.addEffect(new ThunderEffect(true));
 			int damage = 50;
-			for (Base_Enemy c : MapInSelect.getListRoomOrRoadInEnemy()) {
-				thunder(c, damage);
-			}
+//			for (Base_Enemy c : MapInSelect.getListRoomOrRoadInEnemy()) {
+//				thunder(c, damage);
+//			}
 			thunder(Player.me, damage);
 			return true;
-		} else if (attack_possible()) {
+		}
+		
+		if (count == 35) {
+			if (isInside()) {
+				setAnimation(new Special_Wait(this, 9, 4));
+			}
+			Message.set("「召喚ポータル 準備開始」@");
+			return true;
+		} else if (count > 35 && count < 40) {
+			if (isInside()) {
+				setAnimation(new Special_Wait(this, 3, 4));
+			}
+			Message.set("「", 半角全角コンバーター.半角To全角数字(40 - count), "」");
+			return true;
+		} else if (count == 40) {
+			setAnimation(new Special_Wait(this, 9, 4));
+			if (印招.effect()) {
+				Message.set(getColoredName(), "の召喚は失敗に終わった");
+				return true;
+			}
+			else
+			{
+				Message.set("敵がどこかに４体召喚された");
+				for (int i = 0; i < 4; i++)
+				{
+					MapList.summonEnemy(MassCreater.getPlayerPoint(), 1, null);
+				}
+			}
+			return true;
+		}
+
+		if (!player_is_in_sight)
+			return true;
+		
+		if (attack_possible()) {
 			if (new R().is(15)) {
 				startAttack(new Task() {
 					/**
@@ -380,8 +418,8 @@ public class ヒソウテンソク extends Base_Enemy {
 
 					@Override
 					public void work() {
-						if (Damage.normalAttack(ヒソウテンソク.this, Player.me) > 0) {
-							FrameShaker.doneNormaly();
+						
+						if (Damage.enemyCriticalAttack(ヒソウテンソク.this, Player.me) > 0) {
 							MapInSelect.吹き飛ばし(ヒソウテンソク.this, null, Player.me,
 									ヒソウテンソク.this.direction, 10, 0);
 						}
@@ -390,25 +428,27 @@ public class ヒソウテンソク extends Base_Enemy {
 				return true;
 			} else
 				return false;
-		} else {
-			if (!MapInSelect.isCreatureOnTheStraightAllDirection(this,
-					Player.me, Math.max(MassCreater.HEIGHT, MassCreater.WIDTH))) {
-				return true;
-			}
-			direction = converDirection(Player.me.getMassPoint());
-			setAnimation(new Special_Wait(this, 3, 4));
-			// SE.ATTACK_SHOOT_ICY.play();
-			SE.PITFALL_OPEN.play();
-			Base_Artifact a;
-			int r = new R().nextInt(2);
-			if (r == 0)
-				a = beam();
-			else
-				a = mera();
-			a.itemThrow(this, HowToThrow.MAGIC,
-					Math.max(MassCreater.HEIGHT, MassCreater.WIDTH));
-			return true;
-		}
+		} 
+//		else {
+//			if (!MapInSelect.isCreatureOnTheStraightAllDirection(this,
+//					Player.me, Math.max(MassCreater.HEIGHT, MassCreater.WIDTH))) {
+//				return true;
+//			}
+//			direction = converDirection(Player.me.getMassPoint());
+//			setAnimation(new Special_Wait(this, 3, 4));
+//			// SE.ATTACK_SHOOT_ICY.play();
+//			SE.PITFALL_OPEN.play();
+//			Base_Artifact a;
+//			int r = new R().nextInt(2);
+//			if (r == 0)
+//				a = beam();
+//			else
+//				a = mera();
+//			a.itemThrow(this, HowToThrow.MAGIC,
+//					Math.max(MassCreater.HEIGHT, MassCreater.WIDTH));
+//			return true;
+//		}
+		return false;
 		// if (!isSpecialParcent() ) {
 		// return true;
 		// }
@@ -421,10 +461,24 @@ public class ヒソウテンソク extends Base_Enemy {
 	}
 
 	private void tellHp() {
-		if (!WithinOutofScreen.isOutside(this)) {
+		if (isInside()) {
 			setAnimation(new Special_Wait(this, 9, 4));
 		}
 		Message.set("「残り活動値", getHP(), "デス　戦闘を続行します」");
+	}
+
+	private void tellWeakPoint() {
+		if (isInside()) {
+			setAnimation(new Special_Wait(this, 9, 4));
+		}
+		Message.set("「時間でも止めない限り　遠距離攻撃は効きマセン」");
+	}
+	
+	private boolean isInside()
+	{
+		int dx = this.getMassPoint().x - Player.me.getMassPoint().x;
+		int dy = this.getMassPoint().y - Player.me.getMassPoint().y;
+		return (-5 <= dx && dx <= 5) && (-3 <= dy && dy <= 5);
 	}
 
 	private void thunder(Base_Creature c, int dmg) {
@@ -439,8 +493,6 @@ public class ヒソウテンソク extends Base_Enemy {
 			attaking_frame--;
 		} else if (frame_count == 2 * 3) {
 			frame_count++;
-			FrameShaker.doneSoftly();
-			SE.DAMAGED_CRITICAL.play();
 		}
 		if (normal_attack_phase == AttackPhase.GO) {
 			attack_No += frame_count / 2;

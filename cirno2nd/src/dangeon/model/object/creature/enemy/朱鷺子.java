@@ -6,9 +6,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.res.Image_LargeCharacter;
-import main.res.SE;
-import main.thread.MainThread;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.menu.first.adventure.wiki.Wiki_Enemy;
@@ -20,8 +17,10 @@ import dangeon.model.config.table.ItemDetail;
 import dangeon.model.config.table.ItemTable;
 import dangeon.model.config.table.SpecialMonsterHouse;
 import dangeon.model.config.table.TrapTable;
+import dangeon.model.map.InitialPlacement.Room;
 import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
+import dangeon.model.map.Mass;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
@@ -72,6 +71,9 @@ import dangeon.view.anime.DoronEffect;
 import dangeon.view.anime.Special_Wait;
 import dangeon.view.anime.SunEffect;
 import dangeon.view.detail.MainMap;
+import main.res.Image_LargeCharacter;
+import main.res.SE;
+import main.thread.MainThread;
 
 public class 朱鷺子 extends __店主 {
 
@@ -83,6 +85,7 @@ public class 朱鷺子 extends __店主 {
 	private Base_Artifact item = null;
 
 	private boolean flag_decurse;
+	private boolean counter;
 
 	public 朱鷺子(Point p, int Lv) {
 		super(p, Lv);
@@ -108,7 +111,8 @@ public class 朱鷺子 extends __店主 {
 				delt = -50;
 			}
 			boolean flag = super.chengeHP(obj, str, delt);
-			if (!flag && delt < 0) {
+			if (!flag && delt < 0 && !counter) {
+				counter = true;
 				if (isBadCondition() && item == null) {
 					item = new ダンジョン攻略本(mass_point);
 					readBook();
@@ -305,7 +309,7 @@ public class 朱鷺子 extends __店主 {
 			Message.set(getColoredName(), "は嬉しそうだ！");
 		} else if (book.getClass() == 罠師の書.class) {
 			SE.ZAKUZAKU.play();
-			Message.set("罠が生成された");
+			Message.set("罠がたくさん生成された");
 			TrapTable.createMonsterHouse(MassCreater.getRoom(mass_point), 10);
 		}
 	}
@@ -450,8 +454,14 @@ public class 朱鷺子 extends __店主 {
 				}
 			}
 		}
+		Room r = MassCreater.getRoom(this.getMassPoint());
+		if (r == null)
+		{
+			Message.set("しかし召喚できるマスがなかった");
+		}
 		for (int i = 0; i < length; i++) {
-			Point p = MassCreater.getPlayerPoint();
+			Point p = MassCreater.getMonsterPoint(r);
+			if (p == Mass.nullpo.null_point) break;
 			Base_Enemy e;
 			if (smh == null) {
 				if (Player.me.Nedayashi != null) {
@@ -468,7 +478,7 @@ public class 朱鷺子 extends __店主 {
 				e = EnemyTable.setMonsterHouse(p, smh);
 			}
 			if (e != null) {
-				CONDITION.conditionRecovery(e, CONDITION.仮眠);
+				CONDITION.quickRemoveCondition(CONDITION.仮眠, e);
 				MainMap.addEffect(new DoronEffect(p, null));
 				Message.set(e.getColoredName(), "が現れた！");
 			}
@@ -506,7 +516,7 @@ public class 朱鷺子 extends __店主 {
 			Message.set("「あっ・・・」");
 		} else if (book.getClass() == 識別の書.class) {
 		} else if (book.getClass() == 電光石火の書.class) {
-			Message.set("「風が泣くのはもちろん天狗のしわざです！」");
+			Message.set("「風が泣くのは天狗のしわざです！」");
 		} else if (book.getClass() == 破裂の書.class) {
 			Message.set("「ランダムで１キャラの中心を爆破！」");
 		} else if (book.getClass() == 切れ端.class) {
@@ -550,7 +560,7 @@ public class 朱鷺子 extends __店主 {
 		} else if (book.getClass() == 明かりの書.class) {
 			Message.set("「わぁい朱鷺子、明かりの書大好き」");
 		} else if (book.getClass() == 罠師の書.class) {
-			Message.set("「ラグはちょっと許してね！」");
+			Message.set("「たくさん罠を作っちゃうよ！」");
 		}
 		if (!book.isStaticCheked()) {
 			book.staticCheck();
@@ -580,14 +590,20 @@ public class 朱鷺子 extends __店主 {
 
 	@Override
 	protected boolean specialAttack() {
-		if (LV == 4)
-			readBook();
-		return true;
+		if (LV == 4 && MassCreater.isPlayerInTheSameRoom(getMassPoint()))
+			return readBook();
+		else
+			return true;
 	}
 
 	@Override
 	protected boolean specialCheck() {
-		return LV == 4 && isSpecialParcent();
+		if (LV == 4) {
+			counter = false;
+			return isSpecialParcent();
+		}
+		
+		return false;
 	}
 
 	@Override

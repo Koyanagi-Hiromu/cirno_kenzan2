@@ -7,6 +7,7 @@ import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
+import dangeon.util.Switch;
 import dangeon.view.detail.View_Sider;
 
 /**
@@ -142,7 +143,7 @@ public class 印邪 extends EnchantSpecial {
 	}
 
 	public static boolean isWallWalk() {
-		return is(20);
+		return Switch.switch_wall_walk || is(20);
 	}
 
 	public static void setInfomation() {

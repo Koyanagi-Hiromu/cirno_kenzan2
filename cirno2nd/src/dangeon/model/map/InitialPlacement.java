@@ -9,9 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import main.res.SE;
-import main.util.DIRECTION;
-import main.util.Show;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -24,6 +21,9 @@ import dangeon.view.anime.DoronEffect;
 import dangeon.view.constant.MAP;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.MiniMap;
+import main.res.SE;
+import main.util.DIRECTION;
+import main.util.Show;
 
 public class InitialPlacement implements Serializable {
 	public class Room implements Serializable {
@@ -620,6 +620,7 @@ public class InitialPlacement implements Serializable {
 	public ArrayList<Point> getListRoomPoint(Room r) {
 		// System.out.println(Player.me.getMassPoint());
 		ArrayList<Point> list = new ArrayList<Point>();
+		if (r == null) return list;
 		for (int x = 0; x <= r.W - 1; x++) {
 			for (int y = 0; y <= r.H - 1; y++) {
 				list.add(new Point(r.X + x, r.Y + y));

@@ -95,7 +95,8 @@ public class 救出大作戦 extends Base_Map_Random {
 	@Override
 	protected void getExn_Warning(ArrayList<String> list) {
 		list.add("はじめてのダンジョンです");
-		list.add("カードをたくさん使用して慣れておこう");
+		list.add("カードの「使用」を選ぶ練習をしておこう");
+		list.add("８階にお店が開かれていることがあるよ");
 		if (StoryManager.大妖精救出へ.hasFinished()) {
 			list.add("大妖精を助けました");
 		} else {
@@ -144,11 +145,11 @@ public class 救出大作戦 extends Base_Map_Random {
 
 	@Override
 	public int getShopParcent() {
-		if (Difficulty.Easy.is(this) || Difficulty.Normal.is(this)) {
-			if (MapList.getFloor() == 8) {
-				return 100;
-			}
+//		if (Difficulty.Easy.is(this) || Difficulty.Normal.is(this)) {
+		if (MapList.getFloor() == 8) {
+			return 100;
 		}
+//		}
 		return 0;
 	}
 
