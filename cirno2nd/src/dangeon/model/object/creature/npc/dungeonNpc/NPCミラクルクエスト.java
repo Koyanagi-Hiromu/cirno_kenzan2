@@ -2,10 +2,10 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.field.random.ミラクルクエスト;
 import dangeon.util.R;
+import main.res.CHARA_IMAGE;
 
 public class NPCミラクルクエスト extends Base_DungeonNPC {
 
@@ -24,7 +24,7 @@ public class NPCミラクルクエスト extends Base_DungeonNPC {
 	protected void preCreaterFirstMap() {
 		int r = new R().nextInt(5);
 		if (r == 1) {
-			Message.set("残念ながらドラゴンは用意できませんでした");
+			Message.set("最後にヒソウテンソクが挑戦者を待っています！");
 		} else if (r == 2) {
 			Message.set("ミラクエが流行すれば回りまわって信心ゲットです！");
 		} else if (r == 3) {

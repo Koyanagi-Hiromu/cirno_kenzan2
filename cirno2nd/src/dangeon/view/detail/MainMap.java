@@ -16,15 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import main.constant.FR;
-import main.res.CHARA_IMAGE;
-import main.res.Image_Effect;
-import main.res.Image_MapTip;
-import main.thread.MainThread;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
-import main.util.EX_DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.controller.MainSystem;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.latest.scene.action.Scene_Action;
@@ -62,6 +53,15 @@ import dangeon.view.constant.NormalFont;
 import dangeon.view.detail.name.MainMap_Name;
 import dangeon.view.util.StringFilter;
 import dangeon.view.util.WithinOutofScreen;
+import main.constant.FR;
+import main.res.CHARA_IMAGE;
+import main.res.Image_Effect;
+import main.res.Image_MapTip;
+import main.thread.MainThread;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
+import main.util.EX_DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class MainMap {
 
@@ -238,9 +238,13 @@ public class MainMap {
 		List<Base_Creature> jumping_list = new ArrayList<Base_Creature>();
 		for (Base_Enemy e : MapList.getListEnemy())
 			list.add(e);
+		
 		if (!name)
+		{
 			list.add(Player.me);
-		ignoreCreature(list, jumping_list);
+			ignoreCreature(list, jumping_list);
+		}
+
 		List<Base_Creature> order = MergeSort.creatureY(list);
 		if (name) {
 			for (Base_Creature c : order)
