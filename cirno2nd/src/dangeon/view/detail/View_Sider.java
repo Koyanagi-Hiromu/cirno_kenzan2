@@ -7,12 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import main.Listener;
-import main.Listener.ACTION;
-import main.Second_Firster;
-import main.constant.FR;
-import main.util.BeautifulView;
-import main.util.半角全角コンバーター;
 import dangeon.controller.listener.KeyAccepter;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.message.Message;
@@ -27,6 +21,12 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.view.constant.BGMFONT;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.util.StringFilter;
+import main.Listener;
+import main.Listener.ACTION;
+import main.Second_Firster;
+import main.constant.FR;
+import main.util.BeautifulView;
+import main.util.半角全角コンバーター;
 
 public class View_Sider {
 	private static int story = Config.getStory();
@@ -393,7 +393,7 @@ public class View_Sider {
 			sb.append("0");
 		}
 		sb.append(t);
-		drawKeyContent(g, sb.toString(), 2, y + height * 2, height, true,
+		drawKeyContent(g, sb.toString(), 2, y + height * 2 - 1, height, true,
 				is(ACTION.CANCEL));
 	}
 

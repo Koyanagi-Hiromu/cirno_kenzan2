@@ -5,12 +5,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Base_KeyAccepter;
-import main.Listener;
-import main.Listener.ACTION;
-import main.util.BlackOut;
-import main.util.DIRECTION;
-import title.Title;
 import dangeon.controller.DangeonScene;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.TurnSystemController;
@@ -22,6 +16,13 @@ import dangeon.model.object.Base_MapObject;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.player.Player;
+import main.Base_KeyAccepter;
+import main.Listener;
+import main.Listener.ACTION;
+import main.constant.FR;
+import main.util.BlackOut;
+import main.util.DIRECTION;
+import title.Title;
 
 /**
  * 各Sceneにキー（direction/action）を渡すクラス スレッドの同期調整も（KeyHolderを通じて）行う
@@ -93,6 +94,7 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 	}
 
 	private void objectUpdate() {
+		Player.me.addPlayingMilliTime(FR.THREAD_SLEEP);
 		if (!(base_scene instanceof Scene_Action))
 			return;
 		if (TaskOnMapObject.isThrowTaskEmpty()) {

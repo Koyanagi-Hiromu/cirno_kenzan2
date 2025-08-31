@@ -1963,7 +1963,6 @@ public class Player extends Base_Creature {
 
 	@Override
 	public void upDate() {
-		addPlayingMilliTime(FR.THREAD_SLEEP);
 		if (isDying()) {
 			addPlayingMilliTime(-FR.THREAD_SLEEP);
 			if (dying_frame != -1) {
