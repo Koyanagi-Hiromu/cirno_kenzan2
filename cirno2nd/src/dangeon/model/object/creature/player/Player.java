@@ -471,7 +471,10 @@ public class Player extends Base_Creature {
 	private void recover(BGM 復活時のBGM, boolean flanCoin)
 	{
 		dying_frame = 0;
-		復活時のBGM.play();
+		if (MapList.getFlagSheef())
+			BGM.dorobo.play(100);
+		else
+			復活時のBGM.play();
 		chengeHP_NoEffect(getMAX_HP());
 		chengeSatiety(getMAX_SATIETY());
 		CONDITION.conditionAllClear(Player.me, true);
@@ -1490,7 +1493,7 @@ public class Player extends Base_Creature {
 			}
 			return true;
 		}
-		if (印剣.effect()) {
+		if (印剣.effect(ti)) {
 			setStandEffect(剣.class, ti.A.direction.getReverse());
 			SE.ATTACK_SWORD.play();
 			if (ti.HOW == HowToThrow.MAGIC)

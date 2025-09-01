@@ -244,6 +244,10 @@ public class MainMap {
 			list.add(Player.me);
 			ignoreCreature(list, jumping_list);
 		}
+		else
+		{
+			ignoreCreatureForNameplate(list);
+		}
 
 		List<Base_Creature> order = MergeSort.creatureY(list);
 		if (name) {
@@ -797,6 +801,26 @@ public class MainMap {
 		return wall_img;
 	}
 
+	private static void ignoreCreatureForNameplate(List<Base_Creature> list) {
+		// int shigt = Player.me.conditionCheck(CONDITION.蛍) ? 2 : 1;
+		for (Iterator<Base_Creature> i = list.iterator(); i.hasNext();) {
+			Base_Creature c = i.next();
+			Point p = ObjectPoint.getScreenPointRelPlayer(c);
+			int x = p.x;
+			int y = p.y;
+						
+			if (WithinOutofScreen.isOutside(x, y, c.getImage().getWidth(null),
+					c.getImage().getHeight(null))) {
+				i.remove();
+				continue;
+			}
+			if (isOutofPlayerSight(c) && c.getAnimation() == null) {
+				i.remove();
+				continue;
+			}
+		}
+	}
+	
 	private static void ignoreCreature(List<Base_Creature> list,
 			List<Base_Creature> jumping_list) {
 		// int shigt = Player.me.conditionCheck(CONDITION.蛍) ? 2 : 1;

@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.Image_LargeCharacter;
 import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.menu.view.result.Scene_Result_Info;
 import dangeon.latest.scene.action.message.ConvEvent;
@@ -14,6 +13,7 @@ import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.大妖精;
 import dangeon.model.object.creature.player.Player;
+import main.res.Image_LargeCharacter;
 
 public class 大妖精のカード extends SpellCard {
 
@@ -110,7 +110,7 @@ public class 大妖精のカード extends SpellCard {
 			Message.set("「ダンジョン内じゃないと使えないよ」");
 			return false;
 		} else if (Player.me.isGray()) {
-			Message.set("「何か忘れてない？」");
+			Message.set("「泥棒になっちゃうよ？」");
 			return false;
 		} else if (MapList.getFlagSheef()) {
 			Message.set("「い、今はワープ出来ないよ！」");

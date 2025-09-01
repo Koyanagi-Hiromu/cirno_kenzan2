@@ -11,11 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ListIterator;
 
-import main.Second_Firster;
-import main.res.SE;
-import main.util.DIRECTION;
-import main.util.FileReadSupporter;
-import main.util.Show;
 import dangeon.controller.DangeonScene;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.latest.scene.action.Scene_Action;
@@ -48,6 +43,11 @@ import dangeon.util.R;
 import dangeon.view.constant.MAP;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.MiniMap;
+import main.Second_Firster;
+import main.res.SE;
+import main.util.DIRECTION;
+import main.util.FileReadSupporter;
+import main.util.Show;
 
 public class MassCreater implements Serializable {
 	/**
@@ -844,15 +844,7 @@ public class MassCreater implements Serializable {
 
 	void setNewMap() {
 		MapList.clear();
-		MapList.setFlagSheef(false);
-		if (Player.me.saisen != null) {
-			Player.me.saisen.release();
-			Player.me.saisen = null;
-		}
-		if (Player.me.shop != null) {
-			Player.me.shop.release();
-			Player.me.shop = null;
-		}
+		Base_Artifact.setGrayItemYours();
 		MapList.resetHutoChan();
 		CONDITION.conditionAllClear(Player.me);
 		try {

@@ -346,12 +346,17 @@ public enum DIRECTION {
 	}
 
 	public DIRECTION getReverse() {
-		for (DIRECTION d : values()) {
-			if (d.X == -X && d.Y == -Y) {
-				return d;
-			}
+		switch (this) {
+			case UP: return DOWN;
+			case DOWN: return UP;
+			case LEFT: return RIGHT;
+			case RIGHT: return LEFT;
+			case UP_LEFT: return DOWN_RIGHT;
+			case UP_RIGHT: return DOWN_LEFT;
+			case DOWN_LEFT: return UP_RIGHT;
+			case DOWN_RIGHT: return UP_LEFT;
+			default: return this;
 		}
-		return this;
 	}
 
 	/**
@@ -371,6 +376,25 @@ public enum DIRECTION {
 
 	public boolean isBias() {
 		return X != 0 && Y != 0;
+	}
+
+	public static boolean isNeiborOrSame(DIRECTION a, DIRECTION b) {
+		int ra = a.getRotate();
+		int r = b.getRotate();
+		if (ra == r) return true;
+		switch(ra)
+		{
+			case 0: return r == 7 || r == 1;
+			case 1: return r == 0 || r == 2;
+			case 2: return r == 1 || r == 3;
+			case 3: return r == 2 || r == 4;
+			case 4: return r == 3 || r == 5;
+			case 5: return r == 4 || r == 6;
+			case 6: return r == 5 || r == 7;
+			case 7: return r == 6 || r == 0;
+		}
+		
+		return false;
 	}
 
 }

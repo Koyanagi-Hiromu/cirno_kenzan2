@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import main.res.Image_LargeCharacter;
-import main.res.Image_Object;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.message.ConvEvent;
@@ -26,6 +24,8 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.strage.SAISEN_Strage;
 import dangeon.util.R;
 import dangeon.view.detail.MiniMap;
+import main.res.Image_LargeCharacter;
+import main.res.Image_Object;
 
 public class 賽銭箱 extends Base_NPC {
 	/**

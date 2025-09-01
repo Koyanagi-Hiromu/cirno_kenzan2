@@ -588,6 +588,14 @@ public class Scene_Result_Info extends Plain {
 
 	protected void initializePlayer() {
 		if (flag_item_conservation) {
+			ArrayList<Base_Artifact> list = Belongings.getListItems();
+			for(int i = 0; i < list.size();)
+			{
+				if (list.get(i).isNotYoursYet())
+					list.remove(i);
+				else
+					i++;
+			}
 			Player.me.resetAll_exceptItems();
 			Player.flag_clear = false;
 		} else {

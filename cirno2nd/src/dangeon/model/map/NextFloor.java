@@ -1,6 +1,5 @@
 package dangeon.model.map;
 
-import main.res.SE;
 import dangeon.controller.DangeonScene;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.TurnSystemController;
@@ -9,12 +8,14 @@ import dangeon.model.condition.CONDITION;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.EnemyTable;
 import dangeon.model.map.field.Base_Map;
+import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.hold_enemy.HoldEnemy;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.util.R;
 import dangeon.view.anime.Base_Anime;
+import main.res.SE;
 
 public class NextFloor {
 
@@ -43,17 +44,9 @@ public class NextFloor {
 				PresentField.setPresentField(bm);
 			}
 		}
-		if (Player.me.saisen != null) {
-			Player.me.saisen.release();
-			Player.me.saisen = null;
-		}
-		if (Player.me.shop != null) {
-			Player.me.shop.release();
-			Player.me.shop = null;
-		}
+		Base_Artifact.setGrayItemYours();
 		Player.me.setAnimation((Base_Anime) null);
 		Player.me.endDamaging();
-		MapList.setFlagSheef(false);
 		HoldEnemy.ME.reset();
 		MapList.resetHutoChan();
 		EnchantSpecial.removeAlwaysEnchantSpecial();

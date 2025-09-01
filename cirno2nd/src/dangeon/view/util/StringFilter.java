@@ -13,11 +13,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.Second_Firster;
-import main.res.Image_Artifact;
-import main.util.BeautifulView;
-import main.util.DIRECTION;
-import main.util.Show;
 import dangeon.model.config.Config;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
@@ -26,6 +21,11 @@ import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.EnchantArrow;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.detail.Item;
+import main.Second_Firster;
+import main.res.Image_Artifact;
+import main.util.BeautifulView;
+import main.util.DIRECTION;
+import main.util.Show;
 
 public class StringFilter {
 	public static final String VALUE_REGEX = "\\[.*?\\]",
@@ -66,18 +66,18 @@ public class StringFilter {
 				drawString(g, getPlainString(a.getColoredName(false)), x, y);
 				g.setColor(_c);
 			}
-			if (a.isMerchant()) {
+			if (a.isNotYoursYet()) {
 				x += 245;
-				StringBuilder sb = new StringBuilder();
-				sb.append(a.getMerchantBuyValue());
-				int w = g.getFontMetrics().stringWidth(sb.toString());
-				// g.drawImage(Image_Artifact.BOOK2.getImage(0), x - 15 - w,
-				// y - 30, null);
-				int h = 20;
-				g.setColor(new Color(255, 255, 0, 200));
-				g.fillRect(x - w - 2, y - h + 5, w + 4, h);
-				g.setColor(Color.CYAN);
-				drawEdgedString_plain(g, sb.toString(), x - w, y);
+				int w = 28;
+				int h = 16;
+				g.setColor(new Color(150, 150, 150, 200));
+				g.fillRect(x - w - 2, y - h + 2, w + 4, h);
+			}
+			if (a.isMerchant()) {
+				g.setColor(Color.WHITE);
+				String text = Integer.toString(a.getMerchantBuyValue());
+				int w = g.getFontMetrics().stringWidth(text);
+				drawEdgedString_plain(g, text, x - (28 + w) / 2, y - 1);
 			}
 		}
 	}

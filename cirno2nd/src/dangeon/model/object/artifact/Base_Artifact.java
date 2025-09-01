@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.res.Image_Artifact;
-import main.res.SE;
-import main.util.CSVLoadSupporter;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.ThrowingItem;
 import dangeon.controller.ThrowingItem.HowToThrow;
@@ -49,6 +45,10 @@ import dangeon.util.ObjectPoint;
 import dangeon.util.R;
 import dangeon.view.constant.MAP;
 import dangeon.view.util.WithinOutofScreen;
+import main.res.Image_Artifact;
+import main.res.SE;
+import main.util.CSVLoadSupporter;
+import main.util.DIRECTION;
 
 public abstract class Base_Artifact extends Base_MapObject implements
 		Comparable<Base_Artifact> {
@@ -155,7 +155,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 */
 	public boolean flag_sample, flag_unknown;
 
-	protected boolean flag_punishment = false, flag_merchant;
+	protected boolean flag_punishment = false, flag_merchant, flag_notYoursYet;
 
 	protected boolean flag_pass_turn;
 
@@ -744,6 +744,10 @@ public abstract class Base_Artifact extends Base_MapObject implements
 		return flag_punishment;
 	}
 
+	public boolean isNotYoursYet() {
+		return flag_notYoursYet;
+	}
+
 	/**
 	 * 「static識別」されたアイテムかどうか<br/>
 	 * falseなら正しい名称が分からない。
@@ -1157,6 +1161,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 
 	public void setMerchant(boolean b) {
 		flag_merchant = b;
+		if (b) flag_notYoursYet = true;
 	}
 
 	public void setMoveAnimating(boolean b) {
@@ -1165,6 +1170,26 @@ public abstract class Base_Artifact extends Base_MapObject implements
 
 	public void setPunishment(boolean b) {
 		flag_punishment = b;
+		if (b) flag_notYoursYet = true;
+	}
+	
+	public static void setGrayItemYours() {
+		MapList.setFlagSheef(false);
+		if (Player.me.saisen != null) {
+			Player.me.saisen.release();
+			Player.me.saisen = null;
+		}
+		if (Player.me.shop != null) {
+			Player.me.shop.release();
+			Player.me.shop = null;
+		}
+		for (Base_Artifact a : Belongings.getListItems()) {
+			a.setItsNowYours();
+		}
+	}
+
+	void setItsNowYours() {
+		flag_notYoursYet = false;
 	}
 
 	public void setSampleItem(boolean unknown) {
