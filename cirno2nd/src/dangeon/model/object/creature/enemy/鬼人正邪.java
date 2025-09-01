@@ -6,8 +6,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import main.res.SE;
-import main.util.FrameShaker;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
@@ -28,6 +26,8 @@ import dangeon.util.MapInSelect;
 import dangeon.util.R;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
+import main.util.FrameShaker;
 
 public class 鬼人正邪 extends Base_Enemy {
 
@@ -127,6 +127,7 @@ public class 鬼人正邪 extends Base_Enemy {
 				if (atk == null && def == null) {
 					Message.set("何も装備してなくて大丈夫だった");
 				} else {
+					boolean medalFlag = EnchantSpecial.enchantSimbolAllCheck(CASE.DEF, ENCHANT_SIMBOL.邪);
 					Enchant.DEF.setEnchant(atk);
 					Enchant.ATK.setEnchant(def);
 					SE.SYSTEM_ENCHANT.play();
@@ -137,14 +138,15 @@ public class 鬼人正邪 extends Base_Enemy {
 					String def_s = def != null ? def.getColoredName()
 							: Enchant.DEF.getColor() + "防御装備"
 									+ Color.WHITE.toString();
-					if (霍青娥.class.isInstance(def) && def.isCurse()) {
+
+					if (def != null && def.isCurse() && medalFlag && !EnchantSpecial.enchantSimbolAllCheck(CASE.DEF, ENCHANT_SIMBOL.邪)) {
 						Medal.青娥のカード_呪_を防御から攻撃に変更された.addCount();
 					}
 					Message.set(atk_s.concat("と"), def_s.concat("がひっくり返った"));
 				}
 			}
 		} else {
-			Message.set("装備を入れ替えそうになったが、装備がくっついていて大丈夫だった");
+			Message.set("装備を入れ替えられそうになったが、装備がくっついていて大丈夫だった");
 		}
 	}
 

@@ -29,12 +29,16 @@ public class 変化の瓶 extends Base_Pot_Selective {
 	protected String getSecondExplain_ByEach() {
 		return "【注意書き】";
 	}
-
+	
 	@Override
-	protected void potUse() {
+	protected void onPreUse() {
 		if (Enchant.ATK.isEquals(A)) {
 			Medal.にとりの魔法瓶に攻撃カードを入れた.addCount();
 		}
+	}
+
+	@Override
+	protected void potUse() {
 		LIST.remove(A);
 		int i = 1000;
 		Base_Artifact a = null;

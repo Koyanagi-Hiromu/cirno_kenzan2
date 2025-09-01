@@ -2,8 +2,9 @@ package dangeon.latest.scene.action.menu.first.adventure.medal;
 
 import java.util.ArrayList;
 
-import main.constant.PropertySupporter;
 import dangeon.model.config.StoryManager;
+import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
+import main.constant.PropertySupporter;
 
 /**
  * 
@@ -82,7 +83,7 @@ public enum Medal {
 
 
 
-	話しかける前にNPCにとりを倒してしまった ,
+	話しかける前にNPCにとりを倒してしまった("話す前にスキマの合成NPCを倒してしまった"),
 	中身が詰まった瓶を遠投した ,
 	賽銭箱を寅丸に投げられて泥棒させられた ,
 	忘れられた賽銭箱がさわる前に壊れた ,
@@ -93,7 +94,7 @@ public enum Medal {
 	未識別リボンを使用したらレアものだった ,
 	未識別の草を飲んだら超不幸の種だった ,
 	復活状態が吸われた,
-	青娥のカード_呪_を防御から攻撃に変更された("青娥のカード(呪)を防御から攻撃に変更された"),
+	青娥のカード_呪_を防御から攻撃に変更された("装備がひっくり返って"+ENCHANT_SIMBOL.邪.getName()+"が発揮しなくなった"),
 
 	//@formatter:on
 	special, 気分屋OK, ひねくれOK, 復活回数, 命の草から蓮の花を咲かせた, 人形使いOK;

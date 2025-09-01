@@ -75,6 +75,7 @@ public abstract class Base_Pot_Selective extends Base_Pot implements SelectItem 
 			Message.set(A.getColoredName(), "は入れられない");
 			return false;
 		} else {
+			onPreUse();
 			Message.set(getColoredName(), "に", A.getColoredName(), "を入れた");
 			LIST.add(A);
 			A.remove();
@@ -82,6 +83,8 @@ public abstract class Base_Pot_Selective extends Base_Pot implements SelectItem 
 			return true;
 		}
 	}
+	
+	protected void onPreUse() {}
 
 	protected abstract void potUse();
 
