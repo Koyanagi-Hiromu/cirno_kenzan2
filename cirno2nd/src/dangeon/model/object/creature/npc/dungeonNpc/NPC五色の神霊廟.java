@@ -2,9 +2,9 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.field.random.second.五色の神霊廟;
+import main.res.CHARA_IMAGE;
 
 public class NPC五色の神霊廟 extends Base_DungeonNPC {
 
@@ -15,8 +15,8 @@ public class NPC五色の神霊廟 extends Base_DungeonNPC {
 	}
 
 	@Override
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムは１０コまでしか持ち込めませんよ" };
+	protected String getMsg_overItems() {
+		return "アイテムは１０コまでしか持ち込めませんよ";
 	}
 
 	@Override

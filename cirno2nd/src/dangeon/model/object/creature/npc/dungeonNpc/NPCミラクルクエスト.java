@@ -16,8 +16,8 @@ public class NPCミラクルクエスト extends Base_DungeonNPC {
 	}
 
 	@Override
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムは持ち込めません！" };
+	protected String getMsg_overItems() {
+		return "アイテムは持ち込めません！";
 	}
 
 	@Override

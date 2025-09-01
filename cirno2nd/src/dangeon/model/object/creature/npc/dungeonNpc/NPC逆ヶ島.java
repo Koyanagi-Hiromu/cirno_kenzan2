@@ -3,9 +3,6 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 import java.awt.Color;
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
-import main.util.BlackOut;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.Book;
@@ -18,6 +15,9 @@ import dangeon.model.map.field.random.逆ヶ島;
 import dangeon.model.map.field.town.map.FairyPlace;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
+import main.res.CHARA_IMAGE;
+import main.util.BlackOut;
+import main.util.DIRECTION;
 
 public class NPC逆ヶ島 extends Base_DungeonNPC {
 
@@ -111,8 +111,8 @@ public class NPC逆ヶ島 extends Base_DungeonNPC {
 	}
 
 	@Override
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムが多すぎて逆ヶ島まで運べないよ" };
+	protected String getMsg_overItems() {
+		return "アイテムが多すぎて逆ヶ島まで運べないよ";
 	}
 
 	@Override

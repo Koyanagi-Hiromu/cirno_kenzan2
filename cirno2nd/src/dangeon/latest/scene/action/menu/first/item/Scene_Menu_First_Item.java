@@ -26,6 +26,26 @@ public class Scene_Menu_First_Item extends Scene_Menu_First___ {
 		super(2, kh, new Base_Scene_Menu_First____View(bv));
 	}
 
+	private void contentsHAIKI() {
+		if (MapList.isCheckedItem()) {
+			setContents("廃棄", "手持ちのアイテムをすべて廃棄します", new Book() {
+				@Override
+				protected void work() {
+					MapList.gatherCheckedItems();
+					setNextScene(Scene_Action.getMe());
+				}
+			});
+		} else {
+			setDeprecatedContents("回収", "フロアで踏んだアイテムを足元に集めます", new Book() {
+				@Override
+				protected void work() {
+					setNextScene(Scene_Action.getMe());
+					Message.set("踏まれたアイテムが落ちていません");
+				}
+			});
+		}
+	}
+	
 	private void contentsKAISHU() {
 		if (MapList.isCheckedItem()) {
 			setContents("回収", "フロアで踏んだアイテムを足元に集めます", new Book() {
@@ -60,7 +80,11 @@ public class Scene_Menu_First_Item extends Scene_Menu_First___ {
 			}
 		});
 		setFoot();
-		contentsKAISHU();
+		
+		if (true)
+			contentsKAISHU();
+		else
+			contentsKAISHU();
 		// setDeprecatedContents("？？", "（ここに表示するもの募集中）", new Book() {
 		// @Override
 		// protected void work() {

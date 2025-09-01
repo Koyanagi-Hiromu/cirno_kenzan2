@@ -1804,8 +1804,20 @@ public class Player extends Base_Creature {
 		if (bmr instanceof 救出大作戦) {
 			flag_no_item_daichan = flag_no_item;
 		} else if (bmr instanceof 逆ヶ島) {
+			if (flag_no_item_daichan) {
+				View_Sider.setInformation("救出大作戦から持ち込み無しで挑戦中");
+				return;
+			}
 		} else {
 			flag_no_item_daichan = false;
+		}
+		
+		if (flag_no_item) {
+			View_Sider.setInformation("持ち込みなしでダンジョンに挑戦");
+		}
+		else
+		{
+			View_Sider.setInformation("アイテムを" + 半角全角コンバーター.半角To全角数字(Belongings.getSize()) + "コ持ってダンジョンに入った");
 		}
 	}
 

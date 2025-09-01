@@ -2,12 +2,12 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.field.random.運命のワルツ;
+import main.res.CHARA_IMAGE;
+import main.res.SE;
 
 public class NPC運命のワルツ extends Base_DungeonNPC {
 
@@ -23,9 +23,8 @@ public class NPC運命のワルツ extends Base_DungeonNPC {
 	}
 
 	@Override
-	protected String[] getMsg_overItems() {
-		SE.SYSTEM_CURSE.play();
-		return new String[] { "*アイテムは持ち込めない*" };
+	protected String getMsg_overItems() {
+		return "*アイテムは持ち込めない*";
 	}
 
 	@Override

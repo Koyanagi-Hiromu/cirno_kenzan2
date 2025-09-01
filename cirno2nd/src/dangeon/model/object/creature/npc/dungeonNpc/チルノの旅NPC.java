@@ -2,9 +2,9 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.field.random.緋想の地下;
+import main.res.CHARA_IMAGE;
 
 public class チルノの旅NPC extends Base_DungeonNPC {
 
@@ -15,8 +15,8 @@ public class チルノの旅NPC extends Base_DungeonNPC {
 	}
 
 	@Override
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムは持って行けないよ@" };
+	protected String getMsg_overItems() {
+		return "アイテムは持って行けないよ";
 	}
 
 	@Override

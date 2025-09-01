@@ -27,8 +27,8 @@ public class NPC小悪魔 extends Base_DungeonNPC {
 	}
 	
 	@Override
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムは持っていけませんよ" };
+	protected String getMsg_overItems() {
+		return "アイテムは持っていけませんよ";
 	}
 
 	private void dataMove() {

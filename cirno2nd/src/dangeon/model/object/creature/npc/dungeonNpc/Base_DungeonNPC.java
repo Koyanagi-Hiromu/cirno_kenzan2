@@ -2,10 +2,6 @@ package dangeon.model.object.creature.npc.dungeonNpc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.SE;
-import main.util.BlackOut;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.Book;
@@ -16,6 +12,11 @@ import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.SE;
+import main.util.BlackOut;
+import main.util.半角全角コンバーター;
 
 public abstract class Base_DungeonNPC extends Base_NPC {
 
@@ -58,17 +59,84 @@ public abstract class Base_DungeonNPC extends Base_NPC {
 			}
 
 			@Override
-			protected Book getYes() {
-				return new Book() {
+			protected Book getContent1() {
+				return new Book("はい") {
 
 					@Override
 					protected void work() {
 						if (MAP.ITEM_MAX != null
 								&& Belongings.getSize() > MAP.ITEM_MAX) {
-							Message.set(getMsg_overItems());
+							say(getMsg_overItems());
 						} else {
 							intoDungeon();
 						}
+					}
+				};
+			}
+
+			protected Book getContent2() {
+				return new Book("いいえ") {
+					@Override
+					protected void work() { }
+				};
+			}
+
+			protected Book getContent3() {
+				if (Belongings.isEmpty()) return null;
+				return new Book("捨てる") {
+					@Override
+					protected void work() {
+						askDestroyItems();
+					}
+				};
+			}
+		});
+	}
+	
+	protected void askDestroyItems()
+	{
+		new Conversation("その前に持ってるアイテムを捨ててもいい？", new ConvEvent() {
+			@Override
+			protected Book getContent1() {
+				return new Book("捨てない") {
+
+					@Override
+					protected void work() { }
+				};
+			}
+
+			@Override
+			protected Book getContent2() {
+				return new Book("捨てる") {
+					@Override
+					protected void work() {
+						askDestroyItems_final();
+					}
+				};
+			}
+		});
+	}
+	
+	private void askDestroyItems_final() {
+		new Conversation("本当の本当に？", new ConvEvent() {
+			@Override
+			protected Book getContent1() {
+				return new Book("やっぱりやめる") {
+
+					@Override
+					protected void work() { }
+				};
+			}
+
+			@Override
+			protected Book getContent2() {
+				final int count = Belongings.getListItems().size();
+				return new Book(半角全角コンバーター.半角To全角数字(count) +"コのアイテムをすべて捨てる") {
+
+					@Override
+					protected void work() {
+						Belongings.getListItems().clear();
+						Message.set("チルノは" + 半角全角コンバーター.半角To全角数字(count) +"コのアイテムをすべて捨てた");
 					}
 				};
 			}
@@ -97,8 +165,8 @@ public abstract class Base_DungeonNPC extends Base_NPC {
 	 * 
 	 * @return アイテムを持ちすぎている時に表示されるメッセージ
 	 */
-	protected String[] getMsg_overItems() {
-		return new String[] { "アイテムを持ちすぎだよ" };
+	protected String getMsg_overItems() {
+		return "アイテムを持ちすぎだよ";
 	}
 
 	/**
