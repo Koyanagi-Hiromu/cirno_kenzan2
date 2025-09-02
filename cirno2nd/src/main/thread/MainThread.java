@@ -7,6 +7,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import dangeon.model.config.Config;
+import dangeon.view.util.StringFilter;
 import main.Scene;
 import main.Second_Firster;
 import main.constant.FR;
@@ -16,8 +18,6 @@ import main.util.BlackOut;
 import main.util.FrameShaker;
 import main.util.Show;
 import main.util.Sleep;
-import dangeon.model.config.Config;
-import dangeon.view.util.StringFilter;
 
 public class MainThread extends Thread {
 	// public final boolean test = new File("../dangeon").exists();
@@ -263,25 +263,29 @@ public class MainThread extends Thread {
 	private void view() {
 		flag_sys_draw = false;
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		if (!bufferStrategy.contentsLost()) {
-			if (flag_TimeStop) {
-				drawTS(g);
+		try {
+			if (!bufferStrategy.contentsLost()) {
+				if (flag_TimeStop) {
+					drawTS(g);
+				} else {
+					if (Config.isSmooth())
+						view_old(g);
+					else
+						view_zanzou(g);
+				}
+				Sleep.done();
+				if (getFrame() % Config.getSkipRate() == 0)
+					bufferStrategy.show();
+				Toolkit.getDefaultToolkit().sync();
+				StringFilter.upDate();
 			} else {
-				if (Config.isSmooth())
-					view_old(g);
-				else
-					view_zanzou(g);
+				Show.showInformationMessageDialog("bufferStrategy.contentsLost()");
 			}
-			Sleep.done();
-			if (getFrame() % Config.getSkipRate() == 0)
-				bufferStrategy.show();
-			Toolkit.getDefaultToolkit().sync();
-			StringFilter.upDate();
-			Sleep.done(0);
+		} finally {
 			g.dispose();
-		} else {
-			Show.showInformationMessageDialog("bufferStrategy.contentsLost()");
 		}
+		
+		Sleep.done(0);
 		if (!flag_sys_draw) {
 			Show.showInformationMessageDialog("flag_sys_draw = false");
 		}
