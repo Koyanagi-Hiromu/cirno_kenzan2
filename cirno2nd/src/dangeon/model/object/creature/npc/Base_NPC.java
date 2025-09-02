@@ -2,8 +2,6 @@ package dangeon.model.object.creature.npc;
 
 import java.awt.Point;
 
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.latest.scene.action.message.Message;
@@ -11,6 +9,8 @@ import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.staff.一時しのぎの杖;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.player.Player;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
 
 public abstract class Base_NPC extends Base_Enemy {
 	/**
@@ -130,4 +130,7 @@ public abstract class Base_NPC extends Base_Enemy {
 	protected void talks(String... strings) {
 		new Conversation(Conversation.previous_opponent, strings);
 	}
+
+	@Override
+	public void setSize() {}
 }
