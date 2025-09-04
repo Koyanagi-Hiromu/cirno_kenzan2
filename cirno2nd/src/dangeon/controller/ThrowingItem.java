@@ -3,8 +3,6 @@ package dangeon.controller;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.ItemFall;
@@ -29,6 +27,8 @@ import dangeon.util.R;
 import dangeon.view.anime.MissEffect;
 import dangeon.view.constant.MAP;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class ThrowingItem {
 	public enum HowToThrow {
@@ -42,7 +42,7 @@ public class ThrowingItem {
 		}
 	}
 
-	private final int PLAYER_MISS = 15;
+	private final int PLAYER_MISS = 13;
 	private final int ENEMY_MISS = 20;
 
 	private int first_sleep = 3;

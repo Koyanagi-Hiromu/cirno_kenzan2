@@ -37,6 +37,7 @@ import dangeon.model.map.field.random.Base_Map_Random;
 import dangeon.model.map.field.random.救出大作戦;
 import dangeon.model.map.field.random.逆ヶ島;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.item.Base_Item;
 import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.bullet.御柱;
 import dangeon.model.object.artifact.item.bullet.目からビーム;
@@ -1865,6 +1866,10 @@ public class Player extends Base_Creature {
 	}
 
 	public void setThrowing(Base_Artifact throw_item, DIRECTION d) {
+		if (throw_item instanceof Base_Item)
+		{
+			((Base_Item)throw_item).flag_pick_checked = true;
+		}
 		throw_item.direction = d;
 		attacking_direction = direction;
 		normal_attack_phase = AttackPhase.GO;
