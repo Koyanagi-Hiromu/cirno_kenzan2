@@ -3,12 +3,6 @@ package dangeon.model.map.field.town.map;
 import java.awt.Point;
 import java.util.AbstractList;
 
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.Image_MapTip;
-import main.res.SE;
-import main.util.BlackOut;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.ConvEvent;
@@ -22,6 +16,12 @@ import dangeon.model.object.creature.npc.dungeonNpc.NPCミラクルクエスト;
 import dangeon.model.object.creature.npc.second.NPCおりん;
 import dangeon.model.object.creature.npc.second.NPCパチェ;
 import dangeon.model.object.creature.player.Player;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.BlackOut;
+import main.util.DIRECTION;
 
 public class UnderGroundHouse extends Base_TownMap {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +37,6 @@ public class UnderGroundHouse extends Base_TownMap {
 
 	@Override
 	public Point getEntrancePoint() {
-		Player.me.direction = DIRECTION.RIGHT;
 		return new Point(4, 12);
 	}
 
@@ -48,6 +47,7 @@ public class UnderGroundHouse extends Base_TownMap {
 
 	@Override
 	protected AbstractList<Base_MapObject> getObjectList() {
+		Player.me.direction = DIRECTION.RIGHT;
 		// add(new Stairs(new Point(17, 22), 隕石異変.ME).setInVisible());
 		// if (StoryManager.逆ヶ島clear.hasFinished()) {
 		// boolean b = Config.isPassWardTrue("miracle");

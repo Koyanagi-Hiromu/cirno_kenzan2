@@ -135,7 +135,6 @@ public class FairyPlace extends Base_TownMap {
 
 	@Override
 	public Point getEntrancePoint() {
-		Player.me.direction = DIRECTION.DOWN;
 		return new Point(24, 9);
 	}
 
@@ -146,6 +145,7 @@ public class FairyPlace extends Base_TownMap {
 
 	@Override
 	protected AbstractList<Base_MapObject> getObjectList() {
+		Player.me.direction = DIRECTION.DOWN;
 		Player.me.flag_no_item_daichan = false;
 		kanako(new Point(20, 7));
 		if (Switch.test) {
