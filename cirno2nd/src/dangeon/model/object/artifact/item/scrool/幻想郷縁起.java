@@ -73,8 +73,11 @@ public class 幻想郷縁起 extends Scrool {
 	public boolean isHolyPoint(Base_Creature source, Integer damage) {
 		if (isUnAvailable())
 			return false;
-		damage /= 5;
+		damage /= 10;
 		SE.REIMU_BARRIER.play();
+		
+		if (damage <= 0) return true;
+		
 		MainMap.addEffect(new HitEffect(Player.me, damage));
 		Message.set(source.getColoredName(), Damage.enemy_color, "の攻撃によってページが",
 				半角全角コンバーター.半角To全角数字(damage), "枚減った", Color.WHITE);
@@ -129,7 +132,7 @@ public class 幻想郷縁起 extends Scrool {
 		if (pages == 0) {
 			Message.set("特に効果はなかった");
 		} else {
-			int delt = (int) (pages * 0.99f);
+			int delt = (int) (pages * 0.75f);
 			Message.set(delt + "枚のページになってポケットに入った");
 			Player.me.addBooks(delt);
 		}

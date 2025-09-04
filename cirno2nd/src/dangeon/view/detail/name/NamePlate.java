@@ -5,19 +5,19 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import main.res.Image_Artifact;
-import main.thread.MainThread;
-import main.util.BeautifulView;
-import main.util.半角全角コンバーター;
 import dangeon.latest.util.view_window.WindowFrame;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.config.Config;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
+import dangeon.util.Damage;
 import dangeon.util.ObjectPoint;
 import dangeon.view.constant.MAP;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.util.StringFilter;
+import main.thread.MainThread;
+import main.util.BeautifulView;
+import main.util.半角全角コンバーター;
 
 public class NamePlate {
 	public final int W, H;
@@ -42,7 +42,7 @@ public class NamePlate {
 			if (c.getLV() == 0) {
 				lv = "NPC";
 			} else {
-				lv = c.getConvertedLV() == 4 ? "ANOTHER" : "Lv"
+				lv = c.getConvertedLV() == 4 ? "Lv"+ StringFilter.NUMBERS +" A" : "Lv"
 						.concat(半角全角コンバーター.半角To全角数字(c.getLV()));
 				flag_detail_ok = (c instanceof Base_Enemy)
 						&& Config.isAccessableToDetail((Base_Enemy) c,
@@ -62,19 +62,26 @@ public class NamePlate {
 		FIRST = new Point(x, y);
 		screen = FIRST.getLocation();
 		screen.translate(-MAP.TILE_SIZE / 2, 0);
-		int w = Math.max(g.getFontMetrics().stringWidth(NAME) / 2 + 6, 50);
+		int w = Math.max(g.getFontMetrics().stringWidth(NAME) / 2 + 6, 75);
 		WINDOW = new WindowFrame(x, y, w * 2, 3);
 		H = WINDOW.getHeight() / 2;
 		W = WINDOW.getWidth() / 2;
 		g = WINDOW.WINDOW.createGraphics();
 		g.setFont(NormalFont.NORMALFONT.deriveFont((float) font_size * 2));
 		BeautifulView.setAntiAliasing(g, true);
-		g.setColor(Color.WHITE);
 		StringFilter.drawString(g, lv, 12, H / 2 + font_size);
 		if (flag_detail_ok) {
-			g.drawImage(Image_Artifact.BOOK.getImage(0), g.getFontMetrics()
-					.stringWidth(lv) - 2, -2, null);
+//			g.drawImage(Image_Artifact.BOOK.getImage(0), W , -2, null);
+			String damage = Damage.getPredctionDamageText(c);
+			int damageWidth = g.getFontMetrics().stringWidth(damage);
+			StringFilter.drawString(g, damage, W * 2 - damageWidth - 20, H / 2 + font_size);
 		}
+		
+		if (flag_detail_ok || c.getLV() == 0) 
+			g.setColor(Color.WHITE);
+		else
+			g.setColor(Color.YELLOW);
+
 		StringFilter.drawString(g, NAME, 12, H + font_size * 2);
 		g.dispose();
 	}

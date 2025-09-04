@@ -28,7 +28,7 @@ public class NPCミラクルクエスト extends Base_DungeonNPC {
 		} else if (r == 2) {
 			Message.set("ミラクエが流行すれば回りまわって信心ゲットです！");
 		} else if (r == 3) {
-			Message.set("時々壁の中に賽銭箱が埋まっているそうですよ");
+			Message.set("スキマの前には壁に賽銭箱が埋まっているそうですよ");
 		} else if (r == 4) {
 			Message.set("氷の罠は存在しないようですよ");
 		} else {

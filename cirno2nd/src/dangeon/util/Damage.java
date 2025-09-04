@@ -3,9 +3,6 @@ package dangeon.util;
 import java.awt.Color;
 import java.util.Random;
 
-import main.res.SE;
-import main.util.FrameShaker;
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -37,6 +34,9 @@ import dangeon.model.object.creature.player.hold_enemy.HoldEnemy;
 import dangeon.view.anime.MissEffect;
 import dangeon.view.detail.MainMap;
 import dangeon.view.util.StringFilter;
+import main.res.SE;
+import main.util.FrameShaker;
+import main.util.半角全角コンバーター;
 
 public class Damage {
 	private static int attack_miss = 5;
@@ -451,6 +451,26 @@ public class Damage {
 		EnchantSpecial.deffencePhaseFinal(source);
 		return damage;
 	}
+	
+	public static String getPredctionDamageText(Base_Creature source)
+	{
+		int damage = PandE_DamageValue_WithoutRandom(source);
+		int min = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source) * 0.85));
+		int max = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source) * 1.15));
+		return min + "-" + max;
+	}
+	
+	static int getPredictionDamage(Base_Creature source, int damage) {
+		damage = againstMagicDeffence(source, damage);
+		damage = powerUp(source, false, damage);
+		if (BonusConductor.蓬莱人形_被ダメージ量２倍()) {
+			damage = damage * 5 / 2;
+		}
+		if (damage < 1) {
+			damage = 1;
+		}
+		return damage;
+	}
 
 	public static void EtoPandE_ArrowAttack(Object obj, String str,
 			Base_Creature source, Base_Creature target) {
@@ -553,6 +573,18 @@ public class Damage {
 			damage_value = damage_low;
 		}
 		return (int) damage_value;
+	}
+
+	/**
+	 * プレイヤーからエネミーへのダメージ計算 エネミーからプレイヤーへのダメージ計算
+	 */
+	private static int PandE_DamageValue_WithoutRandom(Base_Creature cr) {
+		int damage_value = cr.getSTR() - Enchant.getSumDEF();
+		if (damage_value <= 1) {
+			int damage_low = 1;
+			damage_value = damage_low;
+		}
+		return damage_value;
 	}
 
 	private static int powerUp(Base_Creature c, boolean attack, int damage) {
