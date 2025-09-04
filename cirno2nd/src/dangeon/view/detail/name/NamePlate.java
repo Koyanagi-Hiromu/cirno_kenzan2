@@ -35,18 +35,22 @@ public class NamePlate {
 		g.setFont(NormalFont.NORMALFONT.deriveFont((float) font_size * 2));
 		String lv;
 		String NAME;
+		int minWitdh = 75;
+		boolean damagePrediction = false;
 		if (c.conditionCheck(CONDITION.やりすごし)) {
 			lv = "Lv?";
 			NAME = "ルーミア？";
 		} else {
 			if (c.getLV() == 0) {
 				lv = "NPC";
+				minWitdh = 50;
 			} else {
 				lv = c.getConvertedLV() == 4 ? "Lv"+ StringFilter.NUMBERS +"A" : "Lv"
 						.concat(半角全角コンバーター.半角To全角数字(c.getLV()));
 				flag_detail_ok = (c instanceof Base_Enemy)
 						&& Config.isAccessableToDetail((Base_Enemy) c,
 								c.getConvertedLV());
+				damagePrediction = true;
 			}
 			NAME = c.getName();
 		}
@@ -62,7 +66,7 @@ public class NamePlate {
 		FIRST = new Point(x, y);
 		screen = FIRST.getLocation();
 		screen.translate(-MAP.TILE_SIZE / 2, 0);
-		int w = Math.max(g.getFontMetrics().stringWidth(NAME) / 2 + 6, 75);
+		int w = Math.max(g.getFontMetrics().stringWidth(NAME) / 2 + 6, minWitdh);
 		WINDOW = new WindowFrame(x, y, w * 2, 3);
 		H = WINDOW.getHeight() / 2;
 		W = WINDOW.getWidth() / 2;
@@ -70,9 +74,9 @@ public class NamePlate {
 		g.setFont(NormalFont.NORMALFONT.deriveFont((float) font_size * 2));
 		BeautifulView.setAntiAliasing(g, true);
 		StringFilter.drawString(g, lv, 12, H / 2 + font_size);
-		if (flag_detail_ok) {
+		if (damagePrediction) {
 //			g.drawImage(Image_Artifact.BOOK.getImage(0), W , -2, null);
-			String damage = Damage.getPredctionDamageText(c);
+			String damage = Damage.getPredctionDamageText(c, flag_detail_ok);
 			int damageWidth = g.getFontMetrics().stringWidth(damage);
 			StringFilter.drawString(g, damage, W * 2 - damageWidth - 20, H / 2 + font_size);
 		}

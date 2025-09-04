@@ -341,12 +341,10 @@ public abstract class Base_Creature extends Base_MapObject {
 			this.HP += delt;
 		}
 		if (delt < 0) {
-			if (this.equals(Player.me) && 封獣ぬえ.isNue(3)
-					&& !(obj instanceof 封獣ぬえ)) {
+			if ((this.equals(Player.me) && 封獣ぬえ.isNue(1)) || 封獣ぬえ.isNue(2))
 				MainMap.addEffect(new HitEffect(this, "ぬえん"));
-			} else {
+			 else 
 				MainMap.addEffect(new HitEffect(this, -delt));
-			}
 		} else if (delt > 0) {
 			MainMap.addEffect(new HealEffect(this, delt));
 		}

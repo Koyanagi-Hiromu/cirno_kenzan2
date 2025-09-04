@@ -97,7 +97,7 @@ public class Header {
 		if (!StairScene.isTasksEmpty()) {
 			return;
 		}
-		flag_nue = 封獣ぬえ.isNue();
+		flag_nue = 封獣ぬえ.isHeaderHiddenByNue();
 		setDefaultAlpha(g);
 		drawLeftUp(g);
 		setDefaultAlpha(g);

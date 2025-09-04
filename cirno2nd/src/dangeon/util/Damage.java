@@ -232,7 +232,7 @@ public class Damage {
 				return;
 			}
 			if (target instanceof Player) {
-				if (封獣ぬえ.isNue(2) && !(source instanceof 封獣ぬえ)) {
+				if (封獣ぬえ.isNue(1)) {
 					Message.set(c, msg, target.getColoredName(), c, "は",
 							source.getColoredName(), c, "から",
 							StringFilter.NUMBERS, "ぬえん", Color.WHITE,
@@ -243,9 +243,17 @@ public class Damage {
 							"のダメージを受けた", Color.WHITE);
 				}
 			} else {
-				Message.set(c, msg, source.getColoredName(), c, "は",
-						target.getColoredName(), c, "に", getDight(damage),
-						"のダメージを与えた", Color.WHITE);
+				if (封獣ぬえ.isNue(2)) {
+					Message.set(c, msg, source.getColoredName(), c, "は",
+							target.getColoredName(), c, "に",
+							StringFilter.NUMBERS, "ぬえん", Color.WHITE,
+							"のダメージを与えた", Color.WHITE);
+				} else {
+					Message.set(c, msg, source.getColoredName(), c, "は",
+							target.getColoredName(), c, "に",
+							getDight(damage),
+							"のダメージを与えた", Color.WHITE);
+				}
 			}
 		}
 	}
@@ -452,12 +460,32 @@ public class Damage {
 		return damage;
 	}
 	
-	public static String getPredctionDamageText(Base_Creature source)
+	public static String getPredctionDamageText(Base_Creature source, boolean flag_detail_ok)
 	{
-		int damage = PandE_DamageValue_WithoutRandom(source);
-		int min = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source) * 0.85));
-		int max = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source) * 1.15));
-		return min + "-" + max;
+		if (封獣ぬえ.isNue(1))
+		{
+			return "??";
+		}
+		int max = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source, 1.15)));
+		if (flag_detail_ok)
+		{
+			int min = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source, 0.85)));
+			if (min == max)
+				return Integer.toString(max);
+			else
+				return min + "-" + max;
+		}
+		else
+		{
+			String min;
+			if (max < 10)
+				min = "?";
+			else if (max < 100)
+				min = "?";
+			else
+				min = "??";
+			return min + "-" + max;
+		}
 	}
 	
 	static int getPredictionDamage(Base_Creature source, int damage) {
@@ -578,8 +606,8 @@ public class Damage {
 	/**
 	 * プレイヤーからエネミーへのダメージ計算 エネミーからプレイヤーへのダメージ計算
 	 */
-	private static int PandE_DamageValue_WithoutRandom(Base_Creature cr) {
-		int damage_value = cr.getSTR() - Enchant.getSumDEF();
+	private static int PandE_DamageValue_WithoutRandom(Base_Creature cr, double rate) {
+		int damage_value = (int)(cr.getSTR() * rate - Enchant.getSumDEF());
 		if (damage_value <= 1) {
 			int damage_low = 1;
 			damage_value = damage_low;

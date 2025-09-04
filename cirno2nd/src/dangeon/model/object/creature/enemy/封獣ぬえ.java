@@ -2,12 +2,12 @@ package dangeon.model.object.creature.enemy;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.MapList;
 import dangeon.model.object.creature.player.Player;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
 
 public class 封獣ぬえ extends Base_Enemy {
 
@@ -15,8 +15,25 @@ public class 封獣ぬえ extends Base_Enemy {
 
 	private static boolean flag = false;
 
-	public static boolean isNue() {
-		return isNue(1);
+	public static boolean isHeaderHiddenByNue() {
+		if (isNue(3))
+		{
+			if (!flag) {
+				Message.set("HPが不明になった");
+				SE.AMANOJACK.play();
+				MainMap.addEffect(new DoronEffect(Player.me
+						.getMassPoint().getLocation(), null, true,
+						false), false);
+			}
+			flag = true;
+			return true;
+		}
+		
+		if (flag) {
+			Message.set("HPがよく分かるようになった");
+			flag = false;
+		}
+		return false;
 	}
 
 	public static boolean isNue(int lv) {
@@ -25,26 +42,12 @@ public class 封獣ぬえ extends Base_Enemy {
 				if (lv <= ((封獣ぬえ) em).LV) {
 					em.whereIsPlayer(false);
 					if (em.player_is_in_sight) {
-						if (!flag) {
-							Message.set("HPが不明になった");
-							SE.AMANOJACK.play();
-							MainMap.addEffect(new DoronEffect(Player.me
-									.getMassPoint().getLocation(), null, true,
-									false), false);
-						}
-						flag = true;
 						return true;
 					}
 				}
 			}
 		}
-
-		if (lv <= 1) {
-			if (flag) {
-				Message.set("HPがよく分かるようになった");
-			}
-			flag = false;
-		}
+		
 		return false;
 	}
 
