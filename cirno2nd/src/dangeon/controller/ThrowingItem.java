@@ -17,6 +17,7 @@ import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印食;
+import dangeon.model.object.artifact.item.grass.Base_Grass;
 import dangeon.model.object.artifact.item.pot.Base_Pot;
 import dangeon.model.object.artifact.item.pot.Base_Pot_Selective;
 import dangeon.model.object.artifact.item.staff.MagicBullet;
@@ -357,6 +358,9 @@ public class ThrowingItem {
 					ENCHANT_SIMBOL.必中)) {
 				return 0;
 			}
+			if (A instanceof Base_Grass)
+				return 0;
+			
 			return PLAYER_MISS;
 		}
 		return ENEMY_MISS;
