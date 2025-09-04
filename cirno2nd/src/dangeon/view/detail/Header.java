@@ -366,7 +366,7 @@ public class Header {
 		g.drawImage(Image_Artifact.BOOK2.getImage(0), floor_lv_x - 18, y - 30,
 				null);
 		StringFilter.drawEdgedString_plain(g,
-				"×".concat(半角全角コンバーター.半角To全角数字(Player.me.getBooks())),
+				"×".concat(半角全角コンバーター.半角To全角数字(Player.me.getBooksForDraw())),
 				floor_lv_x + 15, y);
 		if (att >= 0) {
 			sb = new StringBuilder();

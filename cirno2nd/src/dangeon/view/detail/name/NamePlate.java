@@ -42,7 +42,7 @@ public class NamePlate {
 			if (c.getLV() == 0) {
 				lv = "NPC";
 			} else {
-				lv = c.getConvertedLV() == 4 ? "Lv"+ StringFilter.NUMBERS +" A" : "Lv"
+				lv = c.getConvertedLV() == 4 ? "Lv"+ StringFilter.NUMBERS +"A" : "Lv"
 						.concat(半角全角コンバーター.半角To全角数字(c.getLV()));
 				flag_detail_ok = (c instanceof Base_Enemy)
 						&& Config.isAccessableToDetail((Base_Enemy) c,

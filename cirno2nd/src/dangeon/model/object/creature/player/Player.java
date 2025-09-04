@@ -814,7 +814,7 @@ public class Player extends Base_Creature {
 		return back_point;
 	}
 
-	public int getBooks() {
+	public int getBooksForDraw() {
 		if (books_count > books) {
 			books_count -= 10;
 			if (books_count < books) {
@@ -829,6 +829,10 @@ public class Player extends Base_Creature {
 			}
 		}
 		return books_count;
+	}
+	
+	public int getBooks() {
+		return books;
 	}
 
 	public BaseClassJob getClassJob() {
