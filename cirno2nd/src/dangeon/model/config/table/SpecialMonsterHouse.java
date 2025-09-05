@@ -68,7 +68,7 @@ public enum SpecialMonsterHouse {
 	殲滅部隊(フランドール.class, レミリア.class,ナズーリン.class, 比那名居天子.class,八雲藍.class),
 	マジックギルド(小悪魔.class,パチュリー.class, 霧雨魔理沙.class, 聖白蓮.class, 風見幽香.class, アリス.class,魅魔.class),
 	爆炎地帯(霊烏路空.class,パルスィ.class,藤原妹紅.class,紅美鈴.class),
-	ビリビリルーム(永江衣玖.class,パチュリー.class,蘇我屠自古.class,堀川雷鼓.class),
+	ビリビリルーム(永江衣玖.class,パチュリー.class,蘇我屠自古.class,堀川雷鼓.class,魅魔.class),
 	投げ物選手権(八意永琳.class, 十六夜咲夜.class, 寅丸星.class, 村紗水蜜.class, 黒谷ヤマメ.class, 八坂神奈子.class),
 	ドレインパーティ(メディスン.class, 洩矢諏訪子.class, 上白沢慧音.class, 八意永琳.class,宮古芳香.class),
 	ゴーストスポット(魂魄妖夢.class, 西行寺幽々子.class, 村紗水蜜.class, 蘇我屠自古.class,宮古芳香.class,霍青娥.class,魅魔.class),

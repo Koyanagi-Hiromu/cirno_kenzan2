@@ -86,9 +86,6 @@ public class パチュリー extends Base_Enemy {
 		final Base_Creature C = this;
 		setAnimation(new Special_Wait_FrameByFrame(this, SE.SYSTEM_SCROLL, 1,
 				new Task() {
-					/**
-			 *
-			 */
 					private static final long serialVersionUID = 1L;
 
 					@Override
@@ -103,7 +100,7 @@ public class パチュリー extends Base_Enemy {
 							int rdm = -1;
 							if (LV == 1) {
 								if (Player.me.conditionCheck(CONDITION.麻痺)) {
-									rdm = 1;
+									rdm = new R().nextInt(2);
 								} else {
 									s = STAFF;
 									n = "麻痺";
@@ -214,6 +211,14 @@ public class パチュリー extends Base_Enemy {
 
 	@Override
 	protected boolean specialAttack() {
+		if (special_ok && isBuffSelf()) {
+			setAnimation(new Special_Wait_FrameByFrame(this, SE.SYSTEM_SCROLL, 1, null, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+			Message.set(getColoredName(), "は炎に包まれた");
+			SE.ATTACK_FIRE.play();
+			setCondition(CONDITION.炎上, 0);
+			return true;
+		}
+		
 		if (!check()) {
 			return false;
 		}
@@ -227,13 +232,37 @@ public class パチュリー extends Base_Enemy {
 
 	@Override
 	protected boolean specialCheck() {
+		if (isBuffSelf()) return true;
+		
 		if (!check()) {
 			return false;
 		}
+		
 		if (isSpecialParcent()) {
 			return true;
 		}
 		return false;
 	}
 
+	boolean isBuffSelf()
+	{
+		if (conditionCheck(CONDITION.炎上))
+			return false;
+		
+		if (LV == 1 && Player.me.conditionCheck(CONDITION.麻痺)) {
+			return player_is_in_sight;
+		} else if (LV == 2 && Player.me.conditionCheck(CONDITION.封印)) {
+			return player_is_in_sight;
+		} else if (LV == 3 && Player.me.conditionCheck(CONDITION.鈍足)) {
+			return player_is_in_sight;
+		} else if (Player.me.conditionCheck(CONDITION.封印)
+					&& Player.me
+							.conditionCheck(CONDITION.鈍足)
+					&& Player.me
+							.conditionCheck(CONDITION.麻痺)) {
+			return player_is_in_sight;
+		}
+		
+		return false;
+	}	
 }
