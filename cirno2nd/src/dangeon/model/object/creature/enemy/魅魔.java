@@ -3,8 +3,6 @@ package dangeon.model.object.creature.enemy;
 import java.awt.Image;
 import java.awt.Point;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.message.Message;
@@ -12,9 +10,13 @@ import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
+import dangeon.util.Damage;
+import dangeon.util.ThunderDamage;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.anime.EvilField;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 魅魔 extends Base_Enemy {
 
@@ -60,20 +62,37 @@ public class 魅魔 extends Base_Enemy {
 				Scene_Action.getMe().set_I_Dushing_request_arrow_key(true);
 			}
 		} else {
-			startAttack(getAttackTask(this, Player.me),
+			startAttack(getMagicTask(this, Player.me),
 					Player.me.getMassPoint());
-			Message.set(getColoredName(), "は破壊の魔法を唱えた");
+			Message.set(getColoredName(), "は魔法を唱えた");
 		}
 		return true;
+	}
+	
+	protected Task getMagicTask(final Base_Creature active,
+			final Base_Creature passive) {
+		return new Task() {
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void work() {
+				if (active != null && passive != null
+						&& !passive.isInValidOnAttack())
+					ThunderDamage.thunderDamage(active, active, passive, Damage.PandE_DamageValue_WithoutRandom(魅魔.this, 1.0));
+			}
+		};
 	}
 
 	/**
 	 * <pre>
-	 * 　２　３
-	 * １　　　４　
-	 * 　　←
-	 * ８　　　５
-	 * 　７　６
+	 * 　２　３　　　　２②３　　
+	 * １　　　４　　１　　　４　
+	 * 　　←　　　　①　←　③　
+	 * ８　　　５　　８　　　５　
+	 * 　７　６　　　　７④６　　
 	 * 
 	 * 　７　８　
 	 * ６　　　１
@@ -85,11 +104,19 @@ public class 魅魔 extends Base_Enemy {
 	private Point[] get8Points() {
 		Point[] array = new Point[8];
 
-		DIRECTION[] ds = Player.me.getDirection().getNeiboringDirections8();
-		for (int i = 0; i < ds.length; i++) {
-			DIRECTION direction = ds[i];
-			array[i] = getMass(direction);
+		DIRECTION d = Player.me.getDirection();
+		for (int i = 0; i < 8; i++) {
+			Point p = Player.me.getMassPoint().getLocation();
+			d.getFrontPoint(p);
+			d.getFrontPoint(p);
+			array[i] = p;
+			d = d.getNeiboringDirection();
 		}
+//		DIRECTION[] ds = Player.me.getDirection().getNeiboringDirections8();
+//		for (int i = 5; i < ds.length; i++) {
+//			DIRECTION direction = ds[i];
+//			array[i] = getMass(direction);
+//		}
 		return array;
 	}
 
@@ -181,9 +208,14 @@ public class 魅魔 extends Base_Enemy {
 
 	@Override
 	protected boolean specialCheck() {
-		if (parcent() && warpCheck())
-			return true;
-		return isSpecialParcent() && attackCheck();
+		if (attackCheck())
+		{
+			return isSpecialParcent();
+		}
+		else
+		{
+			return parcent() && warpCheck();
+		}
 	}
 
 	@Override

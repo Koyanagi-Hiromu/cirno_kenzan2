@@ -606,7 +606,7 @@ public class Damage {
 	/**
 	 * プレイヤーからエネミーへのダメージ計算 エネミーからプレイヤーへのダメージ計算
 	 */
-	private static int PandE_DamageValue_WithoutRandom(Base_Creature cr, double rate) {
+	public static int PandE_DamageValue_WithoutRandom(Base_Creature cr, double rate) {
 		int damage_value = (int)(cr.getSTR() * rate - Enchant.getSumDEF());
 		if (damage_value <= 1) {
 			int damage_low = 1;
