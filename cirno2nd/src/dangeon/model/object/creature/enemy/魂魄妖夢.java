@@ -7,6 +7,7 @@ import dangeon.controller.ThrowingItem.HowToThrow;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.ItemFall;
+import dangeon.model.map.MapList;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
@@ -76,7 +77,14 @@ public class 魂魄妖夢 extends Base_Enemy {
 							a.setMassPoint(Player.me.getMassPoint()
 									.getLocation());
 							if (LV == 1) {
-								ItemFall.itemFall(direction.getFrontPoint(Player.me.getMassPoint()), a);
+								Point playerPoint = Player.me.getMassPoint();
+								Point p = direction.getFrontPoint(playerPoint.getLocation());
+								if (ItemFall.isAbleToFall(p)) {
+									MapList.addArtifact(a);
+									a.setMassPoint_ParabolaJump_NoAttack_PotBreak(p);
+								}
+								else
+									ItemFall.itemFall(playerPoint, a);
 							} else {
 								a.itemThrow(c, HowToThrow.NORMAL, true);
 							}

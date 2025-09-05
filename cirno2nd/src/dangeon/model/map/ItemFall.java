@@ -13,7 +13,7 @@ import dangeon.model.object.creature.player.Player;
 public class ItemFall {
 	public static boolean flag_trap_check;
 
-	private static boolean isAbleToFall(Point p) {
+	public static boolean isAbleToFall(Point p) {
 		return MassCreater.getMass(p).WALKABLE && !MassCreater.getMass(p).WATER
 				&& MapList.getArtifact(p) == null;
 	}
