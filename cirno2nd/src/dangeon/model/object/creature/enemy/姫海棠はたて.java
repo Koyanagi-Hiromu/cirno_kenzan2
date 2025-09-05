@@ -2,7 +2,7 @@ package dangeon.model.object.creature.enemy;
 
 import java.awt.Point;
 
-import main.util.DIRECTION;
+import dangeon.controller.TurnSystemController;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -11,9 +11,9 @@ import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.grass.すばやさ草;
 import dangeon.model.object.creature.player.Player;
-import dangeon.util.R;
 import dangeon.view.anime.CameraEffect;
 import dangeon.view.detail.MainMap;
+import main.util.DIRECTION;
 
 public class 姫海棠はたて extends Base_Enemy {
 
@@ -31,6 +31,8 @@ public class 姫海棠はたて extends Base_Enemy {
 				}
 			}
 		}
+		
+		if (flag) TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
 		return flag;
 	}
 
@@ -91,11 +93,11 @@ public class 姫海棠はたて extends Base_Enemy {
 		} else if (count >= count_max) {
 			return false;
 		} else {
-			if (new R().is(30)) {
-				count += count_max;
-			} else {
-				count++;
-			}
+			count++;
+//			if (new R().is(30)) {
+//				count += count_max;
+//			} else {
+//			}
 			return true;
 		}
 	}
@@ -111,9 +113,7 @@ public class 姫海棠はたて extends Base_Enemy {
 				MainMap.addEffect(new CameraEffect(THIS.getMassPoint()
 						.getLocation(), p));
 				if (count >= count_max) {
-					if (LV == 1) {
-						Message.set(a.getColoredName(), "は激写された！");
-					}
+					Message.set(a.getColoredName(), "は激写された！");
 					Message.set(getColoredName(), "の取材用携帯の電池が切れた");
 				} else {
 					Message.set(a.getColoredName(), "は激写された！");

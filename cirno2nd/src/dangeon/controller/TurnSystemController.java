@@ -84,6 +84,12 @@ public class TurnSystemController {
 		}
 	}
 
+	static boolean specialTurnSkip;
+	public static void setSpecialTurnSkip_IfStepWaitForCirnoAction()
+	{
+		if (step == EnemyTurnStep.主人公待ち)
+			specialTurnSkip = true;
+	}
 	public static void callMeToStartEnemyTurn() {
 		callMeToStartEnemyTurn(false);
 	}
@@ -689,6 +695,12 @@ public class TurnSystemController {
 	 * ターン開始
 	 */
 	private static void stepStart() {
+		if (specialTurnSkip) {
+			step = null;
+			specialTurnSkip = false;
+			return;
+		}
+			
 		if (time_stop && timeCount()) {
 			step = null;
 			return;
