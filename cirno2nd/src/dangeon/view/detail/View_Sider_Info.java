@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-import main.constant.FR;
-import main.util.BeautifulView;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.view.constant.BGMFONT;
 import dangeon.view.constant.NormalFont;
 import dangeon.view.constant.SCREEN;
 import dangeon.view.util.StringFilter;
+import main.constant.FR;
+import main.util.BeautifulView;
 
 public class View_Sider_Info {
 	private final static int INFO_INTER = 1000;
@@ -86,7 +86,7 @@ public class View_Sider_Info {
 	boolean draw_div(Graphics2D g, int index) {
 		int x = 0;
 		int w = g.getFontMetrics().stringWidth(
-				StringFilter.getPlainString(name));
+				StringFilter.getPlainString(name)) + 5;
 		int h = g.getFontMetrics().getHeight();
 		int height = h * (index + 2) + BGMFONT.DECENT;
 		if (time > 0) {

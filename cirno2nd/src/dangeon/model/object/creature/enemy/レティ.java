@@ -5,20 +5,23 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.res.SE;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.table.ItemTable;
+import dangeon.model.map.ItemFall;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
+import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
 import dangeon.model.object.creature.player.Belongings;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.R;
 import dangeon.util.UtilMessage;
 import dangeon.view.anime.IceEffect;
 import dangeon.view.detail.View_Sider;
+import main.res.SE;
 
 public class レティ extends Base_Enemy {
 
@@ -26,6 +29,40 @@ public class レティ extends Base_Enemy {
 
 	public レティ(Point p, int Lv) {
 		super(p, Lv);
+	}
+
+	private void slipItem() {
+		
+		boolean targetEquipmentOnly = !Enchant.getEnchantList().isEmpty();
+		
+		ArrayList<Base_Artifact> candidates = new ArrayList<Base_Artifact>();
+		for (Base_Artifact a : Belongings.getListItems()) {
+			if (targetEquipmentOnly == a.isEnchantedNow()) {
+				candidates.add(a);
+			}
+		}
+		
+		if (candidates.isEmpty()) return;
+		
+		if (EnchantSpecial.enchantSimbolAllCheck(CASE.RING,
+				ENCHANT_SIMBOL.融合)) {
+			Message.set("アイテムを落としそうになったがリボンの効果で大丈夫だった");
+			return;
+		}		
+		
+		Point playerPoint = Player.me.getMassPoint();
+		int slipCount = targetEquipmentOnly ? 1 : LV;
+		for (int i = 0; i < slipCount; i++) 
+		{
+			if (candidates.isEmpty()) break;
+			Base_Artifact a = candidates.remove(new R().nextInt(candidates.size()));
+			View_Sider.setInformation(a.getColoredName(), "を落としました");
+			if (targetEquipmentOnly)
+				Enchant.forceToRemove(a);
+			Belongings.remove(a);
+			ItemFall.itemFall(playerPoint, a);
+		}
+		Message.set("霜ですべってアイテムを落としてしまった");
 	}
 
 	private void breakItem() {
@@ -57,18 +94,18 @@ public class レティ extends Base_Enemy {
 			UtilMessage.effectDefMsg_Hina();
 			return;
 		}
+		for (Base_Artifact a : list_belongings) {
+			if (a.isParmitThisItemFreeze()
+					&& !a.getListComposition().contains(ENCHANT_SIMBOL.金)) {
+				list_targets.add(a);
+			}
+		}
 		boolean first = true;
 		SE.ICE.play();
 		for (int i = 0; i < LV; i++) {
-			for (Base_Artifact a : list_belongings) {
-				if (a.isParmitThisItemFreeze()
-						&& !a.getListComposition().contains(ENCHANT_SIMBOL.金)) {
-					list_targets.add(a);
-				}
-			}
 			if (list_targets.isEmpty()) {
 				if (first) {
-					breakItem();
+					slipItem();
 				}
 				return;
 			} else {
@@ -80,9 +117,10 @@ public class レティ extends Base_Enemy {
 
 	private void frozenItems(List<Base_Artifact> list_targets) {
 		int select = new R().nextInt(list_targets.size());
-		list_targets.get(select).freezeCountPlus(10);
-		Message.set(list_targets.get(select).getColoredName(), "は冷気に包まれた");
-		View_Sider.setInformation(list_targets.get(select).getColoredName(),
+		Base_Artifact item = list_targets.remove(select);
+		item.freezeCountPlus(10);
+		Message.set(item.getColoredName(), "は冷気に包まれた");
+		View_Sider.setInformation(item.getColoredName(),
 				"は凍りました");
 	}
 

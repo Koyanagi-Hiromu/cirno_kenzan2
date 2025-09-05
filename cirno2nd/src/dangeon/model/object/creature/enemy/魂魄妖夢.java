@@ -3,7 +3,6 @@ package dangeon.model.object.creature.enemy;
 import java.awt.Image;
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.controller.ThrowingItem.HowToThrow;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -21,6 +20,7 @@ import dangeon.util.R;
 import dangeon.util.UtilMessage;
 import dangeon.view.anime.Special_Wait_FrameByFrame;
 import dangeon.view.detail.View_Sider;
+import main.res.SE;
 
 public class 魂魄妖夢 extends Base_Enemy {
 
@@ -76,7 +76,7 @@ public class 魂魄妖夢 extends Base_Enemy {
 							a.setMassPoint(Player.me.getMassPoint()
 									.getLocation());
 							if (LV == 1) {
-								ItemFall.itemFall(Player.me.getMassPoint(), a);
+								ItemFall.itemFall(direction.getFrontPoint(Player.me.getMassPoint()), a);
 							} else {
 								a.itemThrow(c, HowToThrow.NORMAL, true);
 							}
