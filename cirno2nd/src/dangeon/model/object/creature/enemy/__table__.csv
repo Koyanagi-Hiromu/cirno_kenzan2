@@ -183,7 +183,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 2_多々良小傘	びっくり小傘	71	42	0	500	20	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
 3_多々良小傘	ハプニング小傘	120	80	0	2800	20	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
 4_多々良小傘	茫然小傘	355	160	0	7700	40	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
-1_大妖精	にせ大ちゃん	18	14	10	12	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
+1_大妖精	にせ大ちゃん	18	14	10	12	10	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 2_大妖精	大さん	49	28	25	150	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 3_大妖精	大様	90	37	30	1100	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 4_大妖精	でかい大妖精	20	20	99	3000	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
@@ -192,9 +192,9 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 3_東風谷早苗	早苗元締め	105	60	35	2400	35	敵をおにぎりにするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	ATTACK_SMALL_OBJECT
 4_東風谷早苗	早苗神	255	60	35	3400	75	敵をおにぎりにするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	ATTACK_SMALL_OBJECT
 1_藤原妹紅	火炎妹紅	45	32	5	130	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
-2_藤原妹紅	火炎妹紅2	5	2	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
-3_藤原妹紅	火炎妹紅3	5	2	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
-4_藤原妹紅	火炎妹紅4	5	2	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
+2_藤原妹紅	火炎妹紅2	5	3	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
+3_藤原妹紅	火炎妹紅3	5	3	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
+4_藤原妹紅	火炎妹紅4	5	3	1	1	30	通常攻撃をするぞ		f	f	f	TRUE	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	ATTACK_FIRE
 1_寅丸星	寅丸☆ブン	47	35	10	133	60	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	ATTACK_SPEAR
 2_寅丸星	寅丸☆ソイヤッ	60	39	22	366	60	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	ATTACK_SPEAR
 3_寅丸星	寅丸☆そぉい！	134	85	31	2500	60	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	ATTACK_SPEAR

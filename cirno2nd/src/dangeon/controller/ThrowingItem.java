@@ -43,7 +43,7 @@ public class ThrowingItem {
 		}
 	}
 
-	private final int PLAYER_MISS = 13;
+	private final int PLAYER_MISS = 10;
 	private final int ENEMY_MISS = 20;
 
 	private int first_sleep = 3;

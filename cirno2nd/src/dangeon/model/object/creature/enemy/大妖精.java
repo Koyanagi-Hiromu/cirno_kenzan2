@@ -3,8 +3,6 @@ package dangeon.model.object.creature.enemy;
 import java.awt.Point;
 import java.util.List;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.controller.TurnSystemController;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -22,6 +20,8 @@ import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
 import dangeon.util.R;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 大妖精 extends Base_Enemy {
 
@@ -84,7 +84,7 @@ public class 大妖精 extends Base_Enemy {
 					"が重くてうまくテレポートできなかった");
 			return true;
 		}
-		if (LV == 1 && new R().is(40)) {
+		if (LV == 1 && new R().is(10)) {
 			telepote(null, null);
 			TurnSystemController.setTurnFinish();
 			Message.set(getColoredName(), "は", Player.me.getColoredName(),

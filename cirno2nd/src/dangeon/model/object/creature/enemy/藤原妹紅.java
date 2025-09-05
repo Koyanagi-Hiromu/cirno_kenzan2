@@ -3,19 +3,11 @@ package dangeon.model.object.creature.enemy;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import main.res.SE;
-import main.util.FrameShaker;
 import dangeon.controller.task.Task;
-import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
-import dangeon.model.config.table.ItemTable;
 import dangeon.model.object.artifact.Base_Artifact;
-import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
-import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
-import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
@@ -25,6 +17,8 @@ import dangeon.util.MapInSelect;
 import dangeon.util.R;
 import dangeon.view.anime.FireEffect;
 import dangeon.view.detail.View_Sider;
+import main.res.SE;
+import main.util.FrameShaker;
 
 public class 藤原妹紅 extends Base_Enemy {
 
@@ -116,16 +110,15 @@ public class 藤原妹紅 extends Base_Enemy {
 	public void setNameAndStatus() {
 		int lv = LV;
 		LV = 1;
-		super.setNameAndStatus();
+		super.setNameAndStatus(); // LV 1 の状態を取得
 		int MAX_HP = this.getMAX_HP();
 		int MAX_STR = this.MAX_STR;
 		int MAX_DEF = this.MAX_DEF;
 		int ENEMY_EXP = this.ENEMY_EXP;
 		LV = 2;
-		super.setNameAndStatus();
+		super.setNameAndStatus(); // LV 2 の状態を取得
 		int mlp = lv - 1;
-		setFirstStatus(MAX_HP + this.getMAX_HP() * mlp, MAX_STR + this.MAX_STR
-				* mlp, MAX_DEF + this.MAX_DEF * mlp);
+		setFirstStatus(MAX_HP + this.getMAX_HP() * mlp, MAX_STR + this.MAX_STR * mlp, MAX_DEF + this.MAX_DEF * mlp);
 		this.ENEMY_EXP = ENEMY_EXP * lv;
 		LV = lv;
 		this.name = name.replaceAll("[0-9]", "").concat(String.valueOf(LV));
@@ -141,7 +134,6 @@ public class 藤原妹紅 extends Base_Enemy {
 		if (attack_possible()) {
 			direction = converDirection(Player.me.getMassPoint());
 			final Base_Creature c = this;
-			FrameShaker.doneSoftly();
 			startAttack(new Task() {
 				/**
 				 *
@@ -150,8 +142,14 @@ public class 藤原妹紅 extends Base_Enemy {
 
 				@Override
 				public void work() {
-					int str = getSTR();
-					setSTR(str * 125 / 100);
+					final ArrayList<Base_Artifact> list = Belongings
+							.getListFreezeItems();
+					if (list.isEmpty()) {
+						Damage.enemyCriticalAttack(藤原妹紅.this);
+						return;
+					}
+					
+					FrameShaker.doneSoftly();
 					if (Damage.normalAttack(c, Player.me) > 0) {
 						setAnimation(new FireEffect(Player.me, new Task() {
 							/**
@@ -161,51 +159,16 @@ public class 藤原妹紅 extends Base_Enemy {
 
 							@Override
 							public void work() {
-								ArrayList<Base_Artifact> list = Belongings
-										.getListFreezeItems();
-								if (list.isEmpty()) {
-									list = Belongings.getListItemNoEnchant();
-									for (Iterator<Base_Artifact> iterator = list
-											.iterator(); iterator.hasNext();) {
-										Base_Artifact a = iterator.next();
-										if (a.getListComposition().contains(
-												ENCHANT_SIMBOL.金))
-											iterator.remove();
-									}
-									if (list.isEmpty()) {
-										return;
-									}
-									int select = new R().nextInt(list.size());
-									Base_Artifact a = list.get(select);
-									if (EnchantSpecial.enchantSimbolAllCheck(
-											CASE.RING, ENCHANT_SIMBOL.護)) {
-										Message.set(a.getColoredName(),
-												"を燃やされそうになったが神の加護があって大丈夫だった");
-									} else {
-										Belongings.remove(a);
-										Message.set(a.getColoredName(),
-												"を燃やされた");
-										View_Sider.setInformation(
-												a.getColoredName(), "が燃やされました");
-										if (ItemTable.getRank(a) >= 4) {
-											Medal.敵に珍しいアイテムを壊された.addCount();
-										}
-									}
-
-									return;
-								} else {
-									int select = new R().nextInt(list.size());
-									Base_Artifact a = list.get(select);
-									Message.set("凍っていた", a.getColoredName(),
-											"が熱で溶けた");
-									View_Sider.setInformation("凍っていた",
-											a.getColoredName(), "が溶けました");
-									a.freezeCountReset();
-								}
+								int select = new R().nextInt(list.size());
+								Base_Artifact a = list.get(select);
+								Message.set("凍っていた", a.getColoredName(),
+										"が熱で溶けた");
+								View_Sider.setInformation("凍っていた",
+										a.getColoredName(), "が溶けました");
+								a.freezeCountReset();
 							}
 						}));
 					}
-					setSTR(str);
 				}
 			});
 		}
