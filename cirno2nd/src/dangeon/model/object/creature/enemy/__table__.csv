@@ -31,10 +31,10 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 2_パルスィ	隔爆パルスィ	50	50	42	1200	30	周りの敵のMAXHPの半分のダメージを当たるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	ATTACK_SHOOT
 3_パルスィ	パルパルマスター	105	60	46	2000	30	周りの敵のMAXHPの半分のダメージを当たるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	ATTACK_SHOOT
 4_パルスィ	幽爆パルスィ	140	80	46	3300	60	周りの敵のMAXHPの半分のダメージを当たるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	ATTACK_SHOOT
-1_フランドール	熱戦フラン	48	28	7	105	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
-2_フランドール	烈戦フラン	130	75	10	1800	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
-3_フランドール	超激戦フラン	160	106	10	3450	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
-4_フランドール	悪魔の妹	120	150	0	4950	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
+1_フランドール	熱戦フラン	48	31	7	105	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
+2_フランドール	烈戦フラン	130	83	10	1800	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
+3_フランドール	超激戦フラン	160	117	10	3450	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
+4_フランドール	悪魔の妹	120	165	0	4950	20	敵を殴り飛ばすぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SWORD
 1_ミスティア	さえずるミスチー	32	26	10	69	30	周囲の敵を混乱させるぞ		TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 2_ミスティア	歌うミスチー	65	36	14	500	30	周囲の敵を混乱させるぞ		TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 3_ミスティア	熱唱ミスチー	130	63	15	3000	30	周囲の敵を混乱させるぞ		TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
@@ -66,7 +66,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 1_レミリア	飛びつきレミリア	65	62	11	650	70	飛びついて攻撃をするぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_HANDS
 2_レミリア	ヴァンパイアロード	120	100	25	4500	70	飛びついて攻撃をするぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_HANDS
 3_レミリア	最強無敵の吸血姫	155	120	25	5500	70	飛びついて攻撃をするぞ		f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_HANDS
-4_レミリア	究極生物レミリア	250	145	30	9999	70	飛びついて攻撃をするぞ		f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_HANDS
+4_レミリア	究極生物レミリア	200	145	30	9999	70	飛びついて攻撃をするぞ		f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_HANDS
 1_伊吹萃香	ぐるぐる萃香	61	35	10	200	70	会心攻撃をするぞ		f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HEAVY
 2_伊吹萃香	ふえる萃香	122	90	15	575	70	会心攻撃をするぞ		f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HEAVY
 3_伊吹萃香	ぐんぐん萃香	180	114	20	1300	70	会心攻撃をするぞ		f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HEAVY
@@ -86,7 +86,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 1_洩矢諏訪子	ケロ諏訪子	61	1	25	300	35	部屋内の敵の防御力を無くすぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
 2_洩矢諏訪子	ケロケロ諏訪子	80	3	40	1200	35	部屋内の敵の防御力を無くすぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
 3_洩矢諏訪子	ドシャブリ諏訪子	120	5	55	2500	35	部屋内の敵の防御力を無くすぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
-4_洩矢諏訪子	ゲリラ諏訪子	150	75	30	3000	35	部屋内の敵の防御力を無くすぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
+4_洩矢諏訪子	ゲリラ諏訪子	100	50	30	3000	35	部屋内の敵の防御力を無くすぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
 1_黄金ゆっくり	黒鉄ゆっくり	10	60	999	1500	0	倍速状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	ATTACK_YUKKURI
 2_黄金ゆっくり	白銀ゆっくり	10	70	999	3000	0	倍速状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	ATTACK_YUKKURI
 3_黄金ゆっくり	黄金ゆっくり	10	80	999	5000	0	倍速状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	ATTACK_YUKKURI
@@ -182,7 +182,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 1_多々良小傘	おどろき小傘	30	25	0	60	20	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
 2_多々良小傘	びっくり小傘	71	42	0	500	20	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
 3_多々良小傘	ハプニング小傘	120	80	0	2800	20	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
-4_多々良小傘	茫然小傘	355	160	0	7700	40	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
+4_多々良小傘	茫然小傘	142	120	0	7700	40	飛び回るぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	TRUE	f	f	ATTACK_UNKNOWN
 1_大妖精	にせ大ちゃん	18	14	10	12	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 2_大妖精	大さん	49	28	25	150	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
 3_大妖精	大様	90	37	30	1100	40	次の階に行くぞ		TRUE	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	ATTACK_SPECIAL_BODY
@@ -223,10 +223,10 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 2_八坂神奈子	チェイン神奈子	70	54	23	1560	40	オンバシラを投げるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
 3_八坂神奈子	ギガ神奈子	150	120	28	4300	40	オンバシラを投げるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
 4_八坂神奈子	風神様	255	151	30	4600	80	オンバシラを投げるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_HEAVY
-1_比那名居天子	コマンド天子	68	60	35	1650	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
-2_比那名居天子	ラピッド天子	100	77	45	3100	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
-3_比那名居天子	デストロイ天子	160	110	75	5000	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
-4_比那名居天子	極光天子	255	125	80	9999	60	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
+1_比那名居天子	コマンド天子	68	60	40	1650	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
+2_比那名居天子	ラピッド天子	100	77	50	3100	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
+3_比那名居天子	デストロイ天子	160	110	83	5000	40	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
+4_比那名居天子	極光天子	255	125	88	9999	60	とりあえず通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_AURA
 1_姫海棠はたて	スポイラーはたて	15	32	8	120	100	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_SPEAR
 2_姫海棠はたて	ダブルスポイラー	72	58	40	1350	100	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_SPEAR
 3_姫海棠はたて	トリプルスポイラー	99	65	50	2600	100	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_SPEAR
@@ -295,7 +295,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 2_秦こころ	無感情ノココロ	175	110	20	1500	40	ええんじゃないか状態にするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HANDS
 3_秦こころ	絶望ヲ誘ウココロ	255	130	25	3000	40	ええんじゃないか状態にするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HANDS
 4_秦こころ	ココロノ喪失	355	160	30	5000	40	ええんじゃないか状態にするぞ		f	f	f	f	f	f	f	TRUE	f	f	f	f	f	f	f	f	f	f	TRUE	ATTACK_HANDS
-1_わかさぎ姫	テッポー姫	3	18	1	7	0	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	ATTACK_WATER
+1_わかさぎ姫	テッポー姫	3	12	1	7	0	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	ATTACK_WATER
 2_わかさぎ姫	わかさぎクラッシュ	45	60	8	1500	0	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	ATTACK_WATER
 3_わかさぎ姫	湖畔のマーメイド	50	65	10	3000	0	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	ATTACK_WATER
 4_わかさぎ姫	不老不死伝説	120	70	30	4000	0	通常攻撃をするぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	ATTACK_WATER

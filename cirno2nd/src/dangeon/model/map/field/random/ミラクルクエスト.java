@@ -30,7 +30,7 @@ import dangeon.model.object.Base_MapObject;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.device.Stairs;
 import dangeon.model.object.artifact.item.check.Checker;
-import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
+import dangeon.model.object.artifact.item.scrool.グリモワール2;
 import dangeon.model.object.creature.npc.Abstract_NPC;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
@@ -635,7 +635,7 @@ public class ミラクルクエスト extends Base_Map_Random {
 
 			@Override
 			public void appearStair() {
-				幻想郷縁起 a = new 幻想郷縁起(boss.getMassPoint());
+				グリモワール2 a = new グリモワール2(boss.getMassPoint());
 				Checker.checkStatic(a);
 				ItemFall.itemFall(a);
 				super.appearStair();

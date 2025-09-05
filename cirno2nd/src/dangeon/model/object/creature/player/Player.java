@@ -1936,9 +1936,9 @@ public class Player extends Base_Creature {
 			grow = ran.nextInt(3) + 1;
 			break;
 		case HP:
-			grow = ran.nextInt(4) + 3;
-			// 0-4 + 2 = ave 4.5
-			// 0-3 + 3 = ave 5
+			grow = ran.nextInt(5) + 3;
+			// 0-4 + 2 = ave 4.5 Lv60 = 15 + 4.5*60 = 285 → 命1.2 = +57 .. 342
+			// 0-4 + 3 = ave 5.5 Lv60 = 15 + 5.5*60 = 345 → 命1.1 = +34 .. 379
 			break;
 		}
 		if (plus)

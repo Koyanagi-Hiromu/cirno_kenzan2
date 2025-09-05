@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import main.res.BGM;
-import main.res.Image_MapTip;
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.latest.scene.action.menu.Book;
 import dangeon.latest.scene.action.message.ConvEvent;
@@ -32,11 +28,15 @@ import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.device.Stairs;
 import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.check.Checker;
-import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
-import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
+import dangeon.model.object.artifact.item.scrool.グリモワール2;
 import dangeon.model.object.artifact.item.scrool.慧音の歴史書;
+import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
 import dangeon.model.object.creature.npc.second.Takarabako;
 import dangeon.util.R;
+import main.res.BGM;
+import main.res.Image_MapTip;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 運命のワルツ extends Base_Map_Random {
 	private enum FloorConducter {
@@ -268,7 +268,7 @@ public class 運命のワルツ extends Base_Map_Random {
 
 				@Override
 				public void appearStair() {
-					幻想郷縁起 a = new 幻想郷縁起(boss.getMassPoint());
+					グリモワール2 a = new グリモワール2(boss.getMassPoint());
 					Checker.checkStatic(a);
 					ItemFall.itemFall(a);
 					super.appearStair();

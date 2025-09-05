@@ -15,7 +15,7 @@ public class 印の瓶 extends Base_Pot_Selective {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final static int MAX = 9;
+	public final static int MAX = 9;
 
 	public 印の瓶(Point p) {
 		super(p, "魅魔の魔法瓶", new R().nextInt(4) / 3 + 1);
@@ -35,7 +35,6 @@ public class 印の瓶 extends Base_Pot_Selective {
 		} else if (A instanceof ワイルドカード) {
 			LIST.remove(A);
 			魅魔のカード c = new 魅魔のカード(Player.me.getMassPoint());
-			c.setForgeValue(-99);
 			Medal.魅魔のカードを作った.addCount();
 			LIST.add(c);
 		} else {

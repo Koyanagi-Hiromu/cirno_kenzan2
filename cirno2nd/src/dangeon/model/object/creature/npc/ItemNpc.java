@@ -82,6 +82,7 @@ import dangeon.model.object.artifact.item.scrool.いかづちの書;
 import dangeon.model.object.artifact.item.scrool.おにぎりの書;
 import dangeon.model.object.artifact.item.scrool.おはらいの書;
 import dangeon.model.object.artifact.item.scrool.グリモワール;
+import dangeon.model.object.artifact.item.scrool.グリモワール2;
 import dangeon.model.object.artifact.item.scrool.ダンジョン攻略本;
 import dangeon.model.object.artifact.item.scrool.バクスイの書;
 import dangeon.model.object.artifact.item.scrool.パワーアップの書;
@@ -403,6 +404,7 @@ public class ItemNpc extends Base_NPC {
 		items.add(new ダンジョン攻略本(p));
 		items.add(new バクスイの書(p));
 		items.add(new グリモワール(p));
+		items.add(new グリモワール2(p));
 		items.add(new いかづちの書(p));
 		items.add(new 電光石火の書(p));
 		items.add(new 氷の書(p));

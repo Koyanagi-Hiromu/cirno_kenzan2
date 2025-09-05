@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import main.res.Image_Artifact;
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.ItemTable;
@@ -16,6 +14,8 @@ import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.UtilMessage;
+import main.res.Image_Artifact;
+import main.res.SE;
 
 public class ワイルドカード extends Scrool implements SelectItem {
 	private static final long serialVersionUID = 1L;

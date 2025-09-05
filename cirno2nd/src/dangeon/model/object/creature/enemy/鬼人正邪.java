@@ -205,19 +205,19 @@ public class 鬼人正邪 extends Base_Enemy {
 		}
 	}
 
-	@Override
-	protected boolean resistCondition(CONDITION c) {
-		if (isPassiveSkillActive() && c != CONDITION.天邪鬼
-				&& !c.equals(CONDITION.特殊仮眠)) {
-			Message.set(getColoredName(), "は状態異常を天邪鬼状態に変換した");
-			SE.AMANOJACK.play();
-			MainMap.addEffect(
-					new DoronEffect(getMassPoint(), null, true, false), false);
-			this.setCondition(CONDITION.天邪鬼, 3);
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	protected boolean resistCondition(CONDITION c) {
+//		if (isPassiveSkillActive() && c != CONDITION.天邪鬼
+//				&& !c.equals(CONDITION.特殊仮眠)) {
+//			Message.set(getColoredName(), "は状態異常を天邪鬼状態に変換した");
+//			SE.AMANOJACK.play();
+//			MainMap.addEffect(
+//					new DoronEffect(getMassPoint(), null, true, false), false);
+//			this.setCondition(CONDITION.天邪鬼, 3);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public boolean setCondition(CONDITION c, int timer) {
