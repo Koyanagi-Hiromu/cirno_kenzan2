@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -29,6 +27,8 @@ import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
 import dangeon.view.anime.ExplosionEffect;
 import dangeon.view.detail.MainMap;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class MapInSelect {
 	public static void around8Damage(Point p, Object obj, String str, int damage) {
@@ -986,7 +986,7 @@ public class MapInSelect {
 		return list;
 	}
 
-	private static List<Base_Enemy> roomInEnemyToPoint(Point p) {
+	public static List<Base_Enemy> roomInEnemyToPoint(Point p) {
 		ArrayList<Base_Enemy> list = new ArrayList<Base_Enemy>();
 		for (Base_Enemy em : MapList.getListEnemy()) {
 			if (em instanceof Base_NPC) {

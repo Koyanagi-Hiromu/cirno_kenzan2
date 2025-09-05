@@ -37,7 +37,6 @@ import dangeon.model.object.artifact.item.scrool.メッキの書;
 import dangeon.model.object.artifact.item.scrool.ワイルドカード;
 import dangeon.model.object.artifact.item.scrool.人を殺せる書;
 import dangeon.model.object.artifact.item.scrool.八咫烏の書;
-import dangeon.model.object.artifact.item.scrool.切れ端;
 import dangeon.model.object.artifact.item.scrool.大部屋の書;
 import dangeon.model.object.artifact.item.scrool.天邪鬼の書;
 import dangeon.model.object.artifact.item.scrool.封書モンスターハウス;
@@ -51,6 +50,7 @@ import dangeon.model.object.artifact.item.scrool.混乱の書;
 import dangeon.model.object.artifact.item.scrool.破裂の書;
 import dangeon.model.object.artifact.item.scrool.罠師の書;
 import dangeon.model.object.artifact.item.scrool.自爆の書;
+import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
 import dangeon.model.object.artifact.item.scrool.解凍の書;
 import dangeon.model.object.artifact.item.scrool.識別の書;
 import dangeon.model.object.artifact.item.scrool.電光石火の書;
@@ -135,21 +135,27 @@ public class 朱鷺子 extends __店主 {
 
 	protected void effect(Scrool book) {
 
-		ArrayList<Base_Enemy> list = new ArrayList<Base_Enemy>();
-		for (Base_Enemy e : MapList.getListEnemy()) {
-			list.add(e);
+		Base_Creature randomSingleCreature;
+		ArrayList<Base_Creature> room;
+		{
+			List<Base_Enemy> list = MapInSelect.roomInEnemyToPoint(mass_point);
+			if (!list.isEmpty())
+			{
+				randomSingleCreature = list.get(new R().nextInt(list.size()));
+				if (randomSingleCreature == this) {
+					randomSingleCreature = Player.me;
+				}
+			}
+			else
+				randomSingleCreature = Player.me;
+			
+			room = new ArrayList<Base_Creature>(list.size());
+			list.remove(this);
+			for (Base_Creature e : list) {
+				room.add(e);
+			}
+			room.add(Player.me);
 		}
-		Base_Creature c = list.get(new R().nextInt(list.size()));
-		if (c == this) {
-			c = Player.me;
-		}
-		ArrayList<Base_Creature> room = new ArrayList<Base_Creature>(
-				list.size());
-		list.remove(this);
-		for (Base_Creature e : list) {
-			room.add(e);
-		}
-		room.add(Player.me);
 
 		MapInSelect.getListRoomOrRoadInEnemy();
 		if (book.isCurse() && !flag_decurse) {
@@ -157,8 +163,8 @@ public class 朱鷺子 extends __店主 {
 			Message.set("「しかし", book.getColoredName(), "は呪われていて読めないや」");
 		} else if (book.getClass() == おにぎりの書.class) {
 			SE.MIRACLE_ONIGIRI.play();
-			Message.set("「奇跡は", c.getColoredName(), "に舞い降りた！」");
-			c.setConditionNeglectResist(CONDITION.おにぎり, 0);
+			Message.set("「奇跡は", randomSingleCreature.getColoredName(), "に舞い降りた！」");
+			randomSingleCreature.setConditionNeglectResist(CONDITION.おにぎり, 0);
 		} else if (book.getClass() == グリモワール.class) {
 			pop(SpecialMonsterHouse.マジックギルド);
 		} else if (book.getClass() == ワイルドカード.class) {
@@ -190,9 +196,9 @@ public class 朱鷺子 extends __店主 {
 		} else if (book.getClass() == 電光石火の書.class) {
 			pop(SpecialMonsterHouse.天狗の狩場);
 		} else if (book.getClass() == 破裂の書.class) {
-			Message.set("「", c.getColoredName(), "！ 君に決めた！」");
-			MapInSelect.explosion(c.getMassPoint().getLocation());
-		} else if (book.getClass() == 切れ端.class) {
+			Message.set("「", randomSingleCreature.getColoredName(), "！ 君に決めた！」");
+			MapInSelect.explosion(randomSingleCreature.getMassPoint().getLocation());
+		} else if (book.getClass() == 自由人の狂想曲.class) {
 			Message.set(getColoredName(), "は楽しそうだ！");
 		} else if (book.getClass() == 幻想郷縁起.class) {
 			pop(SpecialMonsterHouse.素敵な楽園);
@@ -387,7 +393,7 @@ public class 朱鷺子 extends __店主 {
 		default:
 			break;
 		}
-		return new 切れ端(mass_point);
+		return new 自由人の狂想曲(mass_point);
 	}
 
 	@Override
@@ -519,7 +525,7 @@ public class 朱鷺子 extends __店主 {
 			Message.set("「風が泣くのは天狗のしわざです！」");
 		} else if (book.getClass() == 破裂の書.class) {
 			Message.set("「ランダムで１キャラの中心を爆破！」");
-		} else if (book.getClass() == 切れ端.class) {
+		} else if (book.getClass() == 自由人の狂想曲.class) {
 			Message.set(getColoredName(), "は楽しそうに眺めている！");
 			setAnimation(new Special_Wait(this, 3, 3));
 			return true;
