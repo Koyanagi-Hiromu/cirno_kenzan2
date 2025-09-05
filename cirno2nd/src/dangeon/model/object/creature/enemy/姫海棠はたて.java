@@ -46,7 +46,7 @@ public class 姫海棠はたて extends Base_Enemy {
 	}
 
 	private void countSet() {
-		count_max = (LV != 4) ? LV : 9999;
+		count_max = LV;
 	}
 
 	@Override

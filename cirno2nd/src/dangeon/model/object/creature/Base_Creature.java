@@ -1728,5 +1728,4 @@ public abstract class Base_Creature extends Base_MapObject {
 			}
 		}
 	}
-
 }

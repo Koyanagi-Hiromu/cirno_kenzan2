@@ -3,7 +3,7 @@
 小	1	小	攻撃した敵を小さくするよ			FALSE	FALSE
 面	1	面	敵の良い状態をかき消す必中会心を放つよ			FALSE	FALSE
 狼	1	狼	攻撃した敵を影縫い状態にするよ			FALSE	FALSE
-剣	1	剣	前三方向から来た飛来物を跳ね返すよ			FALSE	FALSE
+剣	1	剣	前三方向から飛んで来た物をかき消すよ			FALSE	FALSE
 驚	1	驚	直線上に飛びついて攻撃するよ			FALSE	FALSE
 酔	1	酔	会心の一撃を放つと追加効果が必ず発生するよ			FALSE	FALSE
 嫉妬	1	妬	攻撃を外したり状態異常にかかると嫉妬するよ			FALSE	FALSE

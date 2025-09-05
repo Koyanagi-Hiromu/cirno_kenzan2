@@ -45,7 +45,6 @@ import dangeon.model.object.artifact.item.check.Checker;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
-import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印剣;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印回復;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印山;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印水;
@@ -68,7 +67,6 @@ import dangeon.model.object.artifact.trap.Base_Trap;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.CardAttackEffect;
-import dangeon.model.object.creature.enemy.剣;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.npc.賽銭箱;
 import dangeon.model.object.creature.npc.second.Takarabako;
@@ -1496,19 +1494,6 @@ public class Player extends Base_Creature {
 			} else {
 				Message.set(ti.A.getColoredName(), "を跳ね返した");
 			}
-			return true;
-		}
-		if (印剣.effect(ti)) {
-			setStandEffect(剣.class, ti.A.direction.getReverse());
-			SE.ATTACK_SWORD.play();
-			if (ti.HOW == HowToThrow.MAGIC)
-				if (ti.A instanceof 目からビーム) {
-					Message.set("ビームを跳ね返した");
-				} else {
-					Message.set("魔法弾を跳ね返した");
-				}
-			else
-				Message.set("飛来物を跳ね返した");
 			return true;
 		}
 		return super.reflection(ti);

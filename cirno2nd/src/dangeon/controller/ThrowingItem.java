@@ -16,6 +16,7 @@ import dangeon.model.object.artifact.item.arrow.大砲の弾;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial;
 import dangeon.model.object.artifact.item.enchantSpecial.EnchantSpecial.CASE;
+import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印剣;
 import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印食;
 import dangeon.model.object.artifact.item.grass.Base_Grass;
 import dangeon.model.object.artifact.item.pot.Base_Pot;
@@ -208,6 +209,9 @@ public class ThrowingItem {
 
 	private void doMagic(Base_Creature object) {
 		if (object != null) {
+			if (object instanceof Player && 印剣.effect(this)) {
+				return;
+			}
 			A.itemHitCheck(false, C, object);
 			entoCheck();
 		} else if (A.isHitToItem()) {
@@ -408,6 +412,9 @@ public class ThrowingItem {
 			}
 		} else {
 			// HIT
+			if (object instanceof Player && 印剣.effect(this)) {
+				return;
+			}
 			if (A.itemHitCheck(!fall, C, object) && fall) {
 				if (A.getListComposition().contains(ENCHANT_SIMBOL.金)) {
 					A.getListComposition().remove(ENCHANT_SIMBOL.金);
