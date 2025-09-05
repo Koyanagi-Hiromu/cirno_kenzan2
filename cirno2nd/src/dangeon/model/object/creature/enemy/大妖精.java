@@ -1,5 +1,6 @@
 package dangeon.model.object.creature.enemy;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.util.List;
 
@@ -20,12 +21,15 @@ import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
 import dangeon.util.R;
+import dangeon.view.anime.OuraEffect;
 import main.res.SE;
 import main.util.DIRECTION;
 
 public class 大妖精 extends Base_Enemy {
 
 	private static final long serialVersionUID = 1L;
+	
+	boolean isChargeMotion;
 
 	public 大妖精(Point p, int Lv) {
 		super(p, Lv);
@@ -71,6 +75,15 @@ public class 大妖精 extends Base_Enemy {
 	@Override
 	protected void init4() {
 		changeSize(1);
+	}	
+
+	@Override
+	public Image getImage() {
+		if (isChargeMotion) {
+			return IM.getATKImage(LV, direction, 0);
+		} else {
+			return super.getImage();
+		}
 	}
 
 	@Override
@@ -84,13 +97,33 @@ public class 大妖精 extends Base_Enemy {
 					"が重くてうまくテレポートできなかった");
 			return true;
 		}
-		if (LV == 1 && new R().is(10)) {
-			telepote(null, null);
-			TurnSystemController.setTurnFinish();
-			Message.set(getColoredName(), "は", Player.me.getColoredName(),
-					"を次の階へ連れ去った");
-			NextFloor.next(PresentField.get());
-			return true;
+		if (LV == 1) {
+			if (isChargeMotion)
+			{
+				telepote(null, null);
+				TurnSystemController.setTurnFinish();
+				Message.set(getColoredName(), "は", Player.me.getColoredName(),
+						"を次の階へ連れ去った");
+				NextFloor.next(PresentField.get());
+				return true;
+			}
+			else if (new R().is(33))
+			{
+				setAnimation(new OuraEffect(this, new Task() {
+
+					/**
+					 *
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void work() {
+						Message.set(getColoredName(), "はワープのちからを溜めた");
+					}
+				}));
+				isChargeMotion = true;
+				return true;
+			}
 		} else if (LV > 2) {
 			int try_number = 3;
 			int i = 0;
@@ -114,9 +147,8 @@ public class 大妖精 extends Base_Enemy {
 			}
 			if (i == try_number)
 				return false;
-		} else {
-			p = MassCreater.getWarpPoint(null);
 		}
+		p = MassCreater.getWarpPoint(null);
 		List<Point> list = MapInSelect.aroundEmptyCheck(p, false);
 		Point _P = null;
 		for (Point point : list) {
@@ -128,13 +160,13 @@ public class 大妖精 extends Base_Enemy {
 		if (_P == null) {
 			return false;
 		}
-		telepote(_P, p);
 		Player.me.setDirection(DIRECTION.getDirection(Player.me.getMassPoint(),
 				getMassPoint()));
 		Message.set(getColoredName(), "は", Player.me.getColoredName(),
 				"を連れてワープした");
 		final DIRECTION _D = DIRECTION.getDirection(p, _P);
 		Player.me.setDirection(_D);
+		telepote(_P, p);
 		//
 		// Player.me.setMassPoint_Jump(p, new Task() {
 		//
@@ -155,10 +187,12 @@ public class 大妖精 extends Base_Enemy {
 	@Override
 	protected boolean specialCheck() {
 		if (attack_possible()) {
+			if (isChargeMotion) return true;
 			if (isSpecialParcent()) {
 				return true;
 			}
 		}
+		isChargeMotion = false;
 		return false;
 	}
 

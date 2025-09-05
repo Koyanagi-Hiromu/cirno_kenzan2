@@ -591,11 +591,6 @@ public class ミラクルクエスト extends Base_Map_Random {
 	}
 
 	@Override
-	protected boolean isDaichanCard() {
-		return false;
-	}
-
-	@Override
 	public boolean isHaraheru() {
 		return true;
 	}

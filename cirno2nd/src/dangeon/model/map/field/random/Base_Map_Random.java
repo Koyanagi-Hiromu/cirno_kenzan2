@@ -178,7 +178,9 @@ public abstract class Base_Map_Random extends Base_Map {
 					if (!Belongings.isMax()) {
 						Belongings.setItems(a);
 						if (Config.isEnchantedOnigiriFirst()) {
-							if (a instanceof 大きなおにぎり) {
+							if (a instanceof 大妖精のカード) {
+								Enchant.DEF.setEnchant(a);
+							} else if (a instanceof 大きなおにぎり) {
 								Enchant.ANY2.setEnchant(a);
 							} else if (a instanceof Ring) {
 								Enchant.ANY1.setEnchant(a);

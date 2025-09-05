@@ -2,8 +2,6 @@ package dangeon.model.map.field.random;
 
 import java.util.ArrayList;
 
-import main.res.BGM;
-import main.res.Image_MapTip;
 import dangeon.latest.scene.event.story.Event_Scene5;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.MapList;
@@ -11,6 +9,8 @@ import dangeon.model.map.field.random.bossmap.BossMap_Sakasa;
 import dangeon.model.map.field.special.map.BossMap;
 import dangeon.util.R;
 import dangeon.util.Switch;
+import main.res.BGM;
+import main.res.Image_MapTip;
 
 public class 逆ヶ島 extends Base_Map_Random {
 	private static final long serialVersionUID = 1L;
@@ -158,4 +158,8 @@ public class 逆ヶ島 extends Base_Map_Random {
 		return true;
 	}
 
+	@Override
+	protected boolean isDaichanCard() {
+		return true;
+	}
 }

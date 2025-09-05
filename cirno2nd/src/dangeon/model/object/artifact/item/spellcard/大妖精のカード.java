@@ -24,8 +24,8 @@ public class 大妖精のカード extends SpellCard {
 	public static final String item_name = "大妖精のカード";
 	public static final String item_name_sound = "たいようせいのかーと";
 	private static final int composition = 7;
-	private static final int item_str = 0;
-	private static final int item_def = 0;
+	private static final int item_str = 1;
+	private static final int item_def = 2;
 	private static final boolean passing_of_spell = true;
 
 	private static final String[] EXPLAN = new String[] { "次の階に進む程度の能力" };
