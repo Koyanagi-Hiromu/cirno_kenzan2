@@ -426,6 +426,14 @@ public class ThrowingItem {
 					podBreak();
 				}
 			}
+			else
+			{
+				if (A.getListComposition().contains(ENCHANT_SIMBOL.金)) {
+					A.getListComposition().remove(ENCHANT_SIMBOL.金);
+					Message.set(A.getColoredName(), "の雛の加護が剥がれた");
+					fall(p);
+				}
+			}
 		}
 	}
 

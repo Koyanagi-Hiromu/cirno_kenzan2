@@ -4,10 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 
-import main.res.SE;
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
-import dangeon.controller.ThrowingItem;
+import dangeon.controller.TurnSystemController;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -16,6 +13,9 @@ import dangeon.model.object.artifact.item.bullet.目からビーム;
 import dangeon.model.object.artifact.item.staff.MagicBullet;
 import dangeon.util.R;
 import dangeon.view.anime.OuraEffect;
+import main.res.SE;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class Exルーミア extends Base_Enemy {
 
@@ -128,56 +128,86 @@ public class Exルーミア extends Base_Enemy {
 
 	@Override
 	public boolean itemHitEffect(final Base_Artifact a, boolean ento) {
-		String msg = null;
-		if (a instanceof MagicBullet) {
-			msg = "魔法弾は闇に飲み込まれて消えてしまった";
-		} else if (a instanceof 目からビーム) {
-			msg = "ビームは闇に飲み込まれて消えてしまった";
-		}
-		if (msg != null) {
-			Message.set(msg);
-			setCondition(CONDITION.やりすごし, 0);
-			if (power_up_count > 0) {
-				Message.set(getColoredName(), "のちからが元に戻った");
-				power_up_count = 0;
-				changeMAX_STR(pre_strength);
-				setSTR(pre_strength);
-			} else {
-				setCondition(CONDITION.仮眠, 0);
-				setCondition(CONDITION.睡眠, 3);
-				Message.set(getColoredName(), "は眠ってしまった");
-			}
-			return false;
-		} else {
-			return super.itemHitEffect(a, ento);
-		}
-	}
-
-	@Override
-	public boolean reflection(final ThrowingItem ti) {
-		if (ti.A instanceof MagicBullet || !new R().is(40)) {
-			return super.reflection(ti);
-		}
-
-		SE.YOUMU_SP2.play();
+//		SE.YOUMU_SP2.play();
 		attaking_frame = 4;
 		sword.setAttackingFrame(attaking_frame);
-		direction = ti.A.direction.getReverse();
+		direction = a.direction.getReverse();
 		sword.setDirection(direction);
-		final String s = getColoredName();
 		startAttack(new Task() {
-			/**
-						 *
-						 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void work() {
-				Message.set(s, "は投擲物を跳ね返した");
+				String msg = null;
+				if (a instanceof MagicBullet)
+					msg = "魔法弾";
+				else if (a instanceof 目からビーム)
+					msg = "ビーム";
+				else  
+					msg = a.getColoredName();
+				Message.set(Exルーミア.this.getColoredName(), "は", msg, "を両断した");
 			}
 		});
-		return true;
+		TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
+		if (power_up_count > 0) {
+			power_up_count--;
+			changeMAX_STR(pre_strength);
+			setSTR(pre_strength);
+		}
+//		setCondition(CONDITION.やりすごし, 0);
+//		setCondition(CONDITION.仮眠, 0);
+//		setCondition(CONDITION.睡眠, 3);
+//		Message.set(getColoredName(), "は満足して眠ってしまった");
+		
+		return false;
+//
+//		if (msg != null) {
+//			Message.set(msg);
+//			setCondition(CONDITION.やりすごし, 0);
+//			setCondition(CONDITION.仮眠, 0);
+//			setCondition(CONDITION.睡眠, 3);
+//			Message.set(getColoredName(), "は満足して眠ってしまった");
+//			if (power_up_count > 0) {
+//				Message.set(getColoredName(), "のちからが元に戻った");
+//				power_up_count = 0;
+//				changeMAX_STR(pre_strength);
+//				setSTR(pre_strength);
+//			} else {
+//				setCondition(CONDITION.仮眠, 0);
+//				setCondition(CONDITION.睡眠, 3);
+//				Message.set(getColoredName(), "は満足して眠ってしまった");
+//			}
+//			return false;
+//		} else {
+//			return super.itemHitEffect(a, ento);
+//		}
 	}
+
+//	@Override
+//	public boolean reflection(final ThrowingItem ti) {
+//		if (ti.A instanceof MagicBullet || !new R().is(40)) {
+//			return super.reflection(ti);
+//		}
+//
+//		SE.YOUMU_SP2.play();
+//		attaking_frame = 4;
+//		sword.setAttackingFrame(attaking_frame);
+//		direction = ti.A.direction.getReverse();
+//		sword.setDirection(direction);
+//		final String s = getColoredName();
+//		startAttack(new Task() {
+//			/**
+//						 *
+//						 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public void work() {
+//				Message.set(s, "は投擲物を跳ね返した");
+//			}
+//		});
+//		return true;
+//	}
 
 	@Override
 	protected boolean specialCheck() {

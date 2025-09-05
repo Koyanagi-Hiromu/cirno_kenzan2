@@ -3,8 +3,6 @@ package dangeon.model.object.creature.enemy;
 import java.awt.Image;
 import java.awt.Point;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -24,6 +22,8 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
 import dangeon.util.R;
 import dangeon.view.anime.Special_Wait_FrameByFrame;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class パチュリー extends Base_Enemy {
 
