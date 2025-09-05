@@ -74,6 +74,7 @@ import dangeon.view.detail.MainMap;
 import main.res.Image_LargeCharacter;
 import main.res.SE;
 import main.thread.MainThread;
+import main.util.DIRECTION;
 
 public class 朱鷺子 extends __店主 {
 
@@ -320,16 +321,6 @@ public class 朱鷺子 extends __店主 {
 		}
 	}
 
-	@Override
-	protected void enemyBreakAction() {
-		if (item != null) {
-			Base_Artifact a;
-			a = ItemTable.itemReturn(getMassPoint(),
-					ItemDetail.getCategory(item));
-			ItemFall.itemFall(getMassPoint(), a);
-		}
-	}
-
 	private Scrool getBook() {
 		if (isBadCondition()) {
 			return new ダンジョン攻略本(mass_point);
@@ -434,6 +425,21 @@ public class 朱鷺子 extends __店主 {
 		SE.CHANGE_ITEM.play();
 		item = a;
 		Message.set(getColoredName(), "は", a.getColoredName(), "を嬉しそうに受け取った");
+		if (LV < 4)
+		{
+			Base_Artifact gift;
+			gift = ItemTable.itemReturn(getMassPoint(), ItemDetail.getCategory(item));
+			gift.setCurse(false);
+			DIRECTION giftDirection = DIRECTION.getDirection(mass_point, Player.me.getMassPoint());
+			Point p = giftDirection.getFrontPoint(mass_point.getLocation());
+			if (ItemFall.isAbleToFall(p)) {
+				MapList.addArtifact(gift);
+				gift.setMassPoint_ParabolaJump_NoAttack_PotBreak(p);
+			}
+			else
+				ItemFall.itemFall(mass_point, gift);
+			Message.set("「お礼にこれをあげるね！」");
+		}
 		Medal.朱鷺子に書を投げつけた.addCount();
 		return false;
 	}
