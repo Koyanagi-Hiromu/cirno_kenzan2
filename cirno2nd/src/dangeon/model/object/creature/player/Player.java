@@ -1951,7 +1951,9 @@ public class Player extends Base_Creature {
 			grow = ran.nextInt(3) + 1;
 			break;
 		case HP:
-			grow = ran.nextInt(5) + 3;
+			grow = ran.nextInt(4) + 3;
+			// 0-4 + 2 = ave 4.5
+			// 0-3 + 3 = ave 5
 			break;
 		}
 		if (plus)
