@@ -466,10 +466,10 @@ public class Damage {
 		{
 			return "??";
 		}
-		int max = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source, 1.15)));
+		int max = getPredictionDamage(source, 1.15);
 		if (flag_detail_ok)
 		{
-			int min = getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source, 0.85)));
+			int min = getPredictionDamage(source, 0.85);
 			if (min == max)
 				return Integer.toString(max);
 			else
@@ -487,8 +487,12 @@ public class Damage {
 			return min + "-" + max;
 		}
 	}
+
+	public static int getPredictionDamage(Base_Creature source, double rate) {
+		return getPredictionDamage(source, (int)(PandE_DamageValue_WithoutRandom(source, rate)));
+	}
 	
-	static int getPredictionDamage(Base_Creature source, int damage) {
+	public static int getPredictionDamage(Base_Creature source, int damage) {
 		damage = againstMagicDeffence(source, damage);
 		damage = powerUp(source, false, damage);
 		if (BonusConductor.蓬莱人形_被ダメージ量２倍()) {
@@ -606,7 +610,7 @@ public class Damage {
 	/**
 	 * プレイヤーからエネミーへのダメージ計算 エネミーからプレイヤーへのダメージ計算
 	 */
-	public static int PandE_DamageValue_WithoutRandom(Base_Creature cr, double rate) {
+	static int PandE_DamageValue_WithoutRandom(Base_Creature cr, double rate) {
 		int damage_value = (int)(cr.getSTR() * rate - Enchant.getSumDEF());
 		if (damage_value <= 1) {
 			int damage_low = 1;

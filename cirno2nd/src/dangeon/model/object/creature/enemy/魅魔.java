@@ -81,7 +81,10 @@ public class 魅魔 extends Base_Enemy {
 			public void work() {
 				if (active != null && passive != null
 						&& !passive.isInValidOnAttack())
-					ThunderDamage.thunderDamage(active, active, passive, Damage.PandE_DamageValue_WithoutRandom(魅魔.this, 1.0));
+				{
+					int dmg = Damage.getPredictionDamage(魅魔.this, 1.0);
+					ThunderDamage.thunderDamage(active, active, passive, dmg);
+				}
 			}
 		};
 	}
