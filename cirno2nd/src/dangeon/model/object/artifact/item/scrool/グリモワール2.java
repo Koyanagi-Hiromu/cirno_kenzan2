@@ -7,7 +7,6 @@ import java.util.Iterator;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.SelectItem;
-import dangeon.model.object.artifact.item.pot.印の瓶;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.魅魔のカード;
 import dangeon.model.object.artifact.item.staff.Staff;
@@ -30,7 +29,11 @@ public class グリモワール2 extends Scrool implements SelectItem {
 	public ArrayList<Base_Artifact> getEscape(ArrayList<Base_Artifact> list) {
 		for (Iterator<Base_Artifact> i = list.iterator(); i.hasNext();) {
 			Base_Artifact a = i.next();
-			if ((a instanceof SpellCard) || (a instanceof Staff) || (a instanceof ワイルドカード))
+			if ((a instanceof SpellCard) && a.composition_number < 7)
+				i.remove();
+			if ((a instanceof Staff))
+				i.remove();
+			if ((a instanceof ワイルドカード))
 				i.remove();
 		}
 		return list;
@@ -46,10 +49,8 @@ public class グリモワール2 extends Scrool implements SelectItem {
 		SE.MEKKI.play();
 		if (A instanceof SpellCard) {
 			SpellCard sc = (SpellCard) A;
-			if (A.composition_number < 印の瓶.MAX) {
-				A.composition_number++;
-				Message.set(A.getColoredName(), "の%", "器の数が増えた");
-			}
+			A.composition_number = 7;
+			Message.set(A.getColoredName(), "の%", "器の数が増えた");
 		} else if (A instanceof Staff) {
 			Staff s = (Staff) A;
 			if (!s.isPerfectCheked()) {
@@ -57,7 +58,7 @@ public class グリモワール2 extends Scrool implements SelectItem {
 			}
 			if (s.getStaffRest() < s.MAX_STAFF_REST) {
 				Message.set(A.getColoredName(), "の%", "使用回数が増えた");
-				s.addStaffRest(10);
+				s.addStaffRest(7);
 			} else {
 				Message.set(A.getColoredName(), "はこれ以上使用回数は増えなかった");
 			}
