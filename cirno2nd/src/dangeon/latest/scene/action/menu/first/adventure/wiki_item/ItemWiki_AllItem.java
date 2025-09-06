@@ -129,11 +129,12 @@ public class ItemWiki_AllItem {
 	}
 
 	private void scrool(ArrayList<String> list) {
-		list.add("あとがき");
+//		list.add("あとがき");
 		list.add("いかづちの書");
 		list.add("おにぎりの書");
 		list.add("おはらいの書");
 		list.add("グリモワール");
+		list.add("グリモワール2");
 		list.add("ダンジョン攻略本");
 		list.add("バクスイの書");
 		list.add("パワーアップの書");
@@ -157,6 +158,7 @@ public class ItemWiki_AllItem {
 		list.add("氷の書");
 		list.add("封書モンスターハウス");
 		list.add("明かりの書");
+		list.add("自由人の狂想曲");	
 	}
 
 	private void spellcard(ArrayList<String> list) {

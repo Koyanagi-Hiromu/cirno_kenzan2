@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.Base_View;
 import dangeon.latest.scene.action.itemlist.Item_List;
@@ -14,6 +13,8 @@ import dangeon.latest.system.KeyHolder;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.ItemTable;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.util.Switch;
+import main.util.半角全角コンバーター;
 
 public class ItemWiki extends Item_List {
 	private static Base_Artifact getFrom(ArrayList<Base_Artifact> LIST,
@@ -64,7 +65,7 @@ public class ItemWiki extends Item_List {
 			if (!s.isEmpty()) {
 				Base_Artifact a = ItemTable.returnBaseArtifactSetPoint(
 						category.concat(s), p);
-				a.setSampleItem(true);
+				a.setSampleItem(!Switch.switch_player_no_death);
 				LIST.add(a);
 			}
 		}
@@ -91,6 +92,12 @@ public class ItemWiki extends Item_List {
 			@Override
 			public int compare(Base_Artifact o1, Base_Artifact o2) {
 				return o1.getTrueName().compareTo(o2.getTrueName());
+			}
+		});
+		Collections.sort(LIST, new Comparator<Base_Artifact>() {
+			@Override
+			public int compare(Base_Artifact o1, Base_Artifact o2) {
+				return ItemTable.getRankForSort(o1) - ItemTable.getRankForSort(o2);
 			}
 		});
 		return LIST;

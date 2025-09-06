@@ -2,15 +2,15 @@ package dangeon.model.object.artifact.item.scrool;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
-import dangeon.model.object.creature.enemy.Base_Enemy;
+import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
 import dangeon.util.ThunderDamage;
 import dangeon.view.anime.ThunderEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
 
 public class いかづちの書 extends Scrool {
 	/**
@@ -35,7 +35,8 @@ public class いかづちの書 extends Scrool {
 	public void scroolUse() {
 		SE.LIGHTNING.play();
 		MainMap.addEffect(new ThunderEffect(MassCreater.isPlayerInRoom()));
-		for (Base_Enemy em : MapInSelect.getListRoomOrRoadInEnemy()) {
+		ThunderDamage.thunderDamage(Player.me, Player.me, Player.me, 25);
+		for (Base_Creature em : MapInSelect.getListRoomOrRoadInCreature(Player.me)) {
 			ThunderDamage.thunderDamage(Player.me, Player.me, em, 25);
 		}
 	}

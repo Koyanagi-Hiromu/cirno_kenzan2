@@ -11,8 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import main.util.FileReadSupporter;
-import main.util.Show;
 import connection.sv_cl.SocketHolder;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.ItemDetail.RANK;
@@ -32,6 +30,8 @@ import dangeon.model.object.creature.npc.second.Takarabako;
 import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
 import dangeon.util.Flag;
 import dangeon.util.R;
+import main.util.FileReadSupporter;
+import main.util.Show;
 
 public class ItemTable {
 	private static HashMap<Class<?>, Integer> map = new HashMap<Class<?>, Integer>();
@@ -158,7 +158,24 @@ public class ItemTable {
 		default:
 			return 1;
 		}
+	}
 
+	public static int getRankForSort(Base_Artifact base_Item) {
+		switch (ItemDetail.getRank(base_Item)) {
+		case S:
+			return 5;
+		case A:
+			return 4;
+		case B:
+			return 3;
+		case C:
+			return 2;
+		case D:
+			return 1;
+		case N:
+		default:
+			return 6;
+		}
 	}
 
 	public static String getRank_String(Base_Artifact a) {

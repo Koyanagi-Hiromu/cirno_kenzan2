@@ -753,7 +753,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 * falseなら正しい名称が分からない。
 	 */
 	public boolean isStaticCheked() {
-		if (checked_static) {
+		if (checked_static || flag_sample) {
 			return true;
 		} else {
 			return checked_static = Checker.isStaticChecked(this);

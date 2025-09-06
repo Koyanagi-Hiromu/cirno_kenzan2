@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import dangeon.model.config.Config;
+import dangeon.model.config.table.ItemTable;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
@@ -66,18 +67,27 @@ public class StringFilter {
 				drawString(g, getPlainString(a.getColoredName(false)), x, y);
 				g.setColor(_c);
 			}
+			if (a.flag_sample) {
+				x += 245;
+				g.setColor(NUMBERS);
+				String text = ItemTable.getRank_String(a);
+				int w2 = g.getFontMetrics().stringWidth(text);
+				drawEdgedString_plain(g, text, x - (28 + w2) / 2 + 6, y - 1);
+				g.setColor(Color.WHITE);
+				return;
+			}
 			if (a.isNotYoursYet()) {
 				x += 245;
 				int w = 28;
 				int h = 16;
 				g.setColor(new Color(150, 150, 150, 200));
 				g.fillRect(x - w - 2, y - h + 2, w + 4, h);
+				g.setColor(Color.WHITE);
 			}
 			if (a.isMerchant()) {
-				g.setColor(Color.WHITE);
 				String text = Integer.toString(a.getMerchantBuyValue());
-				int w = g.getFontMetrics().stringWidth(text);
-				drawEdgedString_plain(g, text, x - (28 + w) / 2, y - 1);
+				int w2 = g.getFontMetrics().stringWidth(text);
+				drawEdgedString_plain(g, text, x - (28 + w2) / 2, y - 1);
 			}
 		}
 	}

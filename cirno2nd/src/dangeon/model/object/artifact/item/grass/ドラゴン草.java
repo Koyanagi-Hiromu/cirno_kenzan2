@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.grass;
 
 import java.awt.Point;
 
-import main.util.DIRECTION;
 import dangeon.controller.ThrowingItem.HowToThrow;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -11,7 +10,6 @@ import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.item.bullet.ドラゴンブレス;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
-import dangeon.model.object.artifact.item.enchantSpecial.simbolEffect.印炎;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.npc.Base_NPC;
@@ -19,6 +17,7 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.view.anime.FireEffect;
 import dangeon.view.detail.MainMap;
+import main.util.DIRECTION;
 
 /**
  * ドラゴン草
@@ -65,17 +64,13 @@ public class ドラゴン草 extends Base_Grass {
 
 			@Override
 			public void work() {
-				int dam = 70;
 				if (c instanceof Player) {
-					dam = 印炎.effect(dam);
+					setFireBody();
+					return;
 				}
+				int dam = 50;
 				dam = c.damagedWithFire(dam);
-				if (c.equals(Player.me)) {
-					Damage.damage(ME, null, ME.getName() + "によって燃え尽きた",
-							Player.me, c, 印炎.effect(dam));
-				} else {
-					Damage.damage(ME, null, "燃え尽きた", Player.me, c, dam);
-				}
+				Damage.damage(ME, null, "燃え尽きた", Player.me, c, dam);
 			}
 		}), true);
 	}
@@ -97,12 +92,17 @@ public class ドラゴン草 extends Base_Grass {
 
 				@Override
 				public void work() {
-					Player.me.setCondition(CONDITION.炎上, 20);
-					Message.set("体が炎に包まれた");
+					setFireBody();
 				}
 			}), true);
 		}
 		return true;
+	}
+	
+	void setFireBody()
+	{
+		Player.me.setCondition(CONDITION.炎上, 20);
+		Message.set("体が炎に包まれた");
 	}
 
 }
