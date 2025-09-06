@@ -103,7 +103,7 @@ NullEnemy	*NullEnemy*	999	255	255	9999	0	f		f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	
 2_犬走椛	賢狼もみじ	43	35	64	240	0	透視状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_SWORD
 3_犬走椛	もみじハンター	70	68	84	1680	0	透視状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_SWORD
 4_犬走椛	風来の椛	120	120	120	5000	0	透視状態になるぞ		f	f	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_SWORD
-1_鍵山雛	厄吸い雛	22	13	9	20	100	自らの状態異常を吸い取るぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_ROOLING
+1_鍵山雛	おはらい雛	22	13	9	20	100	自らの状態異常を吸い取るぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_ROOLING
 2_鍵山雛	バキューム雛	42	30	25	300	100	自らの状態異常を吸い取るぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_ROOLING
 3_鍵山雛	ダイソン雛	90	55	30	2000	100	自らの状態異常を吸い取るぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_ROOLING
 4_鍵山雛	厄神様	189	89	89	8910	100	自らの状態異常を吸い取るぞ		f	TRUE	f	f	f	f	f	f	f	f	f	f	f	TRUE	f	f	f	f	f	ATTACK_ROOLING

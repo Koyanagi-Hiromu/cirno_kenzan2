@@ -100,7 +100,7 @@ public class EternalHouse extends Base_TownMap {
 			};
 		}.setConditionList(CONDITION.反射, 0));
 		add(new Abstract_NPC(CHARA_IMAGE.八意永琳, "八意永琳", 17, 8, false,
-				"最新の研究によると、実は草は投げると必ず当たるのよ@",
+				"草は投げると必ず当たるって気づいてたかしら@",
 				"敵が投げた草は外れることがあるから気づきにくいわよね@",
 				"それと私のカードだけど、草の波紋効果を受け付けなくなる隠し効果があるのよ@"));
 		add(new Abstract_NPC(Image_LargeCharacter.イナバ, CHARA_IMAGE.鈴仙・優曇華院・イナバ,
@@ -114,16 +114,15 @@ public class EternalHouse extends Base_TownMap {
 		add(t);
 		add(new 氷の罠(new Point(19, 10)));
 		add(new Abstract_NPC(CHARA_IMAGE.因幡てゐ, "因幡てゐ", 15, 9, false,
-				"怪しいマスがあったら攻撃してみよう@", "罠が見つかることがあるうさよ@") {
+				"うさうさ@", "怪しいマスがあったら攻撃してみよう@", "罠が見つかることがあるよ@") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void message() {
 				if (t.isVisible()) {
 					MSG = new String[] { "普通は怪しいマス以外に罠はないんだけど@",
-							"敵の能力のせいで怪しいマス以外の所に罠が設置されることもあるうさよ@",
-							"それと素振りの他に罠を見つけるには…@",
-							"ひとつの部屋でしばらく休むと部屋内の罠がすべて見つかるうさ" };
+							"敵の能力のせいで罠が設置されることもある@",
+							"ひとつの部屋でしばらく休むと部屋内の罠がすべて見つかるよ" };
 				}
 				super.message();
 			};

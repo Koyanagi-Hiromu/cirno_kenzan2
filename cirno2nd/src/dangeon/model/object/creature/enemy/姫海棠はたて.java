@@ -9,6 +9,7 @@ import dangeon.model.condition.CONDITION;
 import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.item.bullet.御柱;
 import dangeon.model.object.artifact.item.grass.すばやさ草;
 import dangeon.model.object.creature.player.Player;
 import dangeon.view.anime.CameraEffect;
@@ -32,7 +33,7 @@ public class 姫海棠はたて extends Base_Enemy {
 			}
 		}
 		
-		if (flag) TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
+		if (flag && !(a instanceof 御柱)) TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
 		return flag;
 	}
 

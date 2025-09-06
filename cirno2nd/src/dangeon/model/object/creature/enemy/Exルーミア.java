@@ -9,6 +9,7 @@ import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.Base_Artifact;
+import dangeon.model.object.artifact.item.bullet.御柱;
 import dangeon.model.object.artifact.item.bullet.目からビーム;
 import dangeon.model.object.artifact.item.staff.MagicBullet;
 import dangeon.util.R;
@@ -148,7 +149,9 @@ public class Exルーミア extends Base_Enemy {
 				Message.set(Exルーミア.this.getColoredName(), "は", msg, "を両断した");
 			}
 		});
-		TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
+		if (!(a instanceof 御柱))
+			TurnSystemController.setSpecialTurnSkip_IfStepWaitForCirnoAction();
+
 		if (power_up_count > 0) {
 			power_up_count--;
 			changeMAX_STR(pre_strength);
