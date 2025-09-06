@@ -4,11 +4,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.AbstractList;
 
-import main.res.BGM;
-import main.res.CHARA_IMAGE;
-import main.res.Image_LargeCharacter;
-import main.res.Image_MapTip;
-import main.util.DIRECTION;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
@@ -24,6 +19,11 @@ import dangeon.model.object.creature.npc.合成説明NPC;
 import dangeon.model.object.creature.npc.dungeonNpc.NPC逆ヶ島;
 import dangeon.model.object.creature.npc.dungeonNpc.魔理沙のトラップタワーNPC;
 import dangeon.model.object.creature.player.Player;
+import main.res.BGM;
+import main.res.CHARA_IMAGE;
+import main.res.Image_LargeCharacter;
+import main.res.Image_MapTip;
+import main.util.DIRECTION;
 
 public class EternalHouse extends Base_TownMap {
 
@@ -100,8 +100,9 @@ public class EternalHouse extends Base_TownMap {
 			};
 		}.setConditionList(CONDITION.反射, 0));
 		add(new Abstract_NPC(CHARA_IMAGE.八意永琳, "八意永琳", 17, 8, false,
-				"敵の中には投擲や魔法弾に対して特別な反応をする者がいるわ@", "河城にとりや博麗の巫女、そして姫様のようにね@",
-				"それと私のカードだけど@", "草の波紋効果を受け付けなくなる隠し効果があるわ@"));
+				"最新の研究によると、実は草は投げると必ず当たるのよ@",
+				"敵が投げた草は外れることがあるから気づきにくいわよね@",
+				"それと私のカードだけど、草の波紋効果を受け付けなくなる隠し効果があるのよ@"));
 		add(new Abstract_NPC(Image_LargeCharacter.イナバ, CHARA_IMAGE.鈴仙・優曇華院・イナバ,
 				"鈴仙・優曇華院・イナバ", 15, 10, false, "瞳印には混乱を防ぐ効果もあるのよ@",
 				"それと「ゲイズ」の能力は目が合ってなければ大丈夫よ@",
