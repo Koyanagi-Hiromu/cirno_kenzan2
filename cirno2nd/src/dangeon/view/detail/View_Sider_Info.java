@@ -86,7 +86,7 @@ public class View_Sider_Info {
 	boolean draw_div(Graphics2D g, int index) {
 		int x = 0;
 		int w = g.getFontMetrics().stringWidth(
-				StringFilter.getPlainString(name)) + 5;
+				StringFilter.getPlainString(name)) + 8;
 		int h = g.getFontMetrics().getHeight();
 		int height = h * (index + 2) + BGMFONT.DECENT;
 		if (time > 0) {
@@ -107,7 +107,7 @@ public class View_Sider_Info {
 		g.setColor(Color.WHITE);
 		g.drawRect(x, y - h + 2, w, h);
 		g.setColor(Color.WHITE);
-		StringFilter.drawString(g, name, x, y);
+		StringFilter.drawString(g, name, x + 3, y + 2);
 		if (time > 0) {
 			time--;
 			if (time <= 0) {

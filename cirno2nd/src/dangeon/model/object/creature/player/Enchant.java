@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.res.BGM;
-import main.res.SE;
 import dangeon.controller.listener.menu.ENCHANT;
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.Config;
+import dangeon.model.config.table.ItemTable;
 import dangeon.model.map.PresentField;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.Base_Artifact.STATUS;
@@ -20,6 +19,8 @@ import dangeon.model.object.artifact.item.spellcard.set.BSE;
 import dangeon.model.object.artifact.item.spellcard.set.SetEnchantCard;
 import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
 import dangeon.view.detail.View_Sider;
+import main.res.BGM;
+import main.res.SE;
 
 public enum Enchant {
 	ATK(0), DEF(1), ANY1(2), ANY2(3), ANY3(4);
@@ -469,8 +470,12 @@ public enum Enchant {
 		Base_Artifact old = enchanted_now;
 		setEnchant(selected_artifact);
 		SE.SYSTEM_ENCHANT.play();
-		if (selected_artifact instanceof SpellCard)
+		if (selected_artifact instanceof SpellCard && !selected_artifact.isStaticCheked())
+		{
 			selected_artifact.check();
+			if (ItemTable.getRank(selected_artifact) >= 3)
+				View_Sider.setInformation("出現度：", ItemTable.getRank_String(selected_artifact));
+		}
 		if (old == null) {
 			Message.set(enchanted_now.getColoredName().concat("を")
 					.concat(toColoredString()).concat("装備した"));

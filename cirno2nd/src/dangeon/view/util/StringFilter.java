@@ -314,7 +314,7 @@ public class StringFilter {
 		if (pre_list.containsKey(str)) {
 			bi = pre_list.get(str);
 		} else {
-			int width = g.getFontMetrics().stringWidth(getPlainString(str)) + 1;
+			int width = g.getFontMetrics().stringWidth(getPlainString(str)) + 10;
 			// if (str.contains(ITEM_WARD)) {
 			// Matcher m = Pattern.compile(ITEM_WARD).matcher(str);
 			// while (m.find()) {

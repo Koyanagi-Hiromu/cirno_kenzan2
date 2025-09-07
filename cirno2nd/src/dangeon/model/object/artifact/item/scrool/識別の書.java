@@ -3,12 +3,12 @@ package dangeon.model.object.artifact.item.scrool;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.res.SE;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.first.adventure.wiki.Wiki_Enemy;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.config.Config;
 import dangeon.model.config.table.EnemyTable;
+import dangeon.model.config.table.ItemTable;
 import dangeon.model.map.ItemFall;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.SelectItem;
@@ -19,6 +19,8 @@ import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.player.Belongings;
 import dangeon.util.R;
 import dangeon.util.STAGE;
+import dangeon.view.detail.View_Sider;
+import main.res.SE;
 
 public class 識別の書 extends Scrool implements SelectItem {
 	/**
@@ -111,6 +113,8 @@ public class 識別の書 extends Scrool implements SelectItem {
 			Message.set(A.getColoredName(), "は");
 			A.check();
 			Message.set(A.getColoredName(), "だった");
+			if (ItemTable.getRank(this) >= 3)
+				View_Sider.setInformation("出現度：", ItemTable.getRank_String(this));
 		}
 	}
 

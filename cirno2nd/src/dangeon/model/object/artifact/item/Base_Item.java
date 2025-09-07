@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import main.res.Image_Artifact;
-import main.res.Image_Player;
-import main.res.SE;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.ThrowingItem;
 import dangeon.latest.scene.Base_View;
@@ -36,7 +33,11 @@ import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.util.R;
+import dangeon.view.detail.View_Sider;
 import dangeon.view.util.StringFilter;
+import main.res.Image_Artifact;
+import main.res.Image_Player;
+import main.res.SE;
 
 public abstract class Base_Item extends Base_Artifact {
 
@@ -310,6 +311,9 @@ public abstract class Base_Item extends Base_Artifact {
 					String name = getColoredName();
 					check();
 					Message.set(name, "は", getColoredName(), "だった");
+					if (ItemTable.getRank(this) >= 3)
+						View_Sider.setInformation("出現度：", ItemTable.getRank_String(this));
+					
 					if (this instanceof Ring) {
 						if (ItemTable.getRank(this) == 5) {
 							Medal.未識別リボンを使用したらレアものだった.addCount();

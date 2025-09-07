@@ -17,6 +17,7 @@ import dangeon.latest.scene.action.message.Message;
 import dangeon.latest.system.KeyHolder;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.config.table.ItemDetail;
+import dangeon.model.config.table.ItemTable;
 import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
 import dangeon.model.map.Mass;
@@ -44,6 +45,7 @@ import dangeon.util.Damage;
 import dangeon.util.ObjectPoint;
 import dangeon.util.R;
 import dangeon.view.constant.MAP;
+import dangeon.view.detail.View_Sider;
 import dangeon.view.util.WithinOutofScreen;
 import main.res.Image_Artifact;
 import main.res.SE;
@@ -1208,6 +1210,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 			String str = this.getColoredName();
 			Checker.checkStatic(this);
 			Message.set(str, "は", this.getName(), "だった");
+			if (ItemTable.getRank(this) >= 3)
+				View_Sider.setInformation("出現度：", ItemTable.getRank_String(this));
 			return true;
 		}
 		return false;
