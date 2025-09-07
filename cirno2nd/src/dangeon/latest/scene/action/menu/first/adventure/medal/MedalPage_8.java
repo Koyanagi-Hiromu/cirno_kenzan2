@@ -14,7 +14,7 @@ public class MedalPage_8 extends Base_MedalPage {
 		add(new ClassMedalWrapper(Medal.Class人形使い));
 		add(new ClassMedalWrapper(Medal.Classゆっくり));
 		add(new ClassMedalWrapper(Medal.Classフラワーマスター));
-		add(new ClassMedalWrapper(Medal.Classパチュリー));
+		add(new ClassMedalWrapper(Medal.Class宵闇妖怪));
 		add(new ClassMedalWrapper(Medal.Classひねくれ者));
 		add(new ClassMedalWrapper(Medal.Class半人半霊));
 		add(new ClassMedalWrapper(Medal.Class気分屋));

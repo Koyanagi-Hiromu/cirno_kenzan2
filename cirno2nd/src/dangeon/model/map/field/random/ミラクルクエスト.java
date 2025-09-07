@@ -45,6 +45,7 @@ import dangeon.model.object.creature.player.class_job.Class人形使い;
 import dangeon.model.object.creature.player.class_job.Class冒険家;
 import dangeon.model.object.creature.player.class_job.Class半人半霊;
 import dangeon.model.object.creature.player.class_job.Class守矢神;
+import dangeon.model.object.creature.player.class_job.Class宵闇妖怪;
 import dangeon.model.object.creature.player.class_job.Class気分屋;
 import dangeon.model.object.creature.player.class_job.Class蓬莱人形;
 import dangeon.model.object.creature.player.class_job.Class風水師;
@@ -525,6 +526,8 @@ public class ミラクルクエスト extends Base_Map_Random {
 			add(new ClassJobNpc(new Classゆっくり(), 22, 15, DIRECTION.LEFT));
 		if (Medal.太陽の弱点を突いた.hasFinished())
 			add(new ClassJobNpc(new Class人工太陽(), 20, 11, DIRECTION.DOWN));
+		if (Medal.ルーミアにおにぎりを投げつけた.hasFinished())
+			add(new ClassJobNpc(new Class宵闇妖怪(), 19, 11, DIRECTION.DOWN));
 		if (true)
 			add(new ClassJobNpc(new Class守矢神(), 18, 11, DIRECTION.DOWN));
 		if (Medal.ひねくれOK.hasFinished())

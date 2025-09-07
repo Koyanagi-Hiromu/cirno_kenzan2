@@ -37,7 +37,7 @@ public class Classひねくれ者 extends BaseClassJob {
 
 	@Override
 	protected void firstDemerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusSwitch(this, 6, "凍ったアイテムが装備できない"));
+//		list.add(new BonusSwitch(this, 6, "凍ったアイテムが装備できない"));
 	}
 
 	@Override

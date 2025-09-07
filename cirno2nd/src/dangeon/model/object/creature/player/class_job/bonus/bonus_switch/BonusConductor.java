@@ -11,6 +11,7 @@ import dangeon.model.object.creature.player.class_job.Class人形使い;
 import dangeon.model.object.creature.player.class_job.Class冒険家;
 import dangeon.model.object.creature.player.class_job.Class半人半霊;
 import dangeon.model.object.creature.player.class_job.Class守矢神;
+import dangeon.model.object.creature.player.class_job.Class宵闇妖怪;
 import dangeon.model.object.creature.player.class_job.Class気分屋;
 import dangeon.model.object.creature.player.class_job.Class蓬莱人形;
 import dangeon.model.object.creature.player.class_job.Class賢将;
@@ -179,6 +180,10 @@ public class BonusConductor {
 
 	public static boolean 蓬莱人形_復活時自爆() {
 		return check(Class蓬莱人形.class, 3);
+	}
+
+	public static boolean 宵闇妖怪() {
+		return check(Class宵闇妖怪.class, 0);
 	}
 
 	public static boolean 冒険家() {

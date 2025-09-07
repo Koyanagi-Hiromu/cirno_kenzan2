@@ -14,7 +14,7 @@ public class MedalPage_9 extends Base_MedalPage {
 		add(new ClassMedalWrapper(Medal.Class人形使い_七曜));
 		add(new ClassMedalWrapper(Medal.Classゆっくり_七曜));
 		add(new ClassMedalWrapper(Medal.Classフラワーマスター_七曜));
-		add(new ClassMedalWrapper(Medal.Classパチュリー_七曜));
+		add(new ClassMedalWrapper(Medal.Class宵闇妖怪_七曜));
 		add(new ClassMedalWrapper(Medal.Classひねくれ者_七曜));
 		add(new ClassMedalWrapper(Medal.Class半人半霊_七曜));
 		add(new ClassMedalWrapper(Medal.Class気分屋_七曜));
