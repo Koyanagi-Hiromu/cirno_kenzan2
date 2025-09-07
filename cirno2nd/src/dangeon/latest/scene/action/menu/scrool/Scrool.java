@@ -2,13 +2,13 @@ package dangeon.latest.scene.action.menu.scrool;
 
 import java.util.ArrayList;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.latest.scene.Base_View;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
 import dangeon.latest.system.KeyHolder;
 import dangeon.latest.util.view_window.ScroolWindow;
 import dangeon.latest.util.view_window.UnderMenuWindow;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class Scrool extends Base_Scene_Menu {
 	public final ScroolWindow WINDOW;
@@ -39,10 +39,16 @@ public class Scrool extends Base_Scene_Menu {
 			y += d.Y;
 		else
 			y += d.X * 5;
+
 		if (y < 0)
 			y = 0;
-		while (!WINDOW.isExist(y))
-			y--;
+		else
+		{
+			while (!WINDOW.isExist(y))
+				y--;
+			if (y < 0)
+				y = 0;
+		}
 
 		SE.SYSTEM_CURSOR.play();
 		WINDOW.setY(y);
