@@ -1,12 +1,14 @@
 package dangeon.latest.scene.action.ksg1.main;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
+import dangeon.latest.scene.Base_View;
+import dangeon.view.util.StringFilter;
 import main.constant.FR;
 import main.res.BGM;
 import main.res.Image_LargeCharacter;
 import main.util.BeautifulView;
-import dangeon.latest.scene.Base_View;
 
 public class Ksg_Main_View extends Base_View {
 
@@ -52,5 +54,23 @@ public class Ksg_Main_View extends Base_View {
 		Image_LargeCharacter.チルノ.draw(g, false, diff);
 
 		s.PANEL.draw(g);
+
+		g.setColor(Color.lightGray);
+		{
+			String text = "一番下の「食べ物」を仕分けてください";
+			int w = g.getFontMetrics().stringWidth(text);
+			StringFilter.drawString(g, text, (FR.SCREEN_WIDTH - w) / 2, 323);
+		}
+		{
+			String text = "冷えてるものはダメですよ";
+			int w = g.getFontMetrics().stringWidth(text);
+			StringFilter.drawString(g, text, (FR.SCREEN_WIDTH - w) / 2, 338);
+		}
+		g.setColor(Color.white);
+		{
+			String text = "◀　▶";
+			int w = g.getFontMetrics().stringWidth(text);
+			StringFilter.drawString(g, text, (FR.SCREEN_WIDTH - w) / 2, 258);
+		}
 	}
 }

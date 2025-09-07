@@ -10,6 +10,7 @@ import dangeon.model.object.artifact.item.pot.お祓いの瓶;
 import dangeon.model.object.artifact.item.scrool.グリモワール;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.アリスのカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
@@ -47,7 +48,7 @@ public class Class人形使い extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new アリスのカード(p), 6));
+		list.add(new BonusItem(new アリスのカード(p), 6, Enchant.DEF));
 		list.add(new Bonus人形使い(this));
 	}
 

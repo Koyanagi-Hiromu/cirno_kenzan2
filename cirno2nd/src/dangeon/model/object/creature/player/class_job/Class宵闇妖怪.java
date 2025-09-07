@@ -10,6 +10,7 @@ import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.ring.ルーミアのリボン;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.ルーミアのカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
@@ -46,7 +47,7 @@ public class Class宵闇妖怪 extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new ルーミアのカード(p), 6));
+		list.add(new BonusItem(new ルーミアのカード(p), 6, Enchant.DEF));
 		list.add(new BonusSimbol(ENCHANT_SIMBOL.飯));
 	}
 

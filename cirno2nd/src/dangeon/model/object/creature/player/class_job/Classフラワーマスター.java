@@ -7,6 +7,7 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.風見幽香のカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
@@ -43,7 +44,7 @@ public class Classフラワーマスター extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new 風見幽香のカード(p), 6));
+		list.add(new BonusItem(new 風見幽香のカード(p), 6, Enchant.ATK));
 		list.add(new BonusSwitch(this, 0, "草の出現率が高い"));
 	}
 

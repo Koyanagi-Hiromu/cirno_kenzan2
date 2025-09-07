@@ -7,7 +7,8 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.鬼人正邪のカード;
 import dangeon.model.object.artifact.item.staff.一時しのぎの杖;
-import dangeon.model.object.artifact.item.staff.倍速の杖;
+import dangeon.model.object.artifact.item.staff.悪魔の杖;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
@@ -22,17 +23,17 @@ public class Classひねくれ者 extends BaseClassJob {
 
 	@Override
 	protected void bonusLv1(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusSwitch(this, 0, "魔法弾や投擲物が自分に向かう"));
+		list.add(new BonusSwitch(this, 0, "投擲物が壁から自分に向かう"));
 	}
 
 	@Override
 	protected void bonusLv2(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new 一時しのぎの杖(p).createStaffRest(2)));
+		list.add(new BonusItem(new 一時しのぎの杖(p).createStaffRest(6)));
 	}
 
 	@Override
 	protected void bonusLv3(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new 倍速の杖(p).createStaffRest(2)));
+		list.add(new BonusItem(new 悪魔の杖(p).createStaffRest(9)));
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class Classひねくれ者 extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		// list.add(new Bonusひねくれ者(this));
+		list.add(new BonusItem(new 鬼人正邪のカード(p), 6, Enchant.ATK));
 		list.add(new BonusSwitch(this, 3, "通常攻撃が壁から自分に向かう"));
 	}
 

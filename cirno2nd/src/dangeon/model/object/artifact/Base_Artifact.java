@@ -992,7 +992,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 		Enchant.forceToRemove(this);
 		Belongings.remove(this);
 		// direction = c instanceof Player ? direction : c.direction;
-		if ((c instanceof Player) && BonusConductor.ひねくれ者_受け()) {
+		if ((c instanceof Player) && how != HowToThrow.MAGIC && BonusConductor.ひねくれ者_受け()) {
 			Point p = c.getMassPoint().getLocation();
 			Mass m = MassCreater.getMass(p);
 			DIRECTION d = c.direction;

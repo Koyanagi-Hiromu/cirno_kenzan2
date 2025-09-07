@@ -34,7 +34,7 @@ public class ClassMedalWrapper extends MedalWrapper
 			sb.append(diff.COLOR);
 			sb.append("■");
 		}
-		else if (number == 1)
+		else if (number != 0)
 		{
 			sb.append(Color.lightGray);
 			sb.append("■");

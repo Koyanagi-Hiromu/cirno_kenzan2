@@ -5,6 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.otog.main.panel.Base_Panel;
+import dangeon.latest.system.KeyHolder;
+import dangeon.util.R;
+import dangeon.view.util.StringFilter;
 import main.Listener.ACTION;
 import main.constant.FR;
 import main.res.BGM;
@@ -13,10 +17,6 @@ import main.res.Image_Artifact;
 import main.res.Image_Player;
 import main.res.SE;
 import main.util.DIRECTION;
-import dangeon.latest.scene.action.otog.main.panel.Base_Panel;
-import dangeon.latest.system.KeyHolder;
-import dangeon.util.R;
-import dangeon.view.util.StringFilter;
 
 public class Ksg_Panel_Main extends Base_Panel {
 	public class Accepter {
@@ -30,15 +30,16 @@ public class Ksg_Panel_Main extends Base_Panel {
 		}
 
 		public void draw(Graphics2D g) {
-			if (flag_missed)
-				g.setColor(Color.RED);
-			else if (INDEX == 0) {
-				if (pushing)
+			if (INDEX == 0) {
+				if (flag_missed)
+					g.setColor(Color.RED);
+				else if (pushing)
 					g.setColor(Color.YELLOW);
 				else
 					g.setColor(Color.WHITE);
 			} else if (INDEX == 1) {
-				g.setColor(Color.CYAN);
+//				g.setColor(Color.CYAN);
+				g.setColor(Color.BLUE);
 			} else if (INDEX == 2) {
 				g.setColor(Color.BLUE);
 			}
@@ -229,8 +230,10 @@ public class Ksg_Panel_Main extends Base_Panel {
 			return 3;
 		else if (count > 20)
 			return 2;
-		else
+		else if (count > 0)
 			return 1;
+		else
+			return 0;
 	}
 
 	@Override
@@ -257,13 +260,16 @@ public class Ksg_Panel_Main extends Base_Panel {
 		int y = H - s;
 		int angle = (int) (360.0 * limit / LIMIT);
 		StringBuilder sb = new StringBuilder();
-		sb.append("x");
 		int dec = decLimit();
-		if (dec == 10) {
-			sb.append("9.9");
-		} else {
-			sb.append(decLimit());
-			sb.append(".0");
+		if (dec > 0)
+		{
+			sb.append("x");
+			if (dec == 10) {
+				sb.append("9.9");
+			} else {
+				sb.append(decLimit());
+				sb.append(".0");
+			}
 		}
 		for (int i = 0; i < 2; i++) {
 			y -= s * 2;

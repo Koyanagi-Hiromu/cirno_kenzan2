@@ -9,6 +9,7 @@ import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.八坂神奈子のカード;
 import dangeon.model.object.artifact.item.spellcard.東風谷早苗のカード;
 import dangeon.model.object.artifact.item.spellcard.洩矢諏訪子のカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
@@ -45,10 +46,9 @@ public class Class守矢神 extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		SpellCard[] a = { new 東風谷早苗のカード(p), new 八坂神奈子のカード(p), new 洩矢諏訪子のカード(p) };
-		for (SpellCard s : a) {
-			list.add(new BonusItem(s, 6));
-		}
+		list.add(new BonusItem(new 東風谷早苗のカード(p), 6, Enchant.ANY1));
+		list.add(new BonusItem(new 八坂神奈子のカード(p), 6, Enchant.ATK));
+		list.add(new BonusItem(new 洩矢諏訪子のカード(p), 6, Enchant.DEF));
 	}
 
 	@Override

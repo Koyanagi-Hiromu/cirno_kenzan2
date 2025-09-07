@@ -7,6 +7,7 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.霊烏路空のカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
@@ -43,7 +44,7 @@ public class Class人工太陽旧 extends BaseClassJob {
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
 		SpellCard[] a = { new 霊烏路空のカード(p) };
 		for (SpellCard s : a) {
-			list.add(new BonusItem(s, 6));
+			list.add(new BonusItem(s, 6, Enchant.ATK));
 		}
 	}
 

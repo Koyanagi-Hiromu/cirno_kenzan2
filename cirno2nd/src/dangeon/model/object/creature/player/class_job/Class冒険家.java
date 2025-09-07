@@ -7,6 +7,7 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.food.大きなおにぎり;
 import dangeon.model.object.artifact.item.scrool.明かりの書;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
+import dangeon.model.object.artifact.item.spellcard.大妖精のカード;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
@@ -32,7 +33,7 @@ public class Class冒険家 extends BaseClassJob {
 
 	@Override
 	protected void bonusLv3(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new 明かりの書(p)));
+		list.add(new BonusItem(new 大妖精のカード(p)));
 	}
 
 	@Override

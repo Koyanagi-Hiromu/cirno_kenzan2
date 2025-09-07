@@ -8,7 +8,9 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.霊烏路空のカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
+import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import dangeon.model.object.creature.player.class_job.bonus.spec.Bonus人工太陽;
@@ -42,6 +44,7 @@ public class Class人工太陽 extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
+		list.add(new BonusItem(new 霊烏路空のカード(p), 6, Enchant.ATK));
 		list.add(new BonusSimbol(ENCHANT_SIMBOL.核爆発));
 		list.add(new Bonus人工太陽(this));
 	}

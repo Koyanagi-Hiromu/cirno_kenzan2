@@ -2,38 +2,41 @@ package dangeon.model.object.creature.player.class_job.bonus;
 
 import java.util.ArrayList;
 
-import main.util.半角全角コンバーター;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
+import dangeon.model.object.creature.player.Enchant;
+import main.util.半角全角コンバーター;
 
 public class BonusItem extends BaseBonus {
 	private static final long serialVersionUID = 1L;
 	public int how_many = 1;
 
 	public final Base_Artifact bonus_item;
+	public Enchant enchantSlot;
 
 	public BonusItem(Base_Artifact a) {
-		this(a, 1);
+		this(a, 1, null);
 	}
 
-	public BonusItem(Base_Artifact s, int utsuwa) {
+	public BonusItem(Base_Artifact s, int utsuwa, Enchant enchantSlot) {
 		if (s instanceof SpellCard) {
 			s.composition_number = utsuwa;
 			if (s.composition_number > 9) {
 				s.composition_number = 9;
 			}
 		}
+		this.enchantSlot = enchantSlot;
 		bonus_item = s.createSpellCard(false, 0);
 	}
 
 	public BonusItem(int how_many, Base_Artifact a) {
-		this(a, 1);
+		this(a, 1, null);
 		this.how_many = how_many;
 	}
 
 	public BonusItem(SpellCard s) {
-		this(s, s.composition_number);
+		this(s, s.composition_number, null);
 	}
 
 	@Override
@@ -41,6 +44,8 @@ public class BonusItem extends BaseBonus {
 			ArrayList<ENCHANT_SIMBOL> list2) {
 		for (int i = 0; i < how_many; i++) {
 			list1.add(bonus_item);
+			if (enchantSlot != null)
+				enchantSlot.setEnchant(bonus_item);
 		}
 	}
 

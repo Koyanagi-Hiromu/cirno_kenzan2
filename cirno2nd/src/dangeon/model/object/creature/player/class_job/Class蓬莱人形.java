@@ -9,6 +9,7 @@ import dangeon.model.object.artifact.item.grass.妹切草;
 import dangeon.model.object.artifact.item.grass.鳳凰の種;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.藤原妹紅のカード;
+import dangeon.model.object.creature.player.Enchant;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItems;
@@ -45,7 +46,7 @@ public class Class蓬莱人形 extends BaseClassJob {
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusItem(new 藤原妹紅のカード(p), 6));
+		list.add(new BonusItem(new 藤原妹紅のカード(p), 6, Enchant.ATK));
 		list.add(new BonusItem(new 妹切草(p)));
 		list.add(new BonusSwitch(this, 2, "復活と同時に炎上状態"));
 		list.add(new BonusSwitch(this, 1, "階段を降りてもアイテムが冷えない"));
