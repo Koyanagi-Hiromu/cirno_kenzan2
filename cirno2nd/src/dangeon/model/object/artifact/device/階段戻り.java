@@ -2,12 +2,15 @@ package dangeon.model.object.artifact.device;
 
 import java.awt.Point;
 
-import main.res.Image_Artifact;
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.menu.view.result.Scene_Result_Info;
 import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
 import dangeon.model.map.field.random.Base_Map_Random;
+import dangeon.model.map.field.random.ミラクルクエスト;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.object.creature.player.Player;
+import main.res.Image_Artifact;
 
 public class 階段戻り extends Stairs {
 
@@ -32,6 +35,17 @@ public class 階段戻り extends Stairs {
 		StoryManager flag = BMR.getStoryManager_ClearFlag();
 		if (flag != null)
 			flag.saveThisFinished();
+
+		if (BMR instanceof ミラクルクエスト)
+		{
+			Medal medal = Player.me.getClassJob().getMedal_ミラクルクエスト();
+			medal.saveLevel(Config.getFate() + 1);
+		}
+		else if (BMR instanceof 七曜クエスト)
+		{
+			Medal medal = Player.me.getClassJob().getMedal_七曜クエスト();
+			medal.saveLevel(Config.getFate() + 1);
+		}
 		//
 		// for (Enchant enc : Enchant.values()) {
 		// if (Boolean.TRUE.equals(Player.me.hash_restriction.get(enc))) {

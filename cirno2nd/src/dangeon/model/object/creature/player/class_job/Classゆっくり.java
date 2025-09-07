@@ -3,8 +3,8 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.res.SE;
 import dangeon.controller.task.Task;
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
@@ -15,8 +15,13 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusEndTurnAction;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusStatus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
+import main.res.SE;
 
 public class Classゆっくり extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Classゆっくり; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Classゆっくり_七曜; }
 
 	private static final long serialVersionUID = 1L;
 	private int turn_count = 0;

@@ -541,7 +541,7 @@ public class ミラクルクエスト extends Base_Map_Random {
 			npc.setCondition(CONDITION.透明, 0);
 			add(npc);
 		}
-		if (Config.getKsg1Score() > 50)
+		if (Config.getKsg1Score() > 10)
 			add(new ClassJobNpc(new Class半人半霊(), 16, 15, DIRECTION.RIGHT));
 		if (Medal.ナイフをまとめて投げて敵を倒した.hasFinished())
 			add(new ClassJobNpc(new Classナイフマスター(), 19, 17, DIRECTION.UP));

@@ -3,12 +3,17 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.res.CHARA_IMAGE;
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
+import main.res.CHARA_IMAGE;
 
 public class Class冒険家 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Class冒険家; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Class冒険家_七曜; }
 
 	private static final long serialVersionUID = 1L;
 

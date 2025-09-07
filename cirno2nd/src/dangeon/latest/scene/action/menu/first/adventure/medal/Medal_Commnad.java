@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
@@ -15,6 +13,8 @@ import dangeon.latest.system.KeyHolder;
 import dangeon.latest.util.view_window.StringOnlyWindow;
 import dangeon.latest.util.view_window.UnderMenuWindow;
 import dangeon.view.constant.NormalFont;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public class Medal_Commnad extends Base_Scene_Menu {
 	private Base_Scene BACK;
@@ -66,7 +66,7 @@ public class Medal_Commnad extends Base_Scene_Menu {
 	@Override
 	protected UnderMenuWindow initializeSubWindow() {
 		setArray();
-		sub_left_window = new StringOnlyWindow(6, 24, 289,
+		sub_left_window = new StringOnlyWindow(6, 5, 289,
 				NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE), array);
 		return new UnderMenuWindow(2, Message.Y + 23) {
 			@Override
@@ -85,7 +85,7 @@ public class Medal_Commnad extends Base_Scene_Menu {
 	}
 
 	private void setArray() {
-		array = new String[12];
+		array = new String[13];
 		for (int i = 0; i < array.length; i++) {
 			array[i] = "";
 		}

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dangeon.controller.task.Task;
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
@@ -42,6 +43,11 @@ public abstract class BaseClassJob implements Serializable {
 
 	public BaseClassJob() {
 		s = getRep();
+		if (getMedal_ミラクルクエスト() != null)
+			getMedal_ミラクルクエスト().saveLevel(5);
+		
+		if (getMedal_七曜クエスト() != null)
+			getMedal_七曜クエスト().saveLevel(5);
 	}
 
 	public void addCondition(CONDITION condition, int time) {
@@ -79,6 +85,9 @@ public abstract class BaseClassJob implements Serializable {
 	public String className() {
 		return this.getClass().getSimpleName().substring(5);
 	}
+	
+	public abstract Medal getMedal_ミラクルクエスト();
+	public abstract Medal getMedal_七曜クエスト();
 
 	protected abstract void firstDemerite(ArrayList<BaseBonus> l, Point p);
 

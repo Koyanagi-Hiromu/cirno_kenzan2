@@ -1,5 +1,7 @@
 package dangeon.latest.scene.action.menu.first.adventure.medal;
 
+import dangeon.model.config.StoryManager;
+
 public class MedalPageFactory {
 	public Base_MedalPage create(int index) {
 		int page = index + 1;
@@ -18,13 +20,20 @@ public class MedalPageFactory {
 			return new MedalPage_6();
 		case 7:
 			return new MedalPage_7();
+		case 8:
+			return new MedalPage_8();
+		case 9:
+			return new MedalPage_9();
 		default:
 			return new MedalPage_1();
 		}
 	}
 
 	public int length() {
-		return 7;
+		if (StoryManager.七曜クエストok.hasFinished())
+			return 9;
+		else 
+			return 8;
 	}
 
 }

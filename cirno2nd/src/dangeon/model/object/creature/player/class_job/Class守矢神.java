@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.八坂神奈子のカード;
@@ -14,6 +15,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 
 public class Class守矢神 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Class守矢神; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Class守矢神_七曜; }
 
 	private static final long serialVersionUID = 1L;
 

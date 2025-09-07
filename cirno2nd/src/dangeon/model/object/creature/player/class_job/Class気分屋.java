@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.scrool.解凍の書;
@@ -16,6 +17,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import dangeon.util.R;
 
 public class Class気分屋 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Class気分屋; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Class気分屋_七曜; }
 
 	private static final long serialVersionUID = 1L;
 

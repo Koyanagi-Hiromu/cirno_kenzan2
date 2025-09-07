@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.grass.鳳凰の種;
 import dangeon.model.object.artifact.item.pot.賢将の瓶;
@@ -14,6 +15,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 
 public class Class賢将 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return null; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return null; }
 
 	private static final long serialVersionUID = 1L;
 

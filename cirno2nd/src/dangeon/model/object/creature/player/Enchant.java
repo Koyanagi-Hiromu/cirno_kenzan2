@@ -470,11 +470,18 @@ public enum Enchant {
 		Base_Artifact old = enchanted_now;
 		setEnchant(selected_artifact);
 		SE.SYSTEM_ENCHANT.play();
-		if (selected_artifact instanceof SpellCard && !selected_artifact.isStaticCheked())
+		if (selected_artifact instanceof SpellCard)
 		{
-			selected_artifact.check();
-			if (ItemTable.getRank(selected_artifact) >= 3)
-				View_Sider.setInformation("出現度：", ItemTable.getRank_String(selected_artifact));
+			if (!selected_artifact.isStaticCheked())
+			{
+				selected_artifact.check();
+				if (ItemTable.getRank(selected_artifact) >= 3)
+					View_Sider.setInformation("出現度：", ItemTable.getRank_String(selected_artifact));
+			}
+			else
+			{
+				selected_artifact.check();
+			}
 		}
 		if (old == null) {
 			Message.set(enchanted_now.getColoredName().concat("を")

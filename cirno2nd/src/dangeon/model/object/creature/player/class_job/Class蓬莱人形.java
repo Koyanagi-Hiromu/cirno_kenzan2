@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.item.grass.妹切草;
 import dangeon.model.object.artifact.item.grass.鳳凰の種;
@@ -15,6 +16,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusStatus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 
 public class Class蓬莱人形 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Class蓬莱人形; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Class蓬莱人形_七曜; }
 
 	private static final long serialVersionUID = 1L;
 

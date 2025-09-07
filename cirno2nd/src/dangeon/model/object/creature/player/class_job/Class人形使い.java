@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.アリスのカード;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
@@ -11,6 +12,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import dangeon.model.object.creature.player.class_job.bonus.spec.Bonus人形使い;
 
 public class Class人形使い extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Class人形使い; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Class人形使い_七曜; }
 	private static final long serialVersionUID = 1L;
 
 	@Override

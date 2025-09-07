@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.風見幽香のカード;
@@ -13,6 +14,11 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import dangeon.model.object.creature.player.class_job.bonus.spec.Bonusフラワーマスター;
 
 public class Classフラワーマスター extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Classフラワーマスター; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Classフラワーマスター_七曜; }
+
 	private static final long serialVersionUID = 1L;
 
 	@Override

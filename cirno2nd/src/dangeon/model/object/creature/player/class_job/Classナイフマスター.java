@@ -7,17 +7,16 @@ import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.十六夜咲夜のカード;
-import dangeon.model.object.artifact.item.spellcard.鬼人正邪のカード;
-import dangeon.model.object.artifact.item.staff.一時しのぎの杖;
-import dangeon.model.object.artifact.item.staff.倍速の杖;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
-import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import dangeon.model.object.creature.player.class_job.bonus.spec.Bonusナイフマスター;
-import dangeon.model.object.creature.player.class_job.bonus.spec.Bonus風水師;
 
 public class Classナイフマスター extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Classナイフマスター; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Classナイフマスター_七曜; }
 
 	private static final long serialVersionUID = 1L;
 

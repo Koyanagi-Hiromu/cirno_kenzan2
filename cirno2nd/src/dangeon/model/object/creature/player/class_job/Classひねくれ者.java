@@ -3,6 +3,7 @@ package dangeon.model.object.creature.player.class_job;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.鬼人正邪のカード;
 import dangeon.model.object.artifact.item.staff.一時しのぎの杖;
@@ -12,6 +13,10 @@ import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 
 public class Classひねくれ者 extends BaseClassJob {
+	@Override
+	public Medal getMedal_ミラクルクエスト() { return Medal.Classひねくれ者; }
+	@Override
+	public Medal getMedal_七曜クエスト() { return Medal.Classひねくれ者_七曜; }
 
 	private static final long serialVersionUID = 1L;
 
