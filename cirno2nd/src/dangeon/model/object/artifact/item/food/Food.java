@@ -1,5 +1,6 @@
 package dangeon.model.object.artifact.item.food;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
 
@@ -115,7 +116,7 @@ public abstract class Food extends Base_Item {
 	public final Boolean exchange() {
 		if (BonusConductor.宵闇妖怪())
 		{
-			Message.set("宵闇妖怪は", getColoredName(), "を拾えない");
+			Message.set(Color.gray + "宵闇妖怪"+ Color.white + "は", getColoredName(), "を拾えない");
 			return true;
 		}
 		else
@@ -134,10 +135,10 @@ public abstract class Food extends Base_Item {
 	public boolean itemPickUp() {
 		if (BonusConductor.宵闇妖怪())
 		{
-			Message.set("宵闇妖怪は", getColoredName(), "を拾えない");
+			Message.set(Color.gray + "宵闇妖怪"+ Color.white + "は", getColoredName(), "を拾えない");
 			return false;
 		}
 		else
-			return itemPickUp();
+			return super.itemPickUp();
 	}
 }

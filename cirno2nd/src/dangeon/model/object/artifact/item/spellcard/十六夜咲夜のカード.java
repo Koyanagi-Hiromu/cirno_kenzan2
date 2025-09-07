@@ -101,7 +101,7 @@ public class 十六夜咲夜のカード extends SpellCard {
 
 	@Override
 	protected boolean spellUse() {
-		Message.set("３秒間だけ時間を止めたわ");
+		Message.set("２秒間だけ時間を止めたわ");
 		TurnSystemController.setTimeStop(3);
 		return true;
 	}

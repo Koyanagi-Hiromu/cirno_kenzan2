@@ -50,7 +50,6 @@ import dangeon.model.object.creature.player.class_job.Class気分屋;
 import dangeon.model.object.creature.player.class_job.Class蓬莱人形;
 import dangeon.model.object.creature.player.class_job.Class風水師;
 import dangeon.model.object.creature.player.class_job.クラス箱;
-import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
 import dangeon.util.R;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
@@ -239,10 +238,12 @@ public class ミラクルクエスト extends Base_Map_Random {
 							ArrayList<Base_Artifact> list = new ArrayList<Base_Artifact>();
 							job.setSaisenListLv(0, list);
 							if (!list.isEmpty()) {
-								Point p = new Point(19, 15);
-								MainMap.addEffect(new DoronEffect(p, null,
-										true, false), false);
-								MapList.addEnemy(new クラス箱(p, list));
+								for(Base_Artifact a : list)
+									Belongings.setItems(a);
+//								Point p = new Point(19, 15);
+//								MainMap.addEffect(new DoronEffect(p, null,
+//										true, false), false);
+//								MapList.addEnemy(new クラス箱(p, list));
 							}
 							ConvEvent cne = new ConvEvent() {
 								@Override
@@ -307,7 +308,7 @@ public class ミラクルクエスト extends Base_Map_Random {
 		public void message() {
 			if (checkDefault()) {
 				ask();
-			} else if (check(job.getClass())) {
+			} else {
 				Message.set("【出現条件】", job.getSwitchExp());
 			}
 		}
@@ -360,15 +361,6 @@ public class ミラクルクエスト extends Base_Map_Random {
 				return new R().nextInt(3) + new R().nextInt(2) + 2;
 			}
 		}
-	}
-
-	@Override
-	public int getBelongingsMax() {
-		int max = super.getBelongingsMax();
-		if (BonusConductor.カリスマ_minus20()) {
-			max -= 20;
-		}
-		return max;
 	}
 
 	@Override
@@ -483,7 +475,7 @@ public class ミラクルクエスト extends Base_Map_Random {
 
 	@Override
 	protected AbstractList<Base_MapObject> getObjectList() {
-		add(new Stairs(new Point(19, 13)) {
+		add(new Stairs(new Point(19, 14)) {
 			private static final long serialVersionUID = 1L;
 
 			private void checkPlain() {

@@ -5,14 +5,12 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
-import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
-import dangeon.model.object.artifact.item.pot.お祓いの瓶;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.spellcard.アリスのカード;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
 import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
-import dangeon.model.object.creature.player.class_job.bonus.BonusSimbol;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
+import dangeon.model.object.creature.player.class_job.bonus.spec.Bonus人形使い;
 
 public class Class人形使い extends BaseClassJob {
 	@Override
@@ -29,26 +27,25 @@ public class Class人形使い extends BaseClassJob {
 	@Override
 	protected void bonusLv2(ArrayList<BaseBonus> list, Point p) {
 //		list.add(new BonusSwitch(this, 4, "人形が前進駆動する"));
-		list.add(new BonusSimbol(ENCHANT_SIMBOL.邪));
+//		list.add(new BonusSimbol(ENCHANT_SIMBOL.邪));
 	}
 
 	@Override
 	protected void bonusLv3(ArrayList<BaseBonus> list, Point p) {
 //		list.add(new BonusSwitch(this, 2, "爆発威力が増加　壁も壊れる"));
 //		list.add(new BonusSwitch(this, 5, "人形の寿命が低下"));
+//		list.add(new BonusSwitch(this, 5, "人形の寿命が低下"));
 	}
 
 	@Override
 	protected void firstDemerite(ArrayList<BaseBonus> list, Point p) {
-//		list.add(new BonusSwitch(this, 0, "最大HPの増加度が２５％減"));
-		list.add(new BonusSwitch(this, 100, "アイテムが呪われている確率が高い"));
+		list.add(new BonusSwitch(this, 0, "最大HPの増加度が半減"));
 	}
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
 		list.add(new BonusItem(new アリスのカード(p), 6));
-		list.add(new BonusItem(new お祓いの瓶(p, 4)));
-//		list.add(new Bonus人形使い(this));
+		list.add(new Bonus人形使い(this));
 	}
 
 	@Override

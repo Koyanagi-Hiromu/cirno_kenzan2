@@ -105,6 +105,10 @@ public class BonusConductor {
 	public static boolean 守矢神_口封じ() {
 		return check(Class守矢神.class, 0);
 	}
+	
+	public static boolean 人形使い_所持数増加() {
+		return true;//check(Class人形使い.class, 0);
+	}
 
 	public static boolean 人形使い_HP上昇制限() {
 		return check(Class人形使い.class, 1);

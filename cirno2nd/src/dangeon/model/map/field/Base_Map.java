@@ -86,6 +86,9 @@ public abstract class Base_Map implements Serializable {
 	}
 
 	public int getBelongingsMax() {
+//		if (BonusConductor.人形使い_所持数増加())
+//			return Belongings.MAX + 10;
+//		else
 		return Belongings.MAX;
 	}
 

@@ -721,9 +721,9 @@ public class TurnSystemController {
 		time_stop_count--;
 		time_stop_count2++;
 		Message.set(半角全角コンバーター.半角To全角数字(time_stop_count2), "秒経過！");
-		if (time_stop_count <= 0) {
+		if (time_stop_count <= 1) {
 			removeTimeStop();
-			return false;
+			return true;
 		} else if (time_stop_count2 == 5) {
 			Message.set("ふはは、まだまだ止めていられるぞ！");
 		}

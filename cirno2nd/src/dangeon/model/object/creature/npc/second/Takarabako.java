@@ -40,9 +40,6 @@ public class Takarabako extends Base_NPC {
 	protected Task getAttackTask(final Base_Creature active,
 			final Base_Creature passive) {
 		return new Task() {
-			/**
-			 *
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -91,5 +88,4 @@ public class Takarabako extends Base_NPC {
 		setMAX_HP(HP = ItemTable.getRank(item) * 2 - 1);
 		setENEMY_EXP(0);
 	}
-
 }

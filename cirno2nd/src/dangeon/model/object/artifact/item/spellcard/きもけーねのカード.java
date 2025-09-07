@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
@@ -10,6 +9,7 @@ import dangeon.model.object.creature.enemy.きもけーね;
 import dangeon.model.object.creature.enemy.上白沢慧音;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.util.MapInSelect;
+import main.res.SE;
 
 public class きもけーねのカード extends SpellCard {
 
@@ -22,7 +22,7 @@ public class きもけーねのカード extends SpellCard {
 	private static final int composition = 6;
 	private static final int item_str = 11;
 	private static final int item_def = 11;
-	private static final boolean passing_of_spell = false;
+	private static final boolean passing_of_spell = true;
 
 	private static final String[] EXPLAN = new String[] { "1つ前の階に戻るぞ" };
 

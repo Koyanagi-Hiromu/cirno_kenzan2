@@ -276,7 +276,7 @@ public class Player extends Base_Creature {
 				delt = 2;
 		}
 		if (BonusConductor.人形使い_HP上昇制限()) {
-			delt = delt * 3 / 4;
+			delt = delt / 2;
 		}
 		super.addMAX_HP(delt);
 		Medal.最高HP.save_the_more(getMAX_HP());
