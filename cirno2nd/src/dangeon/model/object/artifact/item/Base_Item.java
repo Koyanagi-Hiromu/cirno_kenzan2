@@ -153,8 +153,10 @@ public abstract class Base_Item extends Base_Artifact {
 				// } else {
 				return Color.YELLOW.toString().concat("？？？？");
 				// }
-			} else
+			} else if (Checker.isStaticChecked(this))
 				return getTrueName();
+			else
+				return Color.YELLOW + getTrueName() + Color.WHITE;
 		}
 		StringBuilder sb = new StringBuilder();
 		if (icon) {
