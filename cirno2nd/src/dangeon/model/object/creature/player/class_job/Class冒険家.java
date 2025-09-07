@@ -4,8 +4,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
+import dangeon.model.object.artifact.item.food.大きなおにぎり;
+import dangeon.model.object.artifact.item.scrool.明かりの書;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.creature.player.class_job.bonus.BaseBonus;
+import dangeon.model.object.creature.player.class_job.bonus.BonusItem;
 import dangeon.model.object.creature.player.class_job.bonus.BonusSwitch;
 import main.res.CHARA_IMAGE;
 
@@ -19,14 +22,17 @@ public class Class冒険家 extends BaseClassJob {
 
 	@Override
 	protected void bonusLv1(ArrayList<BaseBonus> list, Point p) {
+		list.add(new BonusItem(new 大きなおにぎり(p)));
 	}
 
 	@Override
 	protected void bonusLv2(ArrayList<BaseBonus> list, Point p) {
+		list.add(new BonusItem(new 明かりの書(p)));
 	}
 
 	@Override
 	protected void bonusLv3(ArrayList<BaseBonus> list, Point p) {
+		list.add(new BonusItem(new 明かりの書(p)));
 	}
 
 	@Override
