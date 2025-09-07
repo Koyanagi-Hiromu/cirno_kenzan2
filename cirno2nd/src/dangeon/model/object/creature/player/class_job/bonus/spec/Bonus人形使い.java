@@ -33,7 +33,7 @@ public class Bonus人形使い extends BonusSpecialAction {
 				final Point p = Player.me.getMassPoint().getLocation();
 				DIRECTION d = Player.me.getDirection();
 				final 人形 c = new 人形(p, 1, false).setDollDirection(d);
-				MapList.addEnemy(c);
+				MapList.addEnemy(c, true);
 				c.changeSize(-100);
 				d.getFrontPoint(p);
 				d.getFrontPoint(p);

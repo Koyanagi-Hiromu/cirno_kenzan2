@@ -4,7 +4,6 @@ import java.awt.Point;
 
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
-import dangeon.model.condition.CONDITION;
 import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
@@ -59,8 +58,7 @@ public class アリスのカード extends SpellCard {
 						@Override
 						protected void work(int frame) {
 							if (frame == 4) {
-								MapList.addEnemy(new 人形(_p, 1)
-										.setConditionList(CONDITION.死, 99));
+								MapList.addEnemy(new 人形(_p, 1), true);
 							}
 						}
 					}), true);
@@ -142,10 +140,10 @@ public class アリスのカード extends SpellCard {
 
 	@Override
 	protected boolean spellUse() {
-		if (MapList.isEnemyMax()) {
-			Message.set("「敵がフロアにいすぎて作り出せないわ」");
-			return false;
-		}
+//		if (MapList.isEnemyMax()) {
+//			Message.set("「敵がフロアにいすぎて作り出せないわ」");
+//			return false;
+//		}
 		effect();
 		Message.set("人形を作り出した");
 		return true;

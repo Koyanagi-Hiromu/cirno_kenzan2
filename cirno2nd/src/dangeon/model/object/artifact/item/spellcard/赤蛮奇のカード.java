@@ -110,7 +110,7 @@ public class 赤蛮奇のカード extends SpellCard {
 			return false;
 		}
 		final 赤蛮奇_頭 hEAD = new 赤蛮奇_頭(set, 1, false);
-		MapList.addEnemy(hEAD);
+		MapList.addEnemy(hEAD, true);
 		MainMap.addEffect(new DoronEffect(set, null, true));
 		return true;
 	}
@@ -119,10 +119,6 @@ public class 赤蛮奇のカード extends SpellCard {
 	protected boolean spellUse() {
 		if (MassCreater.getRoom(Player.me.getMassPoint()) == null) {
 			Message.set("「……部屋内で使用してよね」");
-			return false;
-		}
-		if (MapList.isEnemyMax()) {
-			Message.set("「……不思議なちからで１つも頭が飛ばせないわ」");
 			return false;
 		}
 		int count = 9;

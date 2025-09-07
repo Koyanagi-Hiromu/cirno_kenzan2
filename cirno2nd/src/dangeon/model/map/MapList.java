@@ -8,10 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import main.res.BGM;
-import main.res.SE;
-import main.util.DIRECTION;
-import main.util.FrameShaker;
 import dangeon.controller.TurnSystemController;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
@@ -45,6 +41,10 @@ import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
 import dangeon.view.detail.View_Sider;
 import dangeon.view.util.WithinOutofScreen;
+import main.res.BGM;
+import main.res.SE;
+import main.util.DIRECTION;
+import main.util.FrameShaker;
 
 /**
  * マップ内にあるオブジェクト管理クラス
@@ -126,6 +126,22 @@ public class MapList implements Serializable {
 	 */
 	public synchronized static boolean addEnemy(Base_Enemy em) {
 		if (isEnemyMax()) {
+			return false;
+		}
+		if (MassCreater.getMass(em.getMassPoint()).WATER && !em.isWatering())
+			return false;
+		em.setSize();
+		list_enemy.add(em);
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param em
+	 * @return !isEnemyMax() && water...
+	 */
+	public synchronized static boolean addEnemy(Base_Enemy em, boolean ignoreMax) {
+		if (!ignoreMax && isEnemyMax()) {
 			return false;
 		}
 		if (MassCreater.getMass(em.getMassPoint()).WATER && !em.isWatering())

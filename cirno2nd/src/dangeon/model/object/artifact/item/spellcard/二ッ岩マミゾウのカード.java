@@ -133,7 +133,7 @@ public class 二ッ岩マミゾウのカード extends SpellCard {
 					@Override
 					protected void work(int frame) {
 						if (frame == 4) {
-							MapList.addEnemy(new 人形(_p, e.getConvertedLV()));
+							MapList.addEnemy(new 人形(_p, e.getConvertedLV()), true);
 						}
 					}
 				}), true);
