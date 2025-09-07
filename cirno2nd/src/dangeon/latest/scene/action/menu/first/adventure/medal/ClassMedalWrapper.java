@@ -13,20 +13,30 @@ public class ClassMedalWrapper extends MedalWrapper
 	@Override
 	public String toString() {
 		StringBuilder flags = new StringBuilder();
-		append(flags, Difficulty.Easy, medal.isLevel(1));
-		append(flags, Difficulty.Normal, medal.isLevel(2));
-		append(flags, Difficulty.Hard, medal.isLevel(3));
+		append(flags, Difficulty.Easy, medal.getDightNumber(1));
+		append(flags, Difficulty.Normal, medal.getDightNumber(2));
+		append(flags, Difficulty.Hard, medal.getDightNumber(3));
 		flags.append(" ");
 		flags.append(medal);
 		return flags.toString();
 	}
 	
-	void append(StringBuilder sb, Difficulty diff, boolean cleared)
+	void append(StringBuilder sb, Difficulty diff, int number)
 	{
 //			sb.append("[");
-		if (cleared)
+		if (number == 9)
 		{
 			sb.append(diff.COLOR);
+			sb.append("★");
+		}
+		else if (number == 8)
+		{
+			sb.append(diff.COLOR);
+			sb.append("■");
+		}
+		else if (number == 1)
+		{
+			sb.append(Color.lightGray);
 			sb.append("■");
 		}
 		else

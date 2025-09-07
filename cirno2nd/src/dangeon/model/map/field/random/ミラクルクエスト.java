@@ -23,6 +23,7 @@ import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
 import dangeon.model.map.field.Base_Map;
 import dangeon.model.map.field.random.bossmap.BossMap_Hisoutensoku;
+import dangeon.model.map.field.random.second.七曜クエスト;
 import dangeon.model.map.field.special.map.BossMap;
 import dangeon.model.map.field.special.map.EndingMap;
 import dangeon.model.map.field.special.map.GouseiMap;
@@ -148,7 +149,18 @@ public class ミラクルクエスト extends Base_Map_Random {
 			flag_lvup = true;
 			SE.FANFARE2.play();
 			ArrayList<Base_Artifact> list = new ArrayList<Base_Artifact>();
-			Player.me.getClassJob().addLv(list);
+			int nextLevel = Player.me.getClassJob().addLv(list);
+			if (ミラクルクエスト.this instanceof 七曜クエスト)
+			{
+				Medal medal = Player.me.getClassJob().getMedal_七曜クエスト();
+				medal.saveLevel(Config.getFate() + 1, nextLevel);
+			}
+			else
+			{
+				Medal medal = Player.me.getClassJob().getMedal_ミラクルクエスト();
+				medal.saveLevel(Config.getFate() + 1, nextLevel);
+			} 
+			
 			if (!list.isEmpty()) {
 				Point p = getMassPoint().getLocation();
 				p.translate(2, 0);

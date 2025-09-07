@@ -35,16 +35,16 @@ public class 階段戻り extends Stairs {
 		StoryManager flag = BMR.getStoryManager_ClearFlag();
 		if (flag != null)
 			flag.saveThisFinished();
-
-		if (BMR instanceof ミラクルクエスト)
-		{
-			Medal medal = Player.me.getClassJob().getMedal_ミラクルクエスト();
-			medal.saveLevel(Config.getFate() + 1);
-		}
-		else if (BMR instanceof 七曜クエスト)
-		{
-			Medal medal = Player.me.getClassJob().getMedal_七曜クエスト();
-			medal.saveLevel(Config.getFate() + 1);
+		
+		Medal medal = null;
+		if (BMR instanceof 七曜クエスト)
+			medal = Player.me.getClassJob().getMedal_七曜クエスト();
+		else if (BMR instanceof ミラクルクエスト)
+			medal = Player.me.getClassJob().getMedal_ミラクルクエスト();
+		
+		if (medal != null) {
+			boolean perfect = Config.getRetryNumber() == 3;
+			medal.saveLevel(Config.getFate() + 1, perfect ? 9 : 8);
 		}
 		//
 		// for (Enchant enc : Enchant.values()) {

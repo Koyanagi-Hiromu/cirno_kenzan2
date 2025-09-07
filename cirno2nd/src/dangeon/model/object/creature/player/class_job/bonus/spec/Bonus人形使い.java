@@ -43,7 +43,7 @@ public class Bonus人形使い extends BonusSpecialAction {
 					@Override
 					public void work() {
 						TaskOnMapObject.addEnemyRemoveTask(c);
-						MainMap.addEffect(new ExplosionEffect(p, null));
+						MainMap.addEffect(new ExplosionEffect(p, null), true);
 						for (DIRECTION d : DIRECTION.values()) {
 							Base_Creature passive = MapList.getCreature(d.getFrontPoint(p
 									.getLocation()));

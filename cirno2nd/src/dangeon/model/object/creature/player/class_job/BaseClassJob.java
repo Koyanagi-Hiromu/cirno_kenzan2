@@ -44,10 +44,10 @@ public abstract class BaseClassJob implements Serializable {
 	public BaseClassJob() {
 		s = getRep();
 		if (getMedal_ミラクルクエスト() != null)
-			getMedal_ミラクルクエスト().saveLevel(5);
+			getMedal_ミラクルクエスト().saveLevel(5, 1);
 		
 		if (getMedal_七曜クエスト() != null)
-			getMedal_七曜クエスト().saveLevel(5);
+			getMedal_七曜クエスト().saveLevel(5, 1);
 	}
 
 	public void addCondition(CONDITION condition, int time) {

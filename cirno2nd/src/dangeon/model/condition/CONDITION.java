@@ -158,8 +158,8 @@ public enum CONDITION {
 				return true;
 			case やりすごし:
 				if (creature == Player.me
-						&& !EnchantSpecial
-								.enchantSimbolAllCheck(ENCHANT_SIMBOL.食)) {
+						&& !EnchantSpecial.enchantSimbolAllCheck(ENCHANT_SIMBOL.食)
+						&& !EnchantSpecial.enchantSimbolAllCheck(ENCHANT_SIMBOL.剣)) {
 					TurnSystemController.setPlayerConditionSleep();
 					TurnSystemController.callMeToStartEnemyTurn(true);
 					return true;

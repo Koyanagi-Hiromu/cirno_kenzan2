@@ -169,10 +169,11 @@ public enum Medal {
 		}
 	}
 	
-	public void saveLevel(int lv)
+	public void saveLevel(int dight, int nextNum)
 	{
-		if (!isLevel(lv))
-			save(getCount() + pow10(lv));
+		int prevNum = getDightNumber(dight); 
+		if (prevNum < nextNum)
+			save(getCount() + pow10(dight) * (nextNum - prevNum));
 	}
 	
 	int pow10(int dight)
@@ -194,24 +195,24 @@ public enum Medal {
 		}
 	}
 	
-	public boolean isLevel(int lv)
+	public int getDightNumber(int dight)
 	{
-		long x = getCount();
+		int x = (int)getCount();
 		
-		switch(lv)
+		switch(dight)
 		{
 			case 1:
-				return x % 10 > 0;
+				return x % 10;
 			case 2:
-				return (x / 10) % 10 > 0;
+				return (x / 10) % 10;
 			case 3:
-				return (x / 100) % 10 > 0;
+				return (x / 100) % 10;
 			case 4:
-				return (x / 1000) % 10 > 0;
+				return (x / 1000) % 10;
 			case 5:
-				return (x / 10000) % 10 > 0;
+				return (x / 10000) % 10;
 			default:
-		        return (x / (int)Math.pow(10, lv - 1)) % 10 > 0;
+		        return (x / (int)Math.pow(10, dight - 1)) % 10;
 		}
 	}
 
