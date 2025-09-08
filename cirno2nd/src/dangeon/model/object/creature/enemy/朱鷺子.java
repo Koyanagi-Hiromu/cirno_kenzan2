@@ -513,6 +513,9 @@ public class 朱鷺子 extends __店主 {
 		}
 		SE.SYSTEM_SCROLL.play();
 		Message.set(getColoredName(), "は", book.getColoredName(), "を読んだ");
+		if (!book.isStaticCheked()) {
+			book.staticCheck();
+		}
 		if (book.isCurse() && !flag_decurse) {
 		} else if (book.getClass() == おにぎりの書.class) {
 			Message.set("「ランダムで１キャラに奇跡の効果！」");
@@ -574,9 +577,7 @@ public class 朱鷺子 extends __店主 {
 		} else if (book.getClass() == 罠師の書.class) {
 			Message.set("「たくさん罠を作っちゃうよ！」");
 		}
-		if (!book.isStaticCheked()) {
-			book.staticCheck();
-		}
+		
 		SE.SYSTEM_USING_SPELLCARD.play();
 		setAnimation(new CardAnime(new 朱鷺子のカード(mass_point) {
 			private static final long serialVersionUID = 1L;
@@ -620,7 +621,7 @@ public class 朱鷺子 extends __店主 {
 
 	@Override
 	protected void wasshoi() {
-		switch (new R().nextInt(4)) {
+		switch (new R().nextInt(5)) {
 		case 0:
 			say("ゆっくりしていってね！");
 			break;
@@ -632,6 +633,9 @@ public class 朱鷺子 extends __店主 {
 			break;
 		case 3:
 			say("静かに本を読んで暮らしたいかな");
+			break;
+		case 4:
+			say("本を投げてくれたら代わりの本を１つあげるよ");
 			break;
 		}
 	}

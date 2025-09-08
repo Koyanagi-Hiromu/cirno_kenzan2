@@ -29,7 +29,7 @@ import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.device.Stairs;
 import dangeon.model.object.artifact.item.arrow.鉄の矢;
 import dangeon.model.object.artifact.item.check.Checker;
-import dangeon.model.object.artifact.item.scrool.幻想郷縁起;
+import dangeon.model.object.artifact.item.scrool.グリモワール2;
 import dangeon.model.object.artifact.item.scrool.慧音の歴史書;
 import dangeon.model.object.artifact.item.scrool.自由人の狂想曲;
 import dangeon.model.object.creature.npc.second.Takarabako;
@@ -53,7 +53,8 @@ public class 七曜クエスト extends ミラクルクエスト {
 				44, BGM.kanpyo_ch2_hexa, Image_MapTip.草原_秋, "来世の木曜日"), レジスタンスベース(
 				60, BGM.to_kou_chiruno, Image_MapTip.スキマ, "氾濫の金曜日"), 星に願いを(74,
 				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "祈りの土曜日"), 誰もいなくなるのか(
-				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水, "賢者の冥日"),
+				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水, "王家の天日"), 運命のラプソディ(100,
+				BGM.kanpyo_ch2_bbcc, Image_MapTip.地霊殿, "賢者の冥日")
 
 		;
 		private static FloorConducter get() {
@@ -270,7 +271,7 @@ public class 七曜クエスト extends ミラクルクエスト {
 
 				@Override
 				public void appearStair() {
-					幻想郷縁起 a = new 幻想郷縁起(boss.getMassPoint());
+					グリモワール2 a = new グリモワール2(boss.getMassPoint());
 					Checker.checkStatic(a);
 					ItemFall.itemFall(a);
 					super.appearStair();

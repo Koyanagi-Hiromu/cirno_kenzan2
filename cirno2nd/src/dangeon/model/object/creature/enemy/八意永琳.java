@@ -2,8 +2,8 @@ package dangeon.model.object.creature.enemy;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.util.List;
 
-import main.util.DIRECTION;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
@@ -16,6 +16,7 @@ import dangeon.model.object.artifact.item.grass.胃拡張の種;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
+import main.util.DIRECTION;
 
 public class 八意永琳 extends Base_Enemy {
 
@@ -132,10 +133,9 @@ public class 八意永琳 extends Base_Enemy {
 			return new 混乱草(getMassPoint());
 		} else {
 			if (LV == 4) {
-				Base_Creature aimed_creature = MapInSelect
-						.getListStraightHitCreature(direction, getMassPoint(),
-								10).get(0);
-				if (aimed_creature != null) {
+				List<Base_Creature> list = MapInSelect.getListStraightHitCreature(direction, getMassPoint(), 10);
+				if (!list.isEmpty()) {
+					Base_Creature aimed_creature = list.get(0);
 					for (DIRECTION d : DIRECTION.values()) {
 						Base_Creature surrounded_creature = MapList
 								.getCreature(d.getFrontPoint(aimed_creature
