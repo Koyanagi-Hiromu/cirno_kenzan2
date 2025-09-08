@@ -1,6 +1,5 @@
 package dangeon.model.object.creature.player.class_job;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -49,12 +48,6 @@ public class Class宵闇妖怪 extends BaseClassJob {
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
 		list.add(new BonusItem(new ルーミアのカード(p), 6, Enchant.DEF));
 		list.add(new BonusSimbol(ENCHANT_SIMBOL.飯));
-	}
-
-	@Override
-	public String getExn() {
-		return Color.ORANGE + "特技の使用は【特殊キー】" + Color.ORANGE + "を押そう！"
-				+ Color.CYAN + "（キャンセル＋あいダッシュでもOK！）";
 	}
 
 	@Override

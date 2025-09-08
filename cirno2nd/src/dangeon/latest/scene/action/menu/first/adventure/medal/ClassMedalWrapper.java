@@ -34,10 +34,20 @@ public class ClassMedalWrapper extends MedalWrapper
 			sb.append(diff.COLOR);
 			sb.append("■");
 		}
-		else if (number != 0)
+		else if (number == 3)
 		{
-			sb.append(Color.lightGray);
-			sb.append("■");
+			sb.append(Color.gray);
+			sb.append("Ⅲ");
+		}
+		else if (number == 2)
+		{
+			sb.append(Color.gray);
+			sb.append("Ⅱ");
+		}
+		else if (number == 1)
+		{
+			sb.append(Color.gray);
+			sb.append("Ⅰ");
 		}
 		else
 		{	

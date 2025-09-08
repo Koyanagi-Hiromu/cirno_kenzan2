@@ -43,7 +43,7 @@ public class Bonus人形使い extends BonusSpecialAction {
 					@Override
 					public void work() {
 						TaskOnMapObject.addEnemyRemoveTask(c);
-						MainMap.addEffect(new ExplosionEffect(p, null), true);
+						boolean waitDamage = false;
 						for (DIRECTION d : DIRECTION.values()) {
 							Base_Creature passive = MapList.getCreature(d.getFrontPoint(p
 									.getLocation()));
@@ -53,10 +53,12 @@ public class Bonus人形使い extends BonusSpecialAction {
 								if (passive instanceof Player || passive == c) {
 									continue;
 								}
+								waitDamage = true;
 								DAMAGE = passive.damagedWithFire(damage);
 								Damage.damage(this, null, "爆発に巻き込まれて倒れた", Player.me, passive, DAMAGE);
 							}
 						}
+						MainMap.addEffect(new ExplosionEffect(p, null), waitDamage);
 
 					}
 				});

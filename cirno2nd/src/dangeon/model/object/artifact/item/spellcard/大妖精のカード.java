@@ -111,43 +111,67 @@ public class 大妖精のカード extends SpellCard {
 
 	@Override
 	protected boolean spellUse() {
+		final Base_Map_Random BMR = PresentField.get().getBaseMapRandom();
+		if (BMR == null) {
+			Message.set("「ダンジョン内で使ってね」");
+			return false;
+		}
+			
 		ConvEvent cne = new ConvEvent() {
 			@Override
 			protected Book getContent1() {
-				return new Book("アイテムを３つ得る") {
+				return new Book("アイテムがたくさんほしい") {
 
 					@Override
 					protected void work() {
-						Message.set("願いが叶って、アイテムが降ってきた");
-						SE.ZAKUZAKU.play();
-						for(int i = 0; i < 3; i++)
-						{
-							ItemFall.itemFall(ItemTable.itemReturn(Player.me.getMassPoint(), false));
-						}
+						ConvEvent cne = new ConvEvent() {
+							@Override
+							public void workAfterPush() {
+								Message.set("願いが叶って、アイテムが３つ降ってきた");
+								SE.ZAKUZAKU.play();
+								for(int i = 0; i < 3; i++)
+								{
+									ItemFall.itemFall(ItemTable.itemReturn(Player.me.getMassPoint(), false));
+								}
+							}
+						};
+						new Conversation("アイテムがたくさんほしい！", cne);
 					}
 				};
 			}
 			@Override
 			protected Book getContent2() {
-				return new Book("かき氷を食べる") {
+				return new Book("かき氷が食べたい") {
 
 					@Override
 					protected void work() {
-						Message.set("願いが叶って、チルノはかき氷を食べた");
-						Header.setEatIce();
-						CONDITION.conditionAllClear(Player.me, true);
-						Player.me.chengeHP(this, null, 999);
+						ConvEvent cne = new ConvEvent() {
+							@Override
+							public void workAfterPush() {
+								Message.set("願いが叶って、チルノはかき氷を食べた");
+								Header.setEatIce();
+								CONDITION.conditionAllClear(Player.me, true);
+								Player.me.chengeHP(this, null, 999);
+							}
+						};
+						new Conversation("かき氷が食べたい！", cne);
 					}
 				};
 			}
 			@Override
 			protected Book getContent3() {
-				return new Book("自爆する") {
+				return new Book("自爆したい") {
 
 					@Override
 					protected void work() {
-						Message.set("願いが叶って、チルノは爆発した");
-						MapInSelect.explosion(Player.me.getMassPoint().getLocation());
+						ConvEvent cne = new ConvEvent() {
+							@Override
+							public void workAfterPush() {
+								Message.set("願いが叶って、チルノは爆発した");
+								MapInSelect.explosion(Player.me.getMassPoint().getLocation());
+							}
+						};
+						new Conversation("爆発したい！", cne);
 					}
 				};
 			}
@@ -160,7 +184,7 @@ public class 大妖精のカード extends SpellCard {
 						boolean success = wishToEscape();
 						if (!success)
 						{
-							大妖精のカード.this.addBomb(2);
+							kickBack();
 						}
 					}
 				};
@@ -171,7 +195,7 @@ public class 大妖精のカード extends SpellCard {
 
 					@Override
 					protected void work() {
-						大妖精のカード.this.addBomb(2);
+						kickBack();
 					}
 				};
 			}
@@ -180,7 +204,7 @@ public class 大妖精のカード extends SpellCard {
 				return 5;
 			}
 		};
-		new Conversation(Image_LargeCharacter.大妖精, cne, "チルノちゃんの願いを教えて？$（どれを選んでもターンは経過しないよ）");
+		new Conversation(Image_LargeCharacter.大妖精, cne, "チルノちゃんの願いを教えて？");
 		return true;
 		
 	}
@@ -198,7 +222,7 @@ public class 大妖精のカード extends SpellCard {
 			Message.set("「い、今はワープ出来ないよ！」");
 			return false;
 		} else {
-			new Conversation("本当にダンジョンから帰還するの？", new ConvEvent() {
+			new Conversation("本当にダンジョンから帰還する？", new ConvEvent() {
 				@Override
 				protected Book getYes() {
 					return new Book() {
@@ -219,6 +243,19 @@ public class 大妖精のカード extends SpellCard {
 			
 			return true;
 		}
+	}
+	
+	void kickBack()
+	{
+		if (getBombs() == BOMB_MAX - 1)
+		{
+			大妖精のカード.this.addBomb(1);
+			大妖精のカード.this.setForgeValue(1);
+		}
+		else if (getBombs() == BOMB_MAX)
+			大妖精のカード.this.setForgeValue(2);
+		else
+			大妖精のカード.this.addBomb(2);
 	}
 
 }

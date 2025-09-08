@@ -39,13 +39,12 @@ public class Classフラワーマスター extends BaseClassJob {
 
 	@Override
 	protected void firstDemerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusSwitch(this, 0, "代わりに他のアイテムが出にくい"));
+		list.add(new BonusSwitch(this, 0, "草以外のアイテムが出にくい"));
 	}
 
 	@Override
 	protected void firstMerite(ArrayList<BaseBonus> list, Point p) {
 		list.add(new BonusItem(new 風見幽香のカード(p), 6, Enchant.ATK));
-		list.add(new BonusSwitch(this, 0, "草の出現率が高い"));
 	}
 
 	@Override

@@ -8,13 +8,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 
-import main.res.BGM;
-import main.res.Image_Artifact;
-import main.res.Image_LargeCharacter;
-import main.res.SE;
-import main.util.CSVLoadSupporter;
-import main.util.Show;
-import main.util.半角全角コンバーター;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.config.table.ItemTable;
@@ -30,12 +23,19 @@ import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.class_job.bonus.bonus_switch.BonusConductor;
 import dangeon.util.R;
 import dangeon.util.STAGE;
+import main.res.BGM;
+import main.res.Image_Artifact;
+import main.res.Image_LargeCharacter;
+import main.res.SE;
+import main.util.CSVLoadSupporter;
+import main.util.Show;
+import main.util.半角全角コンバーター;
 
 public abstract class SpellCard extends Base_Item {
 	private String fu_name, range;
 	public int stand_lv;
 
-	private int BOMB_MAX = 4;
+	public static final int BOMB_MAX = 4;
 
 	private int BOMB;
 

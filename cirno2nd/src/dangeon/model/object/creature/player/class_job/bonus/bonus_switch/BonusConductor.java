@@ -1,5 +1,6 @@
 package dangeon.model.object.creature.player.class_job.bonus.bonus_switch;
 
+import dangeon.model.map.PresentField;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.player.class_job.BaseClassJob;
 import dangeon.model.object.creature.player.class_job.Classひねくれ者;
@@ -35,7 +36,7 @@ public class BonusConductor {
 	}
 
 	public static boolean ナイフマスター_通常攻撃() {
-		return check(Classナイフマスター.class, 0);
+		return check(Classナイフマスター.class, 0) && PresentField.get().isHaraheru();
 	}
 	
 	public static boolean ナイフマスター_デメリット() {

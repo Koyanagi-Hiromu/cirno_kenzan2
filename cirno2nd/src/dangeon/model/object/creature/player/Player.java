@@ -959,7 +959,7 @@ public class Player extends Base_Creature {
 		int max2 = max;
 		max += SetEnchantCard.isSetCard(蓬莱山輝夜のカード.class) ? max2 * 30 / 100 : 0;
 		max += EnchantSpecial.enchantSimbolAllCheck(CASE.ALL,
-				ENCHANT_SIMBOL.ハート) ? max2 * 15 / 100 : 0;
+				ENCHANT_SIMBOL.ハート) ? max2 * 12 / 100 : 0;
 		if (max > 999)
 			max = 999;
 		return max;
