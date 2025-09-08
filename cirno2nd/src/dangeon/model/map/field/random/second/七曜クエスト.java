@@ -215,15 +215,16 @@ public class 七曜クエスト extends ミラクルクエスト {
 		// hash.put(59, );
 	}
 
+	// たくさん楽しんでほしいので、運命のワルツより１つ増やしました
 	@Override
 	public int defaultItemNumber() {
 		int f = MapList.getFloor();
 		if (f < FloorConducter.ゴーストナイトムーン.floor) {
-			return new R().nextInt(3) + 2;
+			return new R().nextInt(3) + 3;
 		} else if (f < FloorConducter.一条戻り橋.floor) {
-			return new R().nextInt(3) + new R().nextInt(2) + 2;
+			return new R().nextInt(3) + new R().nextInt(2) + 3;
 		} else {
-			return new R().nextInt(4) + 2;
+			return new R().nextInt(4) + 3;
 		}
 	}
 

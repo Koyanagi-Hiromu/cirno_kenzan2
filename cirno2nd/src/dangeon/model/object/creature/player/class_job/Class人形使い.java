@@ -43,7 +43,7 @@ public class Class人形使い extends BaseClassJob {
 
 	@Override
 	protected void firstDemerite(ArrayList<BaseBonus> list, Point p) {
-		list.add(new BonusSwitch(this, 0, "最大HPの増加量が半減"));
+		list.add(new BonusSwitch(this, 1, "最大HPの増加量が半減"));
 	}
 
 	@Override
