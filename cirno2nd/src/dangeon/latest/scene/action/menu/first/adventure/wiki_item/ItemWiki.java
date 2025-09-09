@@ -65,7 +65,12 @@ public class ItemWiki extends Item_List {
 			if (!s.isEmpty()) {
 				Base_Artifact a = ItemTable.returnBaseArtifactSetPoint(
 						category.concat(s), p);
-				a.setSampleItem(!Switch.switch_player_no_death);
+				boolean not_used_yet;
+				if (Switch.test && Switch.switch_player_no_death)
+					not_used_yet = false;
+				else
+					not_used_yet = true;
+				a.setSampleItem(not_used_yet);
 				LIST.add(a);
 			}
 		}
@@ -76,6 +81,7 @@ public class ItemWiki extends Item_List {
 				Base_Artifact a = getFrom(LIST,
 						ItemTable.createClazz(category.concat(s)));
 				if (a != null) {
+					// 使ったことがあるので unknow = false
 					a.setSampleItem(false);
 				} else {
 					a = ItemTable.returnBaseArtifactSetPoint(

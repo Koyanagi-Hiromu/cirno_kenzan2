@@ -151,7 +151,7 @@ public abstract class Base_Item extends Base_Artifact {
 				// if (Config.isTest()) {
 				// return Color.GRAY.toString() + getTrueName();
 				// } else {
-				return Color.YELLOW.toString().concat("？？？？");
+				return Color.lightGray.toString().concat("？？？？");
 				// }
 			} else if (Checker.isStaticChecked(this))
 				return getTrueName();
