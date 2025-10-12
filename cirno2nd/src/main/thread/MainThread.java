@@ -198,7 +198,9 @@ public class MainThread extends Thread {
 		while (true) {
 			try {
 				taskWork();
-				ListenerAdapter.frame();
+				if (Second_Firster.ME.isFocused()) {
+					ListenerAdapter.frame();
+				}
 				Scene.getPresentScene().SYS.upDate();
 				view();
 				calculateFPS();
@@ -279,12 +281,13 @@ public class MainThread extends Thread {
 				Toolkit.getDefaultToolkit().sync();
 				StringFilter.upDate();
 			} else {
-				Show.showInformationMessageDialog("bufferStrategy.contentsLost()");
+				Show.showInformationMessageDialog(
+						"bufferStrategy.contentsLost()");
 			}
 		} finally {
 			g.dispose();
 		}
-		
+
 		Sleep.done(0);
 		if (!flag_sys_draw) {
 			Show.showInformationMessageDialog("flag_sys_draw = false");

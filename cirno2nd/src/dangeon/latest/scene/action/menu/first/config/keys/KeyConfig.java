@@ -187,7 +187,7 @@ public class KeyConfig extends Base_Scene_Menu {
 					int pad = ListenerAdapter.getPrevInt();
 					if (pad != -1) {
 						SE.SYSTEM_ENTER.play();
-						Config.setPadKey(pad, a.KEY_NUM);
+						Config.onKeyPressedToSavePadKey(pad, a.KEY_NUM);
 					} else {
 						SE.SYSTEM_ENTER.play();
 						Config.saveKey(code, a);

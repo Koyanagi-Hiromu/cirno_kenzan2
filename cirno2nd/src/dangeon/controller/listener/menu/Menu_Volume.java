@@ -1,7 +1,7 @@
 package dangeon.controller.listener.menu;
 
 import main.Listener.ACTION;
-import main.pad.JInputWrapper;
+import main.pad.JamepadWrapper;
 import main.res.BGM;
 import main.res.SE;
 import main.util.DIRECTION;
@@ -101,6 +101,6 @@ public class Menu_Volume {
 		bgm_vol = Config.getBGMVol();
 		se_vol = Config.getSEVol();
 		Conducter.phase = PHASE.VOL;
-		JInputWrapper.resetLastButton();
+		JamepadWrapper.resetLastButton();
 	}
 }

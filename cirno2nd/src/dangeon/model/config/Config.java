@@ -27,6 +27,7 @@ import main.Listener;
 import main.Listener.ACTION;
 import main.constant.PropertySupporter;
 import main.pad.ListenerAdapter;
+import main.pad.PadKey;
 import main.res.Image_Dungeon_Name;
 import main.util.DIRECTION;
 
@@ -51,9 +52,8 @@ public class Config {
 	private static boolean mini_map_on;
 	private static boolean test;
 	private static boolean bgm_fix;
-	private static boolean lap_on, mouse_on, hack_on, direct_name,
-			no_shadow_on, bias_name_on, no_smooth, otog_arrow_right,
-			show_hours;
+	private static boolean lap_on, mouse_on, hack_on, direct_name, no_shadow_on,
+			bias_name_on, no_smooth, otog_arrow_right, show_hours;
 	private static boolean high_speed_msg, font_style, coin_1, light;
 	private static int otog_random, otog_fps, difficulty, skip_rate = 1;
 	private static int gacha;
@@ -446,10 +446,10 @@ public class Config {
 	/**
 	 * 
 	 * @param i
-	 *            　以上
+	 *            以上
 	 * @param j
-	 *            　以下
-	 * @return　ならtrue
+	 *            以下
+	 * @return ならtrue
 	 */
 	public static boolean isStoryRange(int i, int j) {
 		return story >= i && story <= j;
@@ -656,7 +656,7 @@ public class Config {
 		ps.saveProperty("random_seed_for_retry", seed);
 		ps.saveProperty("numbers_for_retry", 3);
 	}
-	
+
 	public static void resetRetry() {
 		PropertySupporter ps = PR_INDIV_PRE[save_index - 1];
 		ps.saveProperty("numbers_for_retry", 3);
@@ -680,8 +680,12 @@ public class Config {
 		PR_INDIV.saveProperty("mouse_on", mouse_on);
 	}
 
-	public static void setPadKey(int i, int key) {
+	public static void onKeyPressedToSavePadKey(int i, int key) {
 		key = ListenerAdapter.setKeyConfig(i, key);
+		PR_INDIV_PAD.saveProperty("pad".concat(String.valueOf(i)), key);
+	}
+
+	public static void savePadKey(int i, int key) {
 		PR_INDIV_PAD.saveProperty("pad".concat(String.valueOf(i)), key);
 	}
 
@@ -740,6 +744,7 @@ public class Config {
 		coin_1 = PR_INDIV.isGotPropertyTrue("coin_1");
 		light = PR_INDIV.isGotPropertyTrue("light");
 		NormalFont.setBold(!font_style);
+		PadKey.init();
 		for (ACTION a : ACTION.values()) {
 			a.setKey(PR_INDIV_PAD.getProperty_Nature(a.name()));
 		}

@@ -5,9 +5,9 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-import main.pad.JInputWrapper;
-import main.util.DIRECTION;
 import dangeon.model.config.Config;
+import main.pad.PadKey;
+import main.util.DIRECTION;
 
 public class Listener implements KeyListener {
 	public enum ACTION {
@@ -40,7 +40,7 @@ public class Listener implements KeyListener {
 		SOUND(KeyEvent.VK_S, "音量調整"),
 		//@formatter:on
 		// テストコマンド
-		TEST, TEST2, TEST3, TEST4, FUCKIN_MAP, ;
+		TEST, TEST2, TEST3, TEST4, FUCKIN_MAP,;
 		public static ACTION[] getMainCommands() {
 			return new ACTION[] { ENTER, CANCEL, TURN, MENU, BIAS, FIRE, MAP,
 					IDASH };
@@ -160,6 +160,7 @@ public class Listener implements KeyListener {
 		}
 		if (Scene.getPresentScene().SYS.KEY != null) {
 			Scene.getPresentScene().SYS.KEY.keyPressed(e);
+			System.out.println("[" + e + "] ");
 		}
 	}
 
@@ -178,9 +179,7 @@ public class Listener implements KeyListener {
 	}
 
 	public void reset() {
-		for (int j = 0; j < JInputWrapper.buttonID.length; j++) {
-			Config.setPadKey(j, -1);
-		}
+		PadKey.resetConfig();
 		getKey().clear();
 		key.put(KeyEvent.VK_SPACE, ACTION.TURN);
 		key.put(KeyEvent.VK_ENTER, ACTION.ENTER);

@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 import main.Listener;
 import main.Listener.ACTION;
-import main.pad.JInputWrapper;
+import main.pad.JamepadWrapper;
 import main.res.Image_Window_Frame;
 import main.util.DIRECTION;
 import dangeon.latest.scene.Base_View;
@@ -102,7 +102,7 @@ public class KeyConfig_View extends Base_Scene_Menu_View {
 						g.setColor(Color.WHITE);
 					drawTitle(g, x, y, a.name());
 					sb = new StringBuilder();
-					for (int j = 0; j < JInputWrapper.buttonID.length; j++) {
+					for (int j = 0; j < JamepadWrapper.buttonID_length; j++) {
 						int pad = Config.getPadKey(j);
 						if (pad == a.KEY_NUM) {
 							sb.append(j);

@@ -27,8 +27,8 @@ public class ListenerAdapter {
 	private static boolean flgUpReleased = false;
 	private static boolean flgDownReleased = false;
 
-	private static int KEYINTERVAL_A = 5;
-	private static int KEYINTERVAL_B = 5;
+	private static int KEYINTERVAL_A = 11;
+	private static int KEYINTERVAL_B = 11;
 
 	private static boolean arrowSeparateMode = false;
 	private static boolean arrowStepX = false;
@@ -51,7 +51,8 @@ public class ListenerAdapter {
 		@SuppressWarnings("deprecation")
 		KeyEvent kev = new KeyEvent(com, 0, 0, 0, 0);
 		for (int i = 0; i < 16; i++) {
-			if ((flgButtonPressed[i] == 1 || flgButtonPressed[i] > KEYINTERVAL_B)
+			if ((flgButtonPressed[i] == 1
+					|| flgButtonPressed[i] > KEYINTERVAL_B)
 					&& keyConfig[i] != null) {
 				kev.setKeyCode(keyConfig[i]);
 				keyPressed(i, kev);
@@ -119,7 +120,7 @@ public class ListenerAdapter {
 	 * フレーム毎の処理。ボタン・方向キー判定を行い、対応した擬似KeyEventを発生させる。
 	 */
 	public static void frame() {
-		JInputWrapper.upDate();
+		JamepadWrapper.upDate();
 		frameB();
 		if (arrowSeparateMode) {
 			if (arrowStepX) {
@@ -136,7 +137,7 @@ public class ListenerAdapter {
 
 	private static void frameAX() {
 		int arrowX;
-		arrowX = JInputWrapper.getArrowX();
+		arrowX = JamepadWrapper.getArrowX();
 
 		if (arrowX != 0) {
 			if (arrowX == 1 && arrowXState != 1) {
@@ -165,7 +166,7 @@ public class ListenerAdapter {
 
 	private static void frameAY() {
 		int arrowY;
-		arrowY = JInputWrapper.getArrowY();
+		arrowY = JamepadWrapper.getArrowY();
 
 		if (arrowY != 0) {
 			if (arrowY == 1 && arrowYState != 1) {
@@ -196,7 +197,7 @@ public class ListenerAdapter {
 	private static void frameB() {
 		boolean b[] = new boolean[16];
 
-		b = JInputWrapper.getButton();
+		b = JamepadWrapper.getButton();
 		for (int i = 0; i < 16; i++) {
 			if (b[i] && buttonState[i] != true) {
 				if (flgButtonPressed[i] <= KEYINTERVAL_B) {
@@ -223,7 +224,7 @@ public class ListenerAdapter {
 	 * はじめに一度だけ呼ぶ。JInputWrapperの初期化。
 	 */
 	public static void init() {
-		JInputWrapper.init();
+		JamepadWrapper.init();
 	}
 
 	/**

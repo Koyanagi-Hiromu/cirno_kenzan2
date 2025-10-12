@@ -1,13 +1,14 @@
 package dangeon.controller.listener.menu;
 
-import main.Listener.ACTION;
-import main.pad.JInputWrapper;
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.controller.DangeonScene;
 import dangeon.controller.listener.menu.Conducter.PHASE;
 import dangeon.model.config.Config;
 import dangeon.view.detail.View_Pad;
+import main.Listener.ACTION;
+import main.pad.JamepadWrapper;
+import main.pad.PadKey;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class Menu_Pad {
 
@@ -96,7 +97,7 @@ public class Menu_Pad {
 	public static void init() {
 		View_Pad.init();
 		Conducter.phase = PHASE.パッド;
-		JInputWrapper.resetLastButton();
+		JamepadWrapper.resetLastButton();
 	}
 
 	public static boolean isMain() {
@@ -107,10 +108,10 @@ public class Menu_Pad {
 		if (y < getACTION().length) {
 			if (Config.getPadKey(i) == getACTION()[y].KEY_NUM) {
 				SE.SYSTEM_CANCEL.play();
-				Config.setPadKey(i, -1);
+				Config.onKeyPressedToSavePadKey(i, -1);
 			} else {
 				SE.SYSTEM_ENTER.play();
-				Config.setPadKey(i, getACTION()[y].KEY_NUM);
+				Config.onKeyPressedToSavePadKey(i, getACTION()[y].KEY_NUM);
 			}
 		} else {
 			actionKeyPressed(ACTION.ENTER);
@@ -119,9 +120,7 @@ public class Menu_Pad {
 
 	private static void reset() {
 		SE.SYSTEM_ARRANGEMENT.play();
-		for (int j = 0; j < JInputWrapper.buttonID.length; j++) {
-			Config.setPadKey(j, -1);
-		}
+		PadKey.resetConfig();
 	}
 
 }

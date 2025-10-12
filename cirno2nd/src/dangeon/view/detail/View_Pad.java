@@ -7,7 +7,7 @@ import java.awt.Image;
 import main.Listener;
 import main.Listener.ACTION;
 import main.constant.FR;
-import main.pad.JInputWrapper;
+import main.pad.JamepadWrapper;
 import dangeon.controller.listener.menu.Menu_Pad;
 import dangeon.model.config.Config;
 import dangeon.view.constant.NormalFont;
@@ -66,7 +66,7 @@ public class View_Pad {
 			drawStringLeft(g, acs[i].name(), i);
 			// drawStringCenter(g, acs[i].KEY, i);
 			StringBuilder sb = new StringBuilder();
-			for (int j = 0; j < JInputWrapper.buttonID.length; j++) {
+			for (int j = 0; j < JamepadWrapper.buttonID_length; j++) {
 				int pad = Config.getPadKey(j);
 				if (pad == acs[i].KEY_NUM) {
 					sb.append("pad");
