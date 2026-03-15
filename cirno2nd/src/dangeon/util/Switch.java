@@ -24,7 +24,7 @@ public class Switch {
 	public static boolean create = false;
 	// バージョン変更用保険
 	public static String big_ver = "2";
-	public static String small_ver = "30";
+	public static String small_ver = "31";
 	// public static int version = 100;
 	public static String current_game = "２製品版";
 	public static final String main_name = "チルノ見参２"
@@ -35,7 +35,7 @@ public class Switch {
 	public static boolean switch_wall_walk = false;
 
 	public static String getMainTitle() {
-		return main_name.concat(" ver" + Switch.big_ver + "."
-				+ Switch.small_ver + " " + Switch.sub_string);
+		return main_name.concat(" ver" + Switch.big_ver + "." + Switch.small_ver
+				+ " " + Switch.sub_string);
 	}
 }

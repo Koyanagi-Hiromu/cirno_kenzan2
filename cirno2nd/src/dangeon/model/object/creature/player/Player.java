@@ -314,7 +314,8 @@ public class Player extends Base_Creature {
 		}
 		DIRECTION[] d = dir.getNeiboringDirections3();
 		for (int i = 0; i < 3; i++) {
-			if (!MassCreater.getMass(new Point(p.x + d[i].X, p.y + d[i].Y)).WALKABLE) {
+			if (!MassCreater
+					.getMass(new Point(p.x + d[i].X, p.y + d[i].Y)).WALKABLE) {
 				return false;
 			}
 		}
@@ -346,11 +347,11 @@ public class Player extends Base_Creature {
 				if (!a.isVisible()) {
 					if (!conditionCheck(CONDITION.目薬) && !印罠師.effect()) {
 						attackEnd();
-						MainMap.addEffect(new DoronEffect(a.getMassPoint(),
-								new Task() {
+						MainMap.addEffect(
+								new DoronEffect(a.getMassPoint(), new Task() {
 									/**
-							 *
-							 */
+									*
+									*/
 									private static final long serialVersionUID = 1L;
 
 									@Override
@@ -379,8 +380,8 @@ public class Player extends Base_Creature {
 			if (印邪.isHalfGhost()) {
 				delt = 1;
 			}
-			if (EnchantSpecial
-					.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.医)) {
+			if (EnchantSpecial.enchantSimbolAllCheck(CASE.ALL,
+					ENCHANT_SIMBOL.医)) {
 				delt = SetEnchantCard.isSetCard(八意永琳のカード.class) ? delt * 2
 						: delt * 15 / 10;
 			}
@@ -466,9 +467,8 @@ public class Player extends Base_Creature {
 			}
 		}
 	}
-	
-	private void recover(BGM 復活時のBGM, boolean flanCoin)
-	{
+
+	private void recover(BGM 復活時のBGM, boolean flanCoin) {
 		dying_frame = 0;
 		if (MapList.getFlagSheef())
 			BGM.dorobo.play(100);
@@ -477,17 +477,14 @@ public class Player extends Base_Creature {
 		chengeHP_NoEffect(getMAX_HP());
 		chengeSatiety(getMAX_SATIETY());
 		CONDITION.conditionAllClear(Player.me, true);
-		
-		if (flanCoin)
-		{
+
+		if (flanCoin) {
 			setTelepoteAnimation(true, null);
 			Config.decRetryNumbers();
 			setCondition(CONDITION.炎上, 0);
 			setCondition(CONDITION.反射, 0);
 			MapInSelect.explosion(getMassPoint());
-		}
-		else
-		{
+		} else {
 			Medal.復活回数.addCount();
 			if (BonusConductor.蓬莱人形_復活時炎上()) {
 				Player.me.setCondition(CONDITION.炎上, 0);
@@ -497,10 +494,10 @@ public class Player extends Base_Creature {
 			}
 		}
 	}
-	
-	private void confirmFlanCoin(int zanki)
-	{
-		new ConvEvent("残機を使って復活しますか？$(爆発して復活します)$", Scene_Result_Info.getZanki(zanki)) {
+
+	private void confirmFlanCoin(int zanki) {
+		new ConvEvent("残機を使って復活しますか？$(爆発して復活します)$",
+				Scene_Result_Info.getZanki(zanki)) {
 			@Override
 			protected Book getContent1() {
 				return new Book("再挑戦") {
@@ -528,12 +525,10 @@ public class Player extends Base_Creature {
 				if (flag_game_over_TurnOver) {
 					flag_game_over_TurnOver = false;
 					new Scene_Result_Info();
-				}
-				else if (cause_of_death == "冒険をあきらめた") {
+				} else if (cause_of_death == "冒険をあきらめた") {
 					new Scene_Result_Info();
-				}
-				else {
-					BGM 復活時のBGM = 復活.tryRecovery(); 
+				} else {
+					BGM 復活時のBGM = 復活.tryRecovery();
 					if (復活時のBGM != null) {
 						recover(復活時のBGM, false);
 						return;
@@ -541,13 +536,12 @@ public class Player extends Base_Creature {
 
 					if (!Config.isCoinOnly1()) {
 						int zanki = Config.getRetryNumber() - 1;
-						if (zanki > 0)
-						{
+						if (zanki > 0) {
 							confirmFlanCoin(zanki);
 							return;
 						}
 					}
-					
+
 					new Scene_Result_Info();
 				}
 			}
@@ -606,9 +600,9 @@ public class Player extends Base_Creature {
 			if (Scene_Action.getMe().is_I_Dushing()) {
 				g.setColor(new Color(150, 255, 255));
 				String tit = "＼あたいにお任せダッシュ／";
-				StringFilter.drawString(g, tit, x + getFootX() - 100, y
-						+ getFootY());
-				// g.drawString(I_Dush.auto ? "(ﾟДﾟ)ﾉ ｧｨ" : "(  ﾟДﾟ)? ",
+				StringFilter.drawString(g, tit, x + getFootX() - 100,
+						y + getFootY());
+				// g.drawString(I_Dush.auto ? "(ﾟДﾟ)ﾉ ｧｨ" : "( ﾟДﾟ)? ",
 				// x + c.getFootX() + 50, y + c.getFootY() + 35);
 			}
 		}
@@ -674,7 +668,8 @@ public class Player extends Base_Creature {
 			Base_Enemy e2 = MapList.getEnemy(p.x + x, p.y + y);
 			if (e2 != null) {
 				if (e2.hasMessage()) {
-					e2.setDirection(e2.converDirection(Player.me.getMassPoint()));
+					e2.setDirection(
+							e2.converDirection(Player.me.getMassPoint()));
 					if (e2.isSkillActive()) {
 						e2.message();
 					} else {
@@ -696,11 +691,10 @@ public class Player extends Base_Creature {
 
 				if (checkTrap(p.x + x, p.y + y)) {
 					return true;
-				} else { 
+				} else {
 					return ナイフマスター_通常攻撃();
 				}
-			}
-			else if (BonusConductor.ひねくれ者_攻撃受け() && reverseAttack(p, x, y)) {
+			} else if (BonusConductor.ひねくれ者_攻撃受け() && reverseAttack(p, x, y)) {
 				return true;
 			} else if (EnchantSpecial.enchantSimbolAllCheck(CASE.ATK,
 					ENCHANT_SIMBOL.式)) {
@@ -751,7 +745,7 @@ public class Player extends Base_Creature {
 		normal_attack_phase = AttackPhase.GO;
 		SE.THROW.play();
 		new 鉄の矢(getMassPoint(), false).itemThrow(this, HowToThrow.BREAK, 10);
-//		direction = direction.getDeNeiboringDirection();
+		// direction = direction.getDeNeiboringDirection();
 		return true;
 	}
 
@@ -829,7 +823,7 @@ public class Player extends Base_Creature {
 		}
 		return books_count;
 	}
-	
+
 	public int getBooks() {
 		return books;
 	}
@@ -842,8 +836,8 @@ public class Player extends Base_Creature {
 
 	@Override
 	public String getColoredName() {
-		return color.concat(super.getColoredName()).concat(
-				Color.WHITE.toString());
+		return color.concat(super.getColoredName())
+				.concat(Color.WHITE.toString());
 	}
 
 	public int getDeltX() {
@@ -943,7 +937,8 @@ public class Player extends Base_Creature {
 		for (CONDITION con : getConditionList()) {
 			list.add(con);
 		}
-		for (ENCHANT_SIMBOL simbol : EnchantSpecial.getAlways_enchant_special()) {
+		for (ENCHANT_SIMBOL simbol : EnchantSpecial
+				.getAlways_enchant_special()) {
 			list.add(simbol);
 		}
 		return list;
@@ -971,7 +966,7 @@ public class Player extends Base_Creature {
 			max = 999;
 		return max;
 	}
-	
+
 	public int getMAX_SATIETY() {
 		return MAX_SATIETY;
 	}
@@ -1041,7 +1036,8 @@ public class Player extends Base_Creature {
 		double forge_coefficient;
 		if (a != null) {
 			if (s == Base_Artifact.STATUS.STR) {
-				forge_coefficient = enchant_status > 10 ? 0.75 + 0.05 * (enchant_status - 10)
+				forge_coefficient = enchant_status > 10
+						? 0.75 + 0.05 * (enchant_status - 10)
 						: 0.075 * enchant_status;
 				status_value += a.getForgeValue() * forge_coefficient;
 			} else {
@@ -1160,7 +1156,8 @@ public class Player extends Base_Creature {
 
 	public boolean isFalling() {
 		if (Image_Player.isAnimating()) {
-			return Image_Player.getAATIC() == Image_Player.AnimeAccordingToItemClass.PITFALL;
+			return Image_Player
+					.getAATIC() == Image_Player.AnimeAccordingToItemClass.PITFALL;
 		}
 		return false;
 	}
@@ -1171,9 +1168,8 @@ public class Player extends Base_Creature {
 
 	public boolean isGray() {
 		boolean flag = Player.me.saisen != null && !Player.me.saisen.isWhite();
-		flag = flag
-				|| (Player.me.shop != null && Player.me.shop.getTenshu()
-						.warning());
+		flag = flag || (Player.me.shop != null
+				&& Player.me.shop.getTenshu().warning());
 		return flag;
 	}
 
@@ -1191,7 +1187,7 @@ public class Player extends Base_Creature {
 		p.y += direction.Y;
 		if (印邪.isWallWalk()) {
 			return !MassCreater.getMass(p).equals(Mass.nullpo)
-			// && MassCreater.getMass(p).DIGGABLE
+					// && MassCreater.getMass(p).DIGGABLE
 					&& MapList.getCreature(p) == null;
 		} else if (DIRECTION.isBias(direction)) {
 			if (MassCreater.getMass(p).WALKABLE && movable_water_check(p)
@@ -1202,7 +1198,8 @@ public class Player extends Base_Creature {
 			}
 		} else {
 			if (MassCreater.getMass(p).WALKABLE
-					&& MapList.getCreature(p) == null && movable_water_check(p)) {
+					&& MapList.getCreature(p) == null
+					&& movable_water_check(p)) {
 				return true;
 			}
 		}
@@ -1229,7 +1226,8 @@ public class Player extends Base_Creature {
 	}
 
 	boolean isVisibleObjectExistAtNeiboringMass(boolean including_artifact) {
-		return getVisibleObjectExistAtNeiboringMass_direction(including_artifact) != null;
+		return getVisibleObjectExistAtNeiboringMass_direction(
+				including_artifact) != null;
 	}
 
 	public void itemFreezeCount() {
@@ -1247,12 +1245,14 @@ public class Player extends Base_Creature {
 			if (a instanceof MagicBullet) {
 				SE.REIMU_BARRIER.play();
 				Message.set("霊夢の結界は魔法弾の効果をダメージに変えた");
-				Damage.damage(null, null, "変換したダメージによって倒れた", Player.me, this, 1);
+				Damage.damage(null, null, "変換したダメージによって倒れた", Player.me, this,
+						1);
 				return false;
 			} else {
 				SE.REIMU_BARRIER.play();
 				Message.set("霊夢の結界は投擲物の効果をダメージに変えた");
-				Damage.damage(null, null, "変換したダメージによって倒れた", Player.me, this, 1);
+				Damage.damage(null, null, "変換したダメージによって倒れた", Player.me, this,
+						1);
 				return false;
 			}
 		} else {
@@ -1274,8 +1274,8 @@ public class Player extends Base_Creature {
 			for (int i = 0; i < -level_count; i++) {
 				SE.LEVEL_DOWN.play();
 				LV--;
-				int grow = statusGrow(STATUS.HP, false);
-				Player.me.addMAX_HP(grow);
+				int grow = calcLevelupHP(LV);
+				Player.me.addMAX_HP(-grow);
 				if (getMAX_HP() < HP) {
 					Player.me.setHP(Player.me.getMAX_HP());
 				}
@@ -1284,7 +1284,7 @@ public class Player extends Base_Creature {
 			for (int i = 0; i < level_count; i++) {
 				SE.LEVEL_UP.play();
 				LV++;
-				int grow = statusGrow(STATUS.HP, true);
+				int grow = calcLevelupHP(LV);
 				Player.me.addMAX_HP(grow);
 				Player.me.setHP(grow + Player.me.getHP());
 			}
@@ -1344,18 +1344,17 @@ public class Player extends Base_Creature {
 					boolean flag = isVisibleObjectExistAtNeiboringMass(true);
 					// 通路から部屋に出たとき
 					flag = flag || (!before_mass.ROOM && after_mass.ROOM);
-					flag = flag
-							|| (MassCreater.getMass(Player.me.getMassPoint()).ROAD && I_Dush
-									.isStandInBranch() == DIRECTION.NEUTRAL);
+					flag = flag || (MassCreater
+							.getMass(Player.me.getMassPoint()).ROAD
+							&& I_Dush.isStandInBranch() == DIRECTION.NEUTRAL);
 					flag = flag || MapList.getArtifact(mass_point) != null;
 					if (!flag) {
 						if (before_mass.ROOM && after_mass.ROOM) {
 							DIRECTION d = direction.getNeiboringDirection(2);
 							for (int i = 0; i < 2; i++) {
 								d = d.getReverse();
-								if (MassCreater
-										.getMass(d.getFrontPoint(mass_point
-												.getLocation())).ROAD) {
+								if (MassCreater.getMass(d.getFrontPoint(
+										mass_point.getLocation())).ROAD) {
 									flag = true;
 									break;
 								}
@@ -1456,8 +1455,9 @@ public class Player extends Base_Creature {
 			level_count -= Player.me.getLV() + level_count - 99;
 		}
 		for (int i = 1; i <= level_count; i++) {
-			setPlayerLv(getLV() + 1);
-			int grow = statusGrow(STATUS.HP, true);
+			int nextLevel = getLV() + 1;
+			setPlayerLv(nextLevel);
+			int grow = calcLevelupHP(nextLevel);
 			addMAX_HP(grow);
 			chengeHP_NoEffect(grow);
 		}
@@ -1575,7 +1575,8 @@ public class Player extends Base_Creature {
 			c = MapList.getCreature(target);
 		} while (c == null || count > 255);
 		boolean flag_frienlyfire = false;
-		if (c.equals(this) || (c instanceof Base_Enemy && ((Base_Enemy)c).hasMessage())) {
+		if (c.equals(this)
+				|| (c instanceof Base_Enemy && ((Base_Enemy) c).hasMessage())) {
 			// ワナちぇ
 			int i = p.x + x;
 			int j = p.y + y;
@@ -1591,8 +1592,8 @@ public class Player extends Base_Creature {
 			}
 			flag_frienlyfire = true;
 		} else {
-			if (EnchantSpecial
-					.enchantSimbolAllCheck(CASE.ATK, ENCHANT_SIMBOL.間)) {
+			if (EnchantSpecial.enchantSimbolAllCheck(CASE.ATK,
+					ENCHANT_SIMBOL.間)) {
 				Battle.setCriticalFlag();
 				EnchantSpecial.attackPhaseStart();
 			}
@@ -1605,11 +1606,11 @@ public class Player extends Base_Creature {
 		}
 		if (Enchant.ATK.isEnchant()) {
 			SpellCard s = ((SpellCard) Enchant.ATK.getEnchant());
-			list_attacking_stand.add(new Stand(s.getStand(), d, flag,
-					s.stand_lv, target));
+			list_attacking_stand
+					.add(new Stand(s.getStand(), d, flag, s.stand_lv, target));
 		} else {
-			list_attacking_stand.add(new Stand(CardAttackEffect.class, d, flag,
-					1, target));
+			list_attacking_stand
+					.add(new Stand(CardAttackEffect.class, d, flag, 1, target));
 		}
 
 		flag_stand_attacking = true;
@@ -1644,7 +1645,8 @@ public class Player extends Base_Creature {
 		if (getConditionList().contains(CONDITION.回復)) {
 			heal_count += 5;
 		}
-		if (EnchantSpecial.enchantSimbolAllCheck(CASE.RING, ENCHANT_SIMBOL.回復)) {
+		if (EnchantSpecial.enchantSimbolAllCheck(CASE.RING,
+				ENCHANT_SIMBOL.回復)) {
 			heal_count += 5;
 		}
 		if (heal_count == 0)
@@ -1804,13 +1806,13 @@ public class Player extends Base_Creature {
 		} else {
 			flag_no_item_daichan = false;
 		}
-		
+
 		if (flag_no_item) {
 			View_Sider.setInformation("持ち込みなしでダンジョンに挑戦");
-		}
-		else
-		{
-			View_Sider.setInformation("アイテムを" + 半角全角コンバーター.半角To全角数字(Belongings.getSize()) + "コ持ってダンジョンに入った");
+		} else {
+			View_Sider.setInformation(
+					"アイテムを" + 半角全角コンバーター.半角To全角数字(Belongings.getSize())
+							+ "コ持ってダンジョンに入った");
 		}
 	}
 
@@ -1851,9 +1853,8 @@ public class Player extends Base_Creature {
 	}
 
 	public void setThrowing(Base_Artifact throw_item, DIRECTION d) {
-		if (throw_item instanceof Base_Item)
-		{
-			((Base_Item)throw_item).flag_pick_checked = true;
+		if (throw_item instanceof Base_Item) {
+			((Base_Item) throw_item).flag_pick_checked = true;
 		}
 		throw_item.direction = d;
 		attacking_direction = direction;
@@ -1911,7 +1912,8 @@ public class Player extends Base_Creature {
 
 	@Override
 	public void startAttack(Task t) {
-		Show.showConfirmDialog("error@Player.startAttack()\nThis method is not though to be called");
+		Show.showConfirmDialog(
+				"error@Player.startAttack()\nThis method is not though to be called");
 		standAttack(false);
 		super.startAttack(t);
 	}
@@ -1945,6 +1947,23 @@ public class Player extends Base_Creature {
 			return grow;
 		else
 			return -grow;
+	}
+
+	private int calcLevelupHP(int nextLevel) {
+		int grow = new R().nextInt(5);
+		if (nextLevel <= 20) {
+			return grow + 3;
+		} else if (nextLevel <= 40) {
+			return grow + 2;
+		} else if (nextLevel <= 60) { // 41-60 は +3 の反動で +1 になる
+			return grow + 1;
+		} else if (nextLevel <= 70 && Config.getFate() == 1) {
+			return grow + 1;
+		} else if (nextLevel <= 80 && Config.getFate() == 2) {
+			return grow + 1;
+		} else {
+			return grow + 2;
+		}
 	}
 
 	@Override
