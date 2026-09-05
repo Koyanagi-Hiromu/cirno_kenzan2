@@ -197,12 +197,14 @@ public class MainThread extends Thread {
 		ListenerAdapter.init();
 		while (true) {
 			try {
+				main.util.FrameDebug.frameStart();
 				taskWork();
 				if (Second_Firster.ME.isFocused()) {
 					ListenerAdapter.frame();
 				}
 				Scene.getPresentScene().SYS.upDate();
 				view();
+				main.util.FrameDebug.frameEnd();
 				calculateFPS();
 				// System.out.println("残りメモリ＝" +
 				// Runtime.getRuntime().freeMemory()

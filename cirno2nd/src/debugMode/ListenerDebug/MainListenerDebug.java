@@ -20,19 +20,18 @@ public class MainListenerDebug implements ActionListener, MouseListener {
 			Switch.switch_player_no_death = !Switch.switch_player_no_death;
 			RefreshText();
 		} else if (e.getActionCommand().matches("壁抜け")) {
-			Switch.switch_wall_walk= !Switch.switch_wall_walk;
+			Switch.switch_wall_walk = !Switch.switch_wall_walk;
 			RefreshText();
 		} else if (e.getActionCommand().matches("次のフロアへ")) {
 			NextFloor.next(null);
 		}
 	}
-	
-	public void RefreshText()
-	{
+
+	public void RefreshText() {
 		setLabel(WindowDebug.death_l, Switch.switch_player_no_death);
-		setLabel(WindowDebug.walk_l, Switch.switch_wall_walk);		
+		setLabel(WindowDebug.walk_l, Switch.switch_wall_walk);
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == 1) {

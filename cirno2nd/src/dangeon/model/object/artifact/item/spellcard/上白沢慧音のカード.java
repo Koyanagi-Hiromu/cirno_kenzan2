@@ -2,14 +2,13 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.上白沢慧音;
 import dangeon.model.object.creature.npc.Base_NPC;
-import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
+import main.res.SE;
 
 public class 上白沢慧音のカード extends SpellCard {
 
@@ -22,9 +21,10 @@ public class 上白沢慧音のカード extends SpellCard {
 	private static final int composition = 5;
 	private static final int item_str = 7;
 	private static final int item_def = 4;
-	private static final boolean passing_of_spell = false;
+	private static final boolean passing_of_spell = true;
 
-	private static final String[] EXPLAN = new String[] { "ターンを消費せず、周囲の敵のレベルを下げるぞ。" };
+	private static final String[] EXPLAN = new String[] {
+			"ターンを消費せず、周囲の敵のレベルを下げるぞ。" };
 
 	public 上白沢慧音のカード(Point p) {
 		super(p, item_name, 1, composition, 上白沢慧音.class);
@@ -102,11 +102,10 @@ public class 上白沢慧音のカード extends SpellCard {
 		SE.KEINE_SP.play();
 		SE.LEVEL_DOWN.play();
 		// Message.set("「どれどれ先生に任せなさい」");
-		for (Base_Creature c : MapInSelect.getListAroundInCreature(Player.me
-				.getMassPoint())) {
+		for (Base_Creature c : MapInSelect.getListRoomInEnemy()) {
 			if (c instanceof Base_NPC)
 				continue;
-			c.chengeLv(1);
+			c.addLV(-1);
 		}
 		return true;
 	}

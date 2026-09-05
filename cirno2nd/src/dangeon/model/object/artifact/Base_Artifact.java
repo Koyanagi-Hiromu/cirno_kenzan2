@@ -52,8 +52,8 @@ import main.res.SE;
 import main.util.CSVLoadSupporter;
 import main.util.DIRECTION;
 
-public abstract class Base_Artifact extends Base_MapObject implements
-		Comparable<Base_Artifact> {
+public abstract class Base_Artifact extends Base_MapObject
+		implements Comparable<Base_Artifact> {
 	/**
 	 * アイテムの特殊効果タイミング
 	 * 
@@ -61,7 +61,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 * 
 	 */
 	public enum ENCHANT_CASE {
-		ENCHANT,
+			ENCHANT,
 	}
 
 	protected enum GROW_RATE {
@@ -337,9 +337,11 @@ public abstract class Base_Artifact extends Base_MapObject implements
 				return new String[] { c + "未識別のため何のカードかよく分かりません",
 						c + "使用することで識別されます",
 						Color.MAGENTA.toString() + "装備するだけでも識別されます",
-						Base_Item.CL_CURSED.toString() + "呪われていることがあるので注意して下さい" };
+						Base_Item.CL_CURSED.toString()
+								+ "呪われていることがあるので注意して下さい" };
 			} else {
-				if (!(this instanceof Base_Pot) || ((Base_Pot) this).isEmpty()) {
+				if (!(this instanceof Base_Pot)
+						|| ((Base_Pot) this).isEmpty()) {
 					return new String[] { c + "未識別のためよく分かりません",
 							c + "使用することで識別されます",
 							c + "装備して秘められた印の効果が発揮しても識別されます" };
@@ -395,8 +397,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 		if (isFrozen()) {
 			Enchant.itemFreeze(this);
 
-			if (EnchantSpecial
-					.enchantSimbolAllCheck(CASE.ALL, ENCHANT_SIMBOL.冴)) {
+			if (EnchantSpecial.enchantSimbolAllCheck(CASE.ALL,
+					ENCHANT_SIMBOL.冴)) {
 				SE.LIGHT_ON.play();
 				Scene_Action.getMe().tellRestStop();
 				Player.me.setCondition(CONDITION.目薬, 0);
@@ -506,15 +508,15 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	}
 
 	public int getMerchantBuyValue() {
-		int multi;
+		float multi;
 		if (this instanceof SpellCard)
-			multi = 8;
+			multi = 3f;
 		else if (this instanceof Staff) {
-			multi = 4;
+			multi = 2f;
 		} else {
-			multi = 2;
+			multi = 1.5f;
 		}
-		int pages = getMerchantSoldValue() * multi;
+		int pages = (int) Math.round(getMerchantSoldValue_float() * multi);
 		if (pages < 1)
 			pages = 1;
 		if (pages > 800)
@@ -523,6 +525,10 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	}
 
 	public int getMerchantSoldValue() {
+		return (int) Math.round(getMerchantSoldValue_float());
+	}
+
+	public float getMerchantSoldValue_float() {
 		return 1;
 	}
 
@@ -563,8 +569,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	}
 
 	protected void init() {
-		CSVLoadSupporter<String> list = CSVLoadSupporter.loadCSV(this
-				.getClass().getSimpleName(), Base_Artifact.class, "\t");
+		CSVLoadSupporter<String> list = CSVLoadSupporter.loadCSV(
+				this.getClass().getSimpleName(), Base_Artifact.class, "\t");
 		if (list != null) {
 			name = list.get(0);
 			flag_pass_turn = list.isTrue(1);
@@ -580,9 +586,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 		} else if (name.matches("名無しのDISC")) {
 			flag_pass_turn = true;
 		} else {
-			System.out
-					.println("[@Base_artifact.init()]NosuchArtifact Exception :"
-							+ name);
+			System.out.println(
+					"[@Base_artifact.init()]NosuchArtifact Exception :" + name);
 		}
 	}
 
@@ -956,7 +961,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 * @param throw_max
 	 *            -1で遠投
 	 * @param flag_magic
-	 *            true その場から投擲　false cから投擲
+	 *            true その場から投擲 false cから投擲
 	 */
 	public void itemThrow(Base_Creature c, HowToThrow how, boolean booted,
 			int throw_max, boolean flag_magic) {
@@ -966,9 +971,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 			if (this instanceof Base_Device) {
 				ento = false;
 			} else {
-				ento = c instanceof Player
-						&& EnchantSpecial.enchantSimbolAllCheck(CASE.RING,
-								ENCHANT_SIMBOL.遠投);
+				ento = c instanceof Player && EnchantSpecial
+						.enchantSimbolAllCheck(CASE.RING, ENCHANT_SIMBOL.遠投);
 				ento = ento || this instanceof ミニ八卦炉;
 				ento = ento || throw_max == -1;
 			}
@@ -985,14 +989,15 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 * @param throw_max
 	 *            -1で遠投
 	 * @param flag_magic
-	 *            true その場から投擲　false cから投擲
+	 *            true その場から投擲 false cから投擲
 	 */
 	private void itemThrow(Base_Creature c, HowToThrow how, boolean booted,
 			int throw_max, boolean flag_magic, boolean ento) {
 		Enchant.forceToRemove(this);
 		Belongings.remove(this);
 		// direction = c instanceof Player ? direction : c.direction;
-		if ((c instanceof Player) && how != HowToThrow.MAGIC && BonusConductor.ひねくれ者_受け()) {
+		if ((c instanceof Player) && how != HowToThrow.MAGIC
+				&& BonusConductor.ひねくれ者_受け()) {
 			Point p = c.getMassPoint().getLocation();
 			Mass m = MassCreater.getMass(p);
 			DIRECTION d = c.direction;
@@ -1079,7 +1084,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 				for (String string : str.split("@")) {
 					int times = string.length() / length;
 					for (int i = 0; i < times; i++) {
-						list.add(string.substring(length * i, length * (i + 1)));
+						list.add(
+								string.substring(length * i, length * (i + 1)));
 					}
 					list.add(string.substring(length * times));
 				}
@@ -1163,7 +1169,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 
 	public void setMerchant(boolean b) {
 		flag_merchant = b;
-		if (b) flag_notYoursYet = true;
+		if (b)
+			flag_notYoursYet = true;
 	}
 
 	public void setMoveAnimating(boolean b) {
@@ -1172,9 +1179,10 @@ public abstract class Base_Artifact extends Base_MapObject implements
 
 	public void setPunishment(boolean b) {
 		flag_punishment = b;
-		if (b) flag_notYoursYet = true;
+		if (b)
+			flag_notYoursYet = true;
 	}
-	
+
 	public static void setGrayItemYours() {
 		MapList.setFlagSheef(false);
 		if (Player.me.saisen != null) {
@@ -1211,7 +1219,8 @@ public abstract class Base_Artifact extends Base_MapObject implements
 			Checker.checkStatic(this);
 			Message.set(str, "は", this.getName(), "だった");
 			if (ItemTable.getRank(this) >= 3)
-				View_Sider.setInformation("出現度：", ItemTable.getRank_String(this));
+				View_Sider.setInformation("出現度：",
+						ItemTable.getRank_String(this));
 			return true;
 		}
 		return false;
@@ -1231,7 +1240,7 @@ public abstract class Base_Artifact extends Base_MapObject implements
 	 * ダッシュして乗ったとき
 	 * 
 	 * @param b
-	 *            　意味なし
+	 *            意味なし
 	 * @return
 	 */
 	public boolean walkOnAction(boolean b) {

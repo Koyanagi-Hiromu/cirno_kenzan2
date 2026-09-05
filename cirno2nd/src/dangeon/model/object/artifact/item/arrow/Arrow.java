@@ -3,9 +3,6 @@ package dangeon.model.object.artifact.item.arrow;
 import java.awt.Point;
 import java.util.Random;
 
-import main.res.SE;
-import main.util.DIRECTION;
-import main.util.半角全角コンバーター;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.object.artifact.Base_Artifact;
@@ -16,6 +13,9 @@ import dangeon.model.object.creature.player.Belongings;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.util.R;
+import main.res.SE;
+import main.util.DIRECTION;
+import main.util.半角全角コンバーター;
 
 public abstract class Arrow extends Base_Item {
 	/**
@@ -111,7 +111,7 @@ public abstract class Arrow extends Base_Item {
 
 	@Override
 	public int getMerchantSoldValue() {
-		int i = arrow_rest * base_merchant_value / getMin();
+		int i = arrow_rest * base_merchant_value() / getMin();
 		if (i < 1)
 			i = 0;
 		return i;

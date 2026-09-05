@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.food;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
@@ -14,6 +13,7 @@ import dangeon.util.Damage;
 import dangeon.util.R;
 import dangeon.view.anime.GoodBadEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
 
 public class 腐ったおにぎり extends Food {
 
@@ -83,5 +83,10 @@ public class 腐ったおにぎり extends Food {
 	@Override
 	public boolean waterAction() {
 		return true;
+	}
+
+	@Override
+	public int getMerchantSoldValue() {
+		return 1;
 	}
 }

@@ -49,15 +49,25 @@ public abstract class Base_Item extends Base_Artifact {
 	private static HashMap<Class<? extends Base_Item>, Boolean> map = new HashMap<Class<? extends Base_Item>, Boolean>();
 
 	protected int staff_use_count = 0;
-	protected final int base_merchant_value;
+
+	/**
+	 * 倉庫（橙）から引き出したときなど、杖の残り回数を外部から設定する
+	 */
+	public void setStaffUseCount(int i) {
+		staff_use_count = i;
+	}
+
+	protected int base_merchant_value() {
+		return (int) (Math.round(ItemTable.getMerchantValue(this)));
+	}
 
 	public static final String CL_PUNISH = new Color(225, 225, 255).toString(),
 			CL_NOT_USABLE = new Color(190, 230, 220).toString(),
 			CL_CUSTOMIZED = new Color(255, 255, 180).toString(),
-			CL_NAMED = new Color(0, 225, 70).toString(), CL_CURSED = new Color(
-					200, 50, 150).toString(), CL_NORMAL = new Color(255, 195,
-					175).toString(), CL_LIMITTED = new Color(255, 255, 255)
-					.toString();
+			CL_NAMED = new Color(0, 225, 70).toString(),
+			CL_CURSED = new Color(200, 50, 150).toString(),
+			CL_NORMAL = new Color(255, 195, 175).toString(),
+			CL_LIMITTED = new Color(255, 255, 255).toString();
 
 	/**
 	 * 色をつける
@@ -94,7 +104,6 @@ public abstract class Base_Item extends Base_Artifact {
 		super(p, item_name, composition_number == 0 ? 1 : composition_number,
 				item_case, true);
 		visible = true;
-		base_merchant_value = ItemTable.getMerchantValue(this);
 	}
 
 	protected void action() {
@@ -195,11 +204,13 @@ public abstract class Base_Item extends Base_Artifact {
 	}
 
 	@Override
-	public int getMerchantSoldValue() {
+	public float getMerchantSoldValue_float() {
 		int alpha;
 		if (isStaticCheked()) {
 			alpha = 0;
 			alpha += getListComposition().size();
+			if (alpha > 2)
+				alpha = 2;
 			// for (ENCHANT_SIMBOL e : getListComposition()) {
 			// alpha++;
 			// }
@@ -218,16 +229,23 @@ public abstract class Base_Item extends Base_Artifact {
 			if (this instanceof Staff) {
 				beta = staff_rest;
 			} else if (this instanceof SpellCard) {
-				beta = ((SpellCard) this).getBomCount() + getForgeValue();
+				SpellCard spellCard = (SpellCard) this;
+				beta = spellCard.getBomCount() - spellCard.BOMB_USE;
+				if (beta < 0)
+					beta = -1;
+				beta += getForgeValue();
+			}
+			if (beta > 10) {
+				beta = 10;
 			}
 		} else {
 			beta = 0;
 		}
-		boolean flag = (this instanceof Base_Pot)
-				|| (this instanceof SpellCard) || (this instanceof Scrool);
+		boolean flag = (this instanceof Base_Pot) || (this instanceof SpellCard)
+				|| (this instanceof Scrool);
 		float gumma = flag ? 1.5f : 1;
-		int pages = Math.round((base_merchant_value + alpha) * gumma
-				* (1 + 0.1f * beta));
+		float pages = (ItemTable.getMerchantValue(this) + alpha) * gumma
+				* (1 + 0.1f * beta);
 		if (pages > 100)
 			pages = 100;
 		return pages;
@@ -284,7 +302,7 @@ public abstract class Base_Item extends Base_Artifact {
 
 	public boolean isUsingMouse() {
 		return this instanceof Food
-		// || this instanceof Scrool
+				// || this instanceof Scrool
 				|| this instanceof Base_Grass || this instanceof SpellCard;
 	}
 
@@ -314,8 +332,9 @@ public abstract class Base_Item extends Base_Artifact {
 					check();
 					Message.set(name, "は", getColoredName(), "だった");
 					if (ItemTable.getRank(this) >= 3)
-						View_Sider.setInformation("出現度：", ItemTable.getRank_String(this));
-					
+						View_Sider.setInformation("出現度：",
+								ItemTable.getRank_String(this));
+
 					if (this instanceof Ring) {
 						if (ItemTable.getRank(this) == 5) {
 							Medal.未識別リボンを使用したらレアものだった.addCount();
@@ -343,8 +362,8 @@ public abstract class Base_Item extends Base_Artifact {
 		final SelectItem ME = (SelectItem) this;
 		ArrayList<Base_Artifact> list = null;
 		if (isStaticCheked()) {
-			list = Belongings.getDeepCopy(Belongings
-					.getListItems_includingFoot());
+			list = Belongings
+					.getDeepCopy(Belongings.getListItems_includingFoot());
 			list = ME.getEscape(list);
 		}
 		if (list == null)
@@ -386,7 +405,7 @@ public abstract class Base_Item extends Base_Artifact {
 	 * ダッシュして乗ったとき
 	 * 
 	 * @param b
-	 *            　意味なし
+	 *            意味なし
 	 * @return
 	 */
 	@Override

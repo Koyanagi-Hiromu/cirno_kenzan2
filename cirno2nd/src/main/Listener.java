@@ -160,7 +160,7 @@ public class Listener implements KeyListener {
 		}
 		if (Scene.getPresentScene().SYS.KEY != null) {
 			Scene.getPresentScene().SYS.KEY.keyPressed(e);
-			System.out.println("[" + e + "] ");
+			// System.out.println("[" + e + "] ");
 		}
 	}
 

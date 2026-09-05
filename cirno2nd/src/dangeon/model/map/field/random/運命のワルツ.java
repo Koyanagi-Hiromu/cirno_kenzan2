@@ -41,17 +41,28 @@ import main.util.DIRECTION;
 public class 運命のワルツ extends Base_Map_Random {
 	private enum FloorConducter {
 		// vs ヒソウテンソク hisoutensoku
-		// vs 朱鷺子　izanagi
+		// vs 朱鷺子 izanagi
 		ERROR(0, null, Image_MapTip.紅魔館, "運命のワルツ"), 運命のワルツ(7, BGM.frozen_night,
 				Image_MapTip.紅魔館), ゴーストナイトムーン(14, BGM.hyougenyakou,
-				Image_MapTip.stars), オールドヒストリー(24, BGM.kanpyo_ch_sprite,
-				Image_MapTip.草原, "過ぎ去りし夏"), 一条戻り橋(29, BGM.kanpyo_ch2_fairy,
-				Image_MapTip.命蓮寺), ネクストヒストリー(44, BGM.kanpyo_ch2_hexa,
-				Image_MapTip.草原_秋, "思い出になる秋"), レジスタンスベース(60,
-				BGM.to_kou_chiruno, Image_MapTip.スキマ, "妖精大革命"), 星に願いを(74,
-				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "奇跡にお祈り"), 誰もいなくなるのか(
-				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水), 運命のラプソディ(100,
-				BGM.kanpyo_ch2_bbcc, Image_MapTip.地霊殿)
+						Image_MapTip.stars), オールドヒストリー(24, BGM.kanpyo_ch_sprite,
+								Image_MapTip.草原, "過ぎ去りし夏"), 一条戻り橋(29,
+										BGM.kanpyo_ch2_fairy,
+										Image_MapTip.命蓮寺), ネクストヒストリー(44,
+												BGM.kanpyo_ch2_hexa,
+												Image_MapTip.草原_秋,
+												"思い出になる秋"), レジスタンスベース(60,
+														BGM.to_kou_chiruno,
+														Image_MapTip.スキマ,
+														"妖精大革命"), 星に願いを(74,
+																BGM.kanpyo_ch2_fff,
+																Image_MapTip.stars,
+																"奇跡にお祈り"), 誰もいなくなるのか(
+																		86,
+																		BGM.kanpyo_ch_bbcc,
+																		Image_MapTip.地霊殿_水), 運命のラプソディ(
+																				100,
+																				BGM.kanpyo_ch2_bbcc,
+																				Image_MapTip.地霊殿)
 
 		;
 		private static FloorConducter get() {
@@ -362,7 +373,7 @@ public class 運命のワルツ extends Base_Map_Random {
 		if (MapList.getFloor() <= FloorConducter.運命のワルツ.floor) {
 			return 5;
 		} else if (MapList.getFloor() > FloorConducter.星に願いを.floor) {
-			return 0;
+			return 1;
 		} else {
 			return 2;
 		}

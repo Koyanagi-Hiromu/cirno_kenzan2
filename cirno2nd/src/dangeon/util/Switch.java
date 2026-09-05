@@ -24,7 +24,7 @@ public class Switch {
 	public static boolean create = false;
 	// バージョン変更用保険
 	public static String big_ver = "2";
-	public static String small_ver = "31";
+	public static String small_ver = "32";
 	// public static int version = 100;
 	public static String current_game = "２製品版";
 	public static final String main_name = "チルノ見参２"

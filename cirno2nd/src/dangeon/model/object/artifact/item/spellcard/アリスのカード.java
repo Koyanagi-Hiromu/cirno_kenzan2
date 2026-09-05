@@ -1,16 +1,19 @@
 package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
+import java.util.List;
 
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
+import dangeon.model.object.creature.Base_Creature;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.アリス;
 import dangeon.model.object.creature.enemy.人形;
 import dangeon.model.object.creature.player.Player;
+import dangeon.util.MapInSelect;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
 
@@ -25,8 +28,9 @@ public class アリスのカード extends SpellCard {
 	private static final int composition = 5;
 	private static final int item_str = 4;
 	private static final int item_def = 9;
-	private static final boolean passing_of_spell = false;
-	private static final String[] EXPLAN = new String[] { "周囲８マスに動かない人形を作り出す程度の能力" };
+	private static final boolean passing_of_spell = true;
+	private static final String[] EXPLAN = new String[] {
+			"周囲８マスに動かない人形を作り出す程度の能力" };
 
 	public アリスのカード(Point p) {
 		super(p, item_name, 1, composition, アリス.class);
@@ -34,6 +38,20 @@ public class アリスのカード extends SpellCard {
 	}
 
 	private void effect() {
+		List<Base_Creature> list = MapInSelect
+				.getListAroundInCreature(Player.me.getMassPoint());
+		for (final Base_Creature c : list) {
+			c.setTelepoteAnimation(false, new Task() {
+
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void work() {
+					c.setMassPoint(MassCreater.getWarpPoint((Base_Enemy) c));
+				}
+			});
+		}
+
 		Point p = Player.me.getMassPoint().getLocation();
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
@@ -44,26 +62,23 @@ public class アリスのカード extends SpellCard {
 				if (!MassCreater.getMass(_p).WALKABLE) {
 					continue;
 				}
-				if (MapList.getEnemy(_p) == null) {
-					MainMap.addEffect(new DoronEffect(_p, new Task() {
-						/**
-						 *
-						 */
-						private static final long serialVersionUID = 1L;
+				MainMap.addEffect(new DoronEffect(_p, new Task() {
+					/**
+					 *
+					 */
+					private static final long serialVersionUID = 1L;
 
-						@Override
-						public void work() {
+					@Override
+					public void work() {
+					}
+
+					@Override
+					protected void work(int frame) {
+						if (frame == 4) {
+							MapList.addEnemy(new 人形(_p, 1), true);
 						}
-
-						@Override
-						protected void work(int frame) {
-							if (frame == 4) {
-								MapList.addEnemy(new 人形(_p, 1), true);
-							}
-						}
-					}), true);
-
-				}
+					}
+				}), true);
 			}
 		}
 	}
@@ -140,10 +155,10 @@ public class アリスのカード extends SpellCard {
 
 	@Override
 	protected boolean spellUse() {
-//		if (MapList.isEnemyMax()) {
-//			Message.set("「敵がフロアにいすぎて作り出せないわ」");
-//			return false;
-//		}
+		// if (MapList.isEnemyMax()) {
+		// Message.set("「敵がフロアにいすぎて作り出せないわ」");
+		// return false;
+		// }
 		effect();
 		Message.set("人形を作り出した");
 		return true;

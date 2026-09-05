@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.enemy.Base_Enemy;
@@ -12,6 +11,7 @@ import dangeon.util.MapInSelect;
 import dangeon.util.STAGE;
 import dangeon.view.anime.CirnoIceEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
 
 public class チルノのカード extends SpellCard {
 
@@ -24,10 +24,11 @@ public class チルノのカード extends SpellCard {
 	private static final int composition = 9;
 	private static final int item_str = 9;
 	private static final int item_def = 9;
-	private static final int use_damage = 40;
+	private static final int use_damage = 99;
 	private static final boolean passing_of_spell = false;
 
-	private static final String[] EXPLAN = new String[] { "フロア中の敵にダメージを与える程度の能力" };
+	private static final String[] EXPLAN = new String[] {
+			"フロア中の敵にダメージを与える程度の能力" };
 
 	public チルノのカード(Point p) {
 		super(p, item_name, 1, composition, チルノ.class);

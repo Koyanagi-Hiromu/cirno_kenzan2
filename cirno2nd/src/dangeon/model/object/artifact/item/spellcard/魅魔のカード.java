@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.MassCreater;
 import dangeon.model.object.creature.enemy.Base_Enemy;
@@ -12,6 +11,7 @@ import dangeon.util.Damage;
 import dangeon.util.MapInSelect;
 import dangeon.view.anime.ThunderEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
 
 public class 魅魔のカード extends SpellCard {
 
@@ -101,7 +101,7 @@ public class 魅魔のカード extends SpellCard {
 	protected boolean spellUse() {
 		SE.LIGHTNING.play();
 		MainMap.addEffect(new ThunderEffect(MassCreater.isPlayerInRoom()));
-		int damage = 50;
+		int damage = 66;
 		for (Base_Enemy c : MapInSelect.getListRoomOrRoadInEnemy()) {
 			int dmg = damage;
 			// if (c instanceof Player) {

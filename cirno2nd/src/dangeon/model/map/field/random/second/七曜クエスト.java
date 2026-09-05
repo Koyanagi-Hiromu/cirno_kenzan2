@@ -44,17 +44,30 @@ import main.util.DIRECTION;
 public class 七曜クエスト extends ミラクルクエスト {
 	private enum FloorConducter {
 		// vs ヒソウテンソク hisoutensoku
-		// vs 朱鷺子　izanagi
+		// vs 朱鷺子 izanagi
 		ERROR(0, null, Image_MapTip.紅魔館, "七曜クエスト"), 運命のワルツ(7, BGM.frozen_night,
 				Image_MapTip.紅魔館, "始まりの日曜日"), ゴーストナイトムーン(14, BGM.hyougenyakou,
-				Image_MapTip.stars, "夜道の月曜日"), オールドヒストリー(24,
-				BGM.kanpyo_ch_sprite, Image_MapTip.草原, "挑戦の火曜日"), 一条戻り橋(29,
-				BGM.kanpyo_ch2_fairy, Image_MapTip.命蓮寺, "懐かしき水曜日"), ネクストヒストリー(
-				44, BGM.kanpyo_ch2_hexa, Image_MapTip.草原_秋, "来世の木曜日"), レジスタンスベース(
-				60, BGM.to_kou_chiruno, Image_MapTip.スキマ, "氾濫の金曜日"), 星に願いを(74,
-				BGM.kanpyo_ch2_fff, Image_MapTip.stars, "祈りの土曜日"), 誰もいなくなるのか(
-				86, BGM.kanpyo_ch_bbcc, Image_MapTip.地霊殿_水, "王家の天日"), 運命のラプソディ(100,
-				BGM.kanpyo_ch2_bbcc, Image_MapTip.地霊殿, "賢者の冥日")
+						Image_MapTip.stars, "夜道の月曜日"), オールドヒストリー(24,
+								BGM.kanpyo_ch_sprite, Image_MapTip.草原,
+								"挑戦の火曜日"), 一条戻り橋(29, BGM.kanpyo_ch2_fairy,
+										Image_MapTip.命蓮寺, "懐かしき水曜日"), ネクストヒストリー(
+												44, BGM.kanpyo_ch2_hexa,
+												Image_MapTip.草原_秋,
+												"来世の木曜日"), レジスタンスベース(60,
+														BGM.to_kou_chiruno,
+														Image_MapTip.スキマ,
+														"氾濫の金曜日"), 星に願いを(74,
+																BGM.kanpyo_ch2_fff,
+																Image_MapTip.stars,
+																"祈りの土曜日"), 誰もいなくなるのか(
+																		86,
+																		BGM.kanpyo_ch_bbcc,
+																		Image_MapTip.地霊殿_水,
+																		"王家の天日"), 運命のラプソディ(
+																				100,
+																				BGM.kanpyo_ch2_bbcc,
+																				Image_MapTip.地霊殿,
+																				"賢者の冥日")
 
 		;
 		private static FloorConducter get() {
@@ -299,7 +312,7 @@ public class 七曜クエスト extends ミラクルクエスト {
 		}
 		return super.getBossMap();
 	}
-	
+
 	private Stairs getNextStair() {
 		return getNextStair(MassCreater.getStairsIP());
 	}
@@ -373,7 +386,7 @@ public class 七曜クエスト extends ミラクルクエスト {
 		if (MapList.getFloor() <= FloorConducter.運命のワルツ.floor) {
 			return 5;
 		} else if (MapList.getFloor() > FloorConducter.星に願いを.floor) {
-			return 0;
+			return 1;
 		} else {
 			return 2;
 		}

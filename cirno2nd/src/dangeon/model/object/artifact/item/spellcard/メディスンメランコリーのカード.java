@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
@@ -12,6 +11,7 @@ import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.メディスン;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.resistant.Poison;
+import main.res.SE;
 
 public class メディスンメランコリーのカード extends SpellCard {
 
@@ -26,7 +26,8 @@ public class メディスンメランコリーのカード extends SpellCard {
 	private static final int item_def = 5;
 	private static final boolean passing_of_spell = false;
 
-	private static final String[] EXPLAN = new String[] { "フロア内の敵の力を半分にする程度の能力" };
+	private static final String[] EXPLAN = new String[] {
+			"フロア内の敵の力を半分にする程度の能力" };
 
 	public メディスンメランコリーのカード(Point p) {
 		super(p, item_name, 1, composition);
@@ -42,14 +43,14 @@ public class メディスンメランコリーのカード extends SpellCard {
 				if (MassCreater.isPointInTheSameRoomInEntrance(p,
 						em.getMassPoint())) {
 					flag = true;
-					Poison.effect(em, 1, true, false);
+					Poison.effect(em, 1, true, true);
 				}
 			}
 		} else {
 			Message.set("隣接している敵に毒をまいた");
 			for (Base_Creature em : MapList.getListAroundCreature(p)) {
 				flag = true;
-				Poison.effect(em, 1, true, false);
+				Poison.effect(em, 1, true, true);
 			}
 		}
 		return true;

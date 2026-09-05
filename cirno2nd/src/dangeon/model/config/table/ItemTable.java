@@ -97,7 +97,8 @@ public class ItemTable {
 		}
 		for (ItemDetail id : ItemDetail.values()) {
 			for (Class<?> c : id.category_list) {
-				double d = ((double) id.rank_map.get(c).PARCENT / (double) id.parcent_value)
+				double d = ((double) id.rank_map.get(c).PARCENT
+						/ (double) id.parcent_value)
 						* ((double) id.category_parcent / (double) 100) * 100;
 				count += d;
 				BigDecimal b = new BigDecimal(d);
@@ -124,21 +125,21 @@ public class ItemTable {
 		detailParcent();
 	}
 
-	public static int getMerchantValue(Base_Item base_Item) {
+	public static float getMerchantValue(Base_Item base_Item) {
 		switch (ItemDetail.getRank(base_Item)) {
 		case S:
-			return 60;
+			return 22f; // 60
 		case A:
-			return 25;
+			return 8.8f; // 25
 		case B:
-			return 4;
+			return 4.4f;
 		case C:
-			return 2;
+			return 2.2f;
 		case D:
-			return 1;
+			return 1.2f;
 		case N:
 		default:
-			return 10;
+			return 5;
 		}
 	}
 
@@ -213,13 +214,14 @@ public class ItemTable {
 	private static void itemTableCreate() {
 		InputStreamReader read;
 		try {
-			read = FileReadSupporter.readUTF8("res/table/テストフィールド"
-					.concat(".csv"));
+			read = FileReadSupporter
+					.readUTF8("res/table/テストフィールド".concat(".csv"));
 			// read = FileReadSupporter.readUTF8("res/itemTable/".concat(
 			// PresentField.get().getName()).concat(".txt"));
 			itemTableCreate(new BufferedReader(read));
 		} catch (FileNotFoundException e) {
-			Show.showCriticalErrorMessageDialog("ItemTableが見つかりません@FileReader-ItemTable");
+			Show.showCriticalErrorMessageDialog(
+					"ItemTableが見つかりません@FileReader-ItemTable");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -277,13 +279,14 @@ public class ItemTable {
 	private static void itemTableCreate(String dun_name) {
 		InputStreamReader read;
 		try {
-			read = FileReadSupporter.readUTF8("res/table/".concat(dun_name)
-					.concat(".csv"));
+			read = FileReadSupporter
+					.readUTF8("res/table/".concat(dun_name).concat(".csv"));
 			// read = FileReadSupporter.readUTF8("res/itemTable/".concat(
 			// PresentField.get().getName()).concat(".txt"));
 			itemTableCreate(new BufferedReader(read));
 		} catch (FileNotFoundException e) {
-			Show.showCriticalErrorMessageDialog("ItemTableが見つかりません@FileReader-ItemTable");
+			Show.showCriticalErrorMessageDialog(
+					"ItemTableが見つかりません@FileReader-ItemTable");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -332,8 +335,8 @@ public class ItemTable {
 				String[] cut = str.split("\t");
 				sb.append(cut[0].trim());
 				sb.append("\t");
-				sb.append(ItemDetail.RANK.values()[R.ran(ItemDetail.RANK
-						.values().length)]);
+				sb.append(ItemDetail.RANK.values()[R
+						.ran(ItemDetail.RANK.values().length)]);
 				sb.append("\n");
 			}
 		} catch (IOException e) {
@@ -361,9 +364,8 @@ public class ItemTable {
 	private static Class<?> returnClass(String str, String category) {
 		category = category.trim();
 		try {
-			Class<?> clazz = Class
-					.forName("dangeon.model.object.artifact.item.".concat(
-							category.concat(".")).concat(str));
+			Class<?> clazz = Class.forName("dangeon.model.object.artifact.item."
+					.concat(category.concat(".")).concat(str));
 			return clazz;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -461,8 +463,8 @@ public class ItemTable {
 				parcent *= device;
 			}
 		}
-		int r = (PresentField.get().getShopParcent() + PresentField.get()
-				.getSaisenParcent()) * 2 / 3;
+		int r = (PresentField.get().getShopParcent()
+				+ PresentField.get().getSaisenParcent()) * 2 / 3;
 		if (new R().is(r)) {
 			ItemTable.createTresureBox();
 		}

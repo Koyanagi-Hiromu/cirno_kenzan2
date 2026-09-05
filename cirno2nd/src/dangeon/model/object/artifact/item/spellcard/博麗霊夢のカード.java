@@ -2,12 +2,13 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.condition.CONDITION;
+import dangeon.model.map.MapList;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.博麗霊夢;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
+import main.res.SE;
 
 public class 博麗霊夢のカード extends SpellCard {
 
@@ -22,7 +23,8 @@ public class 博麗霊夢のカード extends SpellCard {
 	private static final int item_def = 14;
 	private static final boolean passing_of_spell = false;
 
-	private static final String[] EXPLAN = new String[] { "部屋内の敵を封印状態にする程度の能力" };
+	private static final String[] EXPLAN = new String[] {
+			"部屋内の敵を封印状態にする程度の能力" };
 
 	public 博麗霊夢のカード(Point p) {
 		super(p, item_name, 1, composition, 博麗霊夢.class);
@@ -103,6 +105,10 @@ public class 博麗霊夢のカード extends SpellCard {
 		SE.STATUS_SEAL.play();
 		MapInSelect.roomInChengeConditionAtPoint(Player.me.getMassPoint(),
 				CONDITION.封印, 0);
+
+		for (Base_Enemy c : MapList.getListEnemy()) {
+			c.changeSize(-1);
+		}
 		return true;
 	}
 

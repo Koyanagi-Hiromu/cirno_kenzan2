@@ -22,6 +22,7 @@ import dangeon.model.object.artifact.device.HiddenDevice;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.ヒソウテンソク;
 import dangeon.model.object.creature.npc.Abstract_NPC;
+import dangeon.model.object.creature.npc.橙NPC;
 import dangeon.model.object.creature.npc.藍NPC;
 import dangeon.model.object.creature.player.save.SaveLoad;
 import dangeon.util.Switch;
@@ -65,13 +66,16 @@ public class SukimaMap extends GouseiMap {
 		final 藍NPC RAN_STRAGE = (藍NPC) new 藍NPC(new Point(
 				getEntrancePoint().x + 2, getEntrancePoint().y - 1))
 				.setDirection(DIRECTION.LEFT);
+		final 橙NPC CHEN_STRAGE = (橙NPC) new 橙NPC(new Point(
+				getEntrancePoint().x + 2, getEntrancePoint().y - 2))
+				.setDirection(DIRECTION.LEFT);
 		add(new HiddenDevice(new Point(getEntrancePoint().x + 2,
 				getEntrancePoint().y)) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean walkOnAction() {
-				yukariMsg(RAN_STRAGE);
+				yukariMsg(RAN_STRAGE, CHEN_STRAGE);
 				return false;
 			}
 		});
@@ -81,14 +85,15 @@ public class SukimaMap extends GouseiMap {
 
 			@Override
 			public void message() {
-				yukariMsg(RAN_STRAGE);
+				yukariMsg(RAN_STRAGE, CHEN_STRAGE);
 			}
 		}.setDirection(DIRECTION.LEFT));
 		add(RAN_STRAGE);
+		add(CHEN_STRAGE);
 		return list_object;
 	}
 
-	private void yukariMsg(final 藍NPC RAN_STRAGE) {
+	private void yukariMsg(final 藍NPC RAN_STRAGE, final 橙NPC CHEN_STRAGE) {
 		new Conversation(Image_LargeCharacter.八雲紫, "床に落ちてるアイテムは消えるけど大丈夫かしら？",
 				new ConvEvent() {
 					@Override
@@ -107,6 +112,7 @@ public class SukimaMap extends GouseiMap {
 									@Override
 									public void work() {
 										RAN_STRAGE.save();
+										CHEN_STRAGE.save();
 										MassCreater mc = new MassCreater(
 												new FairyPlace(), false);
 										new SaveLoad(mc).saveContinue();

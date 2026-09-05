@@ -42,6 +42,7 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 	}
 
 	boolean action(ACTION a) {
+		main.util.FrameDebug.action(a, base_scene);
 		return base_scene.action_pre(a);
 	}
 
@@ -59,6 +60,7 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 		do {
 			bs = base_scene;
 			bs.draw(g);
+			main.util.FrameDebug.drawn(bs);
 		} while (bs != base_scene);
 	}
 
@@ -91,6 +93,7 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 		if (a != null || d != null) {
 			base_scene.keyReleased(a, d);
 		}
+		kh.unset(e);
 	}
 
 	private void objectUpdate() {
@@ -116,8 +119,8 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 		int player = 1;
 		List<Base_Enemy> enemies = MapList.getListEnemy();
 		List<Base_Artifact> items = MapList.getListArtifact();
-		ArrayList<Base_MapObject> list = new ArrayList<Base_MapObject>(player
-				+ enemies.size());
+		ArrayList<Base_MapObject> list = new ArrayList<Base_MapObject>(
+				player + enemies.size());
 		list.add(Player.me);
 		for (Base_Enemy enemy : enemies) {
 			list.add(enemy);
@@ -135,6 +138,7 @@ public class SceneHolder_KeyAccepter extends Base_KeyAccepter {
 	}
 
 	void setKeyAccepter(Base_Scene base_scene) {
+		main.util.FrameDebug.sceneChange(this.base_scene, base_scene);
 		this.base_scene = base_scene;
 		// for (DIRECTION d : DIRECTION.values()) {
 		// this.base_scene.keyReleased(null, d);

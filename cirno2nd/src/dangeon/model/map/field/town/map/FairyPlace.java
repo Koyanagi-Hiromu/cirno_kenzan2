@@ -36,6 +36,7 @@ import dangeon.model.object.creature.npc.dungeonNpc.チルノの旅NPC;
 import dangeon.model.object.creature.npc.second.MUSIC_NPC;
 import dangeon.model.object.creature.npc.second.NPCおりん;
 import dangeon.model.object.creature.npc.second.NPCパチェ;
+import dangeon.model.object.creature.npc.second.NPC博麗霊夢;
 import dangeon.model.object.creature.npc.second.SETSUNA_NPC;
 import dangeon.model.object.creature.npc.second.救済箱;
 import dangeon.model.object.creature.player.Belongings;
@@ -100,14 +101,14 @@ public class FairyPlace extends Base_TownMap {
 										SE.YUKARI_SPELL.play();
 										new BlackOut("", new Task() {
 											/**
-									 *
-									 */
+											*
+											*/
 											private static final long serialVersionUID = 1L;
 
 											@Override
 											public void work() {
-												TaskOnMapObject
-														.setNewMap(new MassCreater(
+												TaskOnMapObject.setNewMap(
+														new MassCreater(
 																new SukimaMap(),
 																false));
 											}
@@ -200,7 +201,8 @@ public class FairyPlace extends Base_TownMap {
 				}
 			}
 			if (flag) {
-				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4, false) {
+				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4,
+						false) {
 					private static final long serialVersionUID = 1L;
 
 					@Override
@@ -249,11 +251,12 @@ public class FairyPlace extends Base_TownMap {
 					}
 				};
 			} else if (StoryManager.ミラクルクエスト挑戦ok.hasFinished()) {
-				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4,
-						false, "もしエクストラなカードが手に入ったら見せてくれないかー？@", "⑨おー？@", "⑨エネミー図鑑にヒントが書いてあるらしいぞー");
+				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4, false,
+						"もしエクストラなカードが手に入ったら見せてくれないかー？@", "⑨おー？@",
+						"⑨エネミー図鑑にヒントが書いてあるらしいぞー");
 			} else {
-				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4,
-						false, "おーチルノかー？@", "封印状態になるとどんな状態異常も解除されるって知ってたかー？@",
+				lumia = new Abstract_NPC(CHARA_IMAGE.ルーミア, "ルーミア", 16, 4, false,
+						"おーチルノかー？@", "封印状態になるとどんな状態異常も解除されるって知ってたかー？@",
 						"⑨そーなのかー");
 
 			}
@@ -269,7 +272,7 @@ public class FairyPlace extends Base_TownMap {
 		} else {
 			add(new Abstract_NPC(CHARA_IMAGE.豊聡耳神子, "豊聡耳神子", 10, 6, false,
 					"あなたは大変自分に素直ですね@", "⑨最強だから当たり前じゃない！")
-					.setDirection(DIRECTION.RIGHT));
+							.setDirection(DIRECTION.RIGHT));
 		}
 		add(new Abstract_NPC(CHARA_IMAGE.物部布都, "物部布都", 10, 5, false, false,
 				"お主が長居するとフロアが冷えて水路が凍ってしまうぞ@", "水路にアイテムを落としたら試してみるのもよいかもな？@",
@@ -277,7 +280,7 @@ public class FairyPlace extends Base_TownMap {
 		add(new Abstract_NPC(CHARA_IMAGE.蘇我屠自古, "蘇我屠自古", 11, 5, false, true,
 				"電気はキャラや水場に伝播するしダメージが大きいが…@", "アンタが感電してもHPが１は残るみたいだね@",
 				"⑨氷は電気に強いってことね？", "⑨案外そうかもしれないな")
-				.setDirection(DIRECTION.DOWN_LEFT));
+						.setDirection(DIRECTION.DOWN_LEFT));
 		add(new NPC救出大作戦(new Point(29, 4)));
 		if (StoryManager.逆ヶ島挑戦ok.hasFinished()) {
 			add(new NPC逆ヶ島(new Point(28, 4)));
@@ -295,7 +298,7 @@ public class FairyPlace extends Base_TownMap {
 		add(new Abstract_NPC(CHARA_IMAGE.二ッ岩マミゾウ, "二ッ岩マミゾウ", 18, 14, false,
 				"回収機能は使っておるか？@", "ダッシュで乗ったりしたアイテムをフロア中から集めることができる@",
 				"⑨使い道も教えてよ", "⑨それは自分で探すことじゃな", "⑨ちぇー")
-				.setDirection(DIRECTION.DOWN));
+						.setDirection(DIRECTION.DOWN));
 		if (StoryManager.おりん車.hasFinished())
 			add(new NPCおりん(24, 14));
 		add(new Abstract_NPC(CHARA_IMAGE.封獣ぬえ, "封獣ぬえ", 19, 14, false,
@@ -317,10 +320,10 @@ public class FairyPlace extends Base_TownMap {
 		if (StoryManager.大妖精救出clear.hasFinished()) {
 			add(new Abstract_NPC(CHARA_IMAGE.霍青娥, "霍青娥", 30, 8, false, true,
 					"書は壁の中にいる敵にも効果があるけど@", "アイテムを投げつけても当たるから覚えておくといいわ@")
-					.setDirection(DIRECTION.LEFT));
+							.setDirection(DIRECTION.LEFT));
 			add(new Abstract_NPC(CHARA_IMAGE.宮古芳香, "宮古芳香", 30, 9, false,
 					"おまえ知ってるか～？@", "私のカードは隠し能力として～@", "おにぎりをおいしく食べる能力があるんだぞ～@")
-					.setDirection(DIRECTION.LEFT));
+							.setDirection(DIRECTION.LEFT));
 		}
 		if (StoryManager.おりん車.hasFinished()) {
 			add(new NPC賢将裏の洞窟(new Point(30, 12)).setDirection(DIRECTION.LEFT));
@@ -333,28 +336,23 @@ public class FairyPlace extends Base_TownMap {
 				"ゆ！？", "ゆ～！", "ゆ？", "ゆっくりしていってねっ" };
 		add(new Abstract_NPC(CHARA_IMAGE.ゆっくり霊夢, "ゆっくり", 30, 14, true,
 				arr[new R().nextInt(arr.length)].concat(""))
-				.setDirection(DIRECTION.LEFT));
+						.setDirection(DIRECTION.LEFT));
 		setSaisenBox(22, 4);
+		add(new NPC博麗霊夢(23, 4));
 		if (StoryManager.逆ヶ島clear.hasFinished()) {
-			add(new Abstract_NPC(CHARA_IMAGE.博麗霊夢, "博麗霊夢", 23, 4, false,
-					"平和でいいわね"));
 			add(new NPC二撃(new Point(24, 4)));
 			add(new Abstract_NPC(CHARA_IMAGE.伊吹萃香, "伊吹萃香", 25, 4, false,
 					"ちから試しするかい？@", "⑨また今度ね！").setDirection(DIRECTION.DOWN));
 		} else if (StoryManager.大妖精救出clear.hasFinished()) {
-			add(new Abstract_NPC(CHARA_IMAGE.博麗霊夢, "博麗霊夢", 23, 4, false,
-					"平和でいいわね"));
 			add(new Abstract_NPC(CHARA_IMAGE.星熊勇儀, "星熊勇儀", 24, 4, false,
 					"なんとかなりそうかい？").setDirection(DIRECTION.DOWN));
 			add(new Abstract_NPC(CHARA_IMAGE.伊吹萃香, "伊吹萃香", 25, 4, false,
 					"お酒でも飲まないかい？@", "⑨また今度ね！").setDirection(DIRECTION.DOWN));
 		} else {
-			add(new Abstract_NPC(CHARA_IMAGE.博麗霊夢, "博麗霊夢", 23, 4, false,
-					"大妖精がさらわれたって？@", "まぁもし異変まで発展したら解決しに向かうわ@", "⑨お茶でも飲んで待っててよ"));
 			add(new Abstract_NPC(CHARA_IMAGE.星熊勇儀, "星熊勇儀", 24, 4, false,
 					"鬼の端くれがまた何かやらかしたようだね@", "なんなら私も何か手伝おうかい？@",
 					"⑨あたいひとりでなんとかするわ！@", "さらわれたのはあたいの友達だからね", "⑨あっはっは　良い答えだ")
-					.setDirection(DIRECTION.DOWN));
+							.setDirection(DIRECTION.DOWN));
 			add(new Abstract_NPC(CHARA_IMAGE.伊吹萃香, "伊吹萃香", 25, 4, false,
 					"お酒でも飲まないかい？@", "⑨また今度ね！").setDirection(DIRECTION.DOWN));
 		}

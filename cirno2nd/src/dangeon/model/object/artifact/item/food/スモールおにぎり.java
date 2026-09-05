@@ -2,9 +2,9 @@ package dangeon.model.object.artifact.item.food;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.object.creature.player.Player;
+import main.res.SE;
 
 /**
  * 大きなおにぎり
@@ -38,6 +38,11 @@ public class スモールおにぎり extends Food {
 			Player.me.chengeSatiety(50);
 			Message.set("それなりにお腹が膨れた");
 		}
+	}
+
+	@Override
+	public int getMerchantSoldValue() {
+		return 1;
 	}
 
 	@Override

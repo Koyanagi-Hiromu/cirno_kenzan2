@@ -3,7 +3,6 @@ package dangeon.model.object.artifact.item.pot;
 import java.awt.Point;
 import java.util.Iterator;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.map.ItemFall;
@@ -15,6 +14,7 @@ import dangeon.util.R;
 import dangeon.util.STAGE;
 import dangeon.view.detail.MiniMap;
 import dangeon.view.detail.View_Sider;
+import main.res.SE;
 
 public class 蛍瓶 extends Base_Pot {
 	private class ひかり extends アレ {
@@ -28,7 +28,7 @@ public class 蛍瓶 extends Base_Pot {
 	private static final long serialVersionUID = 1L;
 
 	public 蛍瓶(Point p) {
-		this(p, new R().nextInt(3) + 1);
+		this(p, new R().nextInt(2) + 3);
 	}
 
 	public 蛍瓶(Point p, int size) {
@@ -48,7 +48,7 @@ public class 蛍瓶 extends Base_Pot {
 		staticCheck();
 		Message.set("光が広がった");
 		SE.LIGHT_ON.play();
-		Player.me.setCondition(CONDITION.蛍, 25);
+		Player.me.setCondition(CONDITION.蛍, 40);
 		return true;
 	}
 

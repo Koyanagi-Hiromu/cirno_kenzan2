@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.util.DIRECTION;
 import dangeon.controller.task.Task;
 import dangeon.model.map.MapList;
 import dangeon.model.map.MassCreater;
@@ -11,6 +10,8 @@ import dangeon.model.object.creature.enemy.霧雨魔理沙;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.Damage;
 import dangeon.view.anime.MarisaSpark;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 霧雨魔理沙のカード extends SpellCard {
 
@@ -121,6 +122,8 @@ public class 霧雨魔理沙のカード extends SpellCard {
 								MapList.getEnemy(p), spelldamage);
 					}
 				}
+				SE.LIGHT_ON.play();
+				MassCreater.setAllMassOnMiniMap();
 			}
 		}));
 

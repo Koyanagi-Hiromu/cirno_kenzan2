@@ -3,8 +3,6 @@ package dangeon.model.object.artifact.item.pot;
 import java.awt.Point;
 import java.util.Iterator;
 
-import main.res.SE;
-import main.util.DIRECTION;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.map.ItemFall;
 import dangeon.model.map.MapList;
@@ -18,6 +16,8 @@ import dangeon.util.R;
 import dangeon.util.STAGE;
 import dangeon.view.anime.DoronEffect;
 import dangeon.view.detail.MainMap;
+import main.res.SE;
+import main.util.DIRECTION;
 
 public class 水瓶 extends Base_Pot {
 	private class 水鉄砲 extends アレ {
@@ -42,7 +42,7 @@ public class 水瓶 extends Base_Pot {
 	private static final long serialVersionUID = 1L;
 
 	public 水瓶(Point p) {
-		this(p, new R().nextInt(5) / 2 + 2);
+		this(p, new R().nextInt(2) + 3);
 	}
 
 	public 水瓶(Point p, int size) {

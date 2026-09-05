@@ -2,13 +2,13 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.西行寺幽々子;
 import dangeon.model.object.creature.player.Player;
 import dangeon.util.MapInSelect;
+import main.res.SE;
 
 public class 西行寺幽々子のカード extends SpellCard {
 
@@ -21,7 +21,7 @@ public class 西行寺幽々子のカード extends SpellCard {
 	private static final int composition = 5;
 	private static final int item_str = 7;
 	private static final int item_def = 14;
-	private static final boolean passing_of_spell = true;
+	private static final boolean passing_of_spell = false;
 
 	private static final String[] EXPLAN = new String[] { "部屋内の敵を死にいざなう程度の能力" };
 

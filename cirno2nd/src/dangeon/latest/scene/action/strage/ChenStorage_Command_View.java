@@ -1,0 +1,28 @@
+package dangeon.latest.scene.action.strage;
+
+import main.res.Image_Window_Frame;
+import dangeon.latest.scene.Base_View;
+import dangeon.latest.scene.action.menu.Base_Scene_Menu_View;
+import dangeon.latest.scene.action.menu.first.item.list.Scene_Menu_First_Item_List_View;
+import dangeon.latest.util.view_window.MenuWindow;
+import dangeon.latest.util.view_window.MenuWindow_SelfAdjusting;
+import dangeon.view.constant.NormalFont;
+
+/**
+ * 橙の倉庫のカテゴリメニュー用View（ItemWiki_Command_Viewと同じ配置）
+ */
+public class ChenStorage_Command_View extends Base_Scene_Menu_View {
+
+	public ChenStorage_Command_View(Base_View bv) {
+		super(Scene_Menu_First_Item_List_View.X
+				+ Scene_Menu_First_Item_List_View.MAIN_W
+				+ Scene_Menu_First_Item_List_View.MARGINE, 40,
+				Image_Window_Frame.GLOW, bv);
+	}
+
+	@Override
+	protected MenuWindow createMenuWindow() {
+		return new MenuWindow_SelfAdjusting(this,
+				NormalFont.NORMALFONT.deriveFont(NormalFont.SMALL_SIZE));
+	}
+}

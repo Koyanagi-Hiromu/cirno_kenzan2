@@ -3,14 +3,15 @@ package dangeon.latest.system;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-import main.Listener.ACTION;
-import main.util.DIRECTION;
 import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.view.util.ValueFollower;
+import main.Listener.ACTION;
+import main.util.DIRECTION;
 
 public class KeyHolder {
 
@@ -41,8 +42,13 @@ public class KeyHolder {
 	ArrayList<ACTION> list__a = new ArrayList<ACTION>();
 
 	ArrayList<DIRECTION> list__d = new ArrayList<DIRECTION>(8);
+	HashSet<Integer> list__ev = new HashSet<Integer>();
 
 	private KeyEvent ev;
+
+	public boolean hasKeyEvent(int ev) {
+		return list__ev.contains(ev);
+	}
 
 	public KeyHolder(SceneHolder_KeyAccepter k_acc) {
 		tasklist_action = new LinkedHashSet<ACTION>(ACTION.values().length);
@@ -74,8 +80,8 @@ public class KeyHolder {
 	}
 
 	private synchronized boolean isAnyReleaseRequest() {
-		for (Iterator<Boolean> iterator = request_release.values().iterator(); iterator
-				.hasNext();)
+		for (Iterator<Boolean> iterator = request_release.values()
+				.iterator(); iterator.hasNext();)
 			if (iterator.next())
 				return true;
 		return false;
@@ -125,6 +131,13 @@ public class KeyHolder {
 
 	public synchronized void set(KeyEvent e) {
 		ev = e;
+		if (e != null)
+			list__ev.add(e.getKeyCode());
+	}
+
+	public synchronized void unset(KeyEvent e) {
+		if (e != null)
+			list__ev.remove(e.getKeyCode());
 	}
 
 	public synchronized void setKeyAccepter(Base_Scene base_scene) {
@@ -150,7 +163,7 @@ public class KeyHolder {
 
 	public synchronized void setTaskKeyAction(ACTION action) {
 		if (action_pushing_map.get(action)) {
-			// おしっぱ無効時に追加入力を受けた　→　無視
+			// おしっぱ無効時に追加入力を受けた → 無視
 		} else {
 			tasklist_action.add(action);
 			action_pushing_map.put(action, true);
@@ -168,8 +181,8 @@ public class KeyHolder {
 			} else if (tasklist_direction.isEmpty()) {
 				ValueFollower.setChase(tasklist_action);
 			} else {
-				ValueFollower.setChase(tasklist_direction.toString() + ","
-						+ tasklist_action);
+				ValueFollower.setChase(
+						tasklist_direction.toString() + "," + tasklist_action);
 			}
 		} else {
 			ValueFollower.setChase("-empty-");
@@ -200,14 +213,16 @@ public class KeyHolder {
 				}
 			}
 		}
-		if (Message.isDemandToWaitPushingAnyKey() && !tasklist_action.isEmpty()) {
+		if (Message.isDemandToWaitPushingAnyKey()
+				&& !tasklist_action.isEmpty()) {
 			Message.releaseLock(tasklist_action);
 			for (ACTION a : tasklist_action)
 				list__a.add(a);
 		} else {
 			int j = 0;
 			ACTION[] as = new ACTION[tasklist_action.size()];
-			for (Iterator<ACTION> i = tasklist_action.iterator(); i.hasNext();) {
+			for (Iterator<ACTION> i = tasklist_action.iterator(); i
+					.hasNext();) {
 				as[j++] = i.next();
 			}
 			for (ACTION a : as) {

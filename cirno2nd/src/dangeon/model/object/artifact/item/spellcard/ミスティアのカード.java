@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.model.map.MapList;
 import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.Base_Creature;
@@ -10,6 +9,7 @@ import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.ミスティア;
 import dangeon.model.object.creature.player.Player;
 import dangeon.model.object.creature.resistant.Poison;
+import main.res.SE;
 
 public class ミスティアのカード extends SpellCard {
 
@@ -25,7 +25,8 @@ public class ミスティアのカード extends SpellCard {
 	private static final boolean passing_of_spell = false;
 	private ENCHANT_SIMBOL SIM = ENCHANT_SIMBOL.鰻;
 
-	private static final String[] EXPLAN = new String[] { "フロア中の全てのキャラクターに毒を撒く程度の能力" };
+	private static final String[] EXPLAN = new String[] {
+			"フロア中の全てのキャラクターに毒を撒く程度の能力" };
 
 	public ミスティアのカード(Point p) {
 		super(p, item_name, 1, composition);
@@ -101,9 +102,9 @@ public class ミスティアのカード extends SpellCard {
 	protected boolean spellUse() {
 		SE.MISTHIA_VOISE.play();
 		for (Base_Creature c : MapList.getListCreature()) {
-			Poison.effect(c, 1, true, false);
+			Poison.effect(c, 1, true, true);
 		}
-		Poison.effect(Player.me, 1, false, false);
+		Poison.effect(Player.me, 1, false, true);
 		return true;
 	}
 

@@ -2,7 +2,6 @@ package dangeon.model.object.artifact.item.spellcard;
 
 import java.awt.Point;
 
-import main.res.SE;
 import dangeon.latest.scene.action.message.Message;
 import dangeon.model.condition.CONDITION;
 import dangeon.model.map.MapList;
@@ -11,6 +10,8 @@ import dangeon.model.object.artifact.item.enchantSpecial.ENCHANT_SIMBOL;
 import dangeon.model.object.creature.enemy.Base_Enemy;
 import dangeon.model.object.creature.enemy.火焔猫燐;
 import dangeon.model.object.creature.player.Player;
+import dangeon.util.MapInSelect;
+import main.res.SE;
 
 public class 火焔猫燐のカード extends SpellCard {
 
@@ -23,9 +24,10 @@ public class 火焔猫燐のカード extends SpellCard {
 	private static final int composition = 5;
 	private static final int item_str = 4;
 	private static final int item_def = 6;
-	private static final boolean passing_of_spell = false;
+	private static final boolean passing_of_spell = true;
 
-	private static final String[] EXPLAN = new String[] { "周囲に金縛りと呪い状態の敵を召喚する程度の能力" };
+	private static final String[] EXPLAN = new String[] {
+			"周囲に金縛りと呪い状態の敵を召喚する程度の能力" };
 
 	public 火焔猫燐のカード(Point p) {
 		super(p, item_name, 1, composition);
@@ -100,9 +102,12 @@ public class 火焔猫燐のカード extends SpellCard {
 	protected boolean spellUse() {
 		if (PresentField.get().isHaraheru()
 				&& PresentField.get().isRandomField()) {
+			MapInSelect.aroundInEnemyChengeCondition(CONDITION.麻痺, 0);
+			MapInSelect.aroundInEnemyChengeCondition(CONDITION.死, 0);
+
 			SE.SUMMON.play();
-			MapList.summonEnemy(Player.me.getMassPoint(), 8, null,
-					CONDITION.麻痺, CONDITION.死);
+			MapList.summonEnemy(Player.me.getMassPoint(), 8, null, CONDITION.麻痺,
+					CONDITION.死);
 			return true;
 		} else {
 			Message.set("「ちょいと！ランダムマップで使っておくれよ！」");

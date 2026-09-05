@@ -81,7 +81,14 @@ public class WindowDebug extends JFrame {
 			popup.addMouseListener(MainListenerDebug.ME);
 			add(popup);
 		}
-		
+		current_y += one_height;
+		{
+			// JButton set = new JButton("セーブデータ");
+			// set.setBounds(second_width, current_y, 150, 30);
+			// set.addActionListener(MainListenerDebug.ME);
+			// add(set);
+		}
+
 		MainListenerDebug.ME.RefreshText();
 	}
 
