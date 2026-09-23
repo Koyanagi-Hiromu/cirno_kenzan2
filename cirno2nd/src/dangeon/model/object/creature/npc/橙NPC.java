@@ -60,6 +60,16 @@ public class 橙NPC extends Base_NPC {
 
 			@Override
 			protected Book getContent4() {
+				return new Book("見る") {
+					@Override
+					protected void work() {
+						CHEN_Strage.pushEnter(3);
+					}
+				};
+			}
+
+			@Override
+			protected Book getContent5() {
 				return new Book("やめる") {
 					@Override
 					protected void work() {

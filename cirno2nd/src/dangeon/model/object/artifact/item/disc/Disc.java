@@ -36,6 +36,14 @@ public class Disc extends Base_Disc {
 		return sb;
 	}
 
+	/**
+	 * 曲の組み合わせを表す文字列（橙の倉庫の種類キー用）<br>
+	 * Discなら"妖々夢＆紅魔郷"のような2曲、DiscAなら1曲の名前
+	 */
+	public String getDetailKey() {
+		return item_name;
+	}
+
 	public void selectSetDetail(char c, char c2) {
 		String stage1 = null, stage2 = null;
 		for (Disc_Detail d : Disc_Detail.values()) {

@@ -7,7 +7,6 @@ import dangeon.latest.scene.Base_Scene;
 import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.menu.Base_Scene_Menu;
 import dangeon.latest.scene.action.menu.Book;
-import dangeon.model.config.Config;
 import dangeon.model.object.creature.player.strage.CHEN_Strage;
 
 /**
@@ -30,7 +29,8 @@ public class ChenStorage_Command extends Base_Scene_Menu {
 	@Override
 	public boolean arrow(DIRECTION d) {
 		boolean b = super.arrow(d);
-		setNextScene(new ChenStorage_Command(new ChenStorage_List(getY())));
+		setNextScene(new ChenStorage_Command(new ChenStorage_List(getY(), 0,
+				LIST.VIEW)));
 		return b;
 	}
 
@@ -42,13 +42,12 @@ public class ChenStorage_Command extends Base_Scene_Menu {
 	@Override
 	protected void initializeContents(ArrayList<MenuContent> list) {
 		for (int i = 0; i < CHEN_Strage.CATEGORY_COUNT; i++) {
-			setContents(Config.getItemDataKey(CHEN_Strage.wikiIndex(i)), "",
-					new Book() {
-						@Override
-						protected void work() {
-							setNextScene(LIST);
-						}
-					});
+			setContents(CHEN_Strage.categoryLabel(i), "", new Book() {
+				@Override
+				protected void work() {
+					setNextScene(LIST);
+				}
+			});
 		}
 	}
 

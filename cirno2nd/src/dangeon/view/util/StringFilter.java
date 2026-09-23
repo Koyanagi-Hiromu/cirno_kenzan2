@@ -44,6 +44,16 @@ public class StringFilter {
 
 	private static boolean flag_neglect_dight = false;
 
+	private static boolean flag_draw_sample_rank = true;
+
+	/**
+	 * flag_sampleアイテムのレア度ランク表示のON/OFF<br>
+	 * 橙の倉庫「見る」のようにランク不要のリストが描画中だけOFFにする（使用後は必ず戻すこと）
+	 */
+	public static void setDrawSampleRank(boolean b) {
+		flag_draw_sample_rank = b;
+	}
+
 	public static void drawArtifactName(Graphics2D g, Base_Artifact a, int x,
 			int y) {
 		drawArtifactName(g, a, x, y, null);
@@ -68,12 +78,15 @@ public class StringFilter {
 				g.setColor(_c);
 			}
 			if (a.flag_sample) {
-				x += 245;
-				g.setColor(NUMBERS);
-				String text = ItemTable.getRank_String(a);
-				int w2 = g.getFontMetrics().stringWidth(text);
-				drawEdgedString_plain(g, text, x - (28 + w2) / 2 + 6, y - 1);
-				g.setColor(Color.WHITE);
+				if (flag_draw_sample_rank) {
+					x += 245;
+					g.setColor(NUMBERS);
+					String text = ItemTable.getRank_String(a);
+					int w2 = g.getFontMetrics().stringWidth(text);
+					drawEdgedString_plain(g, text, x - (28 + w2) / 2 + 6,
+							y - 1);
+					g.setColor(Color.WHITE);
+				}
 				return;
 			}
 			if (a.isNotYoursYet()) {

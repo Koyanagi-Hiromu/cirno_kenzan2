@@ -21,7 +21,13 @@ public class StackCountMenuWindow extends ItemSelectMenuWindow {
 
 	@Override
 	protected void drawString(Graphics2D g, int x, int y) {
-		super.drawString(g, x, y);
+		// 倉庫リストではレア度ランクの代わりに在庫数を表示する
+		StringFilter.setDrawSampleRank(false);
+		try {
+			super.drawString(g, x, y);
+		} finally {
+			StringFilter.setDrawSampleRank(true);
+		}
 		g.setFont(FONT);
 		for (int i = 0; i < SCENE.getContentSize(); i++) {
 			MenuContent c = SCENE.getContentSize(i);

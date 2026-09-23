@@ -11,6 +11,17 @@ public class R extends Random {
 	public static long count = 0;
 	private static long seed = -1;
 
+	private static boolean flag_max = false;
+
+	/**
+	 * ランダム値を「発生しうる最大値」に固定するモード（橙の倉庫の生成用）<br>
+	 * ONの間、nextInt(n)は必ずn-1を、is(percent)は必ずtrue（percent>0のとき）を返す。<br>
+	 * 使い終わったら必ずfalseに戻すこと。
+	 */
+	public static void setMaxMode(boolean b) {
+		flag_max = b;
+	}
+
 	/**
 	 * dangeon関係なし
 	 * 
@@ -72,12 +83,16 @@ public class R extends Random {
 	}
 
 	public boolean is(int percent_100) {
+		if (flag_max)
+			return percent_100 > 0;
 		return nextInt(100) < percent_100;
 	}
 
 	@Override
 	public int nextInt(int n) {
 		try {
+			if (flag_max)
+				return n > 0 ? n - 1 : 0;
 			return super.nextInt(n);
 		} catch (Exception e) {
 			Show.showErrorMessageDialog("Randomに0以下の値が渡されました<br/>0を返して続行します");

@@ -16,6 +16,7 @@ import dangeon.latest.scene.action.Scene_Action;
 import dangeon.latest.scene.action.itemlist.Book_Item;
 import dangeon.latest.scene.action.itemlist.Item_List;
 import dangeon.latest.scene.action.menu.Book;
+import dangeon.latest.scene.action.menu.first.adventure.wiki_item.ItemWiki_AllItem;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.latest.scene.action.message.Message;
@@ -25,6 +26,9 @@ import dangeon.model.config.Config;
 import dangeon.model.config.table.ItemTable;
 import dangeon.model.object.artifact.Base_Artifact;
 import dangeon.model.object.artifact.item.Base_Item;
+import dangeon.model.object.artifact.item.disc.Disc;
+import dangeon.model.object.artifact.item.disc.DiscA;
+import dangeon.model.object.artifact.item.disc.Disc_Detail;
 import dangeon.model.object.artifact.item.food.Food;
 import dangeon.model.object.artifact.item.grass.Base_Grass;
 import dangeon.model.object.artifact.item.pot.Base_Pot;
@@ -33,6 +37,7 @@ import dangeon.model.object.artifact.item.scrool.Scrool;
 import dangeon.model.object.artifact.item.spellcard.SpellCard;
 import dangeon.model.object.artifact.item.staff.Staff;
 import dangeon.model.object.creature.player.Belongings;
+import dangeon.util.R;
 import main.res.Image_LargeCharacter;
 import main.util.Show;
 import main.util.半角全角コンバーター;
@@ -58,16 +63,28 @@ public class CHEN_Strage implements Serializable {
 
 	private static final String CLASS_PREFIX = "dangeon.model.object.artifact.";
 
-	/** 倉庫内カテゴリの並び（図鑑のカテゴリから射撃を除いたもの） */
+	/** 倉庫内カテゴリの並び（図鑑のカテゴリから射撃を除き、DISCを足したもの） */
 	private static final String[] CATEGORY_NAMES = { "spellcard", "grass",
-			"ring", "scrool", "staff", "food", "pot" };
+			"ring", "scrool", "staff", "food", "pot", "disc" };
 
-	/** CATEGORY_NAMES の並びを Config.getItemDataKey のインデックスに変換する */
-	private static final int[] WIKI_INDEXES = { 0, 1, 2, 3, 4, 5, 7 };
+	/** カテゴリメニューの表示名（CATEGORY_NAMESと同じ並び） */
+	private static final String[] CATEGORY_LABELS = { "カード", "草", "リボン", "書",
+			"杖", "食べ物", "魔法瓶", "ＤＩＳＣ" };
+
+	/** カテゴリ並びを図鑑（ItemWiki_AllItem/Config.getItemData）の番号に変換する。-1は図鑑になし */
+	private static final int[] WIKI_INDEXES = { 0, 1, 2, 3, 4, 5, 7, -1 };
 
 	public static final int CATEGORY_COUNT = CATEGORY_NAMES.length;
 
+	public static int wikiIndex(int index) {
+		return WIKI_INDEXES[index];
+	}
+
 	public static CHEN_Strage me = new CHEN_Strage();
+
+	public static String categoryLabel(int index) {
+		return CATEGORY_LABELS[index];
+	}
 
 	public static String categoryName(int index) {
 		return CATEGORY_NAMES[index];
@@ -75,11 +92,17 @@ public class CHEN_Strage implements Serializable {
 
 	/**
 	 * 素の状態・完全識別済みのアイテムを生成する（杖は残り回数4）<br>
-	 * コンストラクタがランダムに付ける強化値・呪いは打ち消す
+	 * 生成時のランダム要素（瓶の容量・書のページ数など）は
+	 * 「自然に発生しうる最大値」に固定し、強化値・呪いは打ち消す
 	 */
 	public static Base_Artifact createBasic(String key) {
-		Base_Artifact a = ItemTable.returnBaseArtifactSetPoint(key,
-				new Point());
+		Base_Artifact a;
+		R.setMaxMode(true);
+		try {
+			a = createInstance(key);
+		} finally {
+			R.setMaxMode(false);
+		}
 		if (a == null) {
 			return null;
 		}
@@ -94,20 +117,61 @@ public class CHEN_Strage implements Serializable {
 	}
 
 	/**
+	 * 種類キーからアイテムの実体を生成する<br>
+	 * DISCは"クラス名#曲情報"の拡張キーなので専用に組み立てる
+	 */
+	private static Base_Artifact createInstance(String key) {
+		int sharp = key.indexOf('#');
+		if (sharp < 0) {
+			return ItemTable.returnBaseArtifactSetPoint(key, new Point());
+		}
+		String class_name = key.substring(0, sharp);
+		String detail = key.substring(sharp + 1);
+		if (class_name.equals("item.disc.DiscA")) {
+			return new DiscA(new Point(), detail);
+		}
+		// 2曲構成のDISC（Disc・DiscA_Aなど）：クラスを生成してから曲を差し替える
+		String[] s = detail.split("＆");
+		if (s.length != 2) {
+			return null;
+		}
+		Base_Artifact a = ItemTable.returnBaseArtifactSetPoint(class_name,
+				new Point());
+		if (a instanceof Disc) {
+			((Disc) a).selectSetDetail(s[0], s[1]);
+			return a;
+		}
+		return null;
+	}
+
+	/**
 	 * このアイテムの種類がスタック倉庫に預けられるか（射撃・特殊アイテムは不可）
 	 */
 	public static boolean isDepositable(Base_Artifact a) {
 		return a instanceof SpellCard || a instanceof Base_Grass
 				|| a instanceof Ring || a instanceof Scrool
 				|| a instanceof Staff || a instanceof Food
-				|| a instanceof Base_Pot;
+				|| a instanceof Base_Pot || a instanceof Disc;
 	}
 
 	/**
-	 * アイテムの種類キー（例："item.spellcard.チルノのカード"）
+	 * アイテムの種類キー（例："item.spellcard.チルノのカード"）<br>
+	 * DISCは曲の組み合わせも種類の一部なので"item.disc.Disc#妖々夢＆紅魔郷"の形になる<br>
+	 * Discクラスで同タイトル2曲になった個体はDiscA_Aと同一種として正規化する
 	 */
 	public static String keyOf(Base_Artifact a) {
-		return a.getClass().getName().substring(CLASS_PREFIX.length());
+		String key = a.getClass().getName().substring(CLASS_PREFIX.length());
+		if (a instanceof Disc) {
+			String detail = ((Disc) a).getDetailKey();
+			if (a.getClass() == Disc.class) {
+				String[] s = detail.split("＆");
+				if (s.length == 2 && s[0].equals(s[1])) {
+					key = "item.disc.DiscA_A";
+				}
+			}
+			key = key.concat("#").concat(detail);
+		}
+		return key;
 	}
 
 	/**
@@ -181,6 +245,11 @@ public class CHEN_Strage implements Serializable {
 				Scene_Action.getMe()
 						.setNextScene(new ChenStorage_Command(list));
 			}
+		} else if (y == 3) {
+			// 見る：在庫がなくても全種類のカタログを開ける
+			ChenStorage_List list = new ChenStorage_List(
+					me.firstStockedCategory(), 0, true);
+			Scene_Action.getMe().setNextScene(new ChenStorage_Command(list));
 		} else if (y == 2) {
 			if (Belongings.getSize() == 0) {
 				say("何も持っていないみたいだよ");
@@ -240,13 +309,7 @@ public class CHEN_Strage implements Serializable {
 	private static void depositAllSafe() {
 		ArrayList<Base_Artifact> list = new ArrayList<Base_Artifact>();
 		for (Base_Artifact a : Belongings.getListItems()) {
-			if (a instanceof SpellCard) {
-				continue;
-			}
-			if (a instanceof Base_Pot && !((Base_Pot) a).isEmpty()) {
-				continue;
-			}
-			if (a instanceof Staff && a.staff_rest >= STAFF_KEEP_REST) {
+			if (isDangerous(a)) {
 				continue;
 			}
 			list.add(a);
@@ -290,20 +353,27 @@ public class CHEN_Strage implements Serializable {
 	}
 
 	/**
-	 * 中身入りの瓶が含まれていたら確認してから預かる
+	 * 大事そうなアイテム（カード・中身入りの瓶・回数の多い杖）が
+	 * 含まれていたら確認してから預かる
 	 */
 	private static void depositWithConfirm(final Base_Artifact[] as) {
-		boolean has_filled_pot = false;
+		boolean has_dangerous = false;
 		for (Base_Artifact a : as) {
-			if (a instanceof Base_Pot && isDepositable(a)
-					&& !me.isFull(keyOf(a)) && !((Base_Pot) a).isEmpty()) {
-				has_filled_pot = true;
+			if (isDangerous(a) && isDepositable(a) && !me.isFull(keyOf(a))) {
+				has_dangerous = true;
 				break;
 			}
 		}
-		if (has_filled_pot) {
-			new Conversation(Image_LargeCharacter.橙,
-					"中身が入った瓶があるよ。$預かると中身は消えちゃうけどいい？", new ConvEvent() {
+		if (has_dangerous) {
+			String msg;
+			if (as.length == 1) {
+				msg = as[0].getColoredName()
+						.concat("を本当に預けていいの？$強化値とか中身とかがなくなっちゃうよ");
+			} else {
+				msg = "カードや瓶みたいな大事そうなアイテムが混ざってるよ。$強化値や中身は消えちゃうけど本当にいい？";
+			}
+			new Conversation(Image_LargeCharacter.橙, msg,
+					new ConvEvent() {
 						@Override
 						public boolean defaultYes() {
 							return false;
@@ -322,6 +392,23 @@ public class CHEN_Strage implements Serializable {
 		} else {
 			doDeposit(as);
 		}
+	}
+
+	/**
+	 * 預けると損をしうる「大事そうな」アイテムかどうか<br>
+	 * （カード＝強化が消える／中身入りの瓶＝中身が消える／残り回数5以上の杖＝回数が減る）
+	 */
+	private static boolean isDangerous(Base_Artifact a) {
+		if (a instanceof SpellCard) {
+			return true;
+		}
+		if (a instanceof Base_Pot && !((Base_Pot) a).isEmpty()) {
+			return true;
+		}
+		if (a instanceof Staff && a.staff_rest >= STAFF_KEEP_REST) {
+			return true;
+		}
+		return false;
 	}
 
 	private static void doDeposit(Base_Artifact[] as) {
@@ -402,6 +489,108 @@ public class CHEN_Strage implements Serializable {
 			}
 		});
 		return list;
+	}
+
+	/**
+	 * 「見る」の表示専用サンプルを生成する<br>
+	 * check()（識別）は行わない：未使用アイテムを識別したり
+	 * 未識別名スロットを消費したりする副作用を避けるため（図鑑と同じ流儀）
+	 */
+	private static Base_Artifact createViewSample(String key) {
+		Base_Artifact a;
+		R.setMaxMode(true);
+		try {
+			a = createInstance(key);
+		} finally {
+			R.setMaxMode(false);
+		}
+		if (a == null) {
+			return null;
+		}
+		a.setItemNormalCondition();
+		a.setForgeValue(-a.getForgeValue());
+		return a;
+	}
+
+	/**
+	 * 「見る」用：カテゴリの全種類をリスト表示するサンプルを生成する<br>
+	 * 図鑑（使用履歴）にないアイテムは？？？？表示（setSampleItem(true)）になる
+	 */
+	public ArrayList<Base_Artifact> createViewSampleList(int index) {
+		ArrayList<Base_Artifact> list = new ArrayList<Base_Artifact>();
+		int wiki = wikiIndex(index);
+		if (wiki >= 0) {
+			ArrayList<String> known = new ArrayList<String>();
+			for (String s : Config.getItemData(wiki).split(",")) {
+				known.add(s);
+			}
+			String prefix = "item.".concat(categoryName(index)).concat(".");
+			for (String s : new ItemWiki_AllItem().get(wiki)) {
+				if (s.isEmpty()) {
+					continue;
+				}
+				Base_Artifact a = createViewSample(prefix.concat(s));
+				if (a == null) {
+					continue;
+				}
+				a.setSampleItem(!known.contains(s));
+				list.add(a);
+			}
+			Collections.sort(list, new Comparator<Base_Artifact>() {
+				@Override
+				public int compare(Base_Artifact o1, Base_Artifact o2) {
+					return o1.getTrueName().compareTo(o2.getTrueName());
+				}
+			});
+			Collections.sort(list, new Comparator<Base_Artifact>() {
+				@Override
+				public int compare(Base_Artifact o1, Base_Artifact o2) {
+					return ItemTable.getRankForSort(o1)
+							- ItemTable.getRankForSort(o2);
+				}
+			});
+		} else {
+			// DISC：単曲→同曲2枚→異曲2枚の順に全種類を並べる（DISCに未識別はない）
+			Disc_Detail[] ds = Disc_Detail.values();
+			for (Disc_Detail d : ds) {
+				addViewDisc(list, "item.disc.DiscA#".concat(d.name()));
+			}
+			for (Disc_Detail d : ds) {
+				addViewDisc(list, "item.disc.DiscA_A#".concat(d.name())
+						.concat("＆").concat(d.name()));
+			}
+			for (Disc_Detail d1 : ds) {
+				for (Disc_Detail d2 : ds) {
+					if (d1 == d2) {
+						continue;
+					}
+					addViewDisc(list, "item.disc.Disc#".concat(d1.name())
+							.concat("＆").concat(d2.name()));
+				}
+			}
+		}
+		return list;
+	}
+
+	private static void addViewDisc(ArrayList<Base_Artifact> list, String key) {
+		Base_Artifact a = createViewSample(key);
+		if (a != null) {
+			list.add(a);
+		}
+	}
+
+	/**
+	 * カテゴリ内で在庫のある種類数
+	 */
+	public int getStockedKinds(int index) {
+		String prefix = "item.".concat(categoryName(index)).concat(".");
+		int kinds = 0;
+		for (String key : map.keySet()) {
+			if (getCount(key) > 0 && key.startsWith(prefix)) {
+				kinds++;
+			}
+		}
+		return kinds;
 	}
 
 	/**
@@ -493,7 +682,4 @@ public class CHEN_Strage implements Serializable {
 		return createBasic(key);
 	}
 
-	public static int wikiIndex(int index) {
-		return WIKI_INDEXES[index];
-	}
 }

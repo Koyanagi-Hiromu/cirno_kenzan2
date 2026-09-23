@@ -6,9 +6,11 @@ import java.awt.event.KeyEvent;
 import dangeon.controller.TaskOnMapObject;
 import dangeon.controller.task.Task;
 import dangeon.latest.scene.action.menu.Book;
+import dangeon.latest.scene.action.menu.first.adventure.medal.Medal;
 import dangeon.latest.scene.action.message.ConvEvent;
 import dangeon.latest.scene.action.message.Conversation;
 import dangeon.latest.system.SceneHolder_KeyAccepter;
+import dangeon.model.config.Config;
 import dangeon.model.config.StoryManager;
 import dangeon.model.object.creature.npc.Base_NPC;
 import dangeon.model.object.creature.player.Player;
@@ -107,7 +109,8 @@ public class NPC博麗霊夢 extends Base_NPC {
 										CreateSaveData();
 										setTalks(Image_LargeCharacter.ANY);
 										talks("すべてのダンジョンが解放された！");
-										talks(true, "一度タイトルに戻ってみよう");
+										talks(true,
+												"ミラクルクエストと七曜クエストのクラスもすべて解放されたよ");
 									}
 								}, new Task() {
 									private static final long serialVersionUID = 1L;
@@ -189,5 +192,21 @@ public class NPC博麗霊夢 extends Base_NPC {
 		StoryManager.七曜クエストok.saveThisFinished();
 		StoryManager.賢将裏の洞窟ok.saveThisFinished();
 		StoryManager.トラップタワーok.saveThisFinished();
+		createJobData();
+	}
+
+	/** ミラクルクエスト・七曜クエストのクラス（ジョブ）を全開放する */
+	public static void createJobData() {
+		Medal.水路の上に乗ってワープした.save_the_more(1);
+		Medal.人形使いOK.save_the_more(1);
+		Medal.ゆっくりに倒された.save_the_more(1);
+		Medal.太陽の弱点を突いた.save_the_more(1);
+		Medal.ルーミアにおにぎりを投げつけた.save_the_more(1);
+		Medal.ひねくれOK.save_the_more(1);
+		Medal.命の草から蓮の花を咲かせた.save_the_more(1);
+		Medal.復活回数.save_the_more(10);
+		Medal.気分屋OK.save_the_more(1);
+		Medal.ナイフをまとめて投げて敵を倒した.save_the_more(1);
+		Config.saveKsg1Score(11);
 	}
 }
